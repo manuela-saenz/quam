@@ -107,14 +107,21 @@ var swiper = new Swiper(".SingProducts", {
     slidesPerView: 4,
     freeMode: true,
     watchSlidesProgress: true,
+  
     breakpoints: {
       1200: {
         direction: "vertical",
+        
       },
     },
   });
   var swiper2 = new Swiper(".SingProducts2", {
     spaceBetween: 10,
+    mousewheel: true,
+    slidesPerView: "auto",
+    scrollbar: {
+      el: ".swiper-scrollbar",
+    },
     navigation: {
       nextEl: ".SingProducts-button-next",
       prevEl: ".SingProducts-button-prev",

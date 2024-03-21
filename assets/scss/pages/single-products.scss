@@ -1,23 +1,47 @@
-.SingProducts {
-    position: sticky;
-    top: 80px;
+#Singleimgprincipal {
+    .row {
+        @media(max-width:768px) {
+            .imgP {
+                order: 2;
+            }
 
-    @media(max-width:991px){
-        display: none;
+            .gallery {
+                order: 1;
+            }
+
+            .information-product {
+                order: 3;
+            }
+        }
+
+    }
+}
+
+.SingProducts {
+    // position: sticky;
+    // top: 80px;
+
+    @media(max-width:991px) {
+        height: 85px;
+        margin-bottom: 30px;
     }
 
     .swiper-wrapper {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        height: 520px !important;
+        @media(min-width:1200px) {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            height: 520px !important;
+        }
     }
 
     .swiper-slide {
-        width: 100% !important;
-        margin-left: 0;
-        height: 70px !important;
-        overflow: hidden;
+        @media(min-width:1200px) {
+            width: 100% !important;
+            margin-left: 0;
+            height: 70px !important;
+            overflow: hidden;
+        }
 
     }
 
@@ -25,31 +49,63 @@
         border: 2px solid $dark_blue;
     }
 
+    .img-fit {
+        height: 100%;
+    }
+
 }
 
 .SingProducts2 {
+    height: 500px;
+
+    @media(max-width:991px) {
+        height: 320px;
+        margin-bottom: 30px;
+    }
+
+    .swiper-scrollbar {
+        left: 0;
+        top: 0;
+    }
+
+    /* Estilo del cursor de la barra de desplazamiento */
+    .swiper-scrollbar-drag {
+        background-color: $dark_blue;
+        /* Color de fondo del cursor */
+    }
+
+    /* Estilo de la barra de desplazamiento cuando se pasa el cursor por encima */
+    .swiper-scrollbar:hover .swiper-scrollbar-drag {
+        background-color: #0056b3;
+        /* Cambia el color de fondo al pasar el cursor */
+    }
+
     .swiper-wrapper {
-        @media(min-width:1200px){
+        @media(min-width:1200px) {
             height: 100% !important;
-            display: flex;
-            flex-direction: column;
+            // display: flex;
+            // flex-direction: column;
         }
     }
 
     .swiper-slide {
         height: 250px !important;
-        
-        @media(min-width:1200px){
+
+        @media(min-width:1200px) {
             height: 100% !important;
+            margin-left: 20px;
+        }
+
+        @media(max-width:768px){
+            height: 100%;
         }
     }
-
 
 }
 
 .info-product {
-    position: sticky;
-    top: 80px;
+    // position: sticky;
+    // top: 80px;
 }
 
 .information-product {
@@ -127,6 +183,17 @@
             color: white;
         }
 
+        .size{
+            @media(max-width:768px){
+                flex-wrap: wrap;
+                display: flex;
+                label{
+                    margin-right: 5px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+
     }
 
     .variant-item {
@@ -188,32 +255,39 @@
         width: 80%;
         margin-bottom: 70px;
         height: 50px;
-        // @media (max-width:578px) {
-        //     position: fixed;
-        //     bottom: 0;
-        //     left: 0;
-        //     display: flex;
-        //     padding: 14px;
-        //     background: rgba(25, 25, 25);
-        //     width: 100%;
-        //     z-index: 99;
-        //     box-shadow: 0px -3px 15px #3e3e3e;
+        @media (max-width:768px) {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            padding: 14px;
+            background: white;
+            margin-bottom: 0 !important;
+            padding: 20px 20px;
+            height: 80px;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 99;
+            box-shadow: 0px -3px 15px #3e3e3e2e;
 
-        //     .quantity {
-        //         margin-right: 15px;
-        //     }
+            .quantity {
+                margin-right: 15px;
+                @media(max-width:600px){
+                    margin-right: 10px;
+                }
+            }
 
-        //     .add-cart {
-        //         width: 100%;
-        //     }
+            .add-cart {
+                width: 100%;
+            }
 
-        //     .quantity,
-        //     button {
-        //         margin-bottom: 0;
-        //     }
-        // }
+            .quantity,
+            button {
+                margin-bottom: 0;
+            }
+        }
 
-        .quam-btn{
+        .quam-btn {
             height: 100%;
         }
 
@@ -222,10 +296,18 @@
             margin-left: 15px;
             border: 1px solid #000;
             width: 50px;
+            color: #000;
             @include center-all;
+            @media(max-width:600px){
+                margin-left: 10px;
+            }
 
             .icon-heart {
                 font-size: 20px;
+            }
+
+            &:before {
+             color: #000
             }
         }
 
@@ -241,6 +323,9 @@
     height: 100%;
     padding: 12px 14px;
     margin-right: 15px;
+    @media(max-width:600px){
+        padding: 4px;
+    }
 
     button {
         width: 32px;
@@ -265,6 +350,10 @@
         color: black;
         border-radius: 4px;
         background: transparent;
+
+        @media(max-width:768px){
+            margin: 0 0px;
+        }
     }
 }
 
@@ -285,12 +374,32 @@
         padding: 15px 0;
         margin-bottom: 13px;
         color: $black;
+        @media(max-width:768px){
+            padding: 10px;
+            margin-right: 10px;
+            min-width: 150px;
+        }
+        @media(max-width:420px){
+            min-width: 200px;
+        }
     }
 
     .nav-pills .nav-link.active {
         background: $dark_blue;
         color: $white;
     }
+
+    .nav {
+        @media(max-width:768px) {
+            display: flex;
+            flex-direction: row !important;
+            width: 100% !important;
+            overflow: auto;
+            flex-wrap: nowrap;
+        }
+    }
+
+
 }
 
 

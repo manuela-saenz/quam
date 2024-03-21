@@ -380,6 +380,10 @@
         &.next {
             left: 90px;
             margin-top: 20px;
+            @media(max-width:768px){
+                right: -220px;
+                left: auto;
+            }
         }
 
     }

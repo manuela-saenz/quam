@@ -182,6 +182,10 @@ header {
                     font-weight: 500;
                     position: relative;
                     transition: all 0.3s;
+                    // text-transform: lowercase;
+                    // &::first-letter {
+                    //     text-transform: uppercase;
+                    //   }
 
                     @media(max-width:1200px) {
                         position: relative;

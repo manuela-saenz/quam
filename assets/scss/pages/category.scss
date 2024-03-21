@@ -1,4 +1,4 @@
-#bannerMen {
+#bannerCategory {
     background: $dark_blue;
     height: 370px;
     @include center-all;
@@ -6,9 +6,6 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    @media(max-width:991px){
-        padding-top: 118px;
-    }
 
     &:before{
         content: "";
