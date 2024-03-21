@@ -1,0 +1,16 @@
+{
+  "name": "web-quam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "npx sass --watch assets/scss/index.scss:custom.min.css --style compressed" 
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.71.1"
+  }
+}
