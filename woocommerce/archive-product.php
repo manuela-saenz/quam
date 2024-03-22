@@ -16,6 +16,19 @@ if (is_tax()) {
     );
 }
 
+// setlocale(LC_TIME, 'es_ES.UTF-8');
+
+// $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+// if ($conn->connect_error) {
+//     die("Error de conexión: " . $conn->connect_error);
+// }
+
+$products = get_products_by_category_name($currentCat->name);
+
+
+// Obtener el término (categoría) por su nombre
+// $category = get_term_by('name', $currentCat->name, 'product_cat');
+// echo $category;
 ?>
 
 <section id="bannerCategory" class="padg-mobile">
@@ -86,287 +99,38 @@ if (is_tax()) {
             </div>
             <div class="col-md-12 mt-5">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <a href="https://www.quam.com.co/web_quam/producto/camiseta-polo-slim-para-hombre-reblwh/" class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="CardProducts">
-                            <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-                            </div>
-                            <div class="info-highlights">
-                                <h5>Example Midi Bodycon Dress</h5>
-                                <div class="d-flex align-items-center">
-                                    <p>$70.000</p>
-                                    <span>$100.000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                        foreach ($products as $key => $product) {
+                            $prices = $product->prices;
+                            ?>
+                                <div class="col-lg-3 col-sm-6">
+                                    <a href="https://www.quam.com.co/web_quam/producto/<?php echo $product->get_slug() ?>/" class="CardProducts">
+                                        <div class="img-contain">
+                                            <img src="<?php echo $product->image_src ?>" alt="<?php echo $product->get_name() ?>">
+                                        </div>
+                                        <div class="info-highlights">
+                                            <h5><?php echo $product->get_name(); ?></h5>
+                                            <div class="d-flex align-items-center">
 
+                                                <?php 
+                                                if ($prices['sale_price']) {
+                                                    // Si hay un precio de venta, mostrar el precio de venta y tachar el precio regular
+                                                    echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
+                                                    echo '<span class="">' . wc_price($prices['sale_price']) . '</span>';
+                                                } else {
+                                                    // Si no hay precio de venta, mostrar solo el precio regular
+                                                    echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
+                                                }
+                                                ?>
+                                                
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php
+                        }
+                    ?>
+                    
                 </div>
 
             </div>
