@@ -115,8 +115,9 @@ $products = get_products_by_category_name($currentCat->name);
                                                 <?php 
                                                 if ($prices['sale_price']) {
                                                     // Si hay un precio de venta, mostrar el precio de venta y tachar el precio regular
-                                                    echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
                                                     echo '<span class="">' . wc_price($prices['sale_price']) . '</span>';
+                                                    echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
+                                                    
                                                 } else {
                                                     // Si no hay precio de venta, mostrar solo el precio regular
                                                     echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';

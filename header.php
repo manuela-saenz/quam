@@ -52,9 +52,9 @@
 
               <div class="mobile-menu">
 
-                <a href="" class="logo img-fit">
+                <!-- <a href="" class="logo img-fit">
                   <img src="<?php bloginfo('template_url') ?>/media/images/Logo-white.svg" alt="Logo Quam" title="Logo Quam" />
-                </a>
+                </a> -->
 
                 <a href="<?= get_home_url() ?>" class="">Inicio</a>
                 <!-- ----- -->

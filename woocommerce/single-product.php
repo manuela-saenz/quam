@@ -23,7 +23,7 @@ foreach ($attachment_ids as $attachment_id) {
             <div class="col-md-1 imgP">
                 <div thumbsSlider="" class="swiper SingProducts">
                     <div class="swiper-wrapper">
-                    <?php foreach ($images as $img) : ?>
+                        <?php foreach ($images as $img) : ?>
                         <div class="swiper-slide">
                             <div class="img-fit">
                                 <img src="<?= $img ?>" />
@@ -38,13 +38,13 @@ foreach ($attachment_ids as $attachment_id) {
                 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
                     class="swiper SingProducts2">
                     <div class="swiper-wrapper">
-                    <?php foreach ($images as $img) : ?>
+                        <?php foreach ($images as $img) : ?>
                         <div class="swiper-slide">
                             <div class="img-fit">
                                 <img src="<?= $img ?>" />
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
 
                     </div>
                     <div class="SingProducts-button-next"></div>
@@ -56,91 +56,179 @@ foreach ($attachment_ids as $attachment_id) {
 
             <div class="col-md-6  information-product">
                 <div class="info-product">
-                   <div class="product-actions d-lg-none align-items-center d-flex mb-4">
-                        <div class='quantity'>
-                            <button class='qtyminus minus'><i class="icon-minus"></i></button>
-                            <input type='text' id="singleProductQuantity" name='quantity' value='1' class='qtySingle' />
-                            <button class='qtyplus plus'><i class="icon-add---copia"></i></button>
-                        </div>
-                        <a href="" class="quam-btn blue">Agregar a la bolsa</a>
-                        <button class="button-heart"> <i class="icon-heart"></i> </button>
-                    </div>
-                    <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
-                    <h1 class="section-subtitle">  <?= $post->post_title ?></h1>
-                    <div class="d-flex align-items-center price">
-                        <p><?= $product->get_price() ?></p>
-                        <span><?= $product->get_regular_price() ?> </span>
-                    </div>
-                    <div>
-                        <p> <?= $product->get_short_description() ?></p>
-                    </div>
-                    <div class="product-feature">
-                        <div class="d-flex">
-                            <strong>Color:</strong>
-                            <p class="mb-0 color-name"></p>
-                        </div>
-                        <div class="variant-item">
-                            <div class="product-var">
-                                <input type="radio" id="negro" name="varcolor" style="background: #1C1C1C;">
-                                <label for="negro" class="var-content"></label>
+                    <div class="product-actions d-lg-none align-items-center d-flex mb-4">
+                        <div class="flex bag">
+                            <div class='quantity'>
+                                <button class='qtyminus minus'><i class="icon-minus"></i></button>
+                                <input type='text' id="singleProductQuantity" name='quantity' value='1' class='qtySingle' />
+                                <button class='qtyplus plus'><i class="icon-add---copia"></i></button>
                             </div>
-                            <div class="product-var ">
-                                <input type="radio" id="mixto" checked name="varcolor" style="background: #002D72;">
-                                <label for="blanco" class="var-content"></label>
+                            <button href="" class="quam-btn blue">Agregar a la bolsa</button>
+                            <button class="button-heart"> <i class="icon-heart"></i> </button>
+                        </div>
+                        <!-- <div class="infoMobile">
+                            <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
+                            <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
+                            <div class="d-flex align-items-center price">
+                                <p><?= $product->get_price() ?></p>
+                                <span><?= $product->get_regular_price() ?> </span>
                             </div>
-                            <div class="product-var ">
-                                <input type="radio" id="rojo" checked name="varcolor" style="background: #FF3747;">
-                                <label for="blanco" class="var-content"></label>
+                            <div>
+                                <p> <?= $product->get_short_description() ?></p>
+                            </div>
+                            <div class="product-feature">
+                                <div class="d-flex">
+                                    <strong>Color:</strong>
+                                    <p class="mb-0 color-name"></p>
+                                </div>
+                                <div class="variant-item">
+                                    <div class="product-var">
+                                        <input type="radio" id="negro" name="varcolor" style="background: #1C1C1C;">
+                                        <label for="negro" class="var-content"></label>
+                                    </div>
+                                    <div class="product-var ">
+                                        <input type="radio" id="mixto" checked name="varcolor"
+                                            style="background: #002D72;">
+                                        <label for="blanco" class="var-content"></label>
+                                    </div>
+                                    <div class="product-var ">
+                                        <input type="radio" id="rojo" checked name="varcolor"
+                                            style="background: #FF3747;">
+                                        <label for="blanco" class="var-content"></label>
+                                    </div>
+
+                                </div>
                             </div>
 
-                        </div>
+                            <div class="product-feature">
+                                <div class="d-flex">
+                                    <strong>Talla:</strong>
+                                </div>
+                                <div class="d-flex size">
+
+                                    <div class="" role="group" aria-label="Vertical radio toggle button group">
+                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1"
+                                            autocomplete="off" checked>
+                                        <label class="btn " for="vbtn-radio1">S</label>
+                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2"
+                                            autocomplete="off">
+                                        <label class="btn " for="vbtn-radio2">M</label>
+                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3"
+                                            autocomplete="off">
+                                        <label class="btn " for="vbtn-radio3">L</label>
+                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4"
+                                            autocomplete="off">
+                                        <label class="btn " for="vbtn-radio4">XL</label>
+                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5"
+                                            autocomplete="off">
+                                        <label class="btn " for="vbtn-radio5">XXL</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product-actions d-lg-flex align-items-center d-none ">
+                                <div class='quantity'>
+                                    <button class='qtyminus minus'><i class="icon-minus"></i></button>
+                                    <input type='text' id="singleProductQuantity" name='quantity' value='1'
+                                        class='qtySingle' />
+                                    <button class='qtyplus plus'><i class="icon-add---copia"></i></button>
+                                </div>
+                                <a href="" class="quam-btn blue">Agregar a la bolsa</a>
+                                <button class="button-heart"> <i class="icon-heart"></i> </button>
+                            </div>
+
+                            <div class="share d-flex align-items-center">
+                                <p class="m-0"> <b>Compartir: </b> </p>
+
+                                <div>
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-x"></i>
+                                    <i class="icon-whatsapp1"></i>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
 
-                    <div class="product-feature">
-                        <div class="d-flex">
-                            <strong>Talla:</strong>
+                    <div class="p-4">
+                        <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
+                        <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
+                        <div class="d-flex align-items-center price">
+                            <p><?= $product->get_price() ?></p>
+                            <span><?= $product->get_regular_price() ?> </span>
                         </div>
-                        <div class="d-flex size">
-
-                            <div class="" role="group" aria-label="Vertical radio toggle button group">
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1"
-                                    autocomplete="off" checked>
-                                <label class="btn " for="vbtn-radio1">S</label>
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2"
-                                    autocomplete="off">
-                                <label class="btn " for="vbtn-radio2">M</label>
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3"
-                                    autocomplete="off">
-                                <label class="btn " for="vbtn-radio3">L</label>
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4"
-                                    autocomplete="off">
-                                <label class="btn " for="vbtn-radio4">XL</label>
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5"
-                                    autocomplete="off">
-                                <label class="btn " for="vbtn-radio5">XXL</label>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="product-actions d-lg-flex align-items-center d-none">
-                        <div class='quantity'>
-                            <button class='qtyminus minus'><i class="icon-minus"></i></button>
-                            <input type='text' id="singleProductQuantity" name='quantity' value='1' class='qtySingle' />
-                            <button class='qtyplus plus'><i class="icon-add---copia"></i></button>
-                        </div>
-                        <a href="" class="quam-btn blue">Agregar a la bolsa</a>
-                        <button class="button-heart"> <i class="icon-heart"></i> </button>
-                    </div>
-
-                    <div class="share d-flex align-items-center">
-                        <p class="m-0"> <b>Compartir: </b> </p>
-
                         <div>
-                            <i class="icon-facebook"></i>
-                            <i class="icon-x"></i>
-                            <i class="icon-whatsapp1"></i>
+                            <p> <?= $product->get_short_description() ?></p>
+                        </div>
+                        <div class="product-feature">
+                            <div class="d-flex">
+                                <strong>Color:</strong>
+                                <p class="mb-0 color-name"></p>
+                            </div>
+                            <div class="variant-item">
+                                <div class="product-var">
+                                    <input type="radio" id="negro" name="varcolor" style="background: #1C1C1C;">
+                                    <label for="negro" class="var-content"></label>
+                                </div>
+                                <div class="product-var ">
+                                    <input type="radio" id="mixto" checked name="varcolor" style="background: #002D72;">
+                                    <label for="blanco" class="var-content"></label>
+                                </div>
+                                <div class="product-var ">
+                                    <input type="radio" id="rojo" checked name="varcolor" style="background: #FF3747;">
+                                    <label for="blanco" class="var-content"></label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="product-feature">
+                            <div class="d-flex">
+                                <strong>Talla:</strong>
+                            </div>
+                            <div class="d-flex size">
+
+                                <div class="" role="group" aria-label="Vertical radio toggle button group">
+                                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1"
+                                        autocomplete="off" checked>
+                                    <label class="btn " for="vbtn-radio1">S</label>
+                                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2"
+                                        autocomplete="off">
+                                    <label class="btn " for="vbtn-radio2">M</label>
+                                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3"
+                                        autocomplete="off">
+                                    <label class="btn " for="vbtn-radio3">L</label>
+                                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4"
+                                        autocomplete="off">
+                                    <label class="btn " for="vbtn-radio4">XL</label>
+                                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5"
+                                        autocomplete="off">
+                                    <label class="btn " for="vbtn-radio5">XXL</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="product-actions d-lg-flex align-items-center d-none ">
+                            <div class='quantity'>
+                                <button class='qtyminus minus'><i class="icon-minus"></i></button>
+                                <input type='text' id="singleProductQuantity" name='quantity' value='1'
+                                    class='qtySingle' />
+                                <button class='qtyplus plus'><i class="icon-add---copia"></i></button>
+                            </div>
+                            <a href="" class="quam-btn blue">Agregar a la bolsa</a>
+                            <button class="button-heart"> <i class="icon-heart"></i> </button>
+                        </div>
+
+                        <div class="share d-flex align-items-center">
+                            <p class="m-0"> <b>Compartir: </b> </p>
+
+                            <div>
+                                <i class="icon-facebook"></i>
+                                <i class="icon-x"></i>
+                                <i class="icon-whatsapp1"></i>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -181,6 +269,14 @@ foreach ($attachment_ids as $attachment_id) {
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+
         </div>
     </div>
 </section>

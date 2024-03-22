@@ -37,6 +37,13 @@ $('.menu-btn').on('click', function () {
     }
    })
 
+
+// <!------------------------ modal description single product ------------------------>//
+  //  $('.product-actions').on('click', function () {
+  //   $('.product-actions').toggleClass('show-bag')
+  // })
+
+
 // <!------------------------ Slider banner ------------------------>//
 var swiper = new Swiper(".banner", {
     navigation: {
@@ -115,28 +122,80 @@ var swiper = new Swiper(".SingProducts", {
       },
     },
   });
-  var swiper2 = new Swiper(".SingProducts2", {
-    spaceBetween: 10,
-    mousewheel: true,
-    slidesPerView: "auto",
-    scrollbar: {
-      el: ".swiper-scrollbar",
-    },
-    navigation: {
-      nextEl: ".SingProducts-button-next",
-      prevEl: ".SingProducts-button-prev",
-    },
-    thumbs: {
-      swiper: swiper,
-    },
-    direction: "vertical",
-  //   breakpoints: {
-  //     1200: {
-  //       direction: "vertical",
-  //     },
-  // },
-    
-  });
+
+
+  (function() {
+
+    'use strict';
+  
+    // breakpoint where swiper will be destroyed
+    // and switches to a dual-column layout
+    const breakpoint = window.matchMedia( '(min-width:31.25em)' );
+  
+    // keep track of swiper instances to destroy later
+    let mySwiper;
+  
+  
+    const breakpointChecker = function() {
+  
+      // if larger viewport and multi-row layout needed
+      if ( breakpoint.matches === false ) {
+  
+        // clean up old instances and inline styles when available
+      if ( mySwiper !== undefined ) mySwiper.destroy( true, true );
+  
+      // or/and do nothing
+      return;
+  
+        // else if a small viewport and single column layout needed
+        } else if ( breakpoint.matches === true ) {
+  
+          // fire small viewport version of swiper
+          return enableSwiper();
+  
+        }
+  
+    };
+  
+    const enableSwiper = function() {
+  
+      mySwiper = new Swiper(".SingProducts2", {
+        spaceBetween: 10,
+        mousewheel: true,
+        slidesPerView: "auto",
+        scrollbar: {
+          el: ".swiper-scrollbar",
+        },
+        navigation: {
+          nextEl: ".SingProducts-button-next",
+          prevEl: ".SingProducts-button-prev",
+        },
+        thumbs: {
+          swiper: swiper,
+        },
+        breakpoints: {
+          1200: {
+            direction: "vertical",
+          },
+      },
+        
+      });
+  
+    };
+  
+   
+  
+    // keep an eye on viewport size changes
+    breakpoint.addListener(breakpointChecker);
+  
+    // kickstart
+    breakpointChecker();
+  
+  
+  
+  })();
+
+
 
 
 // <--------- color de ropa ---------->

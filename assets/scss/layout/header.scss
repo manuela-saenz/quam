@@ -67,6 +67,11 @@ header {
         &.infoshow-menu{
             margin-top: -47px;
             transition: all 0.3s;
+
+            .logo{
+                z-index: 3;
+                filter: contrast(0) brightness(5);            
+            }
         }
     }
 
