@@ -129,11 +129,12 @@ var swiper = new Swiper(".SingProducts", {
     thumbs: {
       swiper: swiper,
     },
-    breakpoints: {
-      1200: {
-        direction: "vertical",
-      },
-  },
+    direction: "vertical",
+  //   breakpoints: {
+  //     1200: {
+  //       direction: "vertical",
+  //     },
+  // },
     
   });
 

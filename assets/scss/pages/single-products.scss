@@ -1,16 +1,24 @@
 #Singleimgprincipal {
+    .container{
+        @media(max-width:991px){
+          padding: 0;
+        }
+    }
     .row {
         @media(max-width:768px) {
             .imgP {
-                order: 2;
+                // order: 2;
+                padding: 0;
             }
 
             .gallery {
-                order: 1;
+                // order: 1;
+                padding: 0;
             }
 
             .information-product {
-                order: 3;
+                // order: 3;
+                padding: 0;
             }
         }
 
@@ -22,6 +30,7 @@
     // top: 80px;
 
     @media(max-width:991px) {
+        display: none;
         height: 85px;
         margin-bottom: 30px;
     }
@@ -58,8 +67,12 @@
 .SingProducts2 {
     height: 500px;
 
+    @media(min-width:1500px){
+        height: 660px;
+    }
+
     @media(max-width:991px) {
-        height: 320px;
+        height: 600px;
         margin-bottom: 30px;
     }
 
@@ -97,7 +110,7 @@
         }
 
         @media(max-width:768px){
-            height: 100%;
+            height: 100% !important;
         }
     }
 

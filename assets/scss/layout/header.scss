@@ -265,12 +265,12 @@ header {
                 height: 3px;
                 border-radius: 10px;
                 transition: all 0.3s ease;
-                border: 1px solid $red;
-                background: $red ;
+                border: 1px solid $dark-blue;
+                background: $dark-blue ;
 
                 &:nth-child(2) {
                     width: 18px;
-                    background: $red;
+                    background: $dark-blue;
                 }
 
                 &:nth-child(3) {
