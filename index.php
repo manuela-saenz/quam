@@ -121,7 +121,7 @@ get_header();
       <div class="container">
         <div class="row">
           <div class="col-xxl-3 col-md-4 position-relative">
-            <h3 class="section-subtitle">Última generación</h3>
+            <h3 class="section-subtitle mb-5">Última generación</h3>
             <div class="arrow-prev-container">
               <button class="generation-arrows prev">
                 <i class="icon-arrowline-left"> </i>

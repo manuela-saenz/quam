@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "npx sass --watch assets/scss/index.scss:custom.min.css --style compressed" 
+    "sass": "npx sass --watch assets/scss/index.scss:custom.min.css --style compressed"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "boostrap": "^2.0.0",
     "bootstrap": "^5.3.3",
-    "sass": "^1.71.1"
+    "sass": "^1.72.0"
   }
 }
