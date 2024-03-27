@@ -1,13 +1,18 @@
 #bannerCategory {
     background: $dark_blue;
-    height: 370px;
+    height: 300px;
     @include center-all;
     color: white;
     text-align: center;
     position: relative;
     overflow: hidden;
+    padding-bottom: 0;
 
-    &:before{
+    @media(max-width:991px){
+        height: 220px;
+    }
+
+    &:before {
         content: "";
         position: absolute;
         background-image: url(media/images/Logo-transparent.png);
@@ -18,19 +23,21 @@
         bottom: -82px;
         left: 50%;
         transform: translateX(-50%);
-        @media(max-width:991px){
+
+        @media(max-width:991px) {
             height: 103px;
             width: 456px;
             bottom: -17px;
         }
     }
 
-  
+
 }
 
 .select-box {
     position: relative;
     display: inline-block;
+    margin-right: 20px;
 }
 
 .select-box select {
@@ -43,6 +50,7 @@
     border-radius: 5px;
     outline: none;
     font-weight: 600;
+  
 }
 
 .select-box .arrow {
@@ -62,9 +70,10 @@
     transform: translateY(-50%) rotate(180deg);
 }
 
-.products p{
+.products p {
     font-weight: 600;
-    @media(max-width:991px){
+
+    @media(max-width:991px) {
         padding-top: 20px;
     }
 }
@@ -76,6 +85,9 @@
     .info-highlights {
         display: flex;
         flex-direction: column;
+        @media(max-width:768px){
+            padding: 10px 20px;
+        }
 
         h5 {
             margin-bottom: 0px;
@@ -85,22 +97,22 @@
             text-transform: uppercase;
         }
 
-        span{
+        span {
             margin-bottom: 0;
             color: $gray;
             font-size: 18px;
             margin-right: 5px;
         }
 
-        .regular-price{
+        .regular-price {
 
-            span{
+            span {
                 color: #26252487 !important;
                 font-size: 15px;
             }
-        
+
             position: relative;
-     
+
 
             &:before {
                 content: "";
@@ -126,8 +138,9 @@
     }
 }
 
-#infoProducts{  
+#infoProducts {
     position: relative;
+    overflow: hidden;
 
     // &:before{
     //   content: "";
@@ -141,62 +154,77 @@
     //   @media(max-width:768px){
     //     display: none;
     //   }
-    
+
     // }
 
-    .select_men{
-        @media(max-width:768px){
+    .container {
+        @media(max-width:768px) {
+            padding: 0;
+        }
+    }
+
+    .galleryP {
+        .row .productS {
+            &:first-child {
+
+                @media(max-width:768px) {
+                    width: 100%;
+                }
+
+            }
+        }
+
+    }
+
+    .select_men {
+        @media(max-width:768px) {
             flex-direction: column;
             width: 100%;
             align-items: flex-start !important;
         }
-      
+
     }
 
-    .select{
-        @media(max-width:991px){
+    .select {
+        @media(max-width:991px) {
             flex-wrap: wrap;
-            @include  center-all;
+            @include center-all;
         }
-       
-        div{
-            @media(max-width:991px){
-              margin-right: 20px;
-              margin-bottom: 10px;
+
+        div {
+            @media(max-width:991px) {
+                margin-right: 20px;
+                margin-bottom: 10px;
             }
         }
     }
 
-    .products{
-        @media(max-width:768px){
+    .products {
+        @media(max-width:768px) {
             width: 100%;
         }
     }
- 
+
 }
 
-.pagination_section{
-    // .page-item{
-    //     width: 26px;
-    //     height: 26px;    
-    //     border-radius: 0;
-    //     @include center-all;
-    //     margin: 0 13px;
-
-    //     .page-link{
-    //         background: #002d728f;
-    //         color: $dark-blue;
-    //         border-radius: 0;
-    //     }
-
-    //     &.active{
-    //         background: $dark-blue;
-    //         border-radius: 0;
-    //         color: white;
-    //         .page-link{
-    //             border-radius: 0;
-    //             color: white;
-    //         }
-    //     }
-    // }
-}
+/* Pagination links */
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    color: $dark_blue;
+    background: rgb(0 46 114 / 9%);
+    margin-right: 10px;
+  }
+  
+  /* Style the active/current link */
+  .pagination a.active {
+    background-color: $dark_blue;
+    color: white;
+    color: white;
+  }
+  
+  /* Add a grey background color on mouse-over */
+  .pagination a:hover:not(.active) {background-color: #ddd;}

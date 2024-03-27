@@ -95,3 +95,9 @@ footer {
 
    
 }
+
+.footer-product-none{
+    @media(max-width:768px){
+        display: none;
+    }
+}

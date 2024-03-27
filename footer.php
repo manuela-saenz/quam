@@ -1,4 +1,4 @@
-<section id="shipping">
+<section id="shipping" class="<?= is_singular( 'product' ) ? "footer-product-none" : "" ?>">
       <div class="container position-relative">
         <div class="row center-all">
           <div class="col-md-12 col-xxl-10">
@@ -42,7 +42,7 @@
 
   </main>
 
-  <footer>
+  <footer class="<?= is_singular( 'product' ) ? "footer-product-none" : "" ?>">
     <div class="container">
       <div class="row position-relative">
 

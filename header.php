@@ -72,7 +72,7 @@
                 <a href="<?= get_permalink(43) ?>" class="<?= is_page(43) ? 'active' : '' ?>">Ofertas</a>
 
                 <div class="social-media center-all d-lg-none d-flex flex-column">
-                  <div class="position-relative search"> <input type="text" placeholder="Search.."> <i class="icon-search"></i>
+                  <div class="position-relative search"> <input type="text" placeholder="Search.." class="quam-btn"> <i class="icon-search"></i>
                   </div>
     
                   <div class="icon-media d-flex">
