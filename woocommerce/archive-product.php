@@ -1,4 +1,4 @@
-<?php 
+<?php
 get_header();
 $queryArr = array(
     "post_type" => "product",
@@ -121,43 +121,40 @@ $products = get_products_by_category_name($currentCat->name);
 
 
             </div>
-            <div class="col-md-12 mt-5 galleryP">
-                <div class="row">
-                    <?php
-                        foreach ($products as $key => $product) {
-                            $prices = $product->prices;
-                            ?>
+            <div class="row m-0 galleryP pt-4">
+                <?php
+                foreach ($products as $key => $product) {
+                    $prices = $product->prices;
+                    for($i =0; $i < 20; $i++){
+                ?>
                     <div class="col-lg-3 col-sm-6 col-6 productS">
-                        <a href="https://www.quam.com.co/web_quam/producto/<?php echo $product->get_slug() ?>/"
-                            class="CardProducts">
-                            <div class="img-contain">
+                        <a href="https://www.quam.com.co/web_quam/producto/<?php echo $product->get_slug() ?>/" class="CardProducts">
+                            <div class="img-fit">
                                 <img src="<?php echo $product->image_src ?>" alt="<?php echo $product->get_name() ?>">
                             </div>
                             <div class="info-highlights">
                                 <h5><?php echo $product->get_name(); ?></h5>
-                                <div class="d-flex align-items-lg-center align-items-start flex-column flex-md-row">
+                                <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
 
-                                    <?php 
-                                                if ($prices['sale_price']) {
-                                                    // Si hay un precio de venta, mostrar el precio de venta y tachar el precio regular
-                                                    echo '<span class="">' . wc_price($prices['sale_price']) . '</span>';
-                                                    echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
-                                                    
-                                                } else {
-                                                    // Si no hay precio de venta, mostrar solo el precio regular
-                                                    echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
-                                                }
-                                                ?>
+                                    <?php
+                                    if ($prices['sale_price']) {
+                                        // Si hay un precio de venta, mostrar el precio de venta y tachar el precio regular
+                                        echo '<span class="">' . wc_price($prices['sale_price'], "COP") . '</span>';
+                                        echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
+                                    } else {
+                                        // Si no hay precio de venta, mostrar solo el precio regular
+                                        echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
+                                    }
+                                    ?>
 
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <?php
-                        }
-                    ?>
-
-                </div>
+                <?php
+                 }
+                }
+                ?>
 
             </div>
             <div class="d-lg-none d-flex align-items-center justify-content-center w-100 ">

@@ -127,13 +127,13 @@
 
     .img-fit,
     .img-contain {
-        height: 340px;
+        aspect-ratio: 1 / 1.2;
         margin-bottom: 20px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         background: #f2f2f2;
 
-        @media(max-width:768px) {
-            height: 300px;
+        img{
+            mix-blend-mode: multiply;
         }
     }
 }
@@ -164,13 +164,31 @@
     }
 
     .galleryP {
-        .row .productS {
-            &:first-child {
+        .productS {
+          
+            &:nth-child(10n - 1),&:nth-child(10n){
+                width: 50%;
+            }
 
-                @media(max-width:768px) {
+            @media(max-width:768px){
+                padding: 0;
+                margin-bottom: 20px;
+                &:first-child{
                     width: 100%;
+                    padding: 0;
+                }
+                &:nth-child(9n - 1){
+                    width: 100%;
+                    padding: 0;
                 }
 
+                &:nth-child(2n),&:nth-child(4n){
+                    padding-right: 10px;
+                }
+
+                &:nth-child(3n),&:nth-child(5n){
+                    padding-left: 10px;
+                }
             }
         }
 

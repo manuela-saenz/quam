@@ -1,4 +1,7 @@
 #Singleimgprincipal {
+    @media(max-width:768px){
+        padding-bottom: 130px;
+    }
     .container {
         @media(max-width:991px) {
             padding: 0;
@@ -151,7 +154,10 @@
         margin-bottom: 0px;
 
         @media(max-width:991px) {
+
             font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 10px;
         }
     }
 
@@ -164,6 +170,7 @@
 
             @media(max-width:991px) {
                 font-size: 25px;
+                font-weight: 600;
             }
         }
 
@@ -299,7 +306,7 @@
         margin-bottom: 40px;
     }
 
-      .product-actions {
+    .product-actions {
         // justify-content: space-between;
         width: 80%;
         margin-bottom: 70px;
@@ -369,7 +376,7 @@
             @media(max-width:600px) {
                 margin-left: 10px;
                 min-width: 40px;
-                height:40px ;
+                height: 40px;
             }
 
             .icon-heart {
@@ -746,13 +753,54 @@
 }
 
 #offcanvasBottom {
-    height: 60vh;
+    height: 75vh;
+    border-radius: 20px;
+    padding-bottom: 30px;
 }
 
-.offcanvas-header{
+.offcanvas-header {
     bottom: 0;
     position: fixed;
     z-index: 8;
     width: 100%;
     background: white;
+    box-shadow: rgba(0, 0, 0, 1.35) 0px 5px 15px;
+}
+
+.offcanvas-body{
+    padding: 24px;
+    .ref-number{
+        color: $dark-blue !important;
+        font-size: 14px !important;
+    }
+    .section-subtitle{
+        font-size: 22px !important;
+    }
+
+    .characteristics .nav-pills .nav-link.active {
+        background: transparent !important;
+        color: black !important;
+        font-weight: 700 !important;
+        border: 0 !important;
+        border-bottom: 2px solid $dark-blue !important;
+        border-radius: 0 !important;
+    }
+
+    .characteristics .nav-pills .nav-link{
+        border: 0;
+    }
+
+    #generation .generationSwiper {
+        margin-top: 0px !important;
+    }
+
+    #generation .generation-arrows {
+        background: #E2E2E2;
+        height: 40px;
+        width: 40px;
+        border: none;
+        i{
+            color: black;
+        }
+    }
 }

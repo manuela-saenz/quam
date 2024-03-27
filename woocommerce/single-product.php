@@ -122,8 +122,9 @@ foreach ($attachment_ids as $attachment_id) {
                                                 </div>
                                             </div>
                                             <div class="d-lg-none d-flex flex-column information-product">
-                                                <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
-                                                <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
+                                                <span class="ref-number mb-2">SKU: <?= $sku = $product->get_sku() ?>
+                                                </span>
+                                                <h1 class="section-subtitle mb-2"> <?= $post->post_title ?></h1>
                                                 <div class="d-flex flex-row justify-content-between mb-2">
                                                     <div class="d-flex align-items-center price">
                                                         <p>$<?= $product->get_price() ?></p>
@@ -199,14 +200,82 @@ foreach ($attachment_ids as $attachment_id) {
                                                     <a href="" class="quam-btn blue">Agregar a la bolsa</a>
                                                     <button class="button-heart"> <i class="icon-heart"></i> </button>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section id="generation" class="generation_product">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12 position-relative">
+                                                <h3 class="section-subtitle">Te puede interesar</h3>
 
-                                                <div class="share d-flex align-items-center">
-                                                    <p class="m-0"> <b>Compartir: </b> </p>
-
-                                                    <div>
-                                                        <i class="icon-facebook"></i>
-                                                        <i class="icon-x"></i>
-                                                        <i class="icon-whatsapp1"></i>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="swiper generationSwiper">
+                                                    <div class="swiper-wrapper">
+                                                        <div class="swiper-slide">
+                                                            <div class="img-contain">
+                                                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-1.jpg"
+                                                                    alt="" title="">
+                                                            </div>
+                                                            <div class="info-generation">
+                                                                <h5>Example Midi Bodycon Dress</h5>
+                                                                <div class="d-flex align-items-center">
+                                                                    <p>$70.000</p>
+                                                                    <span>$100.000</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-slide">
+                                                            <div class="img-contain">
+                                                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-2.jpg"
+                                                                    alt="" title="">
+                                                            </div>
+                                                            <div class="info-generation">
+                                                                <h5>Example Midi Bodycon Dress</h5>
+                                                                <div class="d-flex align-items-center">
+                                                                    <p>$70.000</p>
+                                                                    <span>$100.000</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-slide">
+                                                            <div class="img-contain">
+                                                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-3.jpg"
+                                                                    alt="" title="">
+                                                            </div>
+                                                            <div class="info-generation">
+                                                                <h5>Example Midi Bodycon Dress</h5>
+                                                                <div class="d-flex align-items-center">
+                                                                    <p>$70.000</p>
+                                                                    <span>$100.000</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-slide">
+                                                            <div class="img-contain">
+                                                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-4.jpg"
+                                                                    alt="" title="">
+                                                            </div>
+                                                            <div class="info-generation">
+                                                                <h5>Example Midi Bodycon Dress</h5>
+                                                                <div class="d-flex align-items-center">
+                                                                    <p>$70.000</p>
+                                                                    <span>$100.000</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="arrow-prev-container">
+                                                        <button class="generation-arrows prev">
+                                                            <i class="icon-arrowline-left"> </i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="arrow-next-container">
+                                                        <button class="generation-arrows next">
+                                                            <i class="icon-arrowline-right"> </i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
