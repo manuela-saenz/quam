@@ -339,6 +339,9 @@
         @media(max-width:768px){
             height: 300px;
         }
+        @media(min-width:1500px){
+            height: 415px;
+        }
     }
 
     .arrow-prev-container,
@@ -358,6 +361,7 @@
         border: none;
         background: transparent;
         border: 2px solid $dark_blue;
+        background: white;
         color: white;
         width: 80px;
         height: 40px;
@@ -365,7 +369,7 @@
         @include center-all;
 
         i {
-            color: blue;
+            color: $dark_blue;
         }
 
         &.swiper-button-disabled {

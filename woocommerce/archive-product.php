@@ -125,9 +125,9 @@ $products = get_products_by_category_name($currentCat->name);
                 <?php
                 foreach ($products as $key => $product) {
                     $prices = $product->prices;
-                    for($i =0; $i < 20; $i++){
+                    // for($i =0; $i < 20; $i++){
                 ?>
-                    <div class="col-lg-3 col-sm-6 col-6 productS">
+                    <div class="col-lg-3 col-sm-6 col-6 productS mb-4">
                         <a href="https://www.quam.com.co/web_quam/producto/<?php echo $product->get_slug() ?>/" class="CardProducts">
                             <div class="img-fit">
                                 <img src="<?php echo $product->image_src ?>" alt="<?php echo $product->get_name() ?>">
@@ -153,7 +153,7 @@ $products = get_products_by_category_name($currentCat->name);
                     </div>
                 <?php
                  }
-                }
+                // }
                 ?>
 
             </div>
