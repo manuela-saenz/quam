@@ -7,16 +7,18 @@
   <title>Quam</title>
 
   <link rel="icon" href="favicon/favicon-1.ico" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.min.css" />
 </head>
@@ -28,7 +30,9 @@
         <div class="contact d-flex">
           <a href="tel:" target="_blank"><i class="icon-phone1"></i><span>+8 80025.9890.11 </span></a>
           <a href="mailto:" target="_blank"><i class="icon-email"></i><span>info@quamservice.com</span> </a>
-          <a href="" target="_blank"><i class="icon-delivery"></i> <p class="mb-0">Rastrear paquete</p> </a>
+          <a href="" target="_blank"><i class="icon-delivery"></i>
+            <p class="mb-0">Rastrear paquete</p>
+          </a>
         </div>
 
         <div class="d-lg-flex d-none">
@@ -61,9 +65,9 @@
                 <a href="" class="">Nuevo</a>
                 <!-- ----- -->
 
-                
+
                 <a href="https://www.quam.com.co/web_quam/categoria-producto/hombre/">Hombre</a>
-        
+
                 <!-- ----- -->
                 <a href="https://www.quam.com.co/web_quam/categoria-producto/mujer/">Mujer</a>
                 <!-- ----- -->
@@ -74,10 +78,10 @@
                 <div class="social-media center-all d-lg-none d-flex flex-column">
                   <div class="position-relative search"> <input type="text" placeholder="Search.." class="quam-btn"> <i class="icon-search"></i>
                   </div>
-    
+
                   <div class="icon-media d-flex">
                     <a href="" target="_blank"><i class="icon-heart"></i></a>
-                    <a href="" target="_blank"><i class="icon-shopping-bag"></i></a>
+                    <!-- <a href="" target="_blank"><i class="icon-shopping-bag"></i></a> -->
                     <a href="" target="_blank"><i class="icon-user"></i></a>
                   </div>
                 </div>
@@ -93,6 +97,12 @@
                 <a href="" target="_blank"><i class="icon-heart"></i></a>
                 <a href="" target="_blank"><i class="icon-shopping-bag"></i></a>
                 <a href="" target="_blank"><i class="icon-user"></i></a>
+              </div>
+            </div>
+
+            <div class="social-media center-all d-flex d-xl-none">
+              <div class="icon-media p-0">
+                <a href="" target="_blank"><i class="icon-shopping-bag "></i></a>
               </div>
             </div>
 

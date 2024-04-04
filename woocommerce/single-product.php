@@ -233,15 +233,17 @@ foreach ($attachment_ids as $attachment_id) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="arrow-prev-container">
-                                                        <button class="generation-arrows prev">
-                                                            <i class="icon-arrowline-left"> </i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="arrow-next-container">
-                                                        <button class="generation-arrows next">
-                                                            <i class="icon-arrowline-right"> </i>
-                                                        </button>
+                                                    <div class="w-100">
+                                                        <div class="arrow-prev-container">
+                                                            <button class="generation-arrows prev">
+                                                                <i class="icon-arrowline-left"> </i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="arrow-next-container">
+                                                            <button class="generation-arrows next">
+                                                                <i class="icon-arrowline-right"> </i>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -59,6 +59,7 @@ header {
     }
 
     .info-contact{
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
         padding: 10px 0;
         background: white;
         transition: all 0.3s;
@@ -253,7 +254,7 @@ header {
 
 
 
-        .menu-btn {.
+        .menu-btn {
             // margin-right: 22px;
             width: 50px;
             height: 50px;
@@ -508,6 +509,20 @@ header {
                 // right: -4px;
                 // flex-direction: column-reverse;
                 flex-direction: row;
+            }
+            
+            .icon-shopping-bag {
+                @media(max-width:991px) {
+                    position: absolute;
+                    top: 60px;
+                    right: -27px;
+                    background: $dark_blue;
+                    color: white;
+                    padding: 15px;
+                    font-size: 25px;
+                    border-bottom-left-radius: 5px;
+                }
+
             }
         }
        

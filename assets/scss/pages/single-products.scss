@@ -744,6 +744,11 @@
         z-index: 8;
         right: 222px !important;
 
+        @media(max-width:768px){
+            right: 0 !important;
+            left: auto;
+        }
+
         button {
             margin-top: 0px !important;
 
@@ -799,7 +804,7 @@
 
     #generation .generation-arrows {
         background: #E2E2E2;
-        height: 40px;
+        min-height: 40px;
         width: 40px;
         border: none;
         i{

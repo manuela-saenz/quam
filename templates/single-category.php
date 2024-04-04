@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Template Name: single categoria
@@ -35,29 +35,28 @@ get_header() ?>
                 </div>
             </div>
             <div class="col-md-5">
-                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-                    class="swiper SingProducts2">
+                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper SingProducts2">
                     <div class="swiper-scrollbar"></div>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                             <div class="img-fit">
-                            <img src="<?php bloginfo('template_url') ?>/media/images/singleproduct-1.jpg" />
+                            <div class="img-fit">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/singleproduct-1.jpg" />
                             </div>
                         </div>
                         <div class="swiper-slide">
-                             <div class="img-fit">
-                            <img src="<?php bloginfo('template_url') ?>/media/images/singleproduct-2.jpg" />
+                            <div class="img-fit">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/singleproduct-2.jpg" />
                             </div>
                         </div>
                         <div class="swiper-slide">
-                             <div class="img-fit">
-                            <img src="<?php bloginfo('template_url') ?>/media/images/singleproduct-3.jpg" />
+                            <div class="img-fit">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/singleproduct-3.jpg" />
                             </div>
                         </div>
                     </div>
                     <div class="SingProducts-button-next"></div>
                     <div class="SingProducts-button-prev"></div>
-                 
+
                 </div>
 
             </div>
@@ -104,20 +103,15 @@ get_header() ?>
                         <div class="d-flex">
 
                             <div class="" role="group" aria-label="Vertical radio toggle button group">
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1"
-                                    autocomplete="off" checked>
+                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
                                 <label class="btn " for="vbtn-radio1">S</label>
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2"
-                                    autocomplete="off">
+                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
                                 <label class="btn " for="vbtn-radio2">M</label>
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3"
-                                    autocomplete="off">
+                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
                                 <label class="btn " for="vbtn-radio3">L</label>
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4"
-                                    autocomplete="off">
+                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4" autocomplete="off">
                                 <label class="btn " for="vbtn-radio4">XL</label>
-                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5"
-                                    autocomplete="off">
+                                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5" autocomplete="off">
                                 <label class="btn " for="vbtn-radio5">XXL</label>
                             </div>
                         </div>
@@ -154,25 +148,17 @@ get_header() ?>
         <div class="">
             <div class="d-flex align-items-start row">
                 <div class="col-md-3">
-                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
-                        aria-orientation="vertical">
-                        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
-                            aria-selected="true">Descripción</button>
-                        <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
-                            aria-selected="false">Información adicional</button>
-                        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages"
-                            aria-selected="false">Reseñas (12)</button>
+                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Descripción</button>
+                        <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Información adicional</button>
+                        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Reseñas (12)</button>
 
                     </div>
                 </div>
 
                 <div class="col-md-8 offset-md-1">
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                            aria-labelledby="v-pills-home-tab" tabindex="0">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
                             In marketing a product is an object or system made available for consumer use it is
                             anything that can be offered to a market to the desire or need of a \retailing, products
                             are often referred to as merchandise, and in manufacturing, products are bought as
@@ -188,10 +174,8 @@ get_header() ?>
                             group of products that are closely either because they function in a similar manner, are
                             sold to the same customergroups.
                         </div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-                            aria-labelledby="v-pills-profile-tab" tabindex="0">...</div>
-                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                            aria-labelledby="v-pills-messages-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">...</div>
                     </div>
                 </div>
             </div>
@@ -211,8 +195,7 @@ get_header() ?>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-1.jpg" alt=""
-                                    title="">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-1.jpg" alt="" title="">
                             </div>
                             <div class="info-generation">
                                 <h5>Example Midi Bodycon Dress</h5>
@@ -224,8 +207,7 @@ get_header() ?>
                         </div>
                         <div class="swiper-slide">
                             <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-2.jpg" alt=""
-                                    title="">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-2.jpg" alt="" title="">
                             </div>
                             <div class="info-generation">
                                 <h5>Example Midi Bodycon Dress</h5>
@@ -237,8 +219,7 @@ get_header() ?>
                         </div>
                         <div class="swiper-slide">
                             <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-3.jpg" alt=""
-                                    title="">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-3.jpg" alt="" title="">
                             </div>
                             <div class="info-generation">
                                 <h5>Example Midi Bodycon Dress</h5>
@@ -250,8 +231,7 @@ get_header() ?>
                         </div>
                         <div class="swiper-slide">
                             <div class="img-contain">
-                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-4.jpg" alt=""
-                                    title="">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/generation-4.jpg" alt="" title="">
                             </div>
                             <div class="info-generation">
                                 <h5>Example Midi Bodycon Dress</h5>
@@ -262,16 +242,19 @@ get_header() ?>
                             </div>
                         </div>
                     </div>
-                    <div class="arrow-prev-container">
-                        <button class="generation-arrows prev">
-                            <i class="icon-arrowline-left"> </i>
-                        </button>
+                    <div class="w-100">
+                        <div class="arrow-prev-container">
+                            <button class="generation-arrows prev">
+                                <i class="icon-arrowline-left"> </i>
+                            </button>
+                        </div>
+                        <div class="arrow-next-container">
+                            <button class="generation-arrows next">
+                                <i class="icon-arrowline-right"> </i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="arrow-next-container">
-                        <button class="generation-arrows next">
-                            <i class="icon-arrowline-right"> </i>
-                        </button>
-                    </div>
+
                 </div>
             </div>
         </div>
