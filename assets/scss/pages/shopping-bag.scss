@@ -1,6 +1,7 @@
 #bag {
   height: calc(100vh - -120px);
   background: #F3F4F8;
+
   .step_by_step {
     background: #EBEDF5;
     padding: 10px;
@@ -31,25 +32,102 @@
 
   .step-trigger {
     padding: 0 !important;
+    display: flex;
+    flex-direction: column;
 
   }
 
   .bs-stepper-content {
     padding: 35px 0;
+
+    h3 {
+      font-size: 26px;
+      font-size: 28px;
+      font-weight: 700;
+    }
   }
 
-  .quantity{
-    width: 140px;
+  .quantity {
+    width: 100px;
+    padding: 9px 7px;
+    height: 44px;
   }
 }
 
-.table-bag{
+.table-bag {
+
+
+  thead {
+    tr th {
+      background: rgb(243 244 248);
+      padding: 20px 0;
+      height: auto;
+    }
+
+  }
+
+  tbody {
+    tr th {
+      padding: 20px;
+      height: 200px;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      width: 415px;
+      background: white;
+    }
+  }
+
+  td {
+    height: 200px;
+    padding: 20px 0;
+    width: 180px;
+    background: white;
+
+    &:last-child {
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+  }
+
+  .img-fit {
+    height: 100%;
+    width: 130px;
+    margin-right: 20px;
+
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.c {
+  max-width: 400px;
+  padding: 20px;
+  margin-top: 63px;
+  border-radius: 14px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background: white;
 
-  th{
-    background: transparent;
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: none;
+    border: 1px solid #f3f4f8;
+  }
+
+  .quam-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 }
+
+
+
 
 #msform {
   width: 400px;

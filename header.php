@@ -95,14 +95,14 @@
 
               <div class="icon-media">
                 <a href="" target="_blank"><i class="icon-heart"></i></a>
-                <a href="" target="_blank"><i class="icon-shopping-bag"></i></a>
+                <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/"><i class="icon-shopping-bag"></i></a>
                 <a href="" target="_blank"><i class="icon-user"></i></a>
               </div>
             </div>
 
             <div class="social-media center-all d-flex d-xl-none">
               <div class="icon-media p-0">
-                <a href="" target="_blank"><i class="icon-shopping-bag "></i></a>
+                <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/"><i class="icon-shopping-bag "></i></a>
               </div>
             </div>
 
