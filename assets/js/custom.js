@@ -123,6 +123,12 @@ var swiper = new Swiper(".SingProducts", {
   },
 });
 
+// --------- active cards --------------------
+
+
+
+
+
 
 (function () {
 
@@ -257,6 +263,12 @@ function initQuantitySingle() {
 initQuantity();
 initQuantitySingle();
 
+// -------- quitar productos del  carrito-----------
+
+$('.shopping-bag-offcanvas .select-bag a.remove').click(function(event){
+  event.preventDefault();
+  $(this).closest('.select-bag').remove(); // Remueve el elemento con la clase select-bag más cercano al enlace clickeado
+});
 // <--------- Paso a paso bolsa de compra ---------->
 
 var stepper1
@@ -311,4 +323,3 @@ stepper4 = new Stepper(document.querySelector('#stepper4'))
     }
   })
 })
-

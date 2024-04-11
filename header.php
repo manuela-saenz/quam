@@ -95,10 +95,13 @@
 
               <div class="icon-media">
                 <a href="" target="_blank"><i class="icon-heart"></i></a>
-                <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/"><i class="icon-shopping-bag"></i></a>
+                <!-- <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/"><i class="icon-shopping-bag"></i></a> -->
+                <button class="" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="icon-shopping-bag"></i></button>
                 <a href="" target="_blank"><i class="icon-user"></i></a>
               </div>
+
             </div>
+
 
             <div class="social-media center-all d-flex d-xl-none">
               <div class="icon-media p-0">
@@ -117,6 +120,117 @@
     </div>
 
   </header>
+
+  <div class="offcanvas offcanvas-end shopping-bag-offcanvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">Bolsa de la compra</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="select-bag d-flex bg-white">
+        <div class="img-fit">
+          <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
+        </div>
+        <div>
+          <h5>Example Midi Bodycon Dress</h5>
+          <p>Talla: S</p>
+          <p>Color: </p>
+          <div class="quantity">
+            <button class="qtyminus minus"><i class="icon-minus"></i></button>
+            <input type="text" id="singleProductQuantity" name="quantity" value="1" class="qtySingle">
+            <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
+          </div>
+          <div class="d-flex align-items-center price">
+            <p>$200</p>
+            <span>$890</span>
+          </div>
+        </div>
+        <a href="#" class="remove">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 7l16 0"></path>
+            <path d="M10 11l0 6"></path>
+            <path d="M14 11l0 6"></path>
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <div class="select-bag d-flex bg-white">
+        <div class="img-fit">
+          <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
+        </div>
+        <div>
+          <h5>Example Midi Bodycon Dress</h5>
+          <p>Talla: S</p>
+          <p>Color: </p>
+          <div class="quantity">
+            <button class="qtyminus minus"><i class="icon-minus"></i></button>
+            <input type="text" id="singleProductQuantity" name="quantity" value="1" class="qtySingle">
+            <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
+          </div>
+          <div class="d-flex align-items-center price">
+            <p>$200</p>
+            <span>$890</span>
+          </div>
+        </div>
+        <a href="#" class="remove">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 7l16 0"></path>
+            <path d="M10 11l0 6"></path>
+            <path d="M14 11l0 6"></path>
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <div class="select-bag d-flex bg-white">
+        <div class="img-fit">
+          <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
+        </div>
+        <div>
+          <h5>Example Midi Bodycon Dress</h5>
+          <p>Talla: S</p>
+          <p>Color: </p>
+          <div class="quantity">
+            <button class="qtyminus minus"><i class="icon-minus"></i></button>
+            <input type="text" id="singleProductQuantity" name="quantity" value="1" class="qtySingle">
+            <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
+          </div>
+          <div class="d-flex align-items-center price">
+            <p>$200</p>
+            <span>$890</span>
+          </div>
+        </div>
+        <a href="#" class="remove">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 7l16 0"></path>
+            <path d="M10 11l0 6"></path>
+            <path d="M14 11l0 6"></path>
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="offcanvas-footer">
+      <div class="">
+        <div class="d-flex justify-content-between mb-2">
+          <p class="fs-5"> Subtotal</p>
+          <p class="fs-5">$75.000</p>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <p class="fs-4"> <b>Total</b> </p>
+          <p class="fs-4"> <b> $75.000</b> </p>
+        </div>
+      </div>
+      <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/" class="quam-btn blue w-100">Finalizar compra</a>
+    </div>
+  </div>
 
 
   <main>

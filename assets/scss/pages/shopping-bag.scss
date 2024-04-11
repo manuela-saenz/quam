@@ -75,12 +75,14 @@
       margin: 10px 0;
       border: 1px solid #E1E1E6;
       color: #8D8D99;
+      font-weight: 500;
     }
 
     .quam-btn {
       width: 50%;
       color: white;
       padding: initial;
+      font-size: 20px;
 
       &:hover {
         color: $dark_blue;
@@ -102,36 +104,49 @@
   }
 
   tbody {
+    // display: flex;
+    // flex-direction: column;
+
     tr {
       margin-top: 40px;
       position: relative;
       width: 100%;
-      box-shadow: rgba(0, 0, 0, .24) 0px 3px 8px;
+      // box-shadow: rgba(0, 0, 0, .24) 0px 3px 8px;
       border-radius: 20px;
       overflow: hidden;
     }
 
     tr th {
-      padding: 20px;
+      // padding: 20px 0;
+      padding: 0;
       height: 200px;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
+      overflow: hidden;
       width: 415px;
-      background: white;
+      background: transparent;
       border-bottom-width: inherit;
+      margin-bottom: 20px;
+    }
+
+    svg {
+      height: 27px;
     }
   }
 
   td {
     height: 200px;
-    padding: 20px 0;
+    // padding: 20px 0;
+    padding: 0;
     width: 180px;
-    background: white;
+    background: transparent;
     border-bottom-width: inherit;
+    margin-bottom: 20px;
 
     &:last-child {
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
+      overflow: hidden;
     }
 
   }
@@ -197,6 +212,7 @@
     h5 {
       font-size: 18px;
       font-weight: 800;
+      text-transform: uppercase;
     }
 
     input {
@@ -225,7 +241,7 @@
 
     p {
       margin-bottom: 0;
-      font-weight: 700;
+      font-weight: 500;
       margin-right: 10px;
     }
 
@@ -252,23 +268,41 @@
     background: #FF5238;
     color: white;
     border-radius: 7px;
-    padding: 5px 9px;
+    padding: 4px 7px;
     margin-left: 13px;
   }
 
   .form-check {
     background: white;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 16px;
     margin-bottom: 20px;
+    min-width: 198px;
+    margin-right: 20px;
+    @include center-all;
+    height: 115px;
+    border: none;
+
+    .img-fit {
+      height: fit-content;
+      margin-bottom: 15px;
+      width: 42px;
+
+    }
+
+    &:active {
+      border: 1px solid $red;
+    }
+
   }
 
+  .form-check.active {
+    border: 2px solid $red;
+  }
+
+
+
 }
-
-
-
-
-
 
 #msform {
   width: 400px;

@@ -67,19 +67,17 @@ get_header() ?>
                           <thead>
                             <tr>
                               <th scope="col">Producto (s)</th>
-                              <th scope="col">Cantidad</th>
-                              <th scope="col">Precio</th>
+                              <th scope="col" class="text-center">Cantidad</th>
+                              <th scope="col" class="text-center">Precio</th>
                               <th scope="col"></th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <th scope="row d-flex align-items-center">
-                                <div class="d-flex align-items-center h-100">
+                                <div class="d-flex align-items-center h-100 bg-white">
                                   <div class="img-fit">
-                                    <img
-                                      src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg"
-                                      alt="">
+                                    <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                                   </div>
                                   <div>
                                     <h5>Example Midi Bodycon Dress</h5>
@@ -89,23 +87,20 @@ get_header() ?>
                                 </div>
                               </th>
                               <td>
-                                <div class="d-flex align-items-center h-100">
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-white">
                                   <div class="quantity">
                                     <button class="qtyminus minus"><i class="icon-minus"></i></button>
-                                    <input type="text" id="singleProductQuantity" name="quantity" value="1"
-                                      class="qtySingle">
+                                    <input type="text" id="singleProductQuantity" name="quantity" value="1" class="qtySingle">
                                     <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
                                   </div>
                                 </div>
                               </td>
                               <td>
-                                <div class="d-flex align-items-center h-100"> $70.000</div>  
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-white"> $70.000</div>  
                               </td>
                               <td>
-                                <div class="d-flex align-items-center justify-content-center h-100">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash"
-                                    width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50"
-                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-white">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M4 7l16 0" />
                                     <path d="M10 11l0 6" />
@@ -119,11 +114,9 @@ get_header() ?>
                             </tr>
                             <tr>
                               <th scope="row d-flex align-items-center">
-                                <div class="d-flex align-items-center h-100">
+                                <div class="d-flex align-items-center h-100 bg-white">
                                   <div class="img-fit">
-                                    <img
-                                      src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg"
-                                      alt="">
+                                    <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                                   </div>
                                   <div>
                                     <h5>Example Midi Bodycon Dress</h5>
@@ -133,24 +126,21 @@ get_header() ?>
                                 </div>
                               </th>
                               <td>
-                                <div class="d-flex align-items-center h-100">
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-white">
                                   <div class="quantity">
                                     <button class="qtyminus minus"><i class="icon-minus"></i></button>
-                                    <input type="text" id="singleProductQuantity" name="quantity" value="1"
-                                      class="qtySingle">
+                                    <input type="text" id="singleProductQuantity" name="quantity" value="1" class="qtySingle">
                                     <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
                                   </div>
                                 </div>
 
                               </td>
                               <td>
-                                <div class="d-flex align-items-center h-100"> $70.000</div>  
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-white"> $70.000</div>  
                               </td>
                               <td>
-                                <div class="d-flex align-items-center justify-content-center h-100">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash"
-                                    width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50"
-                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-white">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M4 7l16 0" />
                                     <path d="M10 11l0 6" />
@@ -164,22 +154,20 @@ get_header() ?>
                             </tr>
                           </tbody>
                         </table>
-                        <label class="custom-checkbox d-flex align-items-baseline mb-4"><input
-                            class="politicy check me-3" type="checkbox" id="cboxtwo" value="first_checkbox">
+                        <label class="custom-checkbox d-flex align-items-baseline mb-4"><input class="politicy check me-3" type="checkbox" id="cboxtwo" value="first_checkbox">
                           <div>
                             Autorizo el uso de mis datos personales con fines comerciales y publicitarios para recibir
                             información sobre productos y servicios de interés.
                           </div>
                         </label>
-                        <a href="" class="quam-btn blue">Diligenciar información </a>
+                        <button class="quam-btn blue" onclick="stepper1.next()">Diligenciar información</button>
                       </div>
 
                       <div class="col-4">
                         <div class="code">
                           <form method="post" class="position-relative">
                             <div class="position-relative">
-                              <input type="text" id="codigo_descuento" name="codigo_descuento"
-                                placeholder="Código de descuento" required>
+                              <input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
                               <input type="submit" class="quam-btn blue codigo" value="Aplicar">
                             </div>
                             <div class="mt-4">
@@ -200,9 +188,6 @@ get_header() ?>
                           </form>
                         </div>
                       </div>
-                    </div>
-                    <div class="d-flex justify-content-end mt-5">
-                      <button class="quam-btn blue" onclick="stepper1.next()">Next</button>
                     </div>
                   </div>
 
@@ -233,6 +218,7 @@ get_header() ?>
                               <input type="text" id="lname" name="lname" value="Escribe tu teléfono">
                             </div>
                           </div>
+                          <!-- <button class="quam-btn blue" onclick="stepper1.next()">Diligenciar ubicación</button> -->
                           <input type="submit" class="quam-btn blue" value="Diligenciar ubicación">
                         </form>
                       </div>
@@ -243,9 +229,7 @@ get_header() ?>
                           <form method="post" class="position-relative form_compra">
                             <div class="d-flex align-items-center h-100 purchase">
                               <div class="img-fit">
-                                <img
-                                  src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg"
-                                  alt="">
+                                <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                               </div>
                               <div>
                                 <div class="d-flex align-items-baseline">
@@ -260,9 +244,7 @@ get_header() ?>
                             </div>
                             <div class="d-flex align-items-center h-100 purchase">
                               <div class="img-fit">
-                                <img
-                                  src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg"
-                                  alt="">
+                                <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                               </div>
                               <div>
                                 <div class="d-flex align-items-baseline">
@@ -275,9 +257,8 @@ get_header() ?>
                                 </div>
                               </div>
                             </div>
-                            <div class="position-relative">
-                              <input type="text" id="codigo_descuento" name="codigo_descuento"
-                                placeholder="Código de descuento" required>
+                            <div class="position-relative mt-5">
+                              <input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
                               <input type="submit" class="quam-btn blue" value="Aplicar">
                             </div>
                             <div class="mt-4">
@@ -357,9 +338,7 @@ get_header() ?>
                           <form method="post" class="position-relative form_compra">
                             <div class="d-flex align-items-center h-100 purchase">
                               <div class="img-fit">
-                                <img
-                                  src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg"
-                                  alt="">
+                                <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                               </div>
                               <div>
                                 <div class="d-flex align-items-baseline">
@@ -374,9 +353,7 @@ get_header() ?>
                             </div>
                             <div class="d-flex align-items-center h-100 purchase">
                               <div class="img-fit">
-                                <img
-                                  src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg"
-                                  alt="">
+                                <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                               </div>
                               <div>
                                 <div class="d-flex align-items-baseline">
@@ -389,9 +366,8 @@ get_header() ?>
                                 </div>
                               </div>
                             </div>
-                            <div class="position-relative">
-                              <input type="text" id="codigo_descuento" name="codigo_descuento"
-                                placeholder="Código de descuento" required>
+                            <div class="position-relative mt-5">
+                              <input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
                               <input type="submit" class="quam-btn blue" value="Aplicar">
                             </div>
                             <div class="mt-4">
@@ -426,69 +402,52 @@ get_header() ?>
                       <div class="col-md-8">
                         <h3 class="mb-4">Pago</h3>
                         <div class="d-flex">
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                              value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
+
+
+                          <div id="myDIV" class="d-flex">
+                            <button class="btn form-check flex-column active">
+                              <div class="img-fit">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/Tarjeta-debito.png" alt="">
+                              </div>
                               Tarjeta debito
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                              value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
+                            </button>
+                            <button class="btn form-check flex-column ">
+                              <div class="img-fit">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/Tarjeta-credito.png" alt="">
+                              </div>
                               Tarjeta credito
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
-                              value="option3">
-                            <label class="form-check-label" for="exampleRadios3">
+                            </button>
+                            <button class="btn form-check flex-column">
+                              <div class="img-fit">
+                                <img src="<?php bloginfo('template_url') ?>/media/images/Pse.png" alt="">
+                              </div>
                               PSE
-                            </label>
+                            </button>
+                            <!-- <button class="btn">4</button>
+                            <button class="btn">5</button> -->
                           </div>
                         </div>
 
                         <form action="" class="form_contact">
                           <div class="row">
                             <div class="col-md-6">
-                              <label for="cars"><b>Departamento*</b></label>
-
-                              <select name="cars" id="cars">
-                                <option value="volvo">Seleccione</option>
-                                <option value="saab">Bogota</option>
-                                <option value="mercedes">Medellin</option>
-                                <option value="audi">Barranquilla</option>
-                              </select>
+                              <label for="cars"><b>Número de la tarjeta*</b></label>
+                              <input type="text" id="lname" name="lname" value="Escribe el número de la tarjeta">
                             </div>
                             <div class="col-md-6">
-                              <label for="cars"><b>Municipio*</b></label>
-
-                              <select name="cars" id="cars">
-                                <option value="volvo">Seleccione</option>
-                                <option value="saab">Bogota</option>
-                                <option value="mercedes">Medellin</option>
-                                <option value="audi">Barranquilla</option>
-                              </select>
+                              <label for="cars"><b>Nombre de titular de la cuenta*</b></label>
+                              <input type="text" id="lname" name="lname" value="Escribe tu nombre">
                             </div>
                             <div class="col-md-6">
-                              <label for="lname"> <b>Dirección de entrega* </b> </label><br>
-                              <input type="text" id="lname" name="lname" value="Escribe la dirección ">
+                              <label for="lname"> <b>Fecha de vencimiento*</b> </label><br>
+                              <input type="date">
                             </div>
                             <div class="col-md-6">
-                              <label for="lname"> <b> Barrio</b> </label><br>
-                              <input type="text" id="lname" name="lname" value="Opcional">
-                            </div>
-                            <div class="col-md-6">
-                              <label for="lname"> <b> Información adicional </b> (ej:. apart201) </label><br>
-                              <input type="text" id="lname" name="lname" value="Opcional">
-                            </div>
-                            <div class="col-md-6">
-                              <label for="lname"> <b> Destinatario* </b> </label><br>
-                              <input type="text" id="lname" name="lname" value="Carlos Gomez">
+                              <label for="lname"> <b> Código de seguridad*</b> </label><br>
+                              <input type=number>
                             </div>
                           </div>
-                          <input type="submit" class="quam-btn blue" value="Diligenciar método de pago">
+                          <input type="submit" class="quam-btn blue" value="Comprar ahora">
                         </form>
                       </div>
 
@@ -498,9 +457,7 @@ get_header() ?>
                           <form method="post" class="position-relative form_compra">
                             <div class="d-flex align-items-center h-100 purchase">
                               <div class="img-fit">
-                                <img
-                                  src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg"
-                                  alt="">
+                                <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                               </div>
                               <div>
                                 <div class="d-flex align-items-baseline">
@@ -515,9 +472,7 @@ get_header() ?>
                             </div>
                             <div class="d-flex align-items-center h-100 purchase">
                               <div class="img-fit">
-                                <img
-                                  src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg"
-                                  alt="">
+                                <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                               </div>
                               <div>
                                 <div class="d-flex align-items-baseline">
@@ -530,9 +485,8 @@ get_header() ?>
                                 </div>
                               </div>
                             </div>
-                            <div class="position-relative">
-                              <input type="text" id="codigo_descuento" name="codigo_descuento"
-                                placeholder="Código de descuento" required>
+                            <div class="position-relative mt-5">
+                              <input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
                               <input type="submit" class="quam-btn blue" value="Aplicar">
                             </div>
                             <div class="mt-4">
