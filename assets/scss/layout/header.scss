@@ -563,7 +563,7 @@ header {
         margin-bottom: 20px;
 
         .img-fit {
-            height: 150px;
+            height: 100%;
             margin-right: 20px;
             width: 140px;
         }
@@ -571,14 +571,22 @@ header {
 
     .quantity {
         max-height: 30px;
-        padding: 6px 7px;
-        width: 56%;
+        padding: 4px 5px;
+        width: 45%;
         border: 1px solid black;
         margin: 7px 0;
 
         button {
             width: 22px;
             height: 22px;
+
+            i {
+                font-size: 15px;
+            }
+        }
+
+        input {
+            margin: 0 2px
         }
     }
 
@@ -589,6 +597,7 @@ header {
             margin-bottom: 0;
             font-weight: 500;
             margin-right: 10px;
+            color: #1C1C1C;
         }
 
         span {
@@ -609,6 +618,8 @@ header {
     p {
         margin-bottom: 0;
         font-size: 15px;
+        color: #1C1C1C;
+        font-weight: 600;
     }
 
     h5 {

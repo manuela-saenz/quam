@@ -8,6 +8,18 @@
     display: flex;
     align-items: center;
     padding: 20px;
+
+    @media(max-width:768px) {
+      flex-direction: column-reverse;
+      justify-content: flex-start !important;
+      align-items: flex-start;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      background-color: red;
+    }
   }
 
   .active .bs-stepper-circle {
@@ -64,6 +76,10 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     background: white;
 
+    @media(max-width:991px) {
+      padding: 20px;
+    }
+
     .row div {
       margin-bottom: 35px;
     }
@@ -95,6 +111,8 @@
 
 
   thead {
+    border-bottom: 1px solid transparent;
+
     tr th {
       background: rgb(243 244 248);
       padding: 20px 0;
@@ -104,11 +122,11 @@
   }
 
   tbody {
+    display: table-caption;
     // display: flex;
     // flex-direction: column;
 
     tr {
-      margin-top: 40px;
       position: relative;
       width: 100%;
       // box-shadow: rgba(0, 0, 0, .24) 0px 3px 8px;
@@ -171,6 +189,15 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background: white;
 
+  // @media(max-width:991px) {
+  //   position: fixed;
+  //   width: 100%;
+  //   max-width: 100%;
+  //   left: 0;
+  //   bottom: 0;
+  //   z-index: 99;
+  // }
+
   input[type="text"] {
     width: 100%;
     padding: 10px;
@@ -184,6 +211,44 @@
     position: absolute;
     right: 0;
     top: 0;
+  }
+}
+
+#test-l-1 {
+  .code {
+    @media(max-width:991px) {
+      position: fixed;
+      width: 100%;
+      max-width: 100%;
+      left: 0;
+      bottom: 0;
+      z-index: 99;
+      border-radius: 26px 26px 0px 0px;
+      overflow: auto;
+      padding-bottom: 15px;
+      height: 332px;
+      padding-bottom: 70px;
+
+      .btn-next {
+        bottom: 0;
+        position: fixed;
+        z-index: 8;
+        height: 57px;
+        left: 0;
+      }
+
+      .custom-check {
+        font-size: 13px;
+      }
+    }
+  }
+
+  table {
+    @media(max-width:991px) {
+      position: relative;
+      display: block;
+      overflow-x: auto;
+    }
   }
 }
 
@@ -219,15 +284,14 @@
       border: 1px solid #00000042;
       border-radius: 4px;
       background: transparent;
+      height: 65px;
     }
 
     .quam-btn {
       background: $dark_blue;
-      height: 35px;
       right: 6px;
       top: 50%;
       transform: translateY(-63%);
-      padding: 3px 20px;
       font-size: 15px;
 
       &:hover {

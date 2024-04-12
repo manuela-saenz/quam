@@ -61,21 +61,21 @@ get_header() ?>
 
                   <div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
                     <div class="form-group row">
-                      <div class="col-md-8">
+                      <div class="col-lg-8 col-md-12">
                         <h3 class="mb-4"> Bolsa de la compra</h3>
                         <table class="table table-bag">
                           <thead>
                             <tr>
                               <th scope="col">Producto (s)</th>
                               <th scope="col" class="text-center">Cantidad</th>
-                              <th scope="col" class="text-center">Precio</th>
-                              <th scope="col"></th>
+                              <th scope="col" class="">Precio</th>
+                              <th scope="col" style="color: transparent;">dd</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody class="mb-4">
                             <tr>
-                              <th scope="row d-flex align-items-center">
-                                <div class="d-flex align-items-center h-100 bg-white">
+                              <th scope="row d-flex align-items-center ">
+                                <div class=" d-flex align-items-center h-100 bg-white p-4">
                                   <div class="img-fit">
                                     <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                                   </div>
@@ -87,7 +87,7 @@ get_header() ?>
                                 </div>
                               </th>
                               <td>
-                                <div class="d-flex align-items-center justify-content-center h-100 bg-white">
+                                <div class="d-flex align-items-center justify-content-end h-100 bg-white">
                                   <div class="quantity">
                                     <button class="qtyminus minus"><i class="icon-minus"></i></button>
                                     <input type="text" id="singleProductQuantity" name="quantity" value="1" class="qtySingle">
@@ -96,7 +96,8 @@ get_header() ?>
                                 </div>
                               </td>
                               <td>
-                                <div class="d-flex align-items-center justify-content-center h-100 bg-white"> $70.000</div>  
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-white"> $70.000
+                                </div>  
                               </td>
                               <td>
                                 <div class="d-flex align-items-center justify-content-center h-100 bg-white">
@@ -112,9 +113,12 @@ get_header() ?>
 
                               </td>
                             </tr>
+                          </tbody>
+
+                          <tbody class="mb-4">
                             <tr>
                               <th scope="row d-flex align-items-center">
-                                <div class="d-flex align-items-center h-100 bg-white">
+                                <div class="d-flex align-items-center h-100 bg-white p-4">
                                   <div class="img-fit">
                                     <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
                                   </div>
@@ -126,17 +130,17 @@ get_header() ?>
                                 </div>
                               </th>
                               <td>
-                                <div class="d-flex align-items-center justify-content-center h-100 bg-white">
+                                <div class="d-flex align-items-center justify-content-end h-100 bg-white">
                                   <div class="quantity">
                                     <button class="qtyminus minus"><i class="icon-minus"></i></button>
                                     <input type="text" id="singleProductQuantity" name="quantity" value="1" class="qtySingle">
                                     <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
                                   </div>
                                 </div>
-
                               </td>
                               <td>
-                                <div class="d-flex align-items-center justify-content-center h-100 bg-white"> $70.000</div>  
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-white"> $70.000
+                                </div>  
                               </td>
                               <td>
                                 <div class="d-flex align-items-center justify-content-center h-100 bg-white">
@@ -154,16 +158,19 @@ get_header() ?>
                             </tr>
                           </tbody>
                         </table>
-                        <label class="custom-checkbox d-flex align-items-baseline mb-4"><input class="politicy check me-3" type="checkbox" id="cboxtwo" value="first_checkbox">
-                          <div>
-                            Autorizo el uso de mis datos personales con fines comerciales y publicitarios para recibir
-                            información sobre productos y servicios de interés.
-                          </div>
-                        </label>
-                        <button class="quam-btn blue" onclick="stepper1.next()">Diligenciar información</button>
+                        <div class="d-lg-flex d-none flex-column">
+                          <label class="custom-checkbox d-flex align-items-baseline mb-4"><input class="politicy check me-3" type="checkbox" id="cboxtwo" value="first_checkbox">
+                            <div>
+                              Autorizo el uso de mis datos personales con fines comerciales y publicitarios para recibir
+                              información sobre productos y servicios de interés.
+                            </div>
+                          </label>
+                          <button class="quam-btn blue" onclick="stepper1.next()">Diligenciar información</button>
+                        </div>
+
                       </div>
 
-                      <div class="col-4">
+                      <div class="col-lg-4 col-md-12">
                         <div class="code">
                           <form method="post" class="position-relative">
                             <div class="position-relative">
@@ -186,6 +193,20 @@ get_header() ?>
                             </div>
 
                           </form>
+                          <div class="d-lg-none d-flex flex-column">
+                            <label class="custom-checkbox d-flex align-items-baseline mb-4 "><input class="politicy check me-3" type="checkbox" id="cboxtwo" value="first_checkbox">
+                              <div>
+                                Autorizo el uso de mis datos personales con fines comerciales y publicitarios para
+                                recibir
+                                información sobre productos y servicios de interés.
+                              </div>
+                            </label>
+                            <div class="btn-next center-all w-100">
+                              <button class="quam-btn blue w-100" onclick="stepper1.next()">Diligenciar información</button>
+                            </div>
+
+                          </div>
+
                         </div>
                       </div>
                     </div>
@@ -220,10 +241,11 @@ get_header() ?>
                           </div>
                           <!-- <button class="quam-btn blue" onclick="stepper1.next()">Diligenciar ubicación</button> -->
                           <input type="submit" class="quam-btn blue" value="Diligenciar ubicación">
+                          <!-- <button class="quam-btn blue" onclick="stepper1.next()">Next</button> -->
                         </form>
                       </div>
 
-                      <div class="col-4">
+                      <div class="col-lg-4 col-md-12">
                         <div class="code">
                           <h3>Resumen de compra </h3>
                           <form method="post" class="position-relative form_compra">
@@ -285,6 +307,7 @@ get_header() ?>
                     </div>
 
                   </div>
+
                   <div id="test-l-3" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger3">
                     <div class="form-group row">
                       <div class="col-md-8">
@@ -395,7 +418,6 @@ get_header() ?>
                     </div>
 
                   </div>
-
 
                   <div id="test-l-4" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger4">
                     <div class="form-group row">
