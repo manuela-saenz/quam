@@ -67,7 +67,7 @@ var swiper = new Swiper(".generationSwiper", {
   },
   breakpoints: {
     1500: {
-      slidesPerView: 3.2,
+      slidesPerView: 4.2,
       spaceBetween: 20,
     },
     991: {

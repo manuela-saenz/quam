@@ -11,7 +11,7 @@ get_header();
             <div class="swiper-slide">
               <div class="container">
                 <div class="row">
-                  <div class="col-lg-7 col-xxl-7 offset-xxl-1 info-banner" style="z-index: 3;">
+                  <div class="col-lg-6 col-xxl-6 offset-xxl-1 info-banner" style="z-index: 3;">
                     <span>Some text here</span>
                     <h1 class="section-title">Aprovecha nuestras ofertas</h1>
                     <p>The Two golden rules professional graphic designer don’t want you to know about.</p>
@@ -29,7 +29,7 @@ get_header();
             <div class="swiper-slide">
               <div class="container">
                 <div class="row">
-                  <div class="col-lg-7 col-xxl-7 offset-xxl-1 info-banner" style="z-index: 3;">
+                  <div class="col-lg-6 col-xxl-6 offset-xxl-1 info-banner" style="z-index: 3;">
                     <h1 class="section-title">Lorem ipsum <b>dolor </b> sit amet</h1>
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
                       nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
@@ -238,12 +238,12 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
   </div>
 </section>
 
-<section id="product_highlights">
+<!-- <section id="product_highlights">
   <div class="container slideGeneration">
     <div class="row center-all">
       <div class="col-md-4 col-md-12 position-relative">
         <h2 class="section-subtitle">Productos destacados</h2>
-        <div class="d-none d-xl-flex">
+        <div class="d-none d-lg-flex">
           <div class="arrow-prev-container">
             <button class="highlights-arrows prev">
               <i class="icon-arrowline-left"> </i>
@@ -311,7 +311,7 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
               </div>
             </div>
           </div>
-          <div class="d-xl-none d-flex">
+          <div class="d-lg-none d-flex">
             <div class="arrow-prev-container">
               <button class="highlights-arrows prev">
                 <i class="icon-arrowline-left"> </i>
@@ -363,7 +363,7 @@ $oferta = $ofertas['oferta'];
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <?php
 get_footer();

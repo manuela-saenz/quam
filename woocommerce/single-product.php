@@ -21,7 +21,7 @@ foreach ($attachment_ids as $attachment_id) {
     <div class="container">
         <div class="row">
             <div class="col-lg-1 imgP">
-                <div thumbsSlider="" class="swiper SingProducts">
+                <div thumbsSlider="" class="swiper SingProducts mt-4">
                     <div class="swiper-wrapper">
                         <?php foreach ($images as $img) : ?>
                             <div class="swiper-slide">
@@ -53,7 +53,7 @@ foreach ($attachment_ids as $attachment_id) {
 
             </div>
 
-            <div class="col-lg-6  information-product">
+            <div class="col-lg-6  information-product mt-4">
                 <div class="info-product">
                     <div class="product-actions d-lg-none d-flex mb-4">
                         <div class="flex bag">

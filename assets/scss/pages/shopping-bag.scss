@@ -2,6 +2,14 @@
   height: calc(100vh - -120px);
   background: #F3F4F8;
 
+  .informationBag {
+    .center-all {
+      @media(max-width:991px) {
+        justify-content: left;
+      }
+    }
+  }
+
   .step_by_step {
     background: #EBEDF5;
     padding: 10px;
@@ -19,6 +27,20 @@
       content: "";
       position: absolute;
       background-color: red;
+    }
+
+    .bs-stepper-header {
+      width: 60%;
+
+      @media(max-width:991px) {
+        margin-bottom: 20px;
+      }
+    }
+
+    .center-all {
+      @media(max-width:991px) {
+        justify-content: left;
+      }
     }
   }
 
@@ -103,12 +125,22 @@
       &:hover {
         color: $dark_blue;
       }
+
+      @media(max-width:1200px) {
+        width: 100%;
+        padding: 14px 25px;
+      }
     }
   }
 }
 
 .table-bag {
 
+  h5 {
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
 
   thead {
     border-bottom: 1px solid transparent;
@@ -119,12 +151,22 @@
       height: auto;
     }
 
+    @media(max-width:991px) {
+      width: 100%;
+      display: table;
+    }
+
   }
 
   tbody {
     display: table-caption;
+
     // display: flex;
     // flex-direction: column;
+    @media(max-width:991px) {
+      width: 100%;
+      display: block;
+    }
 
     tr {
       position: relative;
@@ -137,7 +179,7 @@
     tr th {
       // padding: 20px 0;
       padding: 0;
-      height: 200px;
+      height: 150px;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
       overflow: hidden;
@@ -153,7 +195,7 @@
   }
 
   td {
-    height: 200px;
+    height: 150px;
     // padding: 20px 0;
     padding: 0;
     width: 180px;
@@ -241,6 +283,48 @@
         font-size: 13px;
       }
     }
+
+    input {
+      border: 1px solid #00000042;
+      border-radius: 10px;
+      background: transparent;
+      height: 65px;
+      letter-spacing: 1px;
+    }
+
+    .quam-btn {
+      background: $dark_blue;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-63%);
+      font-size: 15px;
+      height: 46px;
+
+      &:hover {
+        background: white;
+      }
+
+    }
+
+    .next {
+      @media(max-width:991px) {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        transform: translateY(0px);
+      }
+    }
+
+    .check input {
+      @media(max-width:991px) {
+        height: 15px;
+      }
+
+      @media(max-width:500px) {
+        height: 26px;
+      }
+    }
+
   }
 
   table {
@@ -285,6 +369,7 @@
       border-radius: 4px;
       background: transparent;
       height: 65px;
+      letter-spacing: 1px;
     }
 
     .quam-btn {
@@ -298,6 +383,8 @@
         background: white;
       }
     }
+
+
   }
 
   .price {

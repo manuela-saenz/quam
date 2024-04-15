@@ -60,23 +60,37 @@
                   <img src="<?php bloginfo('template_url') ?>/media/images/Logo-white.svg" alt="Logo Quam" title="Logo Quam" />
                 </a> -->
 
-                <a href="<?= get_home_url() ?>" class="">Inicio</a>
+                <a href="<?= get_home_url() ?>" class="<?= is_page(43) ? 'active' : '' ?>">Inicio</a>
                 <!-- ----- -->
                 <a href="" class="">Nuevo</a>
                 <!-- ----- -->
 
 
-                <a href="https://www.quam.com.co/web_quam/categoria-producto/hombre/">Hombre</a>
+                <!-- <a href="https://www.quam.com.co/web_quam/categoria-producto/hombre/" class="<?= is_page(43) ? 'active' : '' ?>">Hombre</a> -->
+
+                <?php $categories = get_terms(array(
+                  "taxonomy" => "product_cat",
+                  "hide_empty" => false,
+                  "parent" => 0,
+                  'exclude'    => 69,
+                  'orderby'    => 'asc',
+                ));
+                foreach ($categories as $cat) :
+                ?>
+                  <a class="" href="<?= get_term_link($cat) ?>">
+                    <?= $cat->name ?>
+                  </a>
+                <?php endforeach; ?>
 
                 <!-- ----- -->
-                <a href="https://www.quam.com.co/web_quam/categoria-producto/mujer/">Mujer</a>
+                <!-- <a href="https://www.quam.com.co/web_quam/categoria-producto/mujer/" class="<?= is_page(43) ? 'active' : '' ?>">Mujer</a> -->
                 <!-- ----- -->
-                <a href="https://www.quam.com.co/web_quam/categoria-producto/ninos/">Niños</a>
+                <!-- <a href="https://www.quam.com.co/web_quam/categoria-producto/ninos/" class="<?= is_page(43) ? 'active' : '' ?>">Niños</a> -->
                 <!-- ----- -->
                 <a href="<?= get_permalink(43) ?>" class="<?= is_page(43) ? 'active' : '' ?>">Ofertas</a>
 
                 <div class="social-media center-all d-lg-none d-flex flex-column">
-                  <div class="position-relative search"> <input type="text" placeholder="Search.." class="quam-btn"> <i class="icon-search"></i>
+                  <div class="position-relative search"> <input type="text" placeholder="Buscar" class="quam-btn"> <i class="icon-search"></i>
                   </div>
 
                   <div class="icon-media d-flex">
@@ -90,7 +104,7 @@
             </div>
 
             <div class="social-media center-all d-xl-flex d-none">
-              <div class="position-relative"> <input type="text" placeholder="Search.."> <i class="icon-search"></i>
+              <div class="position-relative"> <input type="text" placeholder="Buscar"> <i class="icon-search"></i>
               </div>
 
               <div class="icon-media">
@@ -105,7 +119,7 @@
 
             <div class="social-media center-all d-flex d-xl-none">
               <div class="icon-media p-0">
-                <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/"><i class="icon-shopping-bag "></i></a>
+                <button class="" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="icon-shopping-bag"></i></button>
               </div>
             </div>
 
@@ -220,8 +234,8 @@
     <div class="offcanvas-footer">
       <div class="">
         <div class="d-flex justify-content-between mb-2">
-          <p class="fs-5"> Subtotal</p>
-          <p class="fs-5">$75.000</p>
+          <p class="fs-6"> Subtotal</p>
+          <p class="fs-6">$75.000</p>
         </div>
         <div class="d-flex justify-content-between mb-2">
           <p class="fs-4"> <b>Total</b> </p>

@@ -8,7 +8,7 @@
     overflow: hidden;
     padding-bottom: 0;
 
-    @media(max-width:991px){
+    @media(max-width:991px) {
         height: 220px;
     }
 
@@ -31,6 +31,10 @@
         }
     }
 
+    .section-subtitle {
+        text-transform: uppercase;
+    }
+
 
 }
 
@@ -50,7 +54,7 @@
     border-radius: 5px;
     outline: none;
     font-weight: 600;
-  
+
 }
 
 .select-box .arrow {
@@ -85,7 +89,8 @@
     .info-highlights {
         display: flex;
         flex-direction: column;
-        @media(max-width:768px){
+
+        @media(max-width:768px) {
             padding: 10px 20px;
         }
 
@@ -132,7 +137,7 @@
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         background: #f2f2f2;
 
-        img{
+        img {
             mix-blend-mode: multiply;
         }
     }
@@ -165,28 +170,33 @@
 
     .galleryP {
         .productS {
-          
-            &:nth-child(10n - 1),&:nth-child(10n){
+
+            &:nth-child(10n - 1),
+            &:nth-child(10n) {
                 width: 50%;
             }
 
-            @media(max-width:768px){
+            @media(max-width:768px) {
                 padding: 0;
                 margin-bottom: 20px;
-                &:first-child{
-                    width: 100%;
-                    padding: 0;
-                }
-                &:nth-child(9n - 1){
+
+                &:first-child {
                     width: 100%;
                     padding: 0;
                 }
 
-                &:nth-child(2n),&:nth-child(4n){
+                &:nth-child(9n - 1) {
+                    width: 100%;
+                    padding: 0;
+                }
+
+                &:nth-child(2n),
+                &:nth-child(4n) {
                     padding-right: 10px;
                 }
 
-                &:nth-child(3n),&:nth-child(5n){
+                &:nth-child(3n),
+                &:nth-child(5n) {
                     padding-left: 10px;
                 }
             }
@@ -235,14 +245,16 @@
     color: $dark_blue;
     background: rgb(0 46 114 / 9%);
     margin-right: 10px;
-  }
-  
-  /* Style the active/current link */
-  .pagination a.active {
+}
+
+/* Style the active/current link */
+.pagination a.active {
     background-color: $dark_blue;
     color: white;
     color: white;
-  }
-  
-  /* Add a grey background color on mouse-over */
-  .pagination a:hover:not(.active) {background-color: #ddd;}
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}

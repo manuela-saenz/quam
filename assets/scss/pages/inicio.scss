@@ -47,6 +47,10 @@
             @include center-all;
             flex-direction: column;
         }
+
+        span {
+            font-size: 24px;
+        }
     }
 
     &::after {
@@ -112,14 +116,13 @@
 
 
     .swiper-slide {
-        background: rgb(0, 51, 98);
-        background: linear-gradient(103deg, rgba(0, 51, 98, 1) 25%, rgba(0, 45, 114, 1) 100%);
+        background: $dark_blue;
+        // background: linear-gradient(103deg, rgba(0, 51, 98, 1) 25%, rgba(0, 45, 114, 1) 100%);
         color: #fff;
     }
 
     .section-title {
         color: $white;
-        line-height: 0.9;
     }
 
     span {
@@ -131,6 +134,7 @@
     p {
         color: white;
         margin-bottom: 20px;
+        font-size: 24px;
 
         @media(max-width:1200px) {
             display: none;
@@ -157,7 +161,8 @@
         }
 
         @media(min-width:1450px) {
-            width: 740px;
+            width: 800px;
+            height: 100%;
         }
 
         @media(max-width:400px) {
@@ -191,7 +196,7 @@
             height: 50%;
             background: #000;
             background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, black 100%);
-            z-index: 3;
+            z-index: 1;
 
             @media(max-width:991px) {
                 height: 80%;
@@ -265,8 +270,13 @@
         height: 400px;
     }
 
+    @media(min-width:1500px) {
+        height: 700px;
+    }
+
     .img-fit {
         height: 100%;
+
     }
 
     .info-categories {
@@ -602,7 +612,7 @@
     .arrow-next-container {
         position: absolute;
 
-         @media(max-width:1200px) {
+        @media(max-width:1200px) {
             top: 50%;
             width: 100%;
         }
@@ -620,6 +630,7 @@
     .info-highlights {
         display: flex;
         flex-direction: column;
+
         @media(max-width:1200px) {
             padding: 0 20px;
         }
@@ -809,7 +820,7 @@
         height: 250px;
         width: fit-content;
         position: absolute;
-        right: 0;
+        right: 145px;
         bottom: -36px;
         margin-right: 11px;
 
@@ -847,7 +858,7 @@
 }
 
 .suscription {
-    background: #0063FC;
+    background: $red;
     border-radius: 0;
     padding: 40px 60px;
     border-radius: 7px;

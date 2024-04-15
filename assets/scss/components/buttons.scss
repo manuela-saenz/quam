@@ -9,6 +9,7 @@
   will-change: transform;
   transition: all .2s;
   position: relative;
+  z-index: 4;
 
   @media(max-width:1200px) {
     height: auto;
