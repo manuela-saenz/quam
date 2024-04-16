@@ -3,6 +3,10 @@
   background: #F3F4F8;
 
   .informationBag {
+    @media(max-width:991px) {
+      padding: 0 10px;
+    }
+
     .center-all {
       @media(max-width:991px) {
         justify-content: left;
@@ -21,6 +25,7 @@
       flex-direction: column-reverse;
       justify-content: flex-start !important;
       align-items: flex-start;
+      padding: 20px 0;
     }
 
     &::before {
@@ -34,12 +39,25 @@
 
       @media(max-width:991px) {
         margin-bottom: 20px;
+        width: 100%;
+        justify-content: space-around;
+        align-items: baseline;
       }
     }
 
     .center-all {
       @media(max-width:991px) {
         justify-content: left;
+      }
+    }
+
+    .step {
+      // width: 20px;
+    }
+
+    .bs-stepper-line {
+      @media(max-width:991px) {
+        display: none;
       }
     }
   }
@@ -62,6 +80,10 @@
   .bs-stepper-label {
     color: $dark_blue;
     font-size: 14px;
+
+    @media(max-width:991px) {
+      text-wrap: wrap;
+    }
   }
 
   .step-trigger {
@@ -73,6 +95,10 @@
 
   .bs-stepper-content {
     padding: 35px 0;
+
+    @media(max-width:991px) {
+      padding-bottom: 0;
+    }
 
     h3 {
       font-size: 26px;
@@ -97,13 +123,18 @@
     border-radius: 20px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     background: white;
+    padding-bottom: 74px;
 
     @media(max-width:991px) {
       padding: 20px;
     }
 
     .row div {
-      margin-bottom: 35px;
+      margin-bottom: 30px;
+
+      @media(max-width:991px) {
+        margin-bottom: 15px;
+      }
     }
 
     input,
@@ -117,10 +148,16 @@
     }
 
     .quam-btn {
-      width: 50%;
-      color: white;
-      padding: initial;
+      width: auto;
+      color: #fff;
       font-size: 20px;
+      padding: 14px 25px;
+      margin: inherit;
+      @include center-all;
+      cursor: pointer;
+      font-weight: 500;
+      text-align-last: center;
+      letter-spacing: 1px;
 
       &:hover {
         color: $dark_blue;
@@ -160,13 +197,10 @@
 
   tbody {
     display: table-caption;
-
-    // display: flex;
-    // flex-direction: column;
-    @media(max-width:991px) {
-      width: 100%;
-      display: block;
-    }
+    // @media(max-width:991px) {
+    //   width: 100%;
+    //   display: block;
+    // }
 
     tr {
       position: relative;
@@ -268,8 +302,9 @@
       border-radius: 26px 26px 0px 0px;
       overflow: auto;
       padding-bottom: 15px;
-      height: 332px;
+      height: 290px;
       padding-bottom: 70px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
       .btn-next {
         bottom: 0;
@@ -288,31 +323,29 @@
       border: 1px solid #00000042;
       border-radius: 10px;
       background: transparent;
-      height: 65px;
+      height: 50px;
       letter-spacing: 1px;
     }
 
-    .quam-btn {
+    .codigo {
       background: $dark_blue;
       right: 6px;
       top: 50%;
       transform: translateY(-63%);
       font-size: 15px;
-      height: 46px;
+      height: 40px;
+
 
       &:hover {
         background: white;
       }
 
-    }
-
-    .next {
       @media(max-width:991px) {
-        top: auto;
         right: 0;
         bottom: 0;
-        transform: translateY(0px);
+        height: 50px;
       }
+
     }
 
     .check input {
@@ -327,13 +360,46 @@
 
   }
 
-  table {
-    @media(max-width:991px) {
-      position: relative;
-      display: block;
-      overflow-x: auto;
-    }
+  .next {
+    font-size: 20px;
+    padding: 14px 25px;
+    margin: inherit;
+    @include center-all;
+    cursor: pointer;
+    font-weight: 500;
+    text-align-last: center;
+    letter-spacing: 1px;
+
+    // @media(max-width:991px) {
+    //   top: auto;
+    //   right: 0;
+    //   bottom: 0;
+    //   transform: translateY(0px);
+    //   height: inherit;
+    // }
   }
+
+  table {
+    @media(max-width:578px) {
+      overflow: auto;
+      display: grid;
+    }
+
+    // @media(max-width:991px) {
+    //   position: relative;
+    //   display: block;
+    //   overflow-x: auto;
+    // }
+  }
+}
+
+#test-l-4 {
+  // .next {
+  //   bottom: 134px !important;
+  //   @media(max-width:991px){
+  //     bottom: 0 !important;
+  //   }
+  // }
 }
 
 #test-l-2,
@@ -343,6 +409,10 @@
     background: transparent;
     box-shadow: none;
     margin-top: 35px;
+
+    @media(max-width:991px) {
+      max-width: 100%;
+    }
 
     .quam-btn {
       height: 46px;
@@ -383,8 +453,55 @@
         background: white;
       }
     }
+  }
 
+  .btn-step-next {
+    @media(max-width:991px) {
+      position: fixed;
+      width: 100%;
+      max-width: 100%;
+      left: 0;
+      bottom: 0;
+      z-index: 99;
+      border-radius: 26px 26px 0px 0px;
+      overflow: auto;
+      background: white;
+      padding: 24px 33px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+  }
 
+  .next {
+    position: absolute;
+    bottom: 30px;
+    left: 33px;
+    font-size: 20px;
+    padding: 14px 25px;
+    margin: inherit;
+    @include center-all;
+    cursor: pointer;
+    font-weight: 500;
+    text-align-last: center;
+    letter-spacing: 1px;
+
+    @media(max-width:991px) {
+      width: 100%;
+      position: relative;
+      bottom: auto;
+      left: auto;
+    }
+
+    // @media(max-width:991px) {
+    //   position: fixed;
+    //   width: 100%;
+    //   max-width: 100%;
+    //   left: 0;
+    //   bottom: 0;
+    //   z-index: 99;
+    //   border-radius: 26px 26px 0px 0px;
+    //   overflow: auto;
+    //   padding-bottom: 15px;
+    // }
   }
 
   .price {

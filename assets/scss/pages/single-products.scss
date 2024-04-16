@@ -30,8 +30,8 @@
     }
 
     #offcanvasBottom {
-        height: 75vh;
-        border-radius: 20px;
+        height: 35vh;
+        border-radius: 10px;
         padding-bottom: 30px;
     }
 
@@ -46,6 +46,10 @@
 
     .offcanvas-body {
         padding: 24px;
+
+        @media(max-width:991px) {
+            padding: 24px 33px;
+        }
 
         .ref-number {
             color: $dark-blue !important;
@@ -221,7 +225,7 @@
 
         @media(max-width:991px) {
 
-            font-size: 14px;
+            font-size: 20px;
             font-weight: 800;
             margin-bottom: 10px;
         }
@@ -386,7 +390,7 @@
             padding: 20px !important;
             background: white;
             margin-bottom: 0 !important;
-            height: 150px;
+            height: 200px;
             justify-content: center;
             width: 100%;
             z-index: 99;
@@ -394,6 +398,7 @@
             flex-direction: column;
             transition: all 0.2s;
             z-index: 5;
+            border-radius: 20px 20px 0 0;
 
             &.show-bag {
                 background: white;
@@ -603,6 +608,10 @@
                 margin-bottom: 5px;
                 margin-right: 6px;
 
+                @media(max-width:991px) {
+                    font-size: 20px;
+                }
+
                 +p {
                     color: #ddd;
                     text-transform: capitalize
@@ -615,8 +624,9 @@
 
             .btn {
                 border: 1px solid $black;
-                width: 65px;
-                height: 40px;
+                width: 49%;
+                margin: 4px 0px;
+                height: 50px;
                 border-radius: 0;
             }
 
@@ -646,6 +656,7 @@
         .variant-item {
             display: flex;
             overflow-x: auto;
+            margin-top: 14px;
 
             &:not(:last-child) {
                 margin-bottom: 18px;
@@ -675,6 +686,7 @@
                     &:checked+label {
                         border: 2px solid #fff;
                     }
+
                 }
 
                 label {

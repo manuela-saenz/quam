@@ -167,7 +167,7 @@ get_header() ?>
                                 información sobre productos y servicios de interés.
                               </div>
                             </label>
-                            <button class="quam-btn blue" onclick="stepper1.next()">Diligenciar información</button>
+                            <button class="quam-btn blue next" onclick="stepper1.next()">Diligenciar información</button>
                           </div>
 
                         </div>
@@ -219,33 +219,37 @@ get_header() ?>
                       <div class="form-group row">
                         <div class="col-md-8">
                           <h3 class="mb-4"> Identificación</h3>
-                          <form action="" class="form_contact">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <label for="fname"> <b>Nombres* </b> </label><br>
-                                <input type="text" id="fname" name="fname" value="Escribe tu nombre">
+                          <div class="position-relative">
+                            <form action="" class="form_contact">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <label for="fname"> <b>Nombres* </b> </label><br>
+                                  <input type="text" id="fname" name="fname" value="Escribe tu nombre">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b>Apellidos* </b> </label><br>
+                                  <input type="text" id="lname" name="lname" value="Escribe tus apellidos">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b>Correo electrónico* </b> </label><br>
+                                  <input type="text" id="lname" name="lname" value="Escribe tu correo electrónico">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b> Identificación*</b> </label><br>
+                                  <input type="text" id="lname" name="lname" value="Escribe tu número de identificación">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b> Teléfono*</b> </label><br>
+                                  <input type="text" id="lname" name="lname" value="Escribe tu teléfono">
+                                </div>
                               </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b>Apellidos* </b> </label><br>
-                                <input type="text" id="lname" name="lname" value="Escribe tus apellidos">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b>Correo electrónico* </b> </label><br>
-                                <input type="text" id="lname" name="lname" value="Escribe tu correo electrónico">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b> Identificación*</b> </label><br>
-                                <input type="text" id="lname" name="lname" value="Escribe tu número de identificación">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b> Teléfono*</b> </label><br>
-                                <input type="text" id="lname" name="lname" value="Escribe tu teléfono">
-                              </div>
+                              <!-- <input class="quam-btn blue" onclick="stepper1.next()" value="Diligenciar ubicación"> -->
+                            </form>
+                            <div class="btn-step-next">
+                              <button class="quam-btn blue next" onclick="stepper1.next()">Diligenciar ubicación</button>
                             </div>
-                            <!-- <button class="quam-btn blue" onclick="stepper1.next()">Diligenciar ubicación</button> -->
-                            <input type="submit" class="quam-btn blue" value="Diligenciar ubicación">
-                            <!-- <button class="quam-btn blue" onclick="stepper1.next()">Next</button> -->
-                          </form>
+
+                          </div>
                         </div>
 
                         <div class="col-lg-4 col-md-12">
@@ -306,59 +310,64 @@ get_header() ?>
                       </div>
                       <div class="d-flex justify-content-end mt-5">
                         <button class="quam-btn blue me-4" onclick="stepper1.previous()">Previous</button>
-                        <button class="quam-btn blue next" onclick="stepper1.next()">Next</button>
+                        <!-- <button class="quam-btn blue next" onclick="stepper1.next()">Next</button> -->
                       </div>
-
                     </div>
 
                     <div id="test-l-3" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger3">
                       <div class="form-group row">
-                        <div class="col-md-8">
+                        <div class="col-md-8 ">
                           <h3 class="mb-4"> Ubicación</h3>
-                          <form action="" class="form_contact">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <label for="cars"><b>Departamento*</b></label>
+                          <div class="position-relative">
+                            <form action="" class="form_contact">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <label for="cars"><b>Departamento*</b></label>
 
-                                <select name="cars" id="cars">
-                                  <option value="volvo">Seleccione</option>
-                                  <option value="saab">Bogota</option>
-                                  <option value="mercedes">Medellin</option>
-                                  <option value="audi">Barranquilla</option>
-                                </select>
-                              </div>
-                              <div class="col-md-6">
-                                <label for="cars"><b>Municipio*</b></label>
+                                  <select name="cars" id="cars">
+                                    <option value="volvo">Seleccione</option>
+                                    <option value="saab">Bogota</option>
+                                    <option value="mercedes">Medellin</option>
+                                    <option value="audi">Barranquilla</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="cars"><b>Municipio*</b></label>
 
-                                <select name="cars" id="cars">
-                                  <option value="volvo">Seleccione</option>
-                                  <option value="saab">Bogota</option>
-                                  <option value="mercedes">Medellin</option>
-                                  <option value="audi">Barranquilla</option>
-                                </select>
+                                  <select name="cars" id="cars">
+                                    <option value="volvo">Seleccione</option>
+                                    <option value="saab">Bogota</option>
+                                    <option value="mercedes">Medellin</option>
+                                    <option value="audi">Barranquilla</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b>Dirección de entrega* </b> </label><br>
+                                  <input type="text" id="lname" name="lname" value="Escribe la dirección ">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b> Barrio</b> </label><br>
+                                  <input type="text" id="lname" name="lname" value="Opcional">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b> Información adicional </b> (ej:. apart201) </label><br>
+                                  <input type="text" id="lname" name="lname" value="Opcional">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b> Destinatario* </b> </label><br>
+                                  <input type="text" id="lname" name="lname" value="Carlos Gomez">
+                                </div>
                               </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b>Dirección de entrega* </b> </label><br>
-                                <input type="text" id="lname" name="lname" value="Escribe la dirección ">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b> Barrio</b> </label><br>
-                                <input type="text" id="lname" name="lname" value="Opcional">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b> Información adicional </b> (ej:. apart201) </label><br>
-                                <input type="text" id="lname" name="lname" value="Opcional">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b> Destinatario* </b> </label><br>
-                                <input type="text" id="lname" name="lname" value="Carlos Gomez">
-                              </div>
+                              <!-- <input class="quam-btn blue" onclick="stepper1.next()" value=" Diligenciar método de pago"> -->
+                            </form>
+                            <div class="btn-step-next">
+                              <button class="quam-btn blue next" onclick="stepper1.next()">Diligenciar método de pago</button>
                             </div>
-                            <input type="submit" class="quam-btn blue" value="Diligenciar método de pago">
-                          </form>
+
+                          </div>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12">
                           <div class="code">
                             <h3>Resumen de compra </h3>
                             <form method="post" class="position-relative form_compra">
@@ -417,18 +426,16 @@ get_header() ?>
 
                       <div class="d-flex justify-content-end mt-5">
                         <button class="quam-btn blue me-4" onclick="stepper1.previous()">Previous</button>
-                        <button class="quam-btn blue next" onclick="stepper1.next()">Next</button>
+                        <!-- <button class="quam-btn blue next" onclick="stepper1.next()">Next</button> -->
                       </div>
 
                     </div>
 
                     <div id="test-l-4" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger4">
                       <div class="form-group row">
-                        <div class="col-md-8">
+                        <div class="col-md-8 ">
                           <h3 class="mb-4">Pago</h3>
                           <div class="d-flex">
-
-
                             <div id="myDIV" class="d-flex">
                               <button class="btn form-check flex-column active">
                                 <div class="img-fit">
@@ -453,30 +460,37 @@ get_header() ?>
                             </div>
                           </div>
 
-                          <form action="" class="form_contact">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <label for="cars"><b>Número de la tarjeta*</b></label>
-                                <input type="text" id="lname" name="lname" value="Escribe el número de la tarjeta">
+                          <div class="position-relative">
+                            <form action="" class="form_contact">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <label for="cars"><b>Número de la tarjeta*</b></label>
+                                  <input type="text" id="lname" name="lname" value="Escribe el número de la tarjeta">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="cars"><b>Nombre de titular de la cuenta*</b></label>
+                                  <input type="text" id="lname" name="lname" value="Escribe tu nombre">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b>Fecha de vencimiento*</b> </label><br>
+                                  <input type="date">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="lname"> <b> Código de seguridad*</b> </label><br>
+                                  <input type=number>
+                                </div>
                               </div>
-                              <div class="col-md-6">
-                                <label for="cars"><b>Nombre de titular de la cuenta*</b></label>
-                                <input type="text" id="lname" name="lname" value="Escribe tu nombre">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b>Fecha de vencimiento*</b> </label><br>
-                                <input type="date">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="lname"> <b> Código de seguridad*</b> </label><br>
-                                <input type=number>
-                              </div>
+                              <!-- <input class="quam-btn blue" onclick="stepper1.next()" value="Comprar ahora"> -->
+                            </form>
+                            <div class="btn-step-next">
+                              <button class="quam-btn blue next" onclick="stepper1.next()">Comprar ahora</button>
                             </div>
-                            <input type="submit" class="quam-btn blue" value="Comprar ahora">
-                          </form>
+
+                          </div>
+
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12">
                           <div class="code">
                             <h3>Resumen de compra </h3>
                             <form method="post" class="position-relative form_compra">
@@ -539,13 +553,13 @@ get_header() ?>
                       <div class="d-flex justify-content-end mt-5">
                         <button class="quam-btn blue me-4" onclick="stepper1.previous()">Previous</button>
                         <!-- <button type="submit" class="quam-btn blue">Submit</button> -->
-                        <button class="quam-btn blue next" onclick="stepper1.next()">Next</button>
+                        <!-- <button class="quam-btn blue next" onclick="stepper1.next()">Next</button> -->
                       </div>
                     </div>
 
                     <div id="test-l-5" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger5">
                       <div class="form-group row center-all">
-                        <div class="col-md-6">
+                        <div class="col-md-6 position-relative">
                           <h3 class="mb-4">Pago</h3>
 
                           <form action="" class="form_contact">
