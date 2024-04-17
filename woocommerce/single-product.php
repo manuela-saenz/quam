@@ -118,35 +118,13 @@ foreach ($attachment_ids as $attachment_id) {
                                                     <!-- <div>
                                                     <p> <?= $product->get_short_description() ?></p>
                                                   </div> -->
-                                                    <!-- <div class="product-feature">
-                                                    <div class="d-flex">
-                                                        <strong>Color:</strong>
-                                                        <p class="mb-0 color-name"></p>
-                                                    </div>
-                                                    <div class="variant-item">
-                                                        <div class="product-var">
-                                                            <input type="radio" id="negro" name="varcolor" style="background: #1C1C1C;">
-                                                            <label for="negro" class="var-content"></label>
-                                                        </div>
-                                                        <div class="product-var ">
-                                                            <input type="radio" id="mixto" checked name="varcolor" style="background: #002D72;">
-                                                            <label for="blanco" class="var-content"></label>
-                                                        </div>
-                                                        <div class="product-var ">
-                                                            <input type="radio" id="rojo" checked name="varcolor" style="background: #FF3747;">
-                                                            <label for="blanco" class="var-content"></label>
-                                                        </div>
-
-                                                    </div>
-                                                  </div> -->
-
                                                     <div class="product-feature">
                                                         <div class="d-flex">
                                                             <strong>Talla:</strong>
                                                         </div>
                                                         <div class="">
 
-                                                            <div class="" role="group" aria-label="Vertical radio toggle button group">
+                                                            <div class="group" role="group" aria-label="Vertical radio toggle button group">
                                                                 <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
                                                                 <label class="btn " data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom2" aria-controls="offcanvasBottom2" for="vbtn-radio1">S</label>
                                                                 <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
@@ -161,9 +139,30 @@ foreach ($attachment_ids as $attachment_id) {
                                                                     detalles</button> -->
                                                             </div>
                                                         </div>
-
-
                                                     </div>
+
+                                                    <div class="product-feature">
+                                                        <div class="d-flex">
+                                                            <strong>Color:</strong>
+                                                            <p class="mb-0 color-name"></p>
+                                                        </div>
+                                                        <div class="variant-item">
+                                                            <div class="product-var">
+                                                                <input type="radio" id="negro" name="varcolor" style="background: #1C1C1C;">
+                                                                <label for="negro" class="var-content"></label>
+                                                            </div>
+                                                            <div class="product-var ">
+                                                                <input type="radio" id="mixto" checked name="varcolor" style="background: #002D72;">
+                                                                <label for="blanco" class="var-content"></label>
+                                                            </div>
+                                                            <div class="product-var ">
+                                                                <input type="radio" id="rojo" checked name="varcolor" style="background: #FF3747;">
+                                                                <label for="blanco" class="var-content"></label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
                                                     <div class="product-actions d-lg-flex d-none ">
                                                         <div class='quantity'>
                                                             <button class='qtyminus minus'><i class="icon-minus"></i></button>
@@ -257,7 +256,7 @@ foreach ($attachment_ids as $attachment_id) {
                             </div>
                         </div>
 
-                        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom2" aria-labelledby="offcanvasBottom2Label">
+                        <!-- <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom2" aria-labelledby="offcanvasBottom2Label">
                             <div class="offcanvas-header">
                                 <div class='quantity'>
                                     <button class='qtyminus minus'><i class="icon-minus"></i></button>
@@ -265,8 +264,6 @@ foreach ($attachment_ids as $attachment_id) {
                                     <button class='qtyplus plus'><i class="icon-add---copia"></i></button>
                                 </div>
                                 <button href="" class="quam-btn blue">Agregar a la bolsa</button>
-                                <!-- <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                    aria-label="Close"></button> -->
                             </div>
                             <div class="offcanvas-body small">
                                 <section class="characteristics p-0">
@@ -297,7 +294,7 @@ foreach ($attachment_ids as $attachment_id) {
 
                                                         </div>
                                                     </div>
-                                                </div> <!-- 
+                                                </div> 
                                                 <div class="product-feature">
                                                     <div class="d-flex">
                                                         <strong>Talla:</strong>
@@ -321,7 +318,7 @@ foreach ($attachment_ids as $attachment_id) {
                                                     </div>
 
 
-                                                </div> -->
+                                                </div>
                                                 <div class="product-actions d-lg-flex d-none ">
                                                     <div class='quantity'>
                                                         <button class='qtyminus minus'><i class="icon-minus"></i></button>
@@ -337,7 +334,7 @@ foreach ($attachment_ids as $attachment_id) {
                                     </div>
                                 </section>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="p-4 d-none d-lg-flex flex-column">

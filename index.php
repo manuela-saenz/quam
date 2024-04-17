@@ -56,63 +56,68 @@ get_header();
 <section id="categories" class="p-0">
   <div class="container-fuid p-0">
     <div class="row center-all">
-      <!-- <?php $categories = get_terms(array(
-              "taxonomy" => "product_cat",
-              "parent" => 0,
-            ));
-            foreach ($categories as $cat) :
-              $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
-              $thumbUrl = wp_get_attachment_image_url($thumbnail_id, "medium");
-            ?>
-          <div class="col-md-4 p-0">
-            <div class="card-categories">
-              <div class="img-fit">
-                <img src="<?= $thumbUrl ?>" alt="">
-              </div>
-              <div class="info-categories center-all flex-column">
-                <h5><?= $cat->name ?></h5>
-                <a href="<?= get_term_link($cat) ?>">Ver colección</a>
-              </div>
+      <?php $categories = get_terms(array(
+        "taxonomy" => "product_cat",
+        "parent" => 0,
+        'exclude'    => array(26, 15),
+        "hide_empty" => false,
+      ));
+      foreach ($categories as $cat) :
+        $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
+        $thumbUrl = wp_get_attachment_image_url($thumbnail_id, "medium");
+      ?>
+
+        <div class="col-md-4 p-0 position-relative">
+          <a href="<?= get_term_link($cat) ?>" class="card-categories">
+            <div class="img-fit">
+              <img src="<?= $thumbUrl ?>" alt="">
             </div>
-          </div>
+            <a href="<?= get_term_link($cat) ?>" class="info-categories center-all flex-column">
+              <h5><?= $cat->name ?></h5>
+              <div class="red">Ver colección</div>
+            </a>
+          </a>
+        </div>
 
-          <?php endforeach; ?> -->
+      <?php endforeach; ?>
 
-      <div class="col-md-4 p-0">
-        <div class="card-categories">
+      
+
+      <!-- <div class="col-md-4 p-0 position-relative">
+        <a href="" class="card-categories">
           <div class="img-fit">
             <img src="<?php bloginfo('template_url') ?>/media/images/category-men.jpg" alt="">
           </div>
-          <div class="info-categories center-all flex-column">
+          <a href="" class="info-categories center-all flex-column">
             <h5>Hombre</h5>
-            <a href="">Ver colección</a>
-          </div>
-        </div>
+            <div class="red">Ver colección</div>
+          </a>
+        </a>
       </div>
 
-      <div class="col-md-4 p-0">
-        <div class="card-categories">
+      <div class="col-md-4 p-0 position-relative">
+        <a href="" class="card-categories">
           <div class="img-fit">
             <img src="<?php bloginfo('template_url') ?>/media/images/category-women.png" alt="">
           </div>
-          <div class="info-categories center-all flex-column">
+          <a href="" class="info-categories center-all flex-column">
             <h5>Mujer</h5>
-            <a href="">Ver colección</a>
-          </div>
-        </div>
+            <div class="red">Ver colección</div>
+          </a>
+        </a>
       </div>
 
-      <div class="col-md-4 p-0">
-        <div class="card-categories">
+      <div class="col-md-4 p-0 position-relative">
+        <a href="" class="card-categories">
           <div class="img-fit">
             <img src="<?php bloginfo('template_url') ?>/media/images/category-children.jpg" alt="">
           </div>
-          <div class="info-categories center-all flex-column">
+          <a href="" class="info-categories center-all flex-column">
             <h5>Niño</h5>
-            <a href="">Ver colección</a>
-          </div>
-        </div>
-      </div>
+            <div class="red">Ver colección</div>
+          </a>
+        </a>
+      </div> -->
     </div>
   </div>
 </section>
@@ -186,8 +191,44 @@ get_header();
                 </div>
               </div>
             </div>
+            <div class="swiper-slide">
+              <div class="img-contain">
+                <img src="<?php bloginfo('template_url') ?>/media/images/generation-2.jpg" alt="" title="">
+              </div>
+              <div class="info-generation">
+                <h5>Example Midi Bodycon Dress</h5>
+                <div class="d-flex align-items-center">
+                  <p>$70.000</p>
+                  <span>$100.000</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-contain">
+                <img src="<?php bloginfo('template_url') ?>/media/images/generation-3.jpg" alt="" title="">
+              </div>
+              <div class="info-generation">
+                <h5>Example Midi Bodycon Dress</h5>
+                <div class="d-flex align-items-center">
+                  <p>$70.000</p>
+                  <span>$100.000</span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-contain">
+                <img src="<?php bloginfo('template_url') ?>/media/images/generation-4.jpg" alt="" title="">
+              </div>
+              <div class="info-generation">
+                <h5>Example Midi Bodycon Dress</h5>
+                <div class="d-flex align-items-center">
+                  <p>$70.000</p>
+                  <span>$100.000</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="d-xl-none d-flex">
+          <!-- <div class="d-xl-none d-flex">
             <div class="arrow-prev-container">
               <button class="generation-arrows prev">
                 <i class="icon-arrowline-left"> </i>
@@ -198,7 +239,7 @@ get_header();
                 <i class="icon-arrowline-right"> </i>
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

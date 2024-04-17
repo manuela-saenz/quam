@@ -602,6 +602,12 @@
         .product-feature {
             margin-bottom: 33px;
 
+            .group {
+                display: grid;
+                grid-template-columns: repeat(3, calc(33.33% - 15px));
+                grid-gap: 13px;
+            }
+
             strong {
                 color: $black;
                 display: block;
@@ -624,10 +630,11 @@
 
             .btn {
                 border: 1px solid $black;
-                width: 49%;
+                width: 100%;
                 margin: 4px 0px;
                 height: 50px;
                 border-radius: 0;
+                @include center-all;
             }
 
             .btn-check:checked+.btn,

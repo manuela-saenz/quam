@@ -67,7 +67,7 @@ var swiper = new Swiper(".generationSwiper", {
   },
   breakpoints: {
     1500: {
-      slidesPerView: 4.2,
+      slidesPerView: 3.2,
       spaceBetween: 20,
     },
     991: {
@@ -81,6 +81,47 @@ var swiper = new Swiper(".generationSwiper", {
       slidesPerView: 1,
     },
   },
+  effect: "creative",
+  creativeEffect: {
+    progressMultiplier: 2,
+    limitProgress: 5,
+    prev: {
+      shadow: false,
+      translate: ["-55%", 0, 0],
+      opacity: 0,
+    },
+    next: {
+      shadow: false,
+      translate: ["52%", 0, 0],
+    },
+  },
+  
+  // on: {
+
+  //   init: function () {
+  //     var swiperWrapperWidth = $('.timelineSwiper .swiper-wrapper').width();
+  //     var swiperSlideWidth = '-' + (($('.timelineSwiper .swiper-slide .line .img-fit').width() / 2) * 50 / 100) + 'px';
+  //     $('.timeline-midline').css('width', swiperWrapperWidth)
+  //     $('.timeline-midline').css('left', swiperSlideWidth)
+  //   },
+  //   slideChange: (sw) => {
+  //     if (sw.realIndex == 0) {
+  //       var swiperSlideWidth = '-' + (($('.timelineSwiper .swiper-slide .line .img-fit').width() / 2) * 50 / 100) + 'px';
+  //       $('.timeline-midline').css('left', swiperSlideWidth)
+  //     }
+  //   },
+  //   setTranslate: (sw) => {
+  //     var swiperSlideWidth = ($('.timelineSwiper .swiper-slide .line .img-fit').width() / 2) * 50 / 100;
+  //     if (sw.realIndex == 0) {
+  //       console.log('primer slide')
+  //       $('.timeline-midline').css('left', sw.translate - swiperSlideWidth)
+  //     } else {
+  //       $('.timeline-midline').css('left', sw.translate)
+  //     }
+
+  //   }
+  // },
+
 });
 
 // <!------------------------ Slider grupos------------------------>//

@@ -62,7 +62,7 @@
 
                 <a href="<?= get_home_url() ?>" class="<?= is_page(43) ? 'active' : '' ?>">Inicio</a>
                 <!-- ----- -->
-                <a href="" class="">Nuevo</a>
+                <!-- <a href="" class="">Nuevo</a> -->
                 <!-- ----- -->
 
 
@@ -87,7 +87,7 @@
                 <!-- ----- -->
                 <!-- <a href="https://www.quam.com.co/web_quam/categoria-producto/ninos/" class="<?= is_page(43) ? 'active' : '' ?>">Niños</a> -->
                 <!-- ----- -->
-                <a href="<?= get_permalink(43) ?>" class="<?= is_page(43) ? 'active' : '' ?>">Ofertas</a>
+                <!-- <a href="<?= get_permalink(43) ?>" class="<?= is_page(43) ? 'active' : '' ?>">Ofertas</a> -->
 
                 <div class="social-media center-all d-lg-none d-flex flex-column">
                   <div class="position-relative search"> <input type="text" placeholder="Buscar" class="quam-btn"> <i class="icon-search"></i>
