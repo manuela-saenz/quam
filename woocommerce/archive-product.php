@@ -95,7 +95,7 @@ $products = get_products_by_category_name($currentCat->name);
                     <!-- The second value will be selected initially -->
                     <div class="select-box">
                         <select>
-                            <option value="opcion1">Talla</option>
+                            <option value="opcion1">Filtros</option>
                             <option value="opcion2">Opción 2</option>
                             <option value="opcion3">Opción 3</option>
                             <option value="opcion4">Opción 4</option>
@@ -106,7 +106,7 @@ $products = get_products_by_category_name($currentCat->name);
                     <!-- The second value will be selected initially -->
                     <div class="select-box">
                         <select>
-                            <option value="opcion1">Color</option>
+                            <option value="opcion1">Ordenar</option>
                             <option value="opcion2">Opción 2</option>
                             <option value="opcion3">Opción 3</option>
                             <option value="opcion4">Opción 4</option>
@@ -116,7 +116,7 @@ $products = get_products_by_category_name($currentCat->name);
                 </div>
 
                 <div class="products text-center text-lg-end">
-                    <p class="mb-0">54 productos</p>
+                    <p class="mb-0">3 productos</p>
                 </div>
 
 
@@ -128,28 +128,9 @@ $products = get_products_by_category_name($currentCat->name);
                     // for($i =0; $i < 20; $i++){
                 ?>
                     <div class="col-lg-3 col-sm-6 col-6 productS mb-4">
-                        <a href="https://www.quam.com.co/web_quam/producto/<?php echo $product->get_slug() ?>/" class="CardProducts">
-                            <div class="img-fit">
-                                <img src="<?php echo $product->image_src ?>" alt="<?php echo $product->get_name() ?>">
-                            </div>
-                            <div class="info-highlights">
-                                <h5><?php echo $product->get_name(); ?></h5>
-                                <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
-
-                                    <?php
-                                    if ($prices['sale_price']) {
-                                        // Si hay un precio de venta, mostrar el precio de venta y tachar el precio regular
-                                        echo '<span class="">' . wc_price($prices['sale_price'], "COP") . '</span>';
-                                        echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
-                                    } else {
-                                        // Si no hay precio de venta, mostrar solo el precio regular
-                                        echo '<span class="regular-price">' . wc_price($prices['regular_price']) . '</span>';
-                                    }
-                                    ?>
-
-                                </div>
-                            </div>
-                        </a>
+                        <?php
+                          productCard($product)
+                        ?>
                     </div>
                 <?php
                  }
@@ -157,7 +138,7 @@ $products = get_products_by_category_name($currentCat->name);
                 ?>
 
             </div>
-            <div class="d-lg-none d-flex align-items-center justify-content-center w-100 ">
+            <!-- <div class="d-lg-none d-flex align-items-center justify-content-center w-100 ">
                 <div class="pagination mt-4">
                     <a href="#">1</a>
                     <a class="active" href="#">2</a>
@@ -165,7 +146,7 @@ $products = get_products_by_category_name($currentCat->name);
                     <a href="#">4</a>
                     <a href="#">5</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 

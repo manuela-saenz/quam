@@ -81,7 +81,7 @@ get_header();
 
       <?php endforeach; ?>
 
-      
+
 
       <!-- <div class="col-md-4 p-0 position-relative">
         <a href="" class="card-categories">
@@ -255,13 +255,15 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
   <div class="container-fluid p-0">
     <div class="row m-0">
       <div class="col-md-8 p-0 position-relative">
-        <div class="img-fit backgroundImg">
-          <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="">
-        </div>
-        <div class="info_summer">
-          <p class="mb-0"><?= $primera_coleccion["subtitulo"]; ?></p>
-          <h5 class="title"><?= $primera_coleccion["titulo"]; ?></h5>
-        </div>
+        <a href="" class="position-relative">
+          <div class="img-fit backgroundImg">
+            <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="">
+          </div>
+          <div class="info_summer text-black">
+            <p class="mb-0"><?= $primera_coleccion["subtitulo"]; ?></p>
+            <h5 class="title"><?= $primera_coleccion["titulo"]; ?></h5>
+          </div>
+        </a>
       </div>
       <div class="col-md-4 p-0">
         <a href="" class="position-relative">
