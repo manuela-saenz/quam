@@ -44,206 +44,6 @@ $(window).on("load resize", function () {
 // })
 
 
-// <!------------------------ Slider banner ------------------------>//
-var swiper = new Swiper(".banner", {
-  navigation: {
-    nextEl: ".swiperBanner-button-next",
-    prevEl: ".swiperBanner-button-prev",
-  },
-  // loop: true,
-  // parallax: true,
-  // autoplay: {
-  //     delay: 3000,
-  //     disableOnInteraction: false,
-  // },
-  // speed: 500,
-});
-
-// <!------------------------ Slider generation------------------------>//
-var swiper = new Swiper(".generationSwiper", {
-  navigation: {
-    nextEl: ".generation-arrows.next",
-    prevEl: ".generation-arrows.prev",
-  },
-  breakpoints: {
-    1500: {
-      slidesPerView: 3.2,
-      spaceBetween: 20,
-    },
-    991: {
-      slidesPerView: 2.2,
-      spaceBetween: 20,
-    },
-
-    200: {
-      spaceBetween: 20,
-      loop: true,
-      slidesPerView: 1,
-    },
-  },
-  effect: "creative",
-  creativeEffect: {
-    progressMultiplier: 2,
-    limitProgress: 5,
-    prev: {
-      shadow: false,
-      translate: ["-55%", 0, 0],
-      opacity: 0,
-    },
-    next: {
-      shadow: false,
-      translate: ["52%", 0, 0],
-    },
-  },
-  
-  // on: {
-
-  //   init: function () {
-  //     var swiperWrapperWidth = $('.timelineSwiper .swiper-wrapper').width();
-  //     var swiperSlideWidth = '-' + (($('.timelineSwiper .swiper-slide .line .img-fit').width() / 2) * 50 / 100) + 'px';
-  //     $('.timeline-midline').css('width', swiperWrapperWidth)
-  //     $('.timeline-midline').css('left', swiperSlideWidth)
-  //   },
-  //   slideChange: (sw) => {
-  //     if (sw.realIndex == 0) {
-  //       var swiperSlideWidth = '-' + (($('.timelineSwiper .swiper-slide .line .img-fit').width() / 2) * 50 / 100) + 'px';
-  //       $('.timeline-midline').css('left', swiperSlideWidth)
-  //     }
-  //   },
-  //   setTranslate: (sw) => {
-  //     var swiperSlideWidth = ($('.timelineSwiper .swiper-slide .line .img-fit').width() / 2) * 50 / 100;
-  //     if (sw.realIndex == 0) {
-  //       console.log('primer slide')
-  //       $('.timeline-midline').css('left', sw.translate - swiperSlideWidth)
-  //     } else {
-  //       $('.timeline-midline').css('left', sw.translate)
-  //     }
-
-  //   }
-  // },
-
-});
-
-// <!------------------------ Slider grupos------------------------>//
-
-var swiper = new Swiper(".highlightsSwiper", {
-  navigation: {
-    nextEl: ".highlights-arrows.next",
-    prevEl: ".highlights-arrows.prev",
-  },
-  breakpoints: {
-    1500: {
-      slidesPerView: 3.2,
-      spaceBetween: 20,
-    },
-    991: {
-      slidesPerView: 2.2,
-      spaceBetween: 20,
-    },
-
-    200: {
-      spaceBetween: 50,
-      loop: true,
-      slidesPerView: 1,
-    },
-  },
-});
-
-// <!------------------------ Slider single product------------------------>//
-var swiper = new Swiper(".SingProducts", {
-  spaceBetween: 10,
-  slidesPerView: 4,
-  freeMode: true,
-  watchSlidesProgress: true,
-
-  breakpoints: {
-    1200: {
-      direction: "vertical",
-
-    },
-  },
-});
-
-// --------- active cards --------------------
-
-
-
-
-
-
-(function () {
-
-  'use strict';
-
-  // breakpoint where swiper will be destroyed
-  // and switches to a dual-column layout
-  const breakpoint = window.matchMedia('(min-width:765px)');
-
-  // keep track of swiper instances to destroy later
-  let mySwiper;
-
-
-  const breakpointChecker = function () {
-
-    // if larger viewport and multi-row layout needed
-    if (breakpoint.matches === false) {
-
-      // clean up old instances and inline styles when available
-      if (mySwiper !== undefined) mySwiper.destroy(true, true);
-
-      // or/and do nothing
-      return;
-
-      // else if a small viewport and single column layout needed
-    } else if (breakpoint.matches === true) {
-
-      // fire small viewport version of swiper
-      return enableSwiper();
-
-    }
-
-  };
-
-  const enableSwiper = function () {
-
-    mySwiper = new Swiper(".SingProducts2", {
-      spaceBetween: 10,
-      mousewheel: true,
-      slidesPerView: "auto",
-      scrollbar: {
-        el: ".swiper-scrollbar",
-      },
-      navigation: {
-        nextEl: ".SingProducts-button-next",
-        prevEl: ".SingProducts-button-prev",
-      },
-      thumbs: {
-        swiper: swiper,
-      },
-      breakpoints: {
-        1200: {
-          direction: "vertical",
-        },
-      },
-
-    });
-
-  };
-
-
-
-  // keep an eye on viewport size changes
-  breakpoint.addListener(breakpointChecker);
-
-  // kickstart
-  breakpointChecker();
-
-
-
-})();
-
-
-
 
 // <--------- color de ropa ---------->
 
@@ -306,61 +106,58 @@ initQuantitySingle();
 
 // -------- quitar productos del  carrito-----------
 
-$('.shopping-bag-offcanvas .select-bag a.remove').click(function(event){
+$('.shopping-bag-offcanvas .select-bag a.remove').click(function (event) {
   event.preventDefault();
   $(this).closest('.select-bag').remove(); // Remueve el elemento con la clase select-bag más cercano al enlace clickeado
 });
-// <--------- Paso a paso bolsa de compra ---------->
 
-var stepper1
-var stepper2
-var stepper3
-var stepper4
-var stepperForm
 
-document.addEventListener('DOMContentLoaded', function () {
-stepper1 = new Stepper(document.querySelector('#stepper1'))
-stepper2 = new Stepper(document.querySelector('#stepper2'), {
-  linear: false
+$(window).on('load resize', function(){
+  if($(window).width() <= 991){
+    $('.product-actions').addClass('offcanvas offcanvas-bottom')
+  } else{
+    $('.product-actions').removeClass('offcanvas offcanvas-bottom')
+  }
 })
-stepper3 = new Stepper(document.querySelector('#stepper3'), {
-  linear: false,
-  animation: true
-})
-stepper4 = new Stepper(document.querySelector('#stepper4'))
 
-  var stepperFormEl = document.querySelector('#stepperForm')
-  stepperForm = new Stepper(stepperFormEl, {
-    animation: true
-  })
+const elemento = document.getElementById('box-draggable');
 
-  var btnNextList = [].slice.call(document.querySelectorAll('.btn-next-form'))
-  var stepperPanList = [].slice.call(stepperFormEl.querySelectorAll('.bs-stepper-pane'))
-  var inputMailForm = document.getElementById('inputMailForm')
-  var inputPasswordForm = document.getElementById('inputPasswordForm')
-  var form = stepperFormEl.querySelector('.bs-stepper-content form')
+let inicioY = 0;
 
-  btnNextList.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      stepperForm.next()
-    })
-  })
+elemento.addEventListener('touchstart', iniciarToque, false);
+elemento.addEventListener('touchmove', moverToque, false);
+elemento.addEventListener('touchend', terminarToque, false);
 
-  stepperFormEl.addEventListener('show.bs-stepper', function (event) {
-    form.classList.remove('was-validated')
-    var nextStep = event.detail.indexStep
-    var currentStep = nextStep
+// Función que se ejecuta cuando el toque inicia
+function iniciarToque(evento) {
+    const toque = evento.touches[0]; 
+    inicioY = toque.clientY;
+}
 
-    if (currentStep > 0) {
-      currentStep--
-    }
+$('.product-actions').on('click', function (evento) {
+  evento.preventDefault();
+});
 
-    var stepperPan = stepperPanList[currentStep]
+function moverToque(evento) {
+    evento.preventDefault(); 
+    
+    const toque = evento.touches[0]; 
+    const deltaY = toque.clientY - inicioY;
+    elemento.style.transform = `translateY(${deltaY}px)`;
+    console.log(deltaY)
+}
 
-    if ((stepperPan.getAttribute('id') === 'test-form-1' && !inputMailForm.value.length)
-    || (stepperPan.getAttribute('id') === 'test-form-2' && !inputPasswordForm.value.length)) {
-      event.preventDefault()
-      form.classList.add('was-validated')
-    }
-  })
-})
+// Función que se ejecuta cuando el toque termina
+function terminarToque(evento) {
+  // evento.preventDefault(); 
+  const toque = evento.changedTouches[0]; 
+  const deltaY = toque.clientY - inicioY; 
+  const wh = window.innerHeight - 250; 
+  if (deltaY <= -30) {
+    elemento.style.transform = `translateY(-${wh}px)`;
+} else if (deltaY >= 30) {
+    elemento.style.transform = `translateY(0px)`;
+}
+}
+
+
