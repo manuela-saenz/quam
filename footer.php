@@ -118,6 +118,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
   <script src="<?php bloginfo('template_url') ?>/assets/js/stepper.js"> </script>
 <?php } ?>
-
+<?php wp_footer(); ?>
 
 </html>

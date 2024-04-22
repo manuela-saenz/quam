@@ -107,7 +107,7 @@ initQuantitySingle();
 // -------- quitar productos del  carrito-----------
 
 $('.shopping-bag-offcanvas .select-bag a.remove').click(function (event) {
-  event.preventDefault();
+  // event.preventDefault();
   $(this).closest('.select-bag').remove(); // Remueve el elemento con la clase select-bag más cercano al enlace clickeado
 });
 
@@ -120,8 +120,8 @@ $(window).on('load resize', function () {
   }
 })
 
-$('.product-actions').on('click', (event) => {
-  event.preventDefault();
+$('.product-actions , .variations_form').on('click', (event) => {
+  // event.preventDefault();
 });
 
 const drawer = $('#box-draggable'); // Seleccionar el drawer
@@ -136,7 +136,7 @@ drawer.css({
 
 
 $(drawer).on('touchstart', function (event) {
-  event.preventDefault();
+  // event.preventDefault();
   const touch = event.touches[0];
   startY = touch.clientY; // Almacenar la posición Y inicial
 });
@@ -144,7 +144,7 @@ $(drawer).on('touchstart', function (event) {
 
 // Evento touchmove
 $(drawer).on('touchmove', function (event) {
-  event.preventDefault(); // Prevenir el comportamiento predeterminado
+  // event.preventDefault(); // Prevenir el comportamiento predeterminado
   const touch = event.touches[0];
   const currentY = touch.clientY; // Posición Y actual
   const deltaY = currentY - startY; // Diferencia entre la posición actual e inicial
@@ -164,7 +164,7 @@ $(drawer).on('touchmove', function (event) {
 
 
 $(drawer).on('touchend', function (event) {
-  event.preventDefault();
+  // event.preventDefault();
   const touch = event.changedTouches[0];
   const endY = touch.clientY;
   const deltaY = endY - startY; // Diferencia entre la posición final e inicial

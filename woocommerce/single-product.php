@@ -14,6 +14,14 @@ foreach ($attachment_ids as $attachment_id) {
     $images[] = wp_get_attachment_image_url($attachment_id, "large");
 };
 
+$attributes = $product->get_attributes();
+
+
+// echo '<pre>';
+// print_r($product);
+// echo '<pre>';
+// Iterar sobre cada atributo
+
 ?>
 
 
@@ -72,6 +80,16 @@ foreach ($attachment_ids as $attachment_id) {
                             <p> <?= $product->get_short_description() ?></p>
                         </div>
                         <div class="product-actions p-4" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                            <?php
+                            global $product;
+                            if ($product->is_type('variable')) {
+                                // $default_attributes = $product->get_default_attributes();
+                                woocommerce_variable_add_to_cart();
+                            } else {
+                                woocommerce_simple_add_to_cart();
+                            }
+                            ?>
+
                             <div class="d-flex">
                                 <strong>Color:</strong>
                                 <p class="mb-0 color-name"></p>
