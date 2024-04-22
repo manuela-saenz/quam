@@ -72,9 +72,9 @@ function initQuantity() {
 
   $('.quantity').on('click', '.minus',
     function (e) {
-      let $input = $(this).next('input.qty');
+      let $input = $(this).parent().find('input.qty');
       var val = parseInt($input.val());
-      if (val > 0) {
+      if (val > 1) {
         $input.val(val - 1).change();
       }
     });

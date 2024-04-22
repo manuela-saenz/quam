@@ -52,7 +52,6 @@ $attributes = $product->get_attributes();
                                 </div>
                             </div>
                         <?php endforeach; ?>
-
                     </div>
                     <div class="SingProducts-button-next"></div>
                     <div class="SingProducts-button-prev"></div>
@@ -61,7 +60,7 @@ $attributes = $product->get_attributes();
 
             </div>
 
-            <div class="col-lg-6  information-product mt-4">
+            <div class="col-lg-6  information-product">
                 <div class="info-product">
 
                     <div class="p-4 bg-white" id="box-draggable">
@@ -79,7 +78,7 @@ $attributes = $product->get_attributes();
                         <div>
                             <p> <?= $product->get_short_description() ?></p>
                         </div>
-                        <div class="product-actions p-4" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                        <div class="product-actions" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                             <?php
                             global $product;
                             if ($product->is_type('variable')) {
