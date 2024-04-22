@@ -1,18 +1,37 @@
-.product_offers{
-    .CardProducts{
+.product_offers {
+    .CardProducts {
         position: relative;
 
-        &:before{
+        &:before {
             content: "20%off";
-             position: absolute;
-             right: 0;
-             background: $red;
-             color: #fff;
-             top: 26px;
-             width: 100px;
-             height: 25px;
-             z-index: 3;
-             @include center-all;
+            position: absolute;
+            right: 0;
+            background: $red;
+            color: #fff;
+            top: 26px;
+            width: 100px;
+            height: 25px;
+            z-index: 3;
+            @include center-all;
         }
+    }
+
+
+}
+
+.CardOffers {
+    position: relative;
+
+    &:before {
+        content: "20%off";
+        position: absolute;
+        right: 0;
+        background: $red;
+        color: #fff;
+        top: 26px;
+        width: 100px;
+        height: 25px;
+        z-index: 3;
+        @include center-all;
     }
 }
