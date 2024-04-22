@@ -71,3 +71,14 @@ function get_products_by_category_name($category_name) {
     }
 }
 
+function randomCode()
+{
+    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $codigo = '';
+
+    for ($i = 0; $i < 6; $i++) {
+        $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
+    }
+
+    return $codigo;
+}

@@ -822,10 +822,14 @@
         z-index: 12;
         top: 100%;
         left: 0;
+        
     }
     #box-draggable{
-    transition: transform 0.3s linear, top 0.4s ease-out;
+    &:not(:focus){
+        transition: transform 0.3s linear, top 0.4s ease-out;
+    }
     @media (max-width:991px){
+        height: calc(100vh - 70px);
         margin-top: -180px;
       
         // &.show-info{

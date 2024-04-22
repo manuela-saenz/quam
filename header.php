@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.min.css" />
+  <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.min.css?=v<?= randomCode() ?>" />
 </head>
 
 <body>

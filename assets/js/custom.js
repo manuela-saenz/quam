@@ -112,52 +112,77 @@ $('.shopping-bag-offcanvas .select-bag a.remove').click(function (event) {
 });
 
 
-$(window).on('load resize', function(){
-  if($(window).width() <= 991){
+$(window).on('load resize', function () {
+  if ($(window).width() <= 991) {
     $('.product-actions').addClass('offcanvas offcanvas-bottom')
-  } else{
+  } else {
     $('.product-actions').removeClass('offcanvas offcanvas-bottom')
   }
 })
 
-const elemento = document.getElementById('box-draggable');
-
-let inicioY = 0;
-
-elemento.addEventListener('touchstart', iniciarToque, false);
-elemento.addEventListener('touchmove', moverToque, false);
-elemento.addEventListener('touchend', terminarToque, false);
-
-// Función que se ejecuta cuando el toque inicia
-function iniciarToque(evento) {
-    const toque = evento.touches[0]; 
-    inicioY = toque.clientY;
-}
-
-$('.product-actions').on('click', function (evento) {
-  evento.preventDefault();
+$('.product-actions').on('click', (event) => {
+  event.preventDefault();
 });
 
-function moverToque(evento) {
-    evento.preventDefault(); 
-    
-    const toque = evento.touches[0]; 
-    const deltaY = toque.clientY - inicioY;
-    elemento.style.transform = `translateY(${deltaY}px)`;
-    console.log(deltaY)
-}
+const drawer = $('#box-draggable'); // Seleccionar el drawer
+let drawerOpen = false; // Controlar el estado de apertura del drawer
+let startY = 0; // Posición Y inicial del touchstart
 
-// Función que se ejecuta cuando el toque termina
-function terminarToque(evento) {
-  // evento.preventDefault(); 
-  const toque = evento.changedTouches[0]; 
-  const deltaY = toque.clientY - inicioY; 
-  const wh = window.innerHeight - 250; 
-  if (deltaY <= -30) {
-    elemento.style.transform = `translateY(-${wh}px)`;
-} else if (deltaY >= 30) {
-    elemento.style.transform = `translateY(0px)`;
-}
-}
+// Configuración inicial del drawer
+drawer.css({
+  transform: 'translateY(0%)', // Inicialmente fuera de la vista (abajo)
+  transition: 'transform 0.3s ease', // Transición suave para los movimientos del drawer
+});
+
+
+$(drawer).on('touchstart', function (event) {
+  event.preventDefault();
+  const touch = event.touches[0];
+  startY = touch.clientY; // Almacenar la posición Y inicial
+});
+
+
+// Evento touchmove
+$(drawer).on('touchmove', function (event) {
+  event.preventDefault(); // Prevenir el comportamiento predeterminado
+  const touch = event.touches[0];
+  const currentY = touch.clientY; // Posición Y actual
+  const deltaY = currentY - startY; // Diferencia entre la posición actual e inicial
+
+  // Calcular la posición del drawer en función de deltaY
+  let translateY;
+  if (!drawerOpen && deltaY < 0) {
+    // Si el drawer está cerrado y el movimiento es hacia arriba
+    translateY = event.touches[0].clientY - startY;
+    drawer.css('transform', `translateY(${translateY}%)`);
+  } else if (drawerOpen && deltaY > 0) {
+    // Si el drawer está abierto y el movimiento es hacia abajo
+    translateY = Math.max(0, 100 - (deltaY / window.innerHeight * 100));
+    drawer.css('transform', `translateY(${translateY}%)`);
+  }
+});
+
+
+$(drawer).on('touchend', function (event) {
+  event.preventDefault();
+  const touch = event.changedTouches[0];
+  const endY = touch.clientY;
+  const deltaY = endY - startY; // Diferencia entre la posición final e inicial
+
+  // Decidir si abrir o cerrar el drawer según deltaY
+  if (!drawerOpen && deltaY < -50) {
+    // Abrir el drawer si está cerrado y el swipe fue hacia arriba
+    drawer.css('transform', 'translateY(0)');
+    drawerOpen = true;
+  } else if (drawerOpen && deltaY > 50) {
+    // Cerrar el drawer si está abierto y el swipe fue hacia abajo
+    drawer.css('transform', 'translateY(100%)');
+    drawerOpen = false;
+  }
+});
+
+
+
+
 
 
