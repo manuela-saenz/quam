@@ -30,10 +30,10 @@
             top: 40%;
         }
     }
+    margin-top: 119px;
 }
 
 .banner {
-    height: calc(100vh - -114px);
     position: relative;
     z-index: 2;
 
@@ -141,39 +141,33 @@
         }
     }
 
-    .img-fit {
+    .img-contain {
         position: absolute;
-        top: 0;
+        top: 50%;
         bottom: 0;
-        left: 77%;
-        transform: translateX(-77%) translateY(46px);
-        height: fit-content;
-        width: 680px;
+        left: 65%;
+        transform: translateX(-50%) translateY(-50%);
+        // height: fit-content;
+        // width: 680px;
         display: flex;
+        aspect-ratio: 1.2 / 1;
 
         @media(max-width:1200px) {
-            right: 0;
-            left: auto;
-            width: max-content;
-            transform: translateX(0%) translateY(46px);
-            z-index: 2;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
             height: 100%;
         }
 
         @media(min-width:1450px) {
-            width: 800px;
             height: 100%;
         }
 
-        @media(max-width:400px) {
-            transform: translateX(8%) translateY(46px);
-        }
     }
 
 
     .swiper-slide {
         position: relative;
-        min-height: 100vh;
+        height: calc(100vh - 119px);
         padding: 5vw 0;
         display: flex;
         align-items: center;
@@ -195,9 +189,10 @@
             width: 100%;
             height: 50%;
             background: #000;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, black 100%);
+            background: linear-gradient(180deg, #29292900 0%, rgba(41, 41, 41, 0.8) 100%);
             z-index: 1;
-
+            mix-blend-mode: multiply;
+            opacity: 0.2;
             @media(max-width:991px) {
                 height: 80%;
             }
@@ -252,38 +247,14 @@
     }
 }
 
-#categories {
-    overflow: hidden;
-
-    .row {
-        @media(max-width:768px) {
-            padding: 0 30px;
-        }
-    }
-}
-
 .card-categories {
-    position: relative;
-    height: 530px;
-
+    height: 85dvh;
     @media(max-width:768px) {
-        height: 400px;
-    }
-
-    @media(min-width:1500px) {
-        height: 700px;
-        display: block;
-        position: relative;
-    }
-
-    .img-fit {
-        height: 100%;
-
+        height: 55vh;
     }
 }
 
 .info-categories {
-    position: absolute;
     bottom: 33px;
     z-index: 2;
     background: $gray;

@@ -52,6 +52,7 @@ $attributes = $product->get_attributes();
                                 </div>
                             </div>
                         <?php endforeach; ?>
+
                     </div>
                     <div class="SingProducts-button-next"></div>
                     <div class="SingProducts-button-prev"></div>
@@ -60,10 +61,10 @@ $attributes = $product->get_attributes();
 
             </div>
 
-            <div class="col-lg-6  information-product">
+            <div class="col-lg-6  information-product mt-4">
                 <div class="info-product">
 
-                    <div class="p-4 bg-white" id="box-draggable">
+                    <div class="p-4 bg-white">
                         <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
                         <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
                         <div class="d-flex justify-content-between">
@@ -78,70 +79,20 @@ $attributes = $product->get_attributes();
                         <div>
                             <p> <?= $product->get_short_description() ?></p>
                         </div>
-                        <div class="product-actions" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-                            <?php
-                            global $product;
-                            if ($product->is_type('variable')) {
-                                // $default_attributes = $product->get_default_attributes();
-                                woocommerce_variable_add_to_cart();
-                            } else {
-                                woocommerce_simple_add_to_cart();
-                            }
-                            ?>
-
-                            <div class="d-flex">
-                                <strong>Color:</strong>
-                                <p class="mb-0 color-name"></p>
-                            </div>
-                            <div class="variant-item">
-                                <div class="product-var">
-                                    <input type="radio" id="negro" name="varcolor" style="background: #1C1C1C;">
-                                    <label for="negro" class="var-content"></label>
-                                </div>
-                                <div class="product-var ">
-                                    <input type="radio" id="mixto" checked name="varcolor" style="background: #002D72;">
-                                    <label for="blanco" class="var-content"></label>
-                                </div>
-                                <div class="product-var ">
-                                    <input type="radio" id="rojo" checked name="varcolor" style="background: #FF3747;">
-                                    <label for="blanco" class="var-content"></label>
-                                </div>
-
-                            </div>
-                            <div class="product-feature">
-                                <div class="d-flex">
-                                    <strong>Talla:</strong>
-                                </div>
-                                <div class="d-flex size">
-
-                                    <div class="" role="group" aria-label="Vertical radio toggle button group">
-                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
-                                        <label class="btn " for="vbtn-radio1">S</label>
-                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
-                                        <label class="btn " for="vbtn-radio2">M</label>
-                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
-                                        <label class="btn " for="vbtn-radio3">L</label>
-                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4" autocomplete="off">
-                                        <label class="btn " for="vbtn-radio4">XL</label>
-                                        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5" autocomplete="off">
-                                        <label class="btn " for="vbtn-radio5">XXL</label>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class=" d-flex align-items-center ">
-                                <div class='quantity'>
-                                    <button class='qtyminus minus'><i class="icon-minus"></i></button>
-                                    <input type='text' id="singleProductQuantity" name='quantity' value='1' class='qtySingle' />
-                                    <button class='qtyplus plus'><i class="icon-add---copia"></i></button>
-                                </div>
-                                <a href="" class="quam-btn blue">Agregar a la bolsa</a>
-                                <button class="button-heart d-none d-lg-flex"> <i class="icon-heart"></i> </button>
+                        <div class="product-actions mb-md-5" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                            <div class="p-4 p-md-0">
+                                <?php
+                                global $product;
+                                if ($product->is_type('variable')) {
+                                    // $default_attributes = $product->get_default_attributes();
+                                    woocommerce_variable_add_to_cart();
+                                } else {
+                                    woocommerce_simple_add_to_cart();
+                                }
+                                ?>
                             </div>
                         </div>
 
-
-                        +
 
                         <div class="share d-flex align-items-center">
                             <p class="m-0"> <b>Compartir: </b> </p>
@@ -155,6 +106,26 @@ $attributes = $product->get_attributes();
                     </div>
 
                 </div>
+
+                <div class="sm-floating-box d-md-none">
+                    <div id="box-draggable">
+                        <div class="p-4 bg-white">
+                            <div class="main-box">
+                                <h1 class="section-subtitle"><?= $post->post_title ?></h1>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div class="d-flex align-items-center price">
+                                        <p>$<?= $product->get_price() ?></p>
+                                        <span><?= $product->get_regular_price() ?> </span>
+                                    </div>
+                                    <button class="button-heart" type="button"> <i class="icon-heart"></i> </button>
+                                </div>
+                                <button class="quam-btn blue d-lg-none open-selector" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

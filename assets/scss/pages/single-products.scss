@@ -303,16 +303,16 @@
       ins {
         text-decoration: none;
       }
-      .price:has(del){
+      .price:has(del) {
         display: flex;
         flex-direction: row;
-        ins{
-            order: 1;
-            margin-right: 10px;
+        ins {
+          order: 1;
+          margin-right: 10px;
         }
-        del{
-            order: 2;
-            opacity: 0.4;
+        del {
+          order: 2;
+          opacity: 0.4;
         }
       }
     }
@@ -395,29 +395,31 @@
       font-size: 16px;
     }
 
-    .button-heart {
-      height: 47px;
-      border: 1px solid #000;
-      min-width: 50px;
-      color: #000;
-      @include center-all;
-
-      @media (max-width: 600px) {
-        margin-left: 10px;
-        min-width: 40px;
-        height: 40px;
-      }
-
-      .icon-heart {
-        font-size: 20px;
-      }
-
-      &:before {
-        color: #000;
-      }
-    }
+    
   }
 }
+
+.button-heart {
+    height: 47px;
+    border: 1px solid #000;
+    min-width: 50px;
+    color: #000;
+    @include center-all;
+
+    @media (max-width: 600px) {
+      margin-left: 10px;
+      min-width: 40px;
+      height: 40px;
+    }
+
+    .icon-heart {
+      font-size: 20px;
+    }
+
+    &:before {
+      color: #000;
+    }
+  }
 
 .quantity {
   @include center-vertical;
@@ -611,26 +613,7 @@
         padding: 10px;
       }
 
-      .button-heart {
-        height: 100%;
-        margin-left: 15px;
-        border: 1px solid #000;
-        width: 50px;
-        color: #000;
-        @include center-all;
-
-        @media (max-width: 600px) {
-          margin-left: 10px;
-        }
-
-        .icon-heart {
-          font-size: 20px;
-        }
-
-        &:before {
-          color: #000;
-        }
-      }
+      
     }
   }
 }
@@ -682,23 +665,19 @@
   }
 }
 
-.info-product {
+.sm-floating-box {
   @media (max-width: 991px) {
+    #box-draggable {
+      transition: transform 0.2s linear;
+      max-height: calc(100vh - 80px);
+      > div{
+        min-height: 100vh;
+      }
+    }
     position: fixed;
     z-index: 12;
     top: 100%;
+    width: 100%;
     left: 0;
-  }
-
-  #box-draggable {
-    transition: transform 0.3s linear, top 0.4s ease-out;
-
-    @media (max-width: 991px) {
-      margin-top: -180px;
-
-      // &.show-info{
-      //     transform: translateY(calc(-100% + 180px)) !important;
-      // }
-    }
   }
 }

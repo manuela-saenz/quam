@@ -107,7 +107,7 @@ initQuantitySingle();
 // -------- quitar productos del  carrito-----------
 
 $('.shopping-bag-offcanvas .select-bag a.remove').click(function (event) {
-  // event.preventDefault();
+  event.preventDefault();
   $(this).closest('.select-bag').remove(); // Remueve el elemento con la clase select-bag más cercano al enlace clickeado
 });
 
@@ -120,66 +120,78 @@ $(window).on('load resize', function () {
   }
 })
 
-$('.product-actions , .variations_form').on('click', (event) => {
-  // event.preventDefault();
+$('.open-selector').on('click', (event) => {
+  console.log('funciona')
+  event.preventDefault();
 });
 
-const drawer = $('#box-draggable'); // Seleccionar el drawer
-let drawerOpen = false; // Controlar el estado de apertura del drawer
-let startY = 0; // Posición Y inicial del touchstart
+const elemento = document.querySelector('#box-draggable');
 
-// Configuración inicial del drawer
-drawer.css({
-  transform: 'translateY(0%)', // Inicialmente fuera de la vista (abajo)
-  transition: 'transform 0.3s ease', // Transición suave para los movimientos del drawer
-});
+let inicioY = 0;
+let isUp = false;
+let moving
+elemento.addEventListener('touchstart', iniciarToque, false);
+elemento.addEventListener('touchmove', moverToque, false);
+elemento.addEventListener('touchend', terminarToque, false);
 
+elemento.style.marginTop = `-${document.querySelector('.main-box').offsetHeight + 48}px`;
+const wh = window.innerHeight - 250;
 
-$(drawer).on('touchstart', function (event) {
-  // event.preventDefault();
-  const touch = event.touches[0];
-  startY = touch.clientY; // Almacenar la posición Y inicial
-});
-
-
-// Evento touchmove
-$(drawer).on('touchmove', function (event) {
-  // event.preventDefault(); // Prevenir el comportamiento predeterminado
-  const touch = event.touches[0];
-  const currentY = touch.clientY; // Posición Y actual
-  const deltaY = currentY - startY; // Diferencia entre la posición actual e inicial
-
-  // Calcular la posición del drawer en función de deltaY
-  let translateY;
-  if (!drawerOpen && deltaY < 0) {
-    // Si el drawer está cerrado y el movimiento es hacia arriba
-    translateY = event.touches[0].clientY - startY;
-    drawer.css('transform', `translateY(${translateY}%)`);
-  } else if (drawerOpen && deltaY > 0) {
-    // Si el drawer está abierto y el movimiento es hacia abajo
-    translateY = Math.max(0, 100 - (deltaY / window.innerHeight * 100));
-    drawer.css('transform', `translateY(${translateY}%)`);
+function iniciarToque(evento) {
+  const toque = evento.touches[0];
+  inicioY = toque.clientY;
+  if (isUp) {
+    console.log('toque arriba hacia abajo', inicioY)
+  } else {
+    console.log('toque abajo hacia arriba:', inicioY)
   }
-});
-
-
-$(drawer).on('touchend', function (event) {
-  // event.preventDefault();
-  const touch = event.changedTouches[0];
-  const endY = touch.clientY;
-  const deltaY = endY - startY; // Diferencia entre la posición final e inicial
-
-  // Decidir si abrir o cerrar el drawer según deltaY
-  if (!drawerOpen && deltaY < -50) {
-    // Abrir el drawer si está cerrado y el swipe fue hacia arriba
-    drawer.css('transform', 'translateY(0)');
-    drawerOpen = true;
-  } else if (drawerOpen && deltaY > 50) {
-    // Cerrar el drawer si está abierto y el swipe fue hacia abajo
-    drawer.css('transform', 'translateY(100%)');
-    drawerOpen = false;
+}
+function positionDownIdetifier(deltaY) {
+  if (deltaY <= -30) {
+    isUp = true;
+  } else {
+    isUp = false;
   }
-});
+}
+
+function positionTopIdetifier(deltaY) {
+  if (deltaY >= 30) {
+    isUp = false;
+  } else {
+    isUp = true;
+  }
+}
+
+function moverToque(evento) {
+  evento.preventDefault();
+  const toque = evento.touches[0];
+  const movingDeltaY = toque.clientY - inicioY;
+  if (isUp) {
+    console.log(movingDeltaY + wh)
+    elemento.style.transform = `translateY(${movingDeltaY + wh * -1}px)`;
+  } else {
+
+    console.log(inicioY, '-', toque.clientY, '=', movingDeltaY)
+    elemento.style.transform = `translateY(${movingDeltaY}px)`;
+  }
+
+
+}
+
+
+function terminarToque(evento) {
+  // evento.preventDefault(); 
+  const toque = evento.changedTouches[0];
+  const deltaY = toque.clientY - inicioY;
+  positionDownIdetifier(deltaY);
+  if (isUp) {
+    positionTopIdetifier(deltaY);
+    elemento.style.transform = `translateY(-${wh}px)`;
+  } else {
+    elemento.style.transform = `translateY(0px)`;
+  }
+
+}
 
 
 
