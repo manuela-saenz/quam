@@ -21,7 +21,7 @@ global $product;
 
         <button type="submit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="single_add_to_cart_button quam-btn blue alt<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>"><?php echo esc_html($product->single_add_to_cart_text()); ?></button>
 
-        <button class="button-heart d-none d-lg-flex add-fav" data-product-id="0" type="button"> <i class="icon-heart"></i> </button>
+        <button class="button-heart d-none d-lg-flex add-fav" id="add-sprod-favs" data-product-id="0" type="button"> <i class="icon-heart"></i> </button>
         
     </div>
     <?php do_action('woocommerce_after_add_to_cart_button'); ?>

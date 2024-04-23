@@ -34,6 +34,8 @@ class SyEAjaxRequest
             "woocommerce_confirm_payment",
             "woocommerce_ajax_favorites",
             "woocommerce_ajax_descargar_pdf",
+            "add_product_to_favorites",
+            "delete_favorite_product",
             "recoverPassword",
             "changeInfoProfile",
             "resetPassword",
@@ -733,7 +735,6 @@ class SyEAjaxRequest
     public function add_product_to_favorites()
     {
         session_start();
-
         $prodID = $_POST["prodid"];
         $sessionName = "prodsfavs";
 
@@ -745,7 +746,7 @@ class SyEAjaxRequest
                 $_SESSION[$sessionName][] = $prodID;
             }
         }
-
+        
         ob_start();
         get_template_part("templates/components/mini", "favs");
         $html = ob_get_clean();
@@ -759,6 +760,32 @@ class SyEAjaxRequest
         wp_die();
     }
 
+    public function delete_favorite_product()
+    {
+
+        session_start();
+        $sessionName = "prodsfavs";
+
+        $prodID = $_POST["prodid"];
+        $keyProdIDFind = array_search($prodID, $_SESSION[$sessionName]);
+
+        unset($_SESSION[$sessionName][$keyProdIDFind]);
+
+        ob_start();
+        get_template_part("templates/components/mini", "favs");
+        $html = ob_get_clean();
+
+        header('Content-Type: application/json');
+        echo json_encode(array(
+            "html" => $html,
+            "counter" => count($_SESSION[$sessionName])
+        ));
+
+
+
+
+        wp_die();
+    }
     function woocommerce_generate_order()
     {
         // $response = array();

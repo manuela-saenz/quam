@@ -192,38 +192,69 @@ $(document).on("click", ".qtyminus, .qtyplus", function () {
   }, 1000);
 });
 
-
 function initAddToFavoriteButton() {
-	$('.add-sprod-favs').on('click', function(e) {
-		e.preventDefault();
+  $("#add-sprod-favs").on("click", function (e) {
+    e.preventDefault();
 
-		var prodid = $(this).data('prodid');
-		var loaderContainer = $('#prodSingleLoader_' + prodid);
+    var prodid = $(this).data("product-id");
+    var sessionName = "prodsfavs";
 
-		loaderContainer.removeClass('hide-loader');
+    var loaderContainer = $("#prodSingleLoader_" + prodid);
 
-		if ($(this).hasClass('single-prod-addfav')) {
-			$(this).children('i').addClass('icon-like').removeClass('icon-like_outline');
-		}
+    loaderContainer.removeClass("hide-loader");
 
-		$.ajax({
-			url: ajaxUrl,
-			method: 'POST',
-			data: {
-				action: 'add_product_to_favorites',
-				prodid: prodid
-			},
-			success: function(res) {
-				loaderContainer.addClass('hide-loader');
-				$('#favoritesPanelHead').html(res['html']);
-				$('#favoritesCounter').text(res['counter']).removeClass('d-none');
-				initFavoritesPanel();
+    if ($(this).hasClass("single-prod-addfav")) {
+      $(this)
+        .children("i")
+        .addClass("icon-like")
+        .removeClass("icon-like_outline");
+    }
 
-				$('#tiendaAddProductToCartAlert').addClass('show');
-				setTimeout(function() {
-					$('#tiendaAddProductToCartAlert').removeClass('show');
-				}, 3500);
-			}
-		});
-	});
+    $.ajax({
+      url: ajaxUrl,
+      method: "POST",
+      data: {
+        action: "add_product_to_favorites",
+        prodid: prodid
+      },
+      success: function (res) {
+        loaderContainer.addClass("hide-loader");
+        var res = JSON.parse(res);
+        $("#favoritesPanelHead").html(res.html);
+        // $("#favoritesCounter").text(res["counter"]).removeClass("d-none");
+        // initFavoritesPanel();
+
+        // $("#tiendaAddProductToCartAlert").addClass("show");
+        // setTimeout(function () {
+        //   $("#tiendaAddProductToCartAlert").removeClass("show");
+        // }, 3500);
+      },
+    });
+  });
 }
+
+function initFavoritesPanel() {
+  $(".borrar-favorito").on("click", function () {
+    var prodid = $(this).data("prodid");
+
+    $.ajax({
+      url: ajaxUrl,
+      method: "POST",
+      data: {
+        action: "delete_favorite_product",
+        prodid: prodid,
+      },
+      success: function (res) {
+        $("#favoritesPanelHead").html(res["html"]);
+        if (res["counter"] < 1) {
+          $("#favoritesCounter").addClass("d-none");
+        } else {
+          $("#favoritesCounter").text(res["counter"]).removeClass("d-none");
+        }
+        initFavoritesPanel();
+      },
+    });
+  });
+}
+
+initAddToFavoriteButton();
