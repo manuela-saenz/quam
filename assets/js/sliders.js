@@ -157,9 +157,9 @@ var swiper = new Swiper(".SingProducts", {
     }
 
   };
-
+  let allowScroll = false
   const enableSwiper = function () {
-    let allowScroll = false
+   
     mySwiper = new Swiper(".SingProducts2", {
       spaceBetween: 10,
       mousewheel: true,
@@ -179,22 +179,25 @@ var swiper = new Swiper(".SingProducts", {
           direction: "vertical",
         },
       },
+      // habilitar desplazamiento hacia abajo en el ultimo slide
       on: {
         slideChange: function () {
           allowScroll = false
           if (mySwiper.activeIndex === ($('.SingProducts2 .swiper-wrapper>div').length - 1)) {
             setTimeout(() => {
-              allowScroll = true
-            }, 200)
+              allowScroll = true;
+              console.log('funciona')
+            }, 100)
           }
         },
       }
 
     });
 
+    // desplazamiento hacia abajo cuando haga scroll en el ultimo slide
     $(mySwiper.el).on('wheel', function (e) {
         if (allowScroll) {
-          $(window).scrollTop(e.originalEvent.screenY * -1)
+          $(window).scrollTop(e.originalEvent.screenY)
         }
     })
 

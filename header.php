@@ -27,7 +27,7 @@
   <?php wp_head(); ?>
 </head>
 
-<body <?php body_class() ?>>
+<body>
   <header>
     <div class="header-contact">
       <div class="container d-flex align-items-center justify-content-lg-between justify-content-center position-relative">
