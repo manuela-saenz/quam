@@ -9,7 +9,7 @@ function productCard($product)
   if ($wcProd->get_sale_price()) {
   ?>
     <a href="https://www.quam.com.co/web_quam/producto/<?php echo $product->get_slug() ?>/" class="CardProducts <?= $wcProd->get_sale_price()  ? 'CardOffers' : '' ?>">
-      <div class="img-fit">
+      <div class="img-contain">
         <img src="<?php echo $product->image_src ?>" alt="<?php echo $product->get_name() ?>">
       </div>
       <div class="info-highlights">

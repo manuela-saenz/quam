@@ -104,6 +104,10 @@ function initQuantitySingle() {
 initQuantity();
 initQuantitySingle();
 
+$('.variation_id').on('change', function(){
+  $('.add-fav').attr('data-product-id', $(this).attr('value'))
+})
+
 // -------- quitar productos del  carrito-----------
 
 $('.shopping-bag-offcanvas .select-bag a.remove').click(function (event) {
@@ -126,39 +130,47 @@ $('.open-selector').on('click', (event) => {
 });
 
 const elemento = document.querySelector('#box-draggable');
+const mainBox = document.querySelector('.main-box');
+const wh = window.innerHeight - 250;
 
 let inicioY = 0;
 let isUp = false;
-let moving
 elemento.addEventListener('touchstart', iniciarToque, false);
 elemento.addEventListener('touchmove', moverToque, false);
 elemento.addEventListener('touchend', terminarToque, false);
 
-elemento.style.marginTop = `-${document.querySelector('.main-box').offsetHeight + 48}px`;
-const wh = window.innerHeight - 250;
+elemento.style.marginTop = `-${mainBox.offsetHeight + 48}px`;
+
+
+function positionDownIdentifier(deltaY) {
+  if (deltaY <= -30) {
+    elemento.style.transform = `translateY(-${wh}px)`;
+    isUp = true;
+  } else {
+    isUp = false;
+    elemento.style.transform = `translateY(0px)`;
+  }
+}
+
+function positionTopIdentifier(deltaY) {
+  if (deltaY >= 30) {
+    isUp = false;
+    elemento.style.transform = `translateY(0px)`;
+  } else {
+    isUp = true;
+    elemento.style.transform = `translateY(-${wh}px)`;
+   
+  }
+}
 
 function iniciarToque(evento) {
+  console.log(evento)
   const toque = evento.touches[0];
   inicioY = toque.clientY;
-  if (isUp) {
+  if (position) {
     console.log('toque arriba hacia abajo', inicioY)
   } else {
     console.log('toque abajo hacia arriba:', inicioY)
-  }
-}
-function positionDownIdetifier(deltaY) {
-  if (deltaY <= -30) {
-    isUp = true;
-  } else {
-    isUp = false;
-  }
-}
-
-function positionTopIdetifier(deltaY) {
-  if (deltaY >= 30) {
-    isUp = false;
-  } else {
-    isUp = true;
   }
 }
 
@@ -167,30 +179,20 @@ function moverToque(evento) {
   const toque = evento.touches[0];
   const movingDeltaY = toque.clientY - inicioY;
   if (isUp) {
-    console.log(movingDeltaY + wh)
     elemento.style.transform = `translateY(${movingDeltaY + wh * -1}px)`;
   } else {
-
-    console.log(inicioY, '-', toque.clientY, '=', movingDeltaY)
     elemento.style.transform = `translateY(${movingDeltaY}px)`;
   }
-
-
 }
 
-
 function terminarToque(evento) {
-  // evento.preventDefault(); 
   const toque = evento.changedTouches[0];
   const deltaY = toque.clientY - inicioY;
-  positionDownIdetifier(deltaY);
   if (isUp) {
-    positionTopIdetifier(deltaY);
-    elemento.style.transform = `translateY(-${wh}px)`;
+    positionTopIdentifier(deltaY);
   } else {
-    elemento.style.transform = `translateY(0px)`;
+     positionDownIdentifier(deltaY);
   }
-
 }
 
 
