@@ -80,91 +80,7 @@ get_header() ?>
                                 <th scope="col" style="color: transparent;">dd</th>
                               </tr>
                             </thead>
-                            <tbody class="mb-4">
-                              <tr>
-                                <td scope="row d-flex align-items-center ">
-                                  <div class=" d-flex align-items-center h-100  p-3">
-                                    <div class="img-fit">
-                                      <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
-                                    </div>
-                                    <div>
-                                      <h5>Example Midi Bodycon Dress</h5>
-                                      <p>Talla: S</p>
-                                      <p>Color: </p>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td>
-                                  <div class="d-flex align-items-center justify-content-end h-100 ">
-                                    <div class="quantity">
-                                      <button class="qtyminus minus"><i class="icon-minus"></i></button>
-                                      <input type="text" id="singleProductQuantity" name="quantity" value="1" class="qtySingle">
-                                      <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td>
-                                  <div class="d-flex align-items-center justify-content-center h-100 "> $70.000
-                                  </div>  
-                                </td>
-                                <td>
-                                  <div class="d-flex align-items-center justify-content-center h-100 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                      <path d="M4 7l16 0" />
-                                      <path d="M10 11l0 6" />
-                                      <path d="M14 11l0 6" />
-                                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                    </svg>
-                                  </div>
-
-                                </td>
-                              </tr>
-                            </tbody>
-
-                            <tbody class="mb-4">
-                              <tr>
-                                <td scope="row d-flex align-items-center">
-                                  <div class="d-flex align-items-center h-100  p-4">
-                                    <div class="img-fit">
-                                      <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
-                                    </div>
-                                    <div>
-                                      <h5>Example Midi Bodycon Dress</h5>
-                                      <p>Talla: S</p>
-                                      <p>Color: </p>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td>
-                                  <div class="d-flex align-items-center justify-content-end h-100 ">
-                                    <div class="quantity">
-                                      <button class="qtyminus minus"><i class="icon-minus"></i></button>
-                                      <input type="text" id="singleProductQuantity" name="quantity" value="1" class="qtySingle">
-                                      <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td>
-                                  <div class="d-flex align-items-center justify-content-center h-100 "> $70.000
-                                  </div>  
-                                </td>
-                                <td>
-                                  <div class="d-flex align-items-center justify-content-center h-100 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                      <path d="M4 7l16 0" />
-                                      <path d="M10 11l0 6" />
-                                      <path d="M14 11l0 6" />
-                                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                    </svg>
-                                  </div>
-
-                                </td>
-                              </tr>
-                            </tbody>
+                            <?php ItemsCheckout(); ?>
                           </table>
                           <div class="d-lg-flex d-none flex-column">
                             <label class="custom-checkbox d-flex align-items-baseline mb-4"><input class="politicy check me-3" type="checkbox" id="cboxtwo" value="first_checkbox">
@@ -178,7 +94,10 @@ get_header() ?>
                           </div>
 
                         </div>
-
+                        <?php
+                        $total = WC()->cart->get_cart_total();
+                        $discountTotal = WC()->cart->get_cart_discount_total();
+                        ?>
                         <div class="col-lg-4 col-md-12">
                           <div class="code">
                             <form method="post" class="position-relative">
@@ -189,15 +108,15 @@ get_header() ?>
                               <div class="mt-4">
                                 <div class="d-flex justify-content-between">
                                   <p class="fw-bolder" style="color: #00000075;"> Subtotal</p>
-                                  <p class="fw-bolder" style="color: #00000075;">$75.000</p>
+                                  <p class="fw-bolder" style="color: #00000075;"><?php echo $total; ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                   <p class="fw-bolder" style="color: #00000075;"> Descuento</p>
-                                  <p class="fw-bolder" style="color: #00000075;">$-24.000</p>
+                                  <p class="fw-bolder" style="color: #00000075;"><?php echo $discountTotal; ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                   <p class="" style="font-size: 22px;"> <b>Total</b> </p>
-                                  <p class="" style="font-size: 22px;"> <b> $75.000</b> </p>
+                                  <p class="" style="font-size: 22px;"> <b> <?php echo $total; ?></b> </p>
                                 </div>
                               </div>
 
@@ -263,52 +182,25 @@ get_header() ?>
                           <div class="code">
                             <h3>Resumen de compra </h3>
                             <form method="post" class="position-relative form_compra">
-                              <div class="d-flex align-items-center h-100 purchase">
-                                <div class="img-fit">
-                                  <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
-                                </div>
-                                <div>
-                                  <div class="d-flex align-items-baseline">
-                                    <h5>Example Midi Bodycon Dress</h5>
-                                    <div class="x">x2</div>
-                                  </div>
-                                  <div class="d-flex align-items-center price">
-                                    <p>$200</p>
-                                    <span>$890</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="d-flex align-items-center h-100 purchase">
-                                <div class="img-fit">
-                                  <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
-                                </div>
-                                <div>
-                                  <div class="d-flex align-items-baseline">
-                                    <h5>Example Midi Bodycon Dress</h5>
-                                    <div class="x">x2</div>
-                                  </div>
-                                  <div class="d-flex align-items-center price">
-                                    <p>$200</p>
-                                    <span>$890</span>
-                                  </div>
-                                </div>
-                              </div>
+                              <?php ItemsSummary(); ?>
+
                               <div class="position-relative mt-5">
                                 <input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
                                 <input type="submit" class="quam-btn blue" value="Aplicar">
                               </div>
+
                               <div class="mt-4">
                                 <div class="d-flex justify-content-between">
                                   <p class="fw-bolder" style="color: #00000075;"> Subtotal</p>
-                                  <p class="fw-bolder" style="color: #00000075;">$75.000</p>
+                                  <p class="fw-bolder" style="color: #00000075;"><?php echo $total; ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                   <p class="fw-bolder" style="color: #00000075;"> Descuento</p>
-                                  <p class="fw-bolder" style="color: #00000075;">$-24.000</p>
+                                  <p class="fw-bolder" style="color: #00000075;"><?php echo $discountTotal; ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                   <p class="" style="font-size: 22px;"> <b>Total</b> </p>
-                                  <p class="" style="font-size: 22px;"> <b> $75.000</b> </p>
+                                  <p class="" style="font-size: 22px;"> <b><?php echo $total; ?></b> </p>
                                 </div>
                               </div>
                             </form>
@@ -378,36 +270,7 @@ get_header() ?>
                           <div class="code">
                             <h3>Resumen de compra </h3>
                             <form method="post" class="position-relative form_compra">
-                              <div class="d-flex align-items-center h-100 purchase">
-                                <div class="img-fit">
-                                  <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
-                                </div>
-                                <div>
-                                  <div class="d-flex align-items-baseline">
-                                    <h5>Example Midi Bodycon Dress</h5>
-                                    <div class="x">x2</div>
-                                  </div>
-                                  <div class="d-flex align-items-center price">
-                                    <p>$200</p>
-                                    <span>$890</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="d-flex align-items-center h-100 purchase">
-                                <div class="img-fit">
-                                  <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
-                                </div>
-                                <div>
-                                  <div class="d-flex align-items-baseline">
-                                    <h5>Example Midi Bodycon Dress</h5>
-                                    <div class="x">x2</div>
-                                  </div>
-                                  <div class="d-flex align-items-center price">
-                                    <p>$200</p>
-                                    <span>$890</span>
-                                  </div>
-                                </div>
-                              </div>
+                              <?php ItemsSummary(); ?>
                               <div class="position-relative mt-5">
                                 <input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
                                 <input type="submit" class="quam-btn blue" value="Aplicar">
@@ -415,15 +278,15 @@ get_header() ?>
                               <div class="mt-4">
                                 <div class="d-flex justify-content-between">
                                   <p class="fw-bolder" style="color: #00000075;"> Subtotal</p>
-                                  <p class="fw-bolder" style="color: #00000075;">$75.000</p>
+                                  <p class="fw-bolder" style="color: #00000075;"><?php echo $total; ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                   <p class="fw-bolder" style="color: #00000075;"> Descuento</p>
-                                  <p class="fw-bolder" style="color: #00000075;">$-24.000</p>
+                                  <p class="fw-bolder" style="color: #00000075;"><?php echo $discountTotal; ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                   <p class="" style="font-size: 22px;"> <b>Total</b> </p>
-                                  <p class="" style="font-size: 22px;"> <b> $75.000</b> </p>
+                                  <p class="" style="font-size: 22px;"> <b> <?php echo $total; ?></b> </p>
                                 </div>
                               </div>
                             </form>
@@ -559,36 +422,7 @@ get_header() ?>
                           <div class="code">
                             <h3>Resumen de compra </h3>
                             <form method="post" class="position-relative form_compra">
-                              <div class="d-flex align-items-center h-100 purchase">
-                                <div class="img-fit">
-                                  <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
-                                </div>
-                                <div>
-                                  <div class="d-flex align-items-baseline">
-                                    <h5>Example Midi Bodycon Dress</h5>
-                                    <div class="x">x2</div>
-                                  </div>
-                                  <div class="d-flex align-items-center price">
-                                    <p>$200</p>
-                                    <span>$890</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="d-flex align-items-center h-100 purchase">
-                                <div class="img-fit">
-                                  <img src="https://www.quam.com.co/web_quam/wp-content/uploads/2024/03/singleproduct-1.jpg" alt="">
-                                </div>
-                                <div>
-                                  <div class="d-flex align-items-baseline">
-                                    <h5>Example Midi Bodycon Dress</h5>
-                                    <div class="x">x2</div>
-                                  </div>
-                                  <div class="d-flex align-items-center price">
-                                    <p>$200</p>
-                                    <span>$890</span>
-                                  </div>
-                                </div>
-                              </div>
+                              <?php ItemsSummary(); ?>
                               <div class="position-relative mt-5">
                                 <input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
                                 <input type="submit" class="quam-btn blue" value="Aplicar">
@@ -596,21 +430,16 @@ get_header() ?>
                               <div class="mt-4">
                                 <div class="d-flex justify-content-between">
                                   <p class="fw-bolder" style="color: #00000075;"> Subtotal</p>
-                                  <p class="fw-bolder" style="color: #00000075;">$75.000</p>
+                                  <p class="fw-bolder" style="color: #00000075;"><?php echo $total; ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                   <p class="fw-bolder" style="color: #00000075;"> Descuento</p>
-                                  <p class="fw-bolder" style="color: #00000075;">$-24.000</p>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                  <p class="fw-bolder" style="color: #00000075;"> Gasto de envio</p>
-                                  <p class="fw-bolder" style="color: #00000075;">$13.000</p>
+                                  <p class="fw-bolder" style="color: #00000075;"><?php echo $discountTotal; ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                   <p class="" style="font-size: 22px;"> <b>Total</b> </p>
-                                  <p class="" style="font-size: 22px;"> <b> $75.000</b> </p>
+                                  <p class="" style="font-size: 22px;"> <b> <?php echo $total; ?></b> </p>
                                 </div>
-                              </div>
                             </form>
                           </div>
                         </div>

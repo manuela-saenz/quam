@@ -47,7 +47,7 @@ if ($product->is_in_stock()) : ?>
 			do_action('woocommerce_after_add_to_cart_quantity');
 			?>
 
-			<button type="submit" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>" class="single_add_to_cart_button quam-btn blue button alt<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>"><?php echo esc_html($product->single_add_to_cart_text()); ?></button>
+			<button type="submit" name="add-to-cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" value="<?php echo esc_attr($product->get_id()); ?>" class="single_add_to_cart_button quam-btn blue button alt<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>"><?php echo esc_html($product->single_add_to_cart_text()); ?></button>
 			<button class="button-heart d-none d-lg-flex" type="button"> <i class="icon-heart"></i> </button>
 		</div>
 		<?php do_action('woocommerce_after_add_to_cart_button'); ?>

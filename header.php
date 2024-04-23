@@ -154,11 +154,11 @@
       <div class="">
         <div class="d-flex justify-content-between mb-2">
           <p class="fs-6"> Subtotal</p>
-          <p class="fs-6"><?php echo $total; ?></p>
+          <p class="fs-6" id="subtotal"><?php echo $total; ?></p>
         </div>
         <div class="d-flex justify-content-between mb-2">
           <p class="fs-4"> <b>Total</b> </p>
-          <p class="fs-4"> <b><?php echo $total; ?></b> </p>
+          <p class="fs-4"> <b id="total"><?php echo $total; ?></b> </p>
         </div>
       </div>
       <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/" class="quam-btn blue w-100">Finalizar compra</a>

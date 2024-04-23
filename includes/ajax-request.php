@@ -25,6 +25,7 @@ class SyEAjaxRequest
 
         $actions = array(
             "woocommerce_ajax_add_to_cart",
+            "woocommerce_ajax_add_to_cart_remplace_qty",
             "woocommerce_ajax_add_to_cart_single",
             "woocommerce_remove_cart_item",
             "woocommerce_remove_cart_item_qty",
@@ -59,7 +60,7 @@ class SyEAjaxRequest
 
         // Check if the product exists
         $product = wc_get_product($prodID);
-     
+
 
         if (!$product) {
             echo json_encode(array(
@@ -77,10 +78,10 @@ class SyEAjaxRequest
             ));
             die();
         }
-   
+
         // Add the product to the cart
         $result = $woocommerce->cart->add_to_cart($prodID, $quantity);
-    
+
         $totalItemsProduct = $woocommerce->cart->get_cart_item($result)["quantity"];
         $PrecioProducto = $woocommerce->cart->get_cart_item($result)["data"]->get_price();
         $TotalProduct = $totalItemsProduct * $PrecioProducto;
@@ -93,9 +94,9 @@ class SyEAjaxRequest
         ItemsCart();
         $itemsCart = ob_get_clean();
 
-        // ob_start();
-        // trItemsCart();
-        // $anotherOutput = ob_get_clean();
+        ob_start();
+        ItemsCheckout();
+        $anotherOutput = ob_get_clean();
 
         $search = array(
             '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
@@ -111,13 +112,13 @@ class SyEAjaxRequest
         );
 
         $buffer = preg_replace($search, $replace, $itemsCart);
-        // $buffer2 = preg_replace($search, $replace, $anotherOutput);
+        $buffer2 = preg_replace($search, $replace, $anotherOutput);
 
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
             "html" => $buffer,
-            // "ordenList" => $buffer2,
+            "checkout" => $buffer2,
             "total" => $ValorTotal,
             "quantity" => count($woocommerce->cart->get_cart()),
             "totalProducto" => $formatoColombiano
@@ -126,6 +127,64 @@ class SyEAjaxRequest
         die();
     }
 
+    function woocommerce_ajax_add_to_cart_remplace_qty()
+    {
+        global $woocommerce;
+
+        $prodID = $_POST["product_id"];
+        $quantity = $_POST["quantity"];
+
+
+        $cartItemKey = null;
+
+        foreach ($woocommerce->cart->get_cart() as $key => $cart_item) {
+            if ($cart_item['product_id'] == $prodID || (isset($cart_item['variation_id']) && $cart_item['variation_id'] == $prodID)) {
+                $cartItemKey = $key;
+                break;
+            }
+        }
+
+        if ($cartItemKey) {
+            $woocommerce->cart->set_quantity($cartItemKey, $quantity);
+        }
+
+        $totalItemsProduct = $woocommerce->cart->get_cart_item($cartItemKey)["quantity"];
+        $PrecioProducto = $woocommerce->cart->get_cart_item($cartItemKey)["data"]->get_price();
+        $TotalProduct = $totalItemsProduct * $PrecioProducto;
+
+        $formatoColombiano = "$ " . number_format($TotalProduct, 0, ',', '.');
+
+        $ValorTotal = $woocommerce->cart->get_cart_total();
+
+        ob_start();
+        ItemsCart();
+        $itemsCart = ob_get_clean();
+
+        $search = array(
+            '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
+            '/[^\S ]+\</s',     // strip whitespaces before tags, except space
+            '/(\s)+/s',         // shorten multiple whitespace sequences
+            '/<!--(.|\s)*?-->/' // Remove HTML comments
+        );
+        $replace = array(
+            '>',
+            '<',
+            '\\1',
+            ''
+        );
+
+        $buffer = preg_replace($search, $replace, $itemsCart);
+
+        echo json_encode(array(
+            "item" => $cartItemKey,
+            "status" => "success",
+            "html" => $buffer,
+            "total" => $ValorTotal,
+            "quantity" => count($woocommerce->cart->get_cart()),
+            "totalProducto" => $formatoColombiano
+        ));
+        die();
+    }
 
     function woocommerce_ajax_add_to_cart_single()
     {
@@ -159,7 +218,7 @@ class SyEAjaxRequest
                 $woocommerce->cart->remove_cart_item($cart_item_key);
             }
         }
-       
+
         // Agrega el producto al carrito con la nueva cantidad
         $result = $woocommerce->cart->add_to_cart($product->get_id(), $quantity);
         $totalItemsProduct = $woocommerce->cart->get_cart_item($result)["quantity"];
@@ -212,12 +271,12 @@ class SyEAjaxRequest
         global $woocommerce;
         $cart_item_key = $_POST["cart_item_key"];
         $result = false;
-        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $cart_item ) {
-            if ($cart_item['product_id'] == $cart_item_key|| $cart_item['variation_id'] == $cart_item_key) {
-                $result = $woocommerce->cart->remove_cart_item( $cart_item_key);
+        foreach ($woocommerce->cart->get_cart() as $cart_item_key => $cart_item) {
+            if ($cart_item['product_id'] == $cart_item_key || $cart_item['variation_id'] == $cart_item_key) {
+                $result = $woocommerce->cart->remove_cart_item($cart_item_key);
             }
         }
-   
+
         $result = $woocommerce->cart->remove_cart_item($cart_item_key);
         $ValorTotal = $woocommerce->cart->get_cart_total();
 
@@ -670,6 +729,34 @@ class SyEAjaxRequest
             ));
             die();
         }
+    }
+    public function add_product_to_favorites()
+    {
+        session_start();
+
+        $prodID = $_POST["prodid"];
+        $sessionName = "prodsfavs";
+
+        if (!isset($_SESSION[$sessionName]) || empty($_SESSION[$sessionName])) {
+            $prodsFavs = array($prodID);
+            $_SESSION[$sessionName] = $prodsFavs;
+        } else {
+            if (!in_array($prodID, $_SESSION[$sessionName])) {
+                $_SESSION[$sessionName][] = $prodID;
+            }
+        }
+
+        ob_start();
+        get_template_part("templates/components/mini", "favs");
+        $html = ob_get_clean();
+
+        header('Content-Type: application/json');
+        echo json_encode(array(
+            "html" => $html,
+            "counter" => count($_SESSION[$sessionName])
+        ));
+
+        wp_die();
     }
 
     function woocommerce_generate_order()
