@@ -1,5 +1,12 @@
 <?php
 get_header();
+                 
+                    $banners  = (new WP_Query(array(
+                        'post_type' => 'banner',
+                        'posts_per_page' => -1,
+                        
+                    )))->posts;
+                   
 ?>
 
 <section id="banner">
@@ -8,43 +15,25 @@ get_header();
       <div class="col-md-12 p-0">
         <div class="swiper banner">
           <div class="swiper-wrapper">
+            <?php foreach( $banners as $banner): ?>
             <div class="swiper-slide">
               <div class="container">
                 <div class="row">
                   <div class="col-lg-6 col-xxl-6 offset-xxl-1 info-banner" style="z-index: 3;">
                     <span>Some text here</span>
-                    <h1 class="section-title">Aprovecha nuestras ofertas</h1>
+                    <h1 class="section-title"><?= $banner->post_title ?></h1>
                     <p>The Two golden rules professional graphic designer don’t want you to know about.</p>
                     <a href="" class="quam-btn red">Ver ofertas</a>
                   </div>
                   <div class="col-md-4">
-                    <div class="img-fit">
-                      <img src="<?php bloginfo('template_url') ?>/media/images/banner-men.png" alt="">
+                    <div class="img-contain">
+                      <img src="<?= get_the_post_thumbnail_url($banner->ID)  ?>" title="<?= $banner->post_title ?>" alt="<?= $banner->post_title ?>">
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="swiper-slide">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-6 col-xxl-6 offset-xxl-1 info-banner" style="z-index: 3;">
-                    <h1 class="section-title">Lorem ipsum <b>dolor </b> sit amet</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                      nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                      volutpat.</p>
-                    <a href="" class="quam-btn red">Ver ofertas</a>
-                    <div class="col-md-4">
-                      <div class="img-fit">
-                        <img src="" alt="">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="swiper-pagination"></div> -->
+            <?php endforeach; ?>
           </div>
           <div class="swiperBanner-button-next"> <i class="icon-arrowlongline-right"></i> </div>
           <div class="swiperBanner-button-prev"> <i class="icon-arrowlongline-left"></i> </div>
@@ -53,7 +42,7 @@ get_header();
     </div>
 </section>
 
-<section id="categories" class="p-0">
+<section id="categories" class="p-0 overflow-hidden">
   <div class="container-fuid p-0">
     <div class="row center-all">
       <?php $categories = get_terms(array(
@@ -68,15 +57,15 @@ get_header();
       ?>
 
         <div class="col-md-4 p-0 position-relative">
-          <a href="<?= get_term_link($cat) ?>" class="card-categories">
-            <div class="img-fit">
-              <img src="<?= $thumbUrl ?>" alt="">
-            </div>
-            <a href="<?= get_term_link($cat) ?>" class="info-categories center-all flex-column">
+          <div class="card-categories d-flex position-relative">
+            <a href="<?= get_term_link($cat->term_id) ?>" class="img-fit w-100 h-100">
+              <img src="<?= $thumbUrl ?>" title="<?= $cat->name ?>" alt="<?= $cat->name ?>">
+            </a>
+            <a href="<?= get_term_link($cat->term_id) ?>" class="info-categories center-all flex-column position-absolute">
               <h5><?= $cat->name ?></h5>
               <div class="red">Ver colección</div>
             </a>
-          </a>
+          </div>
         </div>
 
       <?php endforeach; ?>

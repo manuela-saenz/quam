@@ -64,7 +64,7 @@ $attributes = $product->get_attributes();
             <div class="col-lg-6  information-product mt-4">
                 <div class="info-product">
 
-                    <div class="p-4 bg-white" id="box-draggable">
+                    <div class="p-4 bg-white">
                         <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
                         <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
                         <div class="d-flex justify-content-between">
@@ -138,11 +138,20 @@ $attributes = $product->get_attributes();
                                 </div>
                                 <a href="" class="quam-btn blue">Agregar a la bolsa</a>
                                 <button class="button-heart d-none d-lg-flex"> <i class="icon-heart"></i> </button>
+                        <div class="product-actions mb-md-5" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                            <div class="p-4 p-md-0">
+                                <?php
+                                global $product;
+                                if ($product->is_type('variable')) {
+                                    // $default_attributes = $product->get_default_attributes();
+                                    woocommerce_variable_add_to_cart();
+                                } else {
+                                    woocommerce_simple_add_to_cart();
+                                }
+                                ?>
                             </div>
                         </div>
 
-
-                        
 
                         <div class="share d-flex align-items-center">
                             <p class="m-0"> <b>Compartir: </b> </p>
@@ -156,6 +165,26 @@ $attributes = $product->get_attributes();
                     </div>
 
                 </div>
+
+                <div class="sm-floating-box d-md-none">
+                    <div id="box-draggable">
+                        <div class="p-4 bg-white">
+                            <div class="main-box">
+                                <h1 class="section-subtitle"><?= $post->post_title ?></h1>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div class="d-flex align-items-center price">
+                                        <p>$<?= $product->get_price() ?></p>
+                                        <span><?= $product->get_regular_price() ?> </span>
+                                    </div>
+                                    <button class="button-heart" type="button"> <i class="icon-heart"></i> </button>
+                                </div>
+                                <button class="quam-btn blue d-lg-none open-selector" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
