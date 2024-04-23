@@ -38,6 +38,8 @@ $(window).on("load resize", function () {
 })
 
 
+
+
 // <!------------------------ modal description single product ------------------------>//
 //  $('.product-actions').on('click', function () {
 //   $('.product-actions').toggleClass('show-bag')
@@ -104,7 +106,9 @@ function initQuantitySingle() {
 initQuantity();
 initQuantitySingle();
 
-$('.variation_id').on('change', function(){
+
+// obtener el id de la variante actual de producto y pasarlo al boton de  añadir a favoritos
+$('.variation_id').on('change', function () {
   $('.add-fav').attr('data-product-id', $(this).attr('value'))
 })
 
@@ -131,25 +135,33 @@ $('.open-selector').on('click', (event) => {
 
 const elemento = document.querySelector('#box-draggable');
 const mainBox = document.querySelector('.main-box');
-const wh = window.innerHeight - 250;
+const contenedorContenido = document.querySelector('.mobile-container');
+const mainBoxHeight = mainBox.offsetHeight + 48;
+const wh = window.innerHeight - (80 + mainBoxHeight);
 
+let contentScrollable = false;
 let inicioY = 0;
 let isUp = false;
-elemento.addEventListener('touchstart', iniciarToque, false);
-elemento.addEventListener('touchmove', moverToque, false);
-elemento.addEventListener('touchend', terminarToque, false);
+  elemento.addEventListener('touchstart', iniciarToque);
+  elemento.addEventListener('touchmove', moverToque);
+  elemento.addEventListener('touchend', terminarToque);
 
-elemento.style.marginTop = `-${mainBox.offsetHeight + 48}px`;
 
+elemento.style.marginTop = `-${mainBoxHeight}px`;
 
 function positionDownIdentifier(deltaY) {
   if (deltaY <= -30) {
     elemento.style.transform = `translateY(-${wh}px)`;
     isUp = true;
+    setTimeout(() => {
+      contentScrollable = true;
+      console.log('scroll')
+    }, 200)
   } else {
     isUp = false;
     elemento.style.transform = `translateY(0px)`;
   }
+
 }
 
 function positionTopIdentifier(deltaY) {
@@ -159,19 +171,13 @@ function positionTopIdentifier(deltaY) {
   } else {
     isUp = true;
     elemento.style.transform = `translateY(-${wh}px)`;
-   
   }
+
 }
 
 function iniciarToque(evento) {
-  console.log(evento)
   const toque = evento.touches[0];
   inicioY = toque.clientY;
-  if (position) {
-    console.log('toque arriba hacia abajo', inicioY)
-  } else {
-    console.log('toque abajo hacia arriba:', inicioY)
-  }
 }
 
 function moverToque(evento) {
@@ -183,6 +189,7 @@ function moverToque(evento) {
   } else {
     elemento.style.transform = `translateY(${movingDeltaY}px)`;
   }
+
 }
 
 function terminarToque(evento) {
@@ -191,7 +198,16 @@ function terminarToque(evento) {
   if (isUp) {
     positionTopIdentifier(deltaY);
   } else {
-     positionDownIdentifier(deltaY);
+    positionDownIdentifier(deltaY);
+  }
+  if (contentScrollable) {
+    console.log('El contenido es desplazable.');
+    // Deshabilitar los listeners de eventos táctiles
+    elemento.removeEventListener('touchstart', iniciarToque);
+    elemento.removeEventListener('touchmove', moverToque);
+    elemento.removeEventListener('touchend', terminarToque);
+  } else {
+    console.log('El contenido no es desplazable.');
   }
 }
 

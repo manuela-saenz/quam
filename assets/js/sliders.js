@@ -197,7 +197,11 @@ var swiper = new Swiper(".SingProducts", {
     // desplazamiento hacia abajo cuando haga scroll en el ultimo slide
     $(mySwiper.el).on('wheel', function (e) {
         if (allowScroll) {
-          $(window).scrollTop(e.originalEvent.screenY)
+          if(e.originalEvent.screenY <= 0){
+            $(window).scrollTop(e.originalEvent.screenY * -1)
+          } else {
+            $(window).scrollTop(e.originalEvent.screenY)
+          }
         }
     })
 
