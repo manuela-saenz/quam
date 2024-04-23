@@ -59,6 +59,7 @@ class SyEAjaxRequest
 
         // Check if the product exists
         $product = wc_get_product($prodID);
+     
 
         if (!$product) {
             echo json_encode(array(
@@ -76,10 +77,10 @@ class SyEAjaxRequest
             ));
             die();
         }
-
+   
         // Add the product to the cart
         $result = $woocommerce->cart->add_to_cart($prodID, $quantity);
-
+    
         $totalItemsProduct = $woocommerce->cart->get_cart_item($result)["quantity"];
         $PrecioProducto = $woocommerce->cart->get_cart_item($result)["data"]->get_price();
         $TotalProduct = $totalItemsProduct * $PrecioProducto;
@@ -92,9 +93,9 @@ class SyEAjaxRequest
         ItemsCart();
         $itemsCart = ob_get_clean();
 
-        ob_start();
-        trItemsCart();
-        $anotherOutput = ob_get_clean();
+        // ob_start();
+        // trItemsCart();
+        // $anotherOutput = ob_get_clean();
 
         $search = array(
             '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
@@ -110,13 +111,13 @@ class SyEAjaxRequest
         );
 
         $buffer = preg_replace($search, $replace, $itemsCart);
-        $buffer2 = preg_replace($search, $replace, $anotherOutput);
+        // $buffer2 = preg_replace($search, $replace, $anotherOutput);
 
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
             "html" => $buffer,
-            "ordenList" => $buffer2,
+            // "ordenList" => $buffer2,
             "total" => $ValorTotal,
             "quantity" => count($woocommerce->cart->get_cart()),
             "totalProducto" => $formatoColombiano
@@ -210,24 +211,29 @@ class SyEAjaxRequest
     {
         global $woocommerce;
         $cart_item_key = $_POST["cart_item_key"];
+        $result = false;
+        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $cart_item ) {
+            if ($cart_item['product_id'] == $cart_item_key|| $cart_item['variation_id'] == $cart_item_key) {
+                $result = $woocommerce->cart->remove_cart_item( $cart_item_key);
+            }
+        }
+   
         $result = $woocommerce->cart->remove_cart_item($cart_item_key);
-
         $ValorTotal = $woocommerce->cart->get_cart_total();
-
 
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
 
-        ob_start();
-        trItemsCart();
-        $anotherOutput = ob_get_clean();
+        // ob_start();
+        // trItemsCart();
+        // $anotherOutput = ob_get_clean();
 
 
-        if (empty($woocommerce->cart->get_cart())) {
-            $itemsCart = '<span class="px-2 p-4 rounded border center-all text-center" id="emtycard" >Aún no has agregado productos a tu orden</span>';
-            $anotherOutput = '<span class="px-2 p-4 rounded border center-all text-center" id="emtycard" >Aún no has agregado productos a tu orden</span>';
-        }
+        // if (empty($woocommerce->cart->get_cart())) {
+        //     $itemsCart = '<span class="px-2 p-4 rounded border center-all text-center" id="emtycard" >Aún no has agregado productos a tu orden</span>';
+        //     $anotherOutput = '<span class="px-2 p-4 rounded border center-all text-center" id="emtycard" >Aún no has agregado productos a tu orden</span>';
+        // }
 
 
         $search = array(
@@ -244,13 +250,13 @@ class SyEAjaxRequest
         );
 
         $buffer = preg_replace($search, $replace, $itemsCart);
-        $buffer2 = preg_replace($search, $replace, $anotherOutput);
+        // $buffer2 = preg_replace($search, $replace, $anotherOutput);
 
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
             "html" => $buffer,
-            "ordenList" => $buffer2,
+            // "ordenList" => $buffer,
             "total" => $ValorTotal,
             "quantity" => count($woocommerce->cart->get_cart())
         ));

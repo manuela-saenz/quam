@@ -113,6 +113,7 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?=v<?= randomCode() ?>"> </script>
+<script src="<?php bloginfo('template_url') ?>/assets/js/variation.js?=v<?= randomCode() ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js"> </script>
 <?php if (is_page(78)) { ?>
   <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>

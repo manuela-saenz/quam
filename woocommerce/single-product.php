@@ -90,11 +90,11 @@ $attributes = $product->get_attributes();
                             }
                             ?>
 
-                            <div class="d-flex">
+                            <div class="d-flex" hidden>
                                 <strong>Color:</strong>
                                 <p class="mb-0 color-name"></p>
                             </div>
-                            <div class="variant-item">
+                            <div class="variant-item" hidden>
                                 <div class="product-var">
                                     <input type="radio" id="negro" name="varcolor" style="background: #1C1C1C;">
                                     <label for="negro" class="var-content"></label>
@@ -109,7 +109,7 @@ $attributes = $product->get_attributes();
                                 </div>
 
                             </div>
-                            <div class="product-feature">
+                            <div class="product-feature" hidden>
                                 <div class="d-flex">
                                     <strong>Talla:</strong>
                                 </div>
@@ -130,7 +130,7 @@ $attributes = $product->get_attributes();
                                 </div>
 
                             </div>
-                            <div class=" d-flex align-items-center ">
+                            <div class=" d-flex align-items-center " hidden>
                                 <div class='quantity'>
                                     <button class='qtyminus minus'><i class="icon-minus"></i></button>
                                     <input type='text' id="singleProductQuantity" name='quantity' value='1' class='qtySingle' />
@@ -142,7 +142,7 @@ $attributes = $product->get_attributes();
                         </div>
 
 
-                        +
+                        
 
                         <div class="share d-flex align-items-center">
                             <p class="m-0"> <b>Compartir: </b> </p>
