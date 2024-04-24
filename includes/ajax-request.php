@@ -16,6 +16,10 @@ require_once(get_template_directory() . '/functions.php');
 // ini_set('log_errors', 0);
 // error_reporting(E_ALL);
 
+if (session_status() === PHP_SESSION_NONE) {
+	session_start();
+}
+
 class SyEAjaxRequest
 {
     private $woocomerce;
@@ -126,7 +130,7 @@ class SyEAjaxRequest
             "totalProducto" => $formatoColombiano
         ));
 
-        die();
+        wp_die();
     }
 
     function woocommerce_ajax_add_to_cart_remplace_qty()
@@ -264,38 +268,33 @@ class SyEAjaxRequest
             "totalProducto" => $formatoColombiano
         ));
 
-        die();
+        wp_die();
     }
 
 
     function woocommerce_remove_cart_item()
     {
         global $woocommerce;
-        $cart_item_key = $_POST["cart_item_key"];
-        $result = false;
-        foreach ($woocommerce->cart->get_cart() as $cart_item_key => $cart_item) {
-            if ($cart_item['product_id'] == $cart_item_key || $cart_item['variation_id'] == $cart_item_key) {
-                $result = $woocommerce->cart->remove_cart_item($cart_item_key);
+        $cart_variation_key = $_POST["cart_item_key"];
+        $cart_product_key = $_POST["product_id"];
+       
+        foreach ($woocommerce->cart->get_cart() as $key => $cart_item) {
+            if ($cart_item['variation_id'] == $cart_variation_key) {
+                unset($woocommerce->cart->cart_contents[$key]);
+                $woocommerce->cart->calculate_totals();
+                break;
             }
         }
+      
+        if ($cart_variation_key === 0) {
+            $woocommerce->cart->remove_cart_item($cart_product_key);
+        }
 
-        $result = $woocommerce->cart->remove_cart_item($cart_item_key);
         $ValorTotal = $woocommerce->cart->get_cart_total();
 
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
-
-        // ob_start();
-        // trItemsCart();
-        // $anotherOutput = ob_get_clean();
-
-
-        // if (empty($woocommerce->cart->get_cart())) {
-        //     $itemsCart = '<span class="px-2 p-4 rounded border center-all text-center" id="emtycard" >Aún no has agregado productos a tu orden</span>';
-        //     $anotherOutput = '<span class="px-2 p-4 rounded border center-all text-center" id="emtycard" >Aún no has agregado productos a tu orden</span>';
-        // }
-
 
         $search = array(
             '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
@@ -311,8 +310,7 @@ class SyEAjaxRequest
         );
 
         $buffer = preg_replace($search, $replace, $itemsCart);
-        // $buffer2 = preg_replace($search, $replace, $anotherOutput);
-
+       
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
@@ -322,7 +320,7 @@ class SyEAjaxRequest
             "quantity" => count($woocommerce->cart->get_cart())
         ));
 
-        die();
+        wp_die();
     }
 
     function woocommerce_remove_cart_item_qty()
@@ -746,7 +744,7 @@ class SyEAjaxRequest
                 $_SESSION[$sessionName][] = $prodID;
             }
         }
-        
+
         ob_start();
         get_template_part("templates/components/mini", "favs");
         $html = ob_get_clean();

@@ -11,37 +11,17 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
 
     var form = $(this);
-    var productVariations = form.data("product_variations");
-    var color = $("select#pa_color").val();
-    var talla = $("select#pa_talla").val();
-    var data = {};
+
+    var productId = $(".variation_id").val();
+    productId = (productId == undefined || productId == 0) ? $("[name='add-to-cart']")[0].value : productId;
+
     var quantity = form.find("input.input-text.qty.text").val();
+    var data = {
+      action: "woocommerce_ajax_add_to_cart",
+      product_id: productId,
+      quantity: quantity,
+    };
 
-    if (productVariations === undefined || productVariations.length === 0) {
-      var submitValue = $(
-        ".single_add_to_cart_button.quam-btn.blue.button.alt"
-      ).val();
-      data = {
-        action: "woocommerce_ajax_add_to_cart",
-        product_id: submitValue,
-        quantity: quantity,
-      };
-    } else {
-      productVariations.forEach((variation) => {
-        if (
-          variation.attributes.attribute_pa_color === color &&
-          variation.attributes.attribute_pa_talla === talla
-        ) {
-          data = {
-            action: "woocommerce_ajax_add_to_cart",
-            product_id: variation.variation_id,
-            quantity: quantity,
-          };
-        }
-      });
-    }
-
-    console.log(data);
     $.ajax({
       type: "POST",
       url: ajaxUrl,
@@ -49,14 +29,9 @@ jQuery(document).ready(function ($) {
       success: function (response) {
         var res = JSON.parse(response);
         if (res.status === "success") {
-          // updateCartContents(res);
-          document
-            .querySelector(".offcanvas.offcanvas-end.shopping-bag-offcanvas")
-            .classList.add("show");
           $(".ordenList").html(res.html);
           var totalString = res.total;
           var value = getTotalValue(totalString);
-
           $("#subtotal, #total").html("$" + value);
         }
       },
@@ -75,10 +50,11 @@ function updateCartContents(succes) {
   }
 }
 
-function trashItem(id) {
+function trashItem(id, idVariant) {
   var data = {
     action: "woocommerce_remove_cart_item",
-    cart_item_key: id,
+    cart_item_key: idVariant,
+    product_id: id,
   };
 
   $.ajax({
@@ -89,7 +65,6 @@ function trashItem(id) {
       var res = JSON.parse(response);
       if (res.status === "success") {
         updateCartContents(res);
-        console.log(res);
       } else {
         alert("Hubo un problema al eliminar el producto del carrito.");
       }
@@ -102,7 +77,8 @@ function trashItem(id) {
 
 $(document).on("click", ".remove", function () {
   var id = $(this).data("id");
-  trashItem(id);
+  var idVariant = $(this).data("variant");
+  trashItem(id, idVariant);
 });
 
 function updatePriceTimeReal() {
@@ -165,7 +141,7 @@ $(document).on("click", ".qtyminus, .qtyplus", function () {
     total += price;
   });
 
-  var formattedTotal = total.toLocaleString('es-CO');
+  var formattedTotal = total.toLocaleString("es-CO");
   $("#subtotal, #total").html("$" + formattedTotal);
 
   clickTimeout = setTimeout(function () {
@@ -207,6 +183,7 @@ function initAddToFavoriteButton() {
     e.preventDefault();
 
     var prodid = $(this).data("product-id");
+    console.log(prodid);
     var sessionName = "prodsfavs";
 
     var loaderContainer = $("#prodSingleLoader_" + prodid);
