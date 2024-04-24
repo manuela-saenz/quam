@@ -100,9 +100,6 @@ if ($attachment_ids) {
                         <div>
                             <p> <?= $product->get_short_description() ?></p>
                         </div>
-                        <?php 
-                        woocommerce_cross_sell_display()
-                         ?>
                         <div class="product-actions mb-md-5" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                             <div class="p-4 p-md-0">
                                 <?php

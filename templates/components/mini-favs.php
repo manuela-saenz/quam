@@ -10,23 +10,30 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
     ));
     foreach ($prodsFavQuery->posts as $prod) :
       $wcProd = wc_get_product($prod);
-    ?>
-      <li class="favorito-item">
-        <a href="<?= esc_url(get_permalink($prod)) ?>" class="favorito-info">
-          <div class="favorito-img img-fit">
-            <img src="<?= get_the_post_thumbnail_url($prod, "thumbnail") ?>" alt="">
-          </div>
-          <div>
-            <h4><?= $prod->post_title ?></h4>
-            <span><?= theonem_get_formatted_price($wcProd->get_price())  ?></span>
-          </div>
-        </a>
-        <button class="borrar-favorito" data-prodid="<?= $prod->ID ?>"><i class="icon-trash"></i></button>
-      </li>
-    <?php endforeach; ?>
+      ?>
+        <!-- <pre style="height:400px; width:200px">
+        <?php print_r( $wcProd) ?>
+      </pre> -->
+      <?php
+      productCardSmall($wcProd, true);
+    endforeach; ?>
   </ul>
 <?php else : ?>
   <div class="no-favs-products">
     <h3>No tienes productos favoritos</h3>
   </div>
 <?php endif; ?>
+
+
+<!-- <li class="favorito-item">
+        <a href="<?php // esc_url(get_permalink($prod)) ?>" class="favorito-info">
+          <div class="favorito-img img-fit">
+            <img src="<?php // get_the_post_thumbnail_url($prod, "thumbnail") ?>" alt="">
+          </div>
+          <div>
+            <h4><?php // $prod->post_title ?></h4>
+            <span><?php // theonem_get_formatted_price($wcProd->get_price())  ?></span>
+          </div>
+        </a>
+        <button class="borrar-favorito" data-prodid="<?php // $prod->ID ?>"><i class="icon-trash"></i></button>
+      </li> -->

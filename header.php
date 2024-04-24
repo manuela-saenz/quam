@@ -99,7 +99,6 @@
 
                   <div class="icon-media d-flex">
                     <a href="" target="_blank"><i class="icon-heart"></i></a>
-                    <!-- <a href="" target="_blank"><i class="icon-shopping-bag"></i></a> -->
                     <a href="" target="_blank"><i class="icon-user"></i></a>
                   </div>
                 </div>
@@ -112,17 +111,14 @@
               </div>
 
               <div class="icon-media">
-                <a href="" target="_blank"><i class="icon-heart"></i></a>
+                <button data-bs-toggle="offcanvas" data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i></button>
                 <div class="favoritos-contenedor">
                   <div class="favoritos-headline">
                     <span>Mis Productos favoritos</span> <button class="boton-cerrar-favoritos">✕</button>
                   </div>
-                  <div id="favoritesPanelHead">
-                    <?php get_template_part("templates/components/mini", "favs") ?>
-                  </div>
+                  
                 </div>
-                <!-- <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/"><i class="icon-shopping-bag"></i></a> -->
-                <button class="" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="icon-shopping-bag"></i></button>
+                <button type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito"><i class="icon-shopping-bag"></i></button>
                 <a href="" target="_blank"><i class="icon-user"></i></a>
               </div>
 
@@ -147,31 +143,9 @@
 
   </header>
 
-  <div class="offcanvas offcanvas-end shopping-bag-offcanvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasRightLabel">Bolsa de la compra</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body ordenList">
-      <?php ItemsCart(); ?>
-    </div>
-    <div class="offcanvas-footer">
-      <?php
-      $total = WC()->cart->get_cart_total();
-      ?>
-      <div class="">
-        <div class="d-flex justify-content-between mb-2">
-          <p class="fs-6"> Subtotal</p>
-          <p class="fs-6" id="subtotal"><?php echo $total; ?></p>
-        </div>
-        <div class="d-flex justify-content-between mb-2">
-          <p class="fs-4"> <b>Total</b> </p>
-          <p class="fs-4"> <b id="total"><?php echo $total; ?></b> </p>
-        </div>
-      </div>
-      <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/" class="quam-btn blue w-100">Finalizar compra</a>
-    </div>
-  </div>
+<?php desplegableProductos("Bolsa de la compra", "mini-carrito") ?>
+
+<?php desplegableProductos("Mis favoritos", "mini-favoritos") ?>
 
 
   <main>
