@@ -18,6 +18,10 @@ body {
         height: calc(100vh - 150px);
       }
     }
+    .shopping-bag-offcanvas{
+      top: 32px;
+      height: calc(100vh - 32px);
+    }
   }
 }
 

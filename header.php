@@ -110,16 +110,14 @@
               <div class="position-relative"> <input type="text" placeholder="Buscar"> <i class="icon-search"></i>
               </div>
 
-              <div class="icon-media">
-                <button data-bs-toggle="offcanvas" data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i></button>
-                <div class="favoritos-contenedor">
-                  <div class="favoritos-headline">
-                    <span>Mis Productos favoritos</span> <button class="boton-cerrar-favoritos">✕</button>
-                  </div>
-                  
-                </div>
-                <button type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito"><i class="icon-shopping-bag"></i></button>
-                <a href="" target="_blank"><i class="icon-user"></i></a>
+              <div class="header-actions">
+                <button class="position-relative btn p-0 " data-bs-toggle="offcanvas" data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i>
+                  <span id="favoritesCounter" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= !empty($_SESSION["prodsfavs"]) ? count($_SESSION["prodsfavs"]) : 0 ?>
+                  </span></button>
+
+                <button class="position-relative btn p-0 " type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito"><i class="icon-shopping-bag"></i><span id="favoritesCounter" class="cart-section-quantity rounded-pill position-absolute center-all text-white">2
+                  </span></button>
+                <button type="button"><i class="icon-user"></i></button>
               </div>
 
             </div>
@@ -143,9 +141,9 @@
 
   </header>
 
-<?php desplegableProductos("Bolsa de la compra", "mini-carrito") ?>
+  <?php desplegableProductos("Bolsa de la compra", "mini-carrito") ?>
 
-<?php desplegableProductos("Mis favoritos", "mini-favoritos") ?>
+  <?php desplegableProductos("Mis favoritos", "mini-favoritos") ?>
 
 
   <main>

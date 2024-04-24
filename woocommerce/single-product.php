@@ -135,7 +135,7 @@ if ($attachment_ids) {
 <div class="sm-floating-box ">
     <div id="box-draggable">
         <div class="p-4 bg-white mobile-container">
-            <div class="main-box d-md-none">
+            <div class="main-box d-md-none mb-4">
                 <div class="d-flex justify-content-between mb-2">
                     <div class="">
                         <h1 class="section-subtitle mb-1"><?= $post->post_title ?></h1>

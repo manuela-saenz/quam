@@ -163,11 +163,12 @@ function scrollEnable() {
           contentScrollable = true;
         }
       }, 200)
-      console.log('start:', e.currentTarget.scrollTop, contentScrollable)
+      // console.log('start:', e.currentTarget.scrollTop, contentScrollable)
 
     })
 
   } else {
+    $('.mobile-container').off('touchmove');
     elemento.removeEventListener('touchstart', iniciarToque, false);
     elemento.removeEventListener('touchmove', moverToque, false);
     elemento.removeEventListener('touchend', terminarToque, false);
@@ -208,6 +209,10 @@ function moverToque(evento) {
   evento.preventDefault();
   const toque = evento.touches[0];
   const movingDeltaY = toque.clientY - inicioY;
+  console.log(movingDeltaY)
+  // if(movingDeltaY >= 0){
+  //   isUp = false
+  // }
   if (isUp) {
     elemento.style.transform = `translateY(${movingDeltaY + wh * -1}px)`;
   } else {
@@ -235,9 +240,9 @@ function terminarToque(evento) {
     console.log('El contenido no es desplazable.');
   }
   scrollEnable()
-  
+
   console.log(contentScrollable, 'terminarToque')
- 
+
 }
 
 

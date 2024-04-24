@@ -7,7 +7,7 @@ header {
   top: 0;
   transition: all 0.2s;
   // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
+  
   .header-contact {
     background: $dark_blue;
     color: $white;
@@ -413,12 +413,14 @@ header {
   }
 
   &.sticky-header {
-    .header-contact, .info-contact {
+    .header-contact,
+    .info-contact {
       transition: all 0.3s;
       position: relative;
     }
-    @media (min-width:768px){
-      .header-contact, .info-contact {
+    @media (min-width: 768px) {
+      .header-contact,
+      .info-contact {
         top: -50px;
       }
     }
@@ -486,11 +488,19 @@ header {
       color: black;
     }
 
-    .icon-media {
+    .header-actions {
       padding: 0 20px;
       display: flex;
       gap: 20px;
-
+      .cart-section-quantity{
+        padding-bottom: 2px;
+        top: -8px;
+        width: 20px;
+        aspect-ratio: 1;
+        right: -6px;
+        line-height: 0;
+        background: $red;
+      }
       i {
         font-size: 21px;
         margin-right: 7px;
@@ -534,14 +544,10 @@ header {
 
 .shopping-bag-offcanvas {
   .btn-close {
-    left: 10px;
-    position: absolute;
-    top: 30px;
-    --bs-btn-close-opacity: 1;
+   
   }
 
   .offcanvas-title {
-    margin-top: 60px;
     font-weight: 700;
     font-size: 26px;
   }
