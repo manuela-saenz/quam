@@ -157,6 +157,17 @@ $(document).on("click", ".qtyminus, .qtyplus", function () {
   }
   $(".quam-btn").prop("disabled", true);
 
+  var total = 0;
+
+  $(".select-bag.d-flex.bg-white").each(function () {
+    var priceElement = $(this).find(".d-flex.align-items-center.price p#price");
+    var price = parseFloat(priceElement[0].innerText.replace(/[^0-9\.]/g, "")); // Esto elimina cualquier carácter que no sea un número o un punto
+    total += price;
+  });
+
+  var formattedTotal = total.toLocaleString('es-CO');
+  $("#subtotal, #total").html("$" + formattedTotal);
+
   clickTimeout = setTimeout(function () {
     var finalQuantity = quantityInput.val();
     var trashCart = container.find("#trash_cart");
@@ -178,9 +189,8 @@ $(document).on("click", ".qtyminus, .qtyplus", function () {
         if (res.status === "success") {
           var totalString = res.total;
           var value = getTotalValue(totalString);
-          console.log(value);
           $(".quam-btn").prop("disabled", false);
-          $("#subtotal, #total").html("$" + value);
+          console.log(value);
         } else {
           alert("Hubo un problema al actualizar la cantidad del producto.");
         }
@@ -189,7 +199,7 @@ $(document).on("click", ".qtyminus, .qtyplus", function () {
         alert("Hubo un error con la solicitud AJAX.");
       },
     });
-  }, 1000);
+  }, 500);
 });
 
 function initAddToFavoriteButton() {
@@ -215,7 +225,7 @@ function initAddToFavoriteButton() {
       method: "POST",
       data: {
         action: "add_product_to_favorites",
-        prodid: prodid
+        prodid: prodid,
       },
       success: function (res) {
         loaderContainer.addClass("hide-loader");
