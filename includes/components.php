@@ -62,9 +62,9 @@ function desplegableProductos($titulo, $tipoDeLista)
 {
   ?>
   <div class="offcanvas offcanvas-end shopping-bag-offcanvas" tabindex="-1" id="<?= $tipoDeLista ?>" aria-labelledby="<?= $tipoDeLista ?>-label">
-    <div class="offcanvas-header">
+    <div class="offcanvas-header center-vertical justify-content-start border-bottom border-light">
+      <button type="button" class="btn-close me-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       <h5 class="offcanvas-title" id="<?= $tipoDeLista ?>-label"><?= $titulo ?></h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
 
     <?php if ($tipoDeLista == 'mini-carrito') { ?>
@@ -91,7 +91,7 @@ function desplegableProductos($titulo, $tipoDeLista)
       <div class="offcanvas-body ordenList">
         <?php get_template_part("templates/components/mini", "favs") ?>
       </div>
-      <button class="quam-btn blue w-100">Pasar a carrito</button>
+      <!-- <button class="quam-btn blue w-100">Pasar a carrito</button> -->
     <?php } ?>
   </div>
 
