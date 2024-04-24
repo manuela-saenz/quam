@@ -186,7 +186,6 @@ var swiper = new Swiper(".SingProducts", {
           if (mySwiper.activeIndex === ($('.SingProducts2 .swiper-wrapper>div').length - 1)) {
             setTimeout(() => {
               allowScroll = true;
-              console.log('funciona')
             }, 100)
           }
         },
@@ -197,14 +196,24 @@ var swiper = new Swiper(".SingProducts", {
     // desplazamiento hacia abajo cuando haga scroll en el ultimo slide
     $(mySwiper.el).on('wheel', function (e) {
         if (allowScroll) {
-          if(e.originalEvent.screenY <= 0){
-            $(window).scrollTop(e.originalEvent.screenY * -1)
+           // si se desplaza hacia abajo cuando este parado sobre el ultimo slide
+          if(e.originalEvent.deltaY >= 0){
+            let valueToScroll = (($(window).height() - e.originalEvent.screenY )  + 100);
+            // si el valor que retorna screenY es negativo
+            if(e.originalEvent.screenY <= 0){
+              valueToScroll = e.originalEvent.screenY * -1;
+            } 
+            mySwiper.allowSlidePrev = false;
+            $(window).scrollTop(valueToScroll)
           } else {
-            $(window).scrollTop(e.originalEvent.screenY)
+            if($(window).scrollTop() > 0){
+              $(window).scrollTop(0)
+              mySwiper.allowSlidePrev = false;
+            } 
+            mySwiper.allowSlidePrev = true;
           }
         }
     })
-
   };
 
 

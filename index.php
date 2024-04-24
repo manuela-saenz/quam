@@ -53,7 +53,7 @@ get_header();
       ));
       foreach ($categories as $cat) :
         $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
-        $thumbUrl = wp_get_attachment_image_url($thumbnail_id, "medium");
+        $thumbUrl = wp_get_attachment_image_url($thumbnail_id, "large");
       ?>
 
         <div class="col-md-4 p-0 position-relative">

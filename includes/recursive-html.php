@@ -61,9 +61,7 @@ function ItemsCart()
 <?php
     }
 }
-?>
 
-<?php
 function ItemsCheckout()
 {
     $items = WC()->cart->get_cart();
@@ -142,9 +140,7 @@ function ItemsCheckout()
 <?php
     }
 }
-?>
 
-<?php
 function ItemsSummary()
 {
     $items = WC()->cart->get_cart();

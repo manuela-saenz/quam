@@ -6,16 +6,15 @@ $product = wc_get_product($post);
 $terms = get_the_terms($post->ID, 'product_cat');
 $produts_use = get_the_terms($post->ID, 'product_tag');
 
-// echo '<pre>';
-//  print_r($product);
-//  echo '<pre>';
 $attachment_ids = $product->get_gallery_image_ids();
-foreach ($attachment_ids as $attachment_id) {
-    $images[] = wp_get_attachment_image_url($attachment_id, "large");
-};
+
 
 $attributes = $product->get_attributes();
-
+if ($attachment_ids) {
+    foreach ($attachment_ids as $attachment_id) {
+        $images[] = wp_get_attachment_image_url($attachment_id, "large");
+    };
+}
 
 // echo '<pre>';
 // print_r($product);
@@ -29,29 +28,51 @@ $attributes = $product->get_attributes();
     <div class="container">
         <div class="row">
             <div class="col-lg-1 imgP">
+
                 <div thumbsSlider="" class="swiper SingProducts mt-4">
                     <div class="swiper-wrapper">
-                        <?php foreach ($images as $img) : ?>
+                        <?php
+                        if ($attachment_ids) {
+                            foreach ($images as $img) : ?>
+                                <div class="swiper-slide">
+                                    <div class="img-fit">
+                                        <img src="<?= $img ?>" />
+                                    </div>
+
+                                </div>
+                            <?php endforeach;
+                        } else {
+                            ?>
                             <div class="swiper-slide">
                                 <div class="img-fit">
-                                    <img src="<?= $img ?>" />
+                                    <img src="<?= get_the_post_thumbnail_url() ?>" alt="<?= $post->post_title ?>" />
                                 </div>
-
                             </div>
-                        <?php endforeach; ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5 gallery">
                 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper SingProducts2">
                     <div class="swiper-wrapper">
-                        <?php foreach ($images as $img) : ?>
+                    <?php
+                        if ($attachment_ids) {
+                            foreach ($images as $img) : ?>
+                                <div class="swiper-slide">
+                                    <div class="img-fit">
+                                        <img src="<?= $img ?>"  alt="<?= $post->post_title ?>" />
+                                    </div>
+
+                                </div>
+                            <?php endforeach;
+                        } else {
+                            ?>
                             <div class="swiper-slide">
                                 <div class="img-fit">
-                                    <img src="<?= $img ?>" />
+                                    <img src="<?= get_the_post_thumbnail_url() ?>" alt="<?= $post->post_title ?>" />
                                 </div>
                             </div>
-                        <?php endforeach; ?>
+                        <?php } ?>
 
                     </div>
                     <div class="SingProducts-button-next"></div>
@@ -64,7 +85,7 @@ $attributes = $product->get_attributes();
             <div class="col-lg-6  information-product mt-4">
                 <div class="info-product">
 
-                    <div class="p-4 bg-white">
+                    <div class="p-4 bg-white d-none d-md-block">
                         <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
                         <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
                         <div class="d-flex justify-content-between">
@@ -79,6 +100,9 @@ $attributes = $product->get_attributes();
                         <div>
                             <p> <?= $product->get_short_description() ?></p>
                         </div>
+                        <?php 
+                        woocommerce_cross_sell_display()
+                         ?>
                         <div class="product-actions mb-md-5" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                             <div class="p-4 p-md-0">
                                 <?php
@@ -112,18 +136,23 @@ $attributes = $product->get_attributes();
 </section>
 
 <div class="sm-floating-box ">
-    <div id="box-draggable" class="d-md-none">
+    <div id="box-draggable">
         <div class="p-4 bg-white mobile-container">
-            <div class="main-box">
-                <h1 class="section-subtitle"><?= $post->post_title ?></h1>
-                <div class="d-flex justify-content-between mb-3">
-                    <div class="d-flex align-items-center price">
-                        <p>$<?= $product->get_price() ?></p>
-                        <span><?= $product->get_regular_price() ?> </span>
+            <div class="main-box d-md-none">
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="">
+                        <h1 class="section-subtitle mb-1"><?= $post->post_title ?></h1>
+                        <div class="d-flex align-items-center price">
+                            <p class="mb-0">$<?= $product->get_price() ?></p>
+                            <span><?= $product->get_regular_price() ?> </span>
+                        </div>
                     </div>
                     <button class="button-heart" type="button"> <i class="icon-heart"></i> </button>
                 </div>
-                <button class="quam-btn blue d-lg-none open-selector w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
+                <button class="quam-btn blue d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
+            </div>
+            <div class="d-md-none">
+                <p> <?= $product->get_short_description() ?></p>
             </div>
             <section class="characteristics">
                 <div class="container p-0">

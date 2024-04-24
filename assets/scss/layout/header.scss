@@ -53,10 +53,9 @@ header {
       filter: grayscale(1);
       width: 100%;
       height: 20px;
-
-      @media (max-width: 520px) {
-        width: 165px;
-      }
+    }
+    @media (max-width: 768px) {
+      display: none;
     }
   }
 
@@ -414,16 +413,14 @@ header {
   }
 
   &.sticky-header {
-    .header-contact {
-      top: -50px;
+    .header-contact, .info-contact {
       transition: all 0.3s;
       position: relative;
     }
-
-    .info-contact {
-      top: -50px;
-      transition: all 0.3s;
-      position: relative;
+    @media (min-width:768px){
+      .header-contact, .info-contact {
+        top: -50px;
+      }
     }
 
     .info-contact {

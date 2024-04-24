@@ -107,9 +107,9 @@ initQuantity();
 initQuantitySingle();
 
 
-// obtener el id de la variante actual de producto y pasarlo al boton de  añadir a favoritos
+// obtener el id de la variante actual de producto y pasarlo al boton de  añadir a favoritos-carrito
 $('.variation_id').on('change', function () {
-  $('.add-fav').attr('data-product-id', $(this).attr('value'))
+  $('.add-fav , .single_add_to_cart_button').attr('data-product-id', $(this).attr('value'))
 })
 
 // -------- quitar productos del  carrito-----------
@@ -142,9 +142,37 @@ const wh = window.innerHeight - (80 + mainBoxHeight);
 let contentScrollable = false;
 let inicioY = 0;
 let isUp = false;
-  elemento.addEventListener('touchstart', iniciarToque);
-  elemento.addEventListener('touchmove', moverToque);
-  elemento.addEventListener('touchend', terminarToque);
+if (!contentScrollable) {
+  elemento.addEventListener('touchstart', iniciarToque, false);
+  elemento.addEventListener('touchmove', moverToque, false);
+  elemento.addEventListener('touchend', terminarToque, false);
+}
+// $('.mobile-container').scrollTop(2)
+
+
+function scrollEnable() {
+  if (contentScrollable) {
+    $('.mobile-container').on('touchmove', function (e) {
+      setTimeout(() => {
+        if (e.currentTarget.scrollTop <= 0) {
+          contentScrollable = false;
+          elemento.addEventListener('touchstart', iniciarToque, false);
+          elemento.addEventListener('touchmove', moverToque, false);
+          elemento.addEventListener('touchend', terminarToque, false);
+        } else {
+          contentScrollable = true;
+        }
+      }, 200)
+      console.log('start:', e.currentTarget.scrollTop, contentScrollable)
+
+    })
+
+  } else {
+    elemento.removeEventListener('touchstart', iniciarToque, false);
+    elemento.removeEventListener('touchmove', moverToque, false);
+    elemento.removeEventListener('touchend', terminarToque, false);
+  }
+}
 
 
 elemento.style.marginTop = `-${mainBoxHeight}px`;
@@ -153,10 +181,7 @@ function positionDownIdentifier(deltaY) {
   if (deltaY <= -30) {
     elemento.style.transform = `translateY(-${wh}px)`;
     isUp = true;
-    setTimeout(() => {
-      contentScrollable = true;
-      console.log('scroll')
-    }, 200)
+    contentScrollable = true;
   } else {
     isUp = false;
     elemento.style.transform = `translateY(0px)`;
@@ -172,7 +197,6 @@ function positionTopIdentifier(deltaY) {
     isUp = true;
     elemento.style.transform = `translateY(-${wh}px)`;
   }
-
 }
 
 function iniciarToque(evento) {
@@ -207,12 +231,13 @@ function terminarToque(evento) {
     elemento.removeEventListener('touchmove', moverToque);
     elemento.removeEventListener('touchend', terminarToque);
   } else {
+    contentScrollable = false;
     console.log('El contenido no es desplazable.');
   }
+  scrollEnable()
+  
+  console.log(contentScrollable, 'terminarToque')
+ 
 }
-
-
-
-
 
 
