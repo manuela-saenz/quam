@@ -113,14 +113,14 @@
 
               <div class="icon-media">
                 <a href="" target="_blank"><i class="icon-heart"></i></a>
-                <!-- <div class="favoritos-contenedor">
+                <div class="favoritos-contenedor">
                   <div class="favoritos-headline">
                     <span>Mis Productos favoritos</span> <button class="boton-cerrar-favoritos">✕</button>
                   </div>
                   <div id="favoritesPanelHead">
                     <?php get_template_part("templates/components/mini", "favs") ?>
                   </div>
-                </div> -->
+                </div>
                 <!-- <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/"><i class="icon-shopping-bag"></i></a> -->
                 <button class="" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="icon-shopping-bag"></i></button>
                 <a href="" target="_blank"><i class="icon-user"></i></a>

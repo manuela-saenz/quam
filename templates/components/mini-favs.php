@@ -1,6 +1,9 @@
-<?php if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
+<?php 
+
+if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
   <ul class="favoritos-lista">
     <?php
+    var_dump($_SESSION["prodsfavs"]);
     $prodsFavQuery = new WP_Query(array(
       "post_type" => "product",
       "post__in" => $_SESSION["prodsfavs"]
