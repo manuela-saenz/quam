@@ -23,7 +23,8 @@ if ($attachment_ids) {
 
 ?>
 
-
+<div id="showAlertAddCart" class="alert alert-success add-to-cart-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Producto agregado al carrito.</div>
+<div id="showAlertAddFav" class="alert alert-success add-to-list-fav-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Lista de productos favoritos actualizada correctamente.</div>
 <section id="Singleimgprincipal" class="padg-mobile">
     <div class="container">
         <div class="row">
