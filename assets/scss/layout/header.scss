@@ -7,7 +7,7 @@ header {
   top: 0;
   transition: all 0.2s;
   // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  
+
   .header-contact {
     background: $dark_blue;
     color: $white;
@@ -492,7 +492,7 @@ header {
       padding: 0 20px;
       display: flex;
       gap: 20px;
-      .cart-section-quantity{
+      .cart-section-quantity {
         padding-bottom: 2px;
         top: -8px;
         width: 20px;
@@ -544,44 +544,35 @@ header {
 
 .shopping-bag-offcanvas {
   .btn-close {
-   
   }
 
   .offcanvas-title {
     font-weight: 700;
     font-size: 26px;
   }
-
-  .select-bag {
+  .mini-cart-product-card {
     margin-bottom: 20px;
-
-    .img-fit {
-      height: 100%;
+    .img-contain {
+      border: 1px solid #eee;
       margin-right: 20px;
-      width: 140px;
+      width: 115px;
+      min-width: 115px;
+      aspect-ratio: 1;
     }
-  }
-
-  .quantity {
-    max-height: 30px;
-    padding: 3px 3px;
-    width: 35%;
-    border: 1px solid black;
-    margin: 7px 0;
-
-    button {
-      width: 22px;
-      height: 22px;
-
-      i {
-        font-size: 15px;
+    .quantity {
+      max-height: 30px;
+      padding: 3px 3px;
+      button {
+        width: 22px;
+        height: 22px;
+        i {
+          font-size: 15px;
+        }
       }
     }
-
-    input {
-      margin: 0 2px;
-    }
   }
+
+  
 
   .price {
     font-size: 17px;

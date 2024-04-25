@@ -28,35 +28,46 @@ function ItemsCart()
         }
         $identificador = $_product->get_id();
 ?>
-        <div class="select-bag d-flex bg-white">
-            <div class="img-fit">
+        <div class="mini-cart-product-card d-flex bg-white">
+            <div class="img-contain overflow-hidden rounded-1">
                 <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>">
             </div>
             <div>
-                <h5><?php echo esc_html($title); ?></h5>
-                <p>Talla: <?php echo esc_html($talla); ?></p>
-                <p>Color: <?php echo esc_html($color); ?></p>
-                <div class="quantity">
-                    <button class="qtyminus minus"><i class="icon-minus"></i></button>
-                    <input type="text" id="singleProductQuantity" name="quantity" value="<?php echo esc_html($quantity); ?>" class="qtySingle">
-                    <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
-                </div>
-                <div class="d-flex align-items-center price">
+                <h5 class="mb-1"><?= $title ?></h5>
+                <?php if ($talla) { ?>
+                    <p>Talla: <?= $talla ?></p>
+                <?php } ?>
+                <?php if ($color) { ?>
+                    <p>Color: <?= $color ?></p>
+                <?php } ?>
+                <div class="d-flex align-items-center price mb-3">
                     <p id="price">$<?php echo number_format($price * $quantity); ?></p>
+                   <?php if($regular_price) { ?>
                     <span id="regular_price">$<?php echo number_format($regular_price * $quantity); ?></span>
+                    <?php } ?>
                     <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
                 </div>
+                <div class="d-flex justify-content-between">
+                    <div class="quantity">
+                        <button class="qtyminus minus"><i class="icon-minus"></i></button>
+                        <input type="text" id="singleProductQuantity" name="quantity" value="<?= $quantity ?>" class="qtySingle">
+                        <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
+                    </div>
+                    <button id="trash_cart" class="remove" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 7l16 0"></path>
+                            <path d="M10 11l0 6"></path>
+                            <path d="M14 11l0 6"></path>
+                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                        </svg>
+                    </button>
+                </div>
+
+
             </div>
-            <a href="#" id="trash_cart" class="remove" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
-                <svg xmlns="http://www.w3.org/2000/svg" class="" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M4 7l16 0"></path>
-                    <path d="M10 11l0 6"></path>
-                    <path d="M14 11l0 6"></path>
-                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                </svg>
-            </a>
+
         </div>
     <?php
     }
