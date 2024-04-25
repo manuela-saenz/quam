@@ -67,14 +67,14 @@ $(".product-var input").on("click", function () {
 function initQuantity() {
 
   $('.quantity').on('click', '.plus', function (e) {
-    let $input = $(this).prev('input.qty');
+    let $input = $(this).parent().find('input');
     let val = parseInt($input.val());
     $input.val(val + 1).change();
   });
 
   $('.quantity').on('click', '.minus',
     function (e) {
-      let $input = $(this).parent().find('input.qty');
+      let $input = $(this).parent().find('input');
       var val = parseInt($input.val());
       if (val > 1) {
         $input.val(val - 1).change();
@@ -104,7 +104,6 @@ function initQuantitySingle() {
 
 
 initQuantity();
-initQuantitySingle();
 
 
 // obtener el id de la variante actual de producto y pasarlo al boton de  añadir a favoritos-carrito

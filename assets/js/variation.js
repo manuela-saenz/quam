@@ -99,60 +99,66 @@ $(document).on("click", ".remove", function () {
 
 var clickTimeout;
 
-$(document).on("click", ".qtyminus, .qtyplus", function () {
+$(".qtyminus , .qtyplus").on("click", function () {
   clearTimeout(clickTimeout);
 
-  var container = $(this).closest(".select-bag.d-flex.bg-white");
+  var container = $(this).parent().parent().parent();
   var quantityInput = container.find("#singleProductQuantity");
   var currentQuantity = parseInt(quantityInput.val());
   var originalPrice = parseFloat(
     container.find("#price").text().replace("$", "").replace(",", "")
   );
-  var originalRegularPrice = parseFloat(
-    container.find("#regular_price").text().replace("$", "").replace(",", "")
-  );
+  // var originalRegularPrice = parseFloat(
+  //   container.find("#regular_price").text().replace("$", "").replace(",", "")
+  // );
   var priceOriginal = parseInt(container.find("#priceUnit").data("price"));
-
-  if ($(this).hasClass("qtyminus") && currentQuantity > 1) {
-    currentQuantity = currentQuantity - 1;
-    quantityInput.val(currentQuantity);
+ let operacion;
+  if ($(this).hasClass("qtyminus")) {
+    console.log(originalPrice * (parseInt(quantityInput.val()) - 1), 'total')
+    operacion = originalPrice *  (parseInt(quantityInput.val()) - 1);
+    // currentQuantity = currentQuantity - 1;
+    // quantityInput.val(currentQuantity);
     originalPrice = originalPrice - priceOriginal;
-    originalRegularPrice = originalRegularPrice - priceOriginal;
-    container
-      .find("#price")
-      .text("$" + originalPrice.toLocaleString("en-US", {}));
-    container
-      .find("#regular_price")
-      .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
+    // originalRegularPrice = originalRegularPrice - priceOriginal;
+    // container
+    //   .find("#price")
+    //   .text("$" + originalPrice.toLocaleString("en-US", {}));
+    // container
+    //   .find("#regular_price")
+    //   .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
   } else if ($(this).hasClass("qtyplus")) {
-    currentQuantity = currentQuantity + 1;
-    quantityInput.val(currentQuantity);
+    console.log(originalPrice *  (parseInt(quantityInput.val()) + 1), 'total')
+    operacion = originalPrice *  (parseInt(quantityInput.val()) + 1);
+    // currentQuantity = currentQuantity + 1;
+    // quantityInput.val(currentQuantity);
     originalPrice = originalPrice + priceOriginal;
-    originalRegularPrice = originalRegularPrice + priceOriginal;
-    container
-      .find("#price")
-      .text("$" + originalPrice.toLocaleString("en-US", {}));
-    container
-      .find("#regular_price")
-      .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
+    // originalRegularPrice = originalRegularPrice + priceOriginal;
+    // container
+    //   .find("#price")
+    //   .text("$" + originalPrice.toLocaleString("en-US", {}));
+  //   container
+  //     .find("#regular_price")
+  //     .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
   }
   $(".quam-btn").prop("disabled", true);
 
   var total = 0;
+    var getTotal = parseInt($('#total').text().replace("$", "").replace(",", "")) 
+    console.log(getTotal)
+    getTotal += operacion;
+  // $(".mini-cart-product-card").each(function () {
+  //   var priceElement = $(this).find("#price");
+  //   if (priceElement[0] !== undefined) {
+  //     if (priceElement[0].innerText !== "") {
+  //       var price = parseFloat(
+  //         priceElement[0].innerText.replace(/[^0-9\.]/g, "")
+  //       );
+  //       total += price;
+  //     }
+  //   }
+  // });
 
-  $(".select-bag.d-flex.bg-white").each(function () {
-    var priceElement = $(this).find(".d-flex.align-items-center.price p#price");
-    if (priceElement[0] !== undefined) {
-      if (priceElement[0].innerText !== "") {
-        var price = parseFloat(
-          priceElement[0].innerText.replace(/[^0-9\.]/g, "")
-        );
-        total += price;
-      }
-    }
-  });
-
-  var formattedTotal = total.toLocaleString("es-CO");
+  var formattedTotal = getTotal.toLocaleString("es-CO");
   $("#subtotal, #total").html("$" + formattedTotal);
 
   clickTimeout = setTimeout(function () {

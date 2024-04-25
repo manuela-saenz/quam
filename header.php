@@ -112,11 +112,11 @@
 
               <div class="header-actions">
                 <button class="position-relative btn p-0 " data-bs-toggle="offcanvas" data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i>
-                <?php if (!empty($_SESSION["prodsfavs"])) { ?>
-                  <span id="favoritesCounter" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count($_SESSION["prodsfavs"]) ?>
-                  </span></button>
+                  <?php if (!empty($_SESSION["prodsfavs"])) { ?>
+                    <span id="favoritesCounter" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count($_SESSION["prodsfavs"]) ?>
+                    </span>
                   <?php } ?>
-                  
+                </button>
 
                 <button class="position-relative btn p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
                   <i class="icon-shopping-bag"></i>
