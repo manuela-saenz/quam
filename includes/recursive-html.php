@@ -28,22 +28,26 @@ function ItemsCart()
         }
         $identificador = $_product->get_id();
 ?>
-        <div class="mini-cart-product-card d-flex bg-white">
+        <div class="mini-cart-product-card align-items-start d-flex bg-white">
             <div class="img-contain overflow-hidden rounded-1">
                 <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>">
             </div>
             <div>
                 <h5 class="mb-1"><?= $title ?></h5>
-                <?php if ($talla) { ?>
-                    <p>Talla: <?= $talla ?></p>
-                <?php } ?>
-                <?php if ($color) { ?>
-                    <p>Color: <?= $color ?></p>
-                <?php } ?>
+                <div class="d-flex gap-2">
+                    <?php if ($talla) { ?>
+                        <p><b>Talla:</b> <?= $talla ?></p>
+                    <?php } ?>
+
+                    <?php if ($color) { ?>
+                        <p><b>Color:</b> <?= $color ?></p>
+                    <?php } ?>
+                </div>
+
                 <div class="d-flex align-items-center price mb-3">
                     <p id="price">$<?php echo number_format($price); ?></p>
-                   <?php if($regular_price) { ?>
-                    <span id="regular_price">$<?php echo number_format($regular_price ); ?></span>
+                    <?php if ($regular_price) { ?>
+                        <span id="regular_price">$<?php echo number_format($regular_price); ?></span>
                     <?php } ?>
                     <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
                 </div>

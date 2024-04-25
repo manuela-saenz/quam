@@ -128,7 +128,7 @@ $(window).on('load resize', function () {
   }
 })
 
-$('.open-selector').on('click', (event) => {
+$('.open-selector , .add-fav').on('click', (event) => {
   event.preventDefault();
 });
 

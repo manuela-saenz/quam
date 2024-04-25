@@ -6,6 +6,9 @@
   .container {
     @media (max-width: 991px) {
       padding: 0;
+      .row{
+        margin: 0;
+      }
     }
   }
 
@@ -128,9 +131,20 @@
 .SingProducts2 {
   height: calc(100vh - var(--header-height));
   .swiper-slide{
+    height: calc(100vh - var(--header-height));
     .img-contain{
       border: 1px solid #eee;
-      height: calc(100vh - var(--header-height));
+    }
+    @media (max-width:991px){
+      height: auto;
+    }
+    @media (min-width: 1200px) {
+      height: 100% !important;
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      height: 100% !important;
     }
   }
 
@@ -174,19 +188,7 @@
     }
   }
 
-  .swiper-slide {
-    // height: 250px !important;
-    // overflow: hidden;
-
-    @media (min-width: 1200px) {
-      height: 100% !important;
-      margin-left: 20px;
-    }
-
-    @media (max-width: 768px) {
-      height: 100% !important;
-    }
-  }
+  
 }
 
 .bag {

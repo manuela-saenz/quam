@@ -60,7 +60,7 @@ if ($attachment_ids) {
                         if ($attachment_ids) {
                             foreach ($images as $img) : ?>
                                 <div class="swiper-slide">
-                                    <div class="img-contain">
+                                    <div class="img-contain h-100">
                                         <img src="<?= $img ?>"  alt="<?= $post->post_title ?>" />
                                     </div>
 
@@ -69,7 +69,7 @@ if ($attachment_ids) {
                         } else {
                             ?>
                             <div class="swiper-slide">
-                                <div class="img-contain">
+                                <div class="img-contain h-100">
                                     <img src="<?= get_the_post_thumbnail_url() ?>" alt="<?= $post->post_title ?>" />
                                 </div>
                             </div>

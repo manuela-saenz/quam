@@ -536,6 +536,10 @@ header {
       width: 115px;
       min-width: 115px;
       aspect-ratio: 1;
+      @media (max-width:991px){
+        width: 100px;
+        min-width: 100px;
+      }
     }
     .quantity {
       max-height: 30px;
