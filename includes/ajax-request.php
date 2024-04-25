@@ -243,7 +243,7 @@ class SyEAjaxRequest
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
-        
+
         $search = array(
             '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
             '/[^\S ]+\</s',     // strip whitespaces before tags, except space
@@ -262,6 +262,7 @@ class SyEAjaxRequest
         echo json_encode(array(
             "status" => "success",
             "html" => $buffer,
+            // "ordenList" => $buffer,
             "total" => $ValorTotal,
             "counter" => count($woocommerce->cart->get_cart())
         ));

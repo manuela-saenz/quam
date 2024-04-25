@@ -142,39 +142,56 @@ const wh = window.innerHeight - (80 + mainBoxHeight);
 let contentScrollable = false;
 let inicioY = 0;
 let isUp = false;
-if (!contentScrollable) {
+
+var waitToScroll;
+var waitToInit;
+
+function initDragBox() {
   elemento.addEventListener('touchstart', iniciarToque, false);
   elemento.addEventListener('touchmove', moverToque, false);
   elemento.addEventListener('touchend', terminarToque, false);
 }
-// $('.mobile-container').scrollTop(2)
+function disableDragBox() {
+  elemento.removeEventListener('touchstart', iniciarToque, false);
+  elemento.removeEventListener('touchmove', moverToque, false);
+  elemento.removeEventListener('touchend', terminarToque, false);
+}
+
+
+
+if (!contentScrollable) {
+  initDragBox();
+}
+$('.mobile-container').scrollTop(1)
 
 
 function scrollEnable() {
   if (contentScrollable) {
+    let initscroll = false;
+    console.log('initscroll', initscroll)
+    $('.mobile-container').on('touchstart', function () {
+      initscroll = true;
+      console.log('initscroll', initscroll)
+    });
+
     $('.mobile-container').on('touchmove', function (e) {
-      setTimeout(() => {
-        if (e.currentTarget.scrollTop <= 0) {
-          contentScrollable = false;
-          elemento.addEventListener('touchstart', iniciarToque, false);
-          elemento.addEventListener('touchmove', moverToque, false);
-          elemento.addEventListener('touchend', terminarToque, false);
-        } else {
-          contentScrollable = true;
-        }
-      }, 200)
-      // console.log('start:', e.currentTarget.scrollTop, contentScrollable)
+      clearTimeout(waitToInit);
+      console.log('estado de scroll dentro de caja', e.currentTarget.scrollTop)
+      if (e.currentTarget.scrollTop == 0) {
+        contentScrollable = false;
+        console.log('apagar')
+        initDragBox();
+
+      } else {
+        contentScrollable = true;
+        console.log('prender')
+        disableDragBox();
+      }
 
     })
 
-  } else {
-    $('.mobile-container').off('touchmove');
-    elemento.removeEventListener('touchstart', iniciarToque, false);
-    elemento.removeEventListener('touchmove', moverToque, false);
-    elemento.removeEventListener('touchend', terminarToque, false);
   }
 }
-
 
 elemento.style.marginTop = `-${mainBoxHeight}px`;
 
@@ -183,6 +200,11 @@ function positionDownIdentifier(deltaY) {
     elemento.style.transform = `translateY(-${wh}px)`;
     isUp = true;
     contentScrollable = true;
+    console.log('se puede hacer scroll')
+    scrollEnable()
+    setTimeout(() => {
+      $('.mobile-container').scrollTop(1)
+    }, 500)
   } else {
     isUp = false;
     elemento.style.transform = `translateY(0px)`;
@@ -203,22 +225,23 @@ function positionTopIdentifier(deltaY) {
 function iniciarToque(evento) {
   const toque = evento.touches[0];
   inicioY = toque.clientY;
+  clearTimeout(waitToScroll);
+  console.log('estado de scroll', contentScrollable)
 }
 
 function moverToque(evento) {
+
   evento.preventDefault();
   const toque = evento.touches[0];
   const movingDeltaY = toque.clientY - inicioY;
-  console.log(movingDeltaY)
-  // if(movingDeltaY >= 0){
-  //   isUp = false
-  // }
+  contentScrollable = false;
+  scrollEnable();
   if (isUp) {
     elemento.style.transform = `translateY(${movingDeltaY + wh * -1}px)`;
   } else {
     elemento.style.transform = `translateY(${movingDeltaY}px)`;
   }
-
+  console.log('estado de scroll', contentScrollable)
 }
 
 function terminarToque(evento) {
@@ -229,20 +252,6 @@ function terminarToque(evento) {
   } else {
     positionDownIdentifier(deltaY);
   }
-  if (contentScrollable) {
-    console.log('El contenido es desplazable.');
-    // Deshabilitar los listeners de eventos táctiles
-    elemento.removeEventListener('touchstart', iniciarToque);
-    elemento.removeEventListener('touchmove', moverToque);
-    elemento.removeEventListener('touchend', terminarToque);
-  } else {
-    contentScrollable = false;
-    console.log('El contenido no es desplazable.');
-  }
-  scrollEnable()
-
-  console.log(contentScrollable, 'terminarToque')
-
 }
 
 
