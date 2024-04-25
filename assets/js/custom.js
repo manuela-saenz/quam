@@ -129,7 +129,6 @@ $(window).on('load resize', function () {
 })
 
 $('.open-selector').on('click', (event) => {
-  console.log('funciona')
   event.preventDefault();
 });
 

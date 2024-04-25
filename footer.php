@@ -1,8 +1,8 @@
-<section id="shipping" class="<?= is_singular('product') ? "footer-product-none" : "" ?>">
+<section id="shipping" class="<?= is_singular('product') ? "footer-product-none" : "" ?> pb-0">
   <div class="container position-relative">
     <div class="row center-all">
       <div class="col-md-12 col-xxl-10">
-        <div class="d-flex text-shipping">
+        <div class="d-flex text-shipping position-relative mb-5">
           <h6 class="title"> <b> Disfruta de Envío gratis en </b> todos los pedidos con valor superior
             a <b class="number">$100.000</b> </h6>
           <div class="img-fit img-shipping">
