@@ -69,13 +69,11 @@ class SyEAjaxRequest
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
-        $count = $woocommerce->cart->get_cart_contents_count();
         $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $itemsCart);
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
             "html" => $buffer,
-            'counter' => $count,
             "total" => $ValorTotal
         ));
 

@@ -1,60 +1,53 @@
 <?php
-function productCardSmall($product, $fav)
+function ItemsCart()
 {
-    if($fav){
-        $_product = wc_get_product($product->get_id()); 
-    }else{
-        $_product = wc_get_product($product['data']->get_id()); 
-    }
+    $items = WC()->cart->get_cart();
+    $total_items = count($items);
+    $item_counter = 0;
+
+    foreach ($items as $item => $values) {
+        $item_counter++;
+        $product_id = $values['product_id'];
+        $_product = wc_get_product($values['data']->get_id());
         $regular_price = $_product->get_regular_price();
-        $name = $_product->get_name();
         $price = $_product->get_price();
-        $link = get_permalink($_product );
-        $image = get_the_post_thumbnail_url($_product);
+        $link = get_permalink($values['product_id']);
+        $image = get_the_post_thumbnail_url($values['product_id'], array(95, 95));
+        $quantity = $values['quantity'];
+        $title = $_product->get_name();
+        $image = '';
         $color = $_product->get_attribute('pa_color');
         $talla = $_product->get_attribute('pa_talla');
         $variation_id = 0;
         if ($_product->is_type('variation')) {
-            $variation_id = $product['variation_id'];
+            $variation_id = $values['variation_id'];
             $image_id = $_product->get_image_id();
             $image = wp_get_attachment_image_url($image_id, array(95, 95));
         } else {
-            $image = get_the_post_thumbnail_url($_product , array(95, 95));
+            $image = get_the_post_thumbnail_url($values['product_id'], array(95, 95));
         }
         $identificador = $_product->get_id();
-    
 ?>
         <div class="select-bag d-flex bg-white">
             <div class="img-fit">
-                <img src="<?= esc_url($image); ?>" alt="<?= $name ?>">
+                <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>">
             </div>
             <div>
-                <h5><?= esc_html($_product->get_name()); ?></h5>
-                <?php if($_product->is_type('variation')){ ?>
-                <p>Talla: <?= esc_html($talla); ?></p>
-                <p>Color: <?= esc_html($color); ?></p>
-                <?php } ?>
-                <?php if(!$fav){ ?>
+                <h5><?php echo esc_html($title); ?></h5>
+                <p>Talla: <?php echo esc_html($talla); ?></p>
+                <p>Color: <?php echo esc_html($color); ?></p>
                 <div class="quantity">
                     <button class="qtyminus minus"><i class="icon-minus"></i></button>
-                    <input type="text" id="singleProductQuantity" name="quantity" value="
-                    <?php 
-                    esc_html($product['quantity']);
-                    ?>" class="qtySingle">
+                    <input type="text" id="singleProductQuantity" name="quantity" value="<?php echo esc_html($quantity); ?>" class="qtySingle">
                     <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
                 </div>
-               <?php  } ?>
                 <div class="d-flex align-items-center price">
-                    <p id="price">$<?php 
-                    $fav ? number_format( $price) : number_format( $price * $product['quantity']);
-                    ?></p>
-                    <span id="regular_price">$<?php
-                    $fav ? number_format($regular_price) : number_format($regular_price * $product['quantity']);
-                    ?></span>
-                    <p id="priceUnit" data-price="<?php // esc_attr($price); ?>" hidden> </p>
+                    <p id="price">$<?php echo number_format($price * $quantity); ?></p>
+                    <span id="regular_price">$<?php echo number_format($regular_price * $quantity); ?></span>
+                    <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
                 </div>
             </div>
-            <button id="trash_cart" class="remove" data-id="<?= esc_attr($identificador); ?>" data-variant="<?= isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
+            <a href="#" id="trash_cart" class="remove" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" class="" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M4 7l16 0"></path>
@@ -63,9 +56,69 @@ function productCardSmall($product, $fav)
                     <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
                     <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
                 </svg>
-            </button>
+            </a>
         </div>
-<?php
+    <?php
+    }
+}
+
+function productCardSmallFav($prod)
+{
+    var_dump($prod);
+    foreach ($prod as $item => $values) {
+        $product_id = $values['product_id'];
+        $_product = wc_get_product($values['data']->get_id());
+        $regular_price = $_product->get_regular_price();
+        $price = $_product->get_price();
+        $link = get_permalink($values['product_id']);
+        $image = get_the_post_thumbnail_url($values['product_id'], array(95, 95));
+        $quantity = $values['quantity'];
+        $title = $_product->get_name();
+        $image = '';
+        $color = $_product->get_attribute('pa_color');
+        $talla = $_product->get_attribute('pa_talla');
+        $variation_id = 0;
+        if ($_product->is_type('variation')) {
+            $variation_id = $values['variation_id'];
+            $image_id = $_product->get_image_id();
+            $image = wp_get_attachment_image_url($image_id, array(95, 95));
+        } else {
+            $image = get_the_post_thumbnail_url($values['product_id'], array(95, 95));
+        }
+        $identificador = $_product->get_id();
+?>
+        <div class="select-bag d-flex bg-white">
+            <div class="img-fit">
+                <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>">
+            </div>
+            <div>
+                <h5><?php echo esc_html($title); ?></h5>
+                <p>Talla: <?php echo esc_html($talla); ?></p>
+                <p>Color: <?php echo esc_html($color); ?></p>
+                <div class="quantity">
+                    <button class="qtyminus minus"><i class="icon-minus"></i></button>
+                    <input type="text" id="singleProductQuantity" name="quantity" value="<?php echo esc_html($quantity); ?>" class="qtySingle">
+                    <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
+                </div>
+                <div class="d-flex align-items-center price">
+                    <p id="price">$<?php echo number_format($price * $quantity); ?></p>
+                    <span id="regular_price">$<?php echo number_format($regular_price * $quantity); ?></span>
+                    <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
+                </div>
+            </div>
+            <a href="#" id="trash_cart" class="remove" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" class="" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M4 7l16 0"></path>
+                    <path d="M10 11l0 6"></path>
+                    <path d="M14 11l0 6"></path>
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                </svg>
+            </a>
+        </div>
+    <?php
+    }
 }
 
 function ItemsCheckout()
@@ -96,7 +149,7 @@ function ItemsCheckout()
             $image = get_the_post_thumbnail_url($values['product_id'], array(180, 180));
         }
         $identificador = $_product->get_id();
-?>
+    ?>
         <tbody class="mb-4">
             <tr>
                 <td scope="row d-flex align-items-center ">
@@ -143,7 +196,7 @@ function ItemsCheckout()
                 </td>
             </tr>
         </tbody>
-<?php
+    <?php
     }
 }
 
@@ -175,7 +228,7 @@ function ItemsSummary()
             $image = get_the_post_thumbnail_url($values['product_id'], array(180, 180));
         }
         $identificador = $_product->get_id();
-?>
+    ?>
         <div class="d-flex align-items-center h-100 purchase">
             <div class="img-fit">
                 <img src="<?= esc_url($image); ?>" alt="<?= esc_attr($title); ?>">
