@@ -69,12 +69,12 @@ class SyEAjaxRequest
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
-
         $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $itemsCart);
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
             "html" => $buffer,
+            "counter" => count($woocommerce->cart->get_cart()),
             "total" => $ValorTotal
         ));
 
@@ -243,7 +243,7 @@ class SyEAjaxRequest
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
-
+        
         $search = array(
             '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
             '/[^\S ]+\</s',     // strip whitespaces before tags, except space
@@ -260,12 +260,10 @@ class SyEAjaxRequest
         $buffer = preg_replace($search, $replace, $itemsCart);
 
         echo json_encode(array(
-            "item" => $result,
             "status" => "success",
             "html" => $buffer,
-            // "ordenList" => $buffer,
             "total" => $ValorTotal,
-            "quantity" => count($woocommerce->cart->get_cart())
+            "counter" => count($woocommerce->cart->get_cart())
         ));
 
         wp_die();
@@ -302,12 +300,6 @@ class SyEAjaxRequest
         ItemsCart();
         $itemsCart = ob_get_clean();
 
-        ob_start();
-        trItemsCart();
-        $anotherOutput = ob_get_clean();
-
-
-
         $search = array(
             '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
             '/[^\S ]+\</s',     // strip whitespaces before tags, except space
@@ -322,13 +314,11 @@ class SyEAjaxRequest
         );
 
         $buffer = preg_replace($search, $replace, $itemsCart);
-        $buffer2 = preg_replace($search, $replace, $anotherOutput);
 
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
             "html" => $buffer,
-            "ordenList" => $buffer2,
             "totalProducto" => $formatoColombiano,
             "total" => $ValorTotal,
             "quantity" => count($woocommerce->cart->get_cart())
@@ -726,9 +716,6 @@ class SyEAjaxRequest
             "html" => $html,
             "counter" => count($_SESSION[$sessionName])
         ));
-
-
-
 
         wp_die();
     }
