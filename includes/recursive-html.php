@@ -41,9 +41,9 @@ function ItemsCart()
                     <p>Color: <?= $color ?></p>
                 <?php } ?>
                 <div class="d-flex align-items-center price mb-3">
-                    <p id="price">$<?php echo number_format($price * $quantity); ?></p>
+                    <p id="price">$<?php echo number_format($price); ?></p>
                    <?php if($regular_price) { ?>
-                    <span id="regular_price">$<?php echo number_format($regular_price * $quantity); ?></span>
+                    <span id="regular_price">$<?php echo number_format($regular_price ); ?></span>
                     <?php } ?>
                     <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
                 </div>
