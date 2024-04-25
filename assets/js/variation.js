@@ -256,7 +256,7 @@ function initAddToFavoriteButton() {
         }
 
         $("#favoritesCounter").text(res.counter);
-        $(".offcanvas-body.ordenList.fav").html(res.html);
+        $(".offcanvas-body.ordenListFav.fav").html(res.html);
         var alertElement = $("#showAlertAddFav");
         alertElement.removeClass("d-none").show();
 
@@ -287,7 +287,7 @@ function initFavoritesPanelDelete() {
           }
         }
         $("#favoritesCounter").text(res.counter);
-        $(".offcanvas-body.ordenList.fav").html(res.html);
+        $(".offcanvas-body.ordenListFav.fav").html(res.html);
       },
     });
   });
