@@ -6,6 +6,8 @@ function getTotalValue(totalString) {
   return value;
 }
 
+var botonCart = document.getElementById("bottonCart");
+
 jQuery(document).ready(function ($) {
   $("form.cart").on("submit", function (e) {
     e.preventDefault();
@@ -32,19 +34,34 @@ jQuery(document).ready(function ($) {
       success: function (response) {
         var res = JSON.parse(response);
         if (res.status === "success") {
+          // Si el botón existe, procede a agregar el elemento span
+          if (botonCart) {
+            // Verifica si el elemento span con ID "cartItem" ya existe dentro del botón
+            var spanElement = document.getElementById("cartItem");
+
+            // Si el elemento span no existe, entonces lo crea y lo agrega al botón
+            if (!spanElement) {
+              spanElement = document.createElement("span");
+              spanElement.id = "cartItem";
+              spanElement.className =
+                "cart-section-quantity rounded-pill position-absolute center-all text-white";
+              spanElement.textContent = ""; // Agrega el texto dinámico aquí
+              botonCart.appendChild(spanElement);
+            }
+          }
+
           $(".offcanvas-body.ordenList.cart").html(res.html);
           var totalString = res.total;
           var value = getTotalValue(totalString);
           $("#cartItem").text(res.counter);
           $("#subtotal, #total").html("$" + value);
-          // Muestra el mensaje de éxito
+     
           $(".alert.alert-success.add-to-cart-message.d-none").show();
 
           var alertElement = $("#showAlertAddCart");
-          console.log(alertElement)
           alertElement.removeClass("d-none").show();
 
-          // Oculta el mensaje de éxito después de 5 segundos y añade la clase 'd-none'
+
           setTimeout(function () {
             alertElement.hide().addClass("d-none");
           }, 2000);
@@ -81,6 +98,12 @@ function trashItem(id, idVariant) {
       var res = JSON.parse(response);
       if (res.status === "success") {
         updateCartContents(res);
+        if (res.counter === 0) {
+          var spanElement = document.getElementById("cartItem");
+          if (spanElement) {
+            botonCart.removeChild(spanElement);
+          }
+        }
       } else {
         alert("Hubo un problema al eliminar el producto del carrito.");
       }
@@ -99,7 +122,7 @@ $(document).on("click", ".remove", function () {
 
 var clickTimeout;
 
-$(".qtyminus , .qtyplus").on("click", function () {
+$(document).on("click", ".qtyminus , .qtyplus", function () {
   clearTimeout(clickTimeout);
 
   var container = $(this).parent().parent().parent();
@@ -112,53 +135,62 @@ $(".qtyminus , .qtyplus").on("click", function () {
   //   container.find("#regular_price").text().replace("$", "").replace(",", "")
   // );
   var priceOriginal = parseInt(container.find("#priceUnit").data("price"));
- let operacion;
+  let operacion;
   if ($(this).hasClass("qtyminus")) {
-    console.log(originalPrice * (parseInt(quantityInput.val()) - 1), 'total')
-    operacion = originalPrice *  (parseInt(quantityInput.val()) - 1);
-    // currentQuantity = currentQuantity - 1;
-    // quantityInput.val(currentQuantity);
-    originalPrice = originalPrice - priceOriginal;
-    // originalRegularPrice = originalRegularPrice - priceOriginal;
-    // container
-    //   .find("#price")
-    //   .text("$" + originalPrice.toLocaleString("en-US", {}));
-    // container
-    //   .find("#regular_price")
-    //   .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
+    if (currentQuantity > 1) {
+      // console.log(originalPrice * (parseInt(quantityInput.val()) - 1), "total");
+      operacion = originalPrice * (parseInt(quantityInput.val()) - 1);
+      currentQuantity = currentQuantity - 1;
+      quantityInput.val(currentQuantity);
+      originalPrice = originalPrice - priceOriginal;
+      // originalRegularPrice = originalRegularPrice - priceOriginal;
+      // container
+      //   .find("#price")
+      //   .text("$" + originalPrice.toLocaleString("en-US", {}));
+      // container
+      //   .find("#regular_price")
+      //   .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
+    }
   } else if ($(this).hasClass("qtyplus")) {
-    console.log(originalPrice *  (parseInt(quantityInput.val()) + 1), 'total')
-    operacion = originalPrice *  (parseInt(quantityInput.val()) + 1);
-    // currentQuantity = currentQuantity + 1;
-    // quantityInput.val(currentQuantity);
-    originalPrice = originalPrice + priceOriginal;
-    // originalRegularPrice = originalRegularPrice + priceOriginal;
-    // container
-    //   .find("#price")
-    //   .text("$" + originalPrice.toLocaleString("en-US", {}));
-  //   container
-  //     .find("#regular_price")
-  //     .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
+    if (currentQuantity >= 1) {
+      // console.log(originalPrice * (parseInt(quantityInput.val()) + 1), "total");
+      operacion = originalPrice * (parseInt(quantityInput.val()) + 1);
+      currentQuantity = currentQuantity + 1;
+      quantityInput.val(currentQuantity);
+      originalPrice = originalPrice + priceOriginal;
+      // originalRegularPrice = originalRegularPrice + priceOriginal;
+      // container
+      //   .find("#price")
+      //   .text("$" + originalPrice.toLocaleString("en-US", {}));
+      // container
+      //   .find("#regular_price")
+      //   .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
+    }
   }
-  $(".quam-btn").prop("disabled", true);
 
-  var total = 0;
-    var getTotal = parseInt($('#total').text().replace("$", "").replace(",", "")) 
-    console.log(getTotal)
-    getTotal += operacion;
-  // $(".mini-cart-product-card").each(function () {
-  //   var priceElement = $(this).find("#price");
-  //   if (priceElement[0] !== undefined) {
-  //     if (priceElement[0].innerText !== "") {
-  //       var price = parseFloat(
-  //         priceElement[0].innerText.replace(/[^0-9\.]/g, "")
-  //       );
-  //       total += price;
-  //     }
-  //   }
-  // });
+  if (currentQuantity > 1) {
+    var totalGeneral = 0;
+    $(".mini-cart-product-card").each(function () {
+      var priceElement = $(this).find("#price");
+      var quantity = $(this).find("#singleProductQuantity");
+      if (priceElement[0] !== undefined) {
+        var price = parseFloat(
+          priceElement[0].innerText.replace(/[^0-9\.]/g, "")
+        );
+        var quantity = parseInt(quantity[0].value);
+        var total = price * quantity;
+        totalGeneral += total;
+        // if (priceElement[0].innerText !== "") {
+        //   var price = parseFloat(
+        //     priceElement[0].innerText.replace(/[^0-9\.]/g, "")
+        //   );
+        //   total += price;
+        // }
+      }
+    });
+  }
 
-  var formattedTotal = getTotal.toLocaleString("es-CO");
+  var formattedTotal = totalGeneral.toLocaleString("es-CO");
   $("#subtotal, #total").html("$" + formattedTotal);
 
   clickTimeout = setTimeout(function () {
@@ -195,6 +227,7 @@ $(".qtyminus , .qtyplus").on("click", function () {
   }, 500);
 });
 
+var botonFav = document.getElementById("bottonFav");
 function initAddToFavoriteButton() {
   $("#add-sprod-favs , .add-fav").on("click", function (e) {
     e.preventDefault();
@@ -212,24 +245,24 @@ function initAddToFavoriteButton() {
         prodid: productId,
       },
       success: function (res) {
-        console.log(res.counter);
+        var spanElement = document.getElementById("favoritesCounter");
+        if (!spanElement) {
+          spanElement = document.createElement("span");
+          spanElement.id = "favoritesCounter";
+          spanElement.className =
+            "cart-section-quantity rounded-pill position-absolute center-all text-white";
+          spanElement.textContent = "";
+          botonFav.appendChild(spanElement);
+        }
+
         $("#favoritesCounter").text(res.counter);
-        $(".offcanvas-body.ordenList.fav").html(res.html);
+        $(".offcanvas-body.ordenListFav.fav").html(res.html);
         var alertElement = $("#showAlertAddFav");
-          console.log(alertElement)
-          alertElement.removeClass("d-none").show();
+        alertElement.removeClass("d-none").show();
 
-          // Oculta el mensaje de éxito después de 5 segundos y añade la clase 'd-none'
-          setTimeout(function () {
-            alertElement.hide().addClass("d-none");
-          }, 2000);
-        // $("#favoritesCounter").text(res["counter"]).removeClass("d-none");
-        // initFavoritesPanel();
-
-        // $("#tiendaAddProductToCartAlert").addClass("show");
-        // setTimeout(function () {
-        //   $("#tiendaAddProductToCartAlert").removeClass("show");
-        // }, 3500);
+        setTimeout(function () {
+          alertElement.hide().addClass("d-none");
+        }, 2000);
       },
     });
   });
@@ -247,9 +280,14 @@ function initFavoritesPanelDelete() {
         prodid: prodid,
       },
       success: function (res) {
+        if (res.counter === 0) {
+          var spanElement = document.getElementById("favoritesCounter");
+          if (spanElement) {
+            botonFav.removeChild(spanElement);
+          }
+        }
         $("#favoritesCounter").text(res.counter);
-        console.log(res.html);
-        $(".offcanvas-body.ordenList.fav").html(res.html);
+        $(".offcanvas-body.ordenListFav.fav").html(res.html);
       },
     });
   });

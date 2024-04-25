@@ -88,7 +88,7 @@ function desplegableProductos($titulo, $tipoDeLista)
         <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/" class="quam-btn blue w-100">Finalizar compra</a>
       </div>
     <?php } elseif ($tipoDeLista == 'mini-favoritos') { ?>
-      <div class="offcanvas-body ordenList fav">
+      <div class="offcanvas-body ordenListFav fav">
         <?php get_template_part("templates/components/mini", "favs") ?>
       </div>
       <!-- <button class="quam-btn blue w-100">Pasar a carrito</button> -->

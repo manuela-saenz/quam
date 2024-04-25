@@ -14,6 +14,7 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
       ));
 
       $combined_posts = array_merge($prodsFavQueryVariation->posts, $prodsFavQueryProd->posts);
+      
       foreach ($combined_posts as $prod) :
         $wcProd = wc_get_product($prod);
 
