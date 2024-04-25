@@ -111,7 +111,7 @@ var swiper = new Swiper(".SingProducts", {
   watchSlidesProgress: true,
 
   breakpoints: {
-    1200: {
+    991: {
       direction: "vertical",
 
     },
@@ -131,7 +131,7 @@ var swiper = new Swiper(".SingProducts", {
 
   // breakpoint where swiper will be destroyed
   // and switches to a dual-column layout
-  const breakpoint = window.matchMedia('(min-width:765px)');
+  const breakpoint = window.matchMedia('(min-width:991px)');
 
   // keep track of swiper instances to destroy later
   let mySwiper;
@@ -175,7 +175,7 @@ var swiper = new Swiper(".SingProducts", {
         swiper: swiper,
       },
       breakpoints: {
-        1200: {
+        991: {
           direction: "vertical",
         },
       },

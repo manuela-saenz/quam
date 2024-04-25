@@ -7,7 +7,7 @@
 
 get_header() ?>
 
-<section id="bannerCategory" class="padg-mobile">
+<section id="bannerCategory" class=" position-relative overflow-hidden p-0">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

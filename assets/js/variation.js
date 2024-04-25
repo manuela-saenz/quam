@@ -196,7 +196,7 @@ $(".qtyminus , .qtyplus").on("click", function () {
 });
 
 function initAddToFavoriteButton() {
-  $("#add-sprod-favs").on("click", function (e) {
+  $("#add-sprod-favs , .add-fav").on("click", function (e) {
     e.preventDefault();
     var productId = $(".variation_id").val();
     productId =

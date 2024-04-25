@@ -1,12 +1,9 @@
 #bannerCategory {
   background: $dark_blue;
-  height: 300px;
+  height: 250px;
   @include center-all;
   color: white;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 0;
 
   @media (max-width: 991px) {
     height: 220px;

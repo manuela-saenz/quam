@@ -42,7 +42,7 @@ get_header();
     </div>
 </section>
 
-<section id="categories" class="p-0 overflow-hidden">
+<section id="categories" class="overflow-hidden pt-0">
   <div class="container-fuid p-0">
     <div class="row center-all">
       <?php $categories = get_terms(array(
@@ -240,7 +240,7 @@ $colecciones = get_field('colecciones');
 $primera_coleccion = $colecciones['primera_coleccion'];
 $segunda_coleccion = $colecciones['segunda_coleccion'];
 ?>
-<section id="summer_collection" class="p-0">
+<section id="summer_collection" class="">
   <div class="container-fluid p-0">
     <div class="row m-0">
       <div class="col-md-8 p-0 position-relative">

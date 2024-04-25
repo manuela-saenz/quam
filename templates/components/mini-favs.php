@@ -48,7 +48,7 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
   </div>
 
 <?php else : ?>
-  <div class="no-favs-products">
-    <h3>No tienes productos favoritos</h3>
+  <div class="no-favs-products text-center">
+    <h4>No tienes productos favoritos</h4>
   </div>
 <?php endif; ?>

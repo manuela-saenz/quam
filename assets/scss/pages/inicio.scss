@@ -30,7 +30,6 @@
             top: 40%;
         }
     }
-    margin-top: 119px;
 }
 
 .banner {
@@ -167,7 +166,7 @@
 
     .swiper-slide {
         position: relative;
-        height: calc(100vh - 119px);
+        height: calc(100vh - var(--header-height));
         padding: 5vw 0;
         display: flex;
         align-items: center;
@@ -440,7 +439,6 @@
 
 #summer_collection {
     position: relative;
-    height: 600px;
 
     @media(max-width:768px) {
         height: auto;
@@ -732,10 +730,10 @@
 
 #shipping {
     position: relative;
-    padding: 130px 0 90px;
+    padding-top: 100px;
 
     @media(max-width:768px) {
-        padding: 90px 0 0px 0;
+        padding-top: 85px;
         overflow: hidden;
     }
 

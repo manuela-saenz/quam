@@ -17,7 +17,9 @@ $('.menu-btn').on('click', function () {
 $('.mobile-menu a').on('click', function () {
   $('.mobile-menu').removeClass('show-menu')
   $('.menu-btn').removeClass('close')
-  header.toggleClass('sticky-header');
+  $('.info-contact').removeClass('infoshow-menu')
+  header.removeClass('sticky-header');
+  $('body').removeClass('no-scroll');
 })
 
 $("body").on("click", function () {
@@ -36,7 +38,6 @@ $(window).on("load resize", function () {
     })
   }
 })
-
 
 
 
@@ -66,13 +67,13 @@ $(".product-var input").on("click", function () {
 
 function initQuantity() {
 
-  $('.quantity').on('click', '.plus', function (e) {
+  $('.quantity.product').on('click', '.plus', function (e) {
     let $input = $(this).parent().find('input');
     let val = parseInt($input.val());
     $input.val(val + 1).change();
   });
 
-  $('.quantity').on('click', '.minus',
+  $('.quantity.product').on('click', '.minus',
     function (e) {
       let $input = $(this).parent().find('input');
       var val = parseInt($input.val());

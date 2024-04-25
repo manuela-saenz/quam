@@ -7,7 +7,7 @@
 
 get_header() ?>
 
-<section id="bannerMen" class="padg-mobile">
+<section id="bannerMen" class=" ">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

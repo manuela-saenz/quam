@@ -86,6 +86,7 @@
 .SingProducts {
   // position: sticky;
   // top: 80px;
+  height: calc(100vh - var(--header-height));
 
   @media (max-width: 991px) {
     display: none;
@@ -94,7 +95,7 @@
   }
 
   .swiper-wrapper {
-    @media (min-width: 1200px) {
+    @media (min-width: 991px) {
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -103,7 +104,7 @@
   }
 
   .swiper-slide {
-    @media (min-width: 1200px) {
+    @media (min-width: 991px) {
       width: 100% !important;
       margin-left: 0;
       height: 70px !important;
@@ -125,10 +126,12 @@
 }
 
 .SingProducts2 {
-  height: 500px;
-
-  @media (min-width: 1500px) {
-    height: 750px;
+  height: calc(100vh - var(--header-height));
+  .swiper-slide{
+    .img-contain{
+      border: 1px solid #eee;
+      height: calc(100vh - var(--header-height));
+    }
   }
 
   @media (max-width: 991px) {
@@ -172,8 +175,8 @@
   }
 
   .swiper-slide {
-    height: 250px !important;
-    overflow: hidden;
+    // height: 250px !important;
+    // overflow: hidden;
 
     @media (min-width: 1200px) {
       height: 100% !important;
@@ -320,7 +323,7 @@
     }
     .variations {
       .reset_variations {
-        display: none;
+        display: none !important;
       }
       tbody {
         tr {

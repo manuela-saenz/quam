@@ -25,10 +25,10 @@ if ($attachment_ids) {
 
 <div id="showAlertAddCart" class="alert alert-success add-to-cart-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Producto agregado al carrito.</div>
 <div id="showAlertAddFav" class="alert alert-success add-to-list-fav-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Lista de productos favoritos actualizada correctamente.</div>
-<section id="Singleimgprincipal" class="padg-mobile">
+<section id="Singleimgprincipal" class="pt-0">
     <div class="container">
         <div class="row">
-            <div class="col-lg-1 imgP">
+            <div class="col-lg-1 imgP p-0 px-xl-3">
 
                 <div thumbsSlider="" class="swiper SingProducts mt-4">
                     <div class="swiper-wrapper">
@@ -36,7 +36,7 @@ if ($attachment_ids) {
                         if ($attachment_ids) {
                             foreach ($images as $img) : ?>
                                 <div class="swiper-slide">
-                                    <div class="img-fit">
+                                    <div class="img-contain h-100">
                                         <img src="<?= $img ?>" />
                                     </div>
 
@@ -45,7 +45,7 @@ if ($attachment_ids) {
                         } else {
                             ?>
                             <div class="swiper-slide">
-                                <div class="img-fit">
+                                <div class="img-contain h-100">
                                     <img src="<?= get_the_post_thumbnail_url() ?>" alt="<?= $post->post_title ?>" />
                                 </div>
                             </div>
@@ -60,7 +60,7 @@ if ($attachment_ids) {
                         if ($attachment_ids) {
                             foreach ($images as $img) : ?>
                                 <div class="swiper-slide">
-                                    <div class="img-fit">
+                                    <div class="img-contain">
                                         <img src="<?= $img ?>"  alt="<?= $post->post_title ?>" />
                                     </div>
 
@@ -69,7 +69,7 @@ if ($attachment_ids) {
                         } else {
                             ?>
                             <div class="swiper-slide">
-                                <div class="img-fit">
+                                <div class="img-contain">
                                     <img src="<?= get_the_post_thumbnail_url() ?>" alt="<?= $post->post_title ?>" />
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ if ($attachment_ids) {
                 <div class="info-product">
 
                     <div class="p-4 bg-white ">
-                       <div class="d-none d-md-block">
+                       <div class="d-none d-lg-block">
                        <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
                         <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
                         <div class="d-flex justify-content-between">
@@ -138,7 +138,7 @@ if ($attachment_ids) {
 <div class="sm-floating-box ">
     <div id="box-draggable">
         <div class="p-4 bg-white mobile-container">
-            <div class="main-box d-md-none mb-4">
+            <div class="main-box d-lg-none mb-4">
                 <div class="d-flex justify-content-between mb-2">
                     <div class="">
                         <h1 class="section-subtitle mb-1"><?= $post->post_title ?></h1>
@@ -147,7 +147,7 @@ if ($attachment_ids) {
                             <span><?= $product->get_regular_price() ?> </span>
                         </div>
                     </div>
-                    <button class="button-heart" type="button"> <i class="icon-heart"></i> </button>
+                    <button class="button-heart add-fav" data-product-id="0" type="button"> <i class="icon-heart"></i> </button>
                 </div>
                 <button class="quam-btn blue d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
             </div>
@@ -182,7 +182,7 @@ if ($attachment_ids) {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="section-subtitle text-center">También te podría interesar </h3>
+                            <h3 class="section-subtitle text-center mb-4">También te podría interesar </h3>
                             <div class="swiper generationSwiper">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">

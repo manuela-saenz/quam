@@ -7,7 +7,7 @@
 
 get_header() ?>
 
-<section id="bag" class="padg-mobile h-100">
+<section id="bag" class="  h-100">
   <div class="container-fluid position-relative">
     <div class="flex-grow-1 flex-shrink-0">
       <div class="mb-5 ">

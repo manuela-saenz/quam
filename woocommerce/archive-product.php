@@ -31,7 +31,7 @@ $products = get_products_by_category_name($currentCat->name);
 // echo $category;
 ?>
 
-<section id="bannerCategory" class="padg-mobile">
+<section id="bannerCategory" class=" position-relative overflow-hidden p-0">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -121,7 +121,18 @@ $products = get_products_by_category_name($currentCat->name);
 
 
             </div>
-            <div class="row m-0 galleryP pt-4">
+            
+            <!-- <div class="d-lg-none d-flex align-items-center justify-content-center w-100 ">
+                <div class="pagination mt-4">
+                    <a href="#">1</a>
+                    <a class="active" href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                </div>
+            </div> -->
+        </div>
+        <div class="row galleryP pt-4">
                 <?php
                 foreach ($products as $key => $product) {
                     $prices = $product->prices;
@@ -138,16 +149,6 @@ $products = get_products_by_category_name($currentCat->name);
                 ?>
 
             </div>
-            <!-- <div class="d-lg-none d-flex align-items-center justify-content-center w-100 ">
-                <div class="pagination mt-4">
-                    <a href="#">1</a>
-                    <a class="active" href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                </div>
-            </div> -->
-        </div>
     </div>
 
 </section>

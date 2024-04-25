@@ -1,37 +1,50 @@
-html{
+html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: "Raleway", sans-serif;
   font-size: 16px;
-  &.no-scroll{
+  --header-height: 120px;
+  &.no-scroll {
     overflow: hidden;
     height: 100vh;
   }
-  &.customize-support{
-    header{
+  &.customize-support {
+    --header-height: 150px;
+    @media (max-width: 1200px) {
+      --header-height: 58px;
+    }
+    header {
       top: 32px;
     }
-    .banner{
-      .swiper-slide{
+    .banner {
+      .swiper-slide {
         height: calc(100vh - 150px);
       }
     }
-    .shopping-bag-offcanvas{
+    .shopping-bag-offcanvas {
       top: 32px;
       height: calc(100vh - 32px);
     }
+    main {
+      margin-top: var(--header-height);
+    }
+  }
+  @media (max-width: 1200px) {
+    --header-height: 70px;
   }
 }
 
+main {
+  margin-top: var(--header-height);
+}
+
 section {
-  padding: 130px 0 45px;
-  @media (max-width: 768px) {
-    padding: 60px 0;
-  }
+  padding: 60px 0;
+
   @media (max-width: 578px) {
-    padding: 50px 0;
+    padding: 40px 0;
   }
 }
 
@@ -54,9 +67,4 @@ ul {
 a {
   text-decoration: none;
   color: inherit;
-}
-
-.padg-mobile{
-  padding-top: 120px;
-  overflow: hidden;
 }
