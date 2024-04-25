@@ -17,7 +17,7 @@ require_once(get_template_directory() . '/functions.php');
 // error_reporting(E_ALL);
 
 if (session_status() === PHP_SESSION_NONE) {
-	session_start();
+    session_start();
 }
 
 class SyEAjaxRequest
@@ -63,71 +63,20 @@ class SyEAjaxRequest
 
         $prodID = $_POST["product_id"];
         $quantity = $_POST["quantity"];
-
-        // Check if the product exists
-        $product = wc_get_product($prodID);
-
-
-        if (!$product) {
-            echo json_encode(array(
-                "status" => "error",
-                "message" => "Producto no encontrado"
-            ));
-            die();
-        }
-
-        // Check if the product is in stock
-        if (!$product->is_in_stock()) {
-            echo json_encode(array(
-                "status" => "error",
-                "message" => "Agotado. Por favor elige un producto diferente."
-            ));
-            die();
-        }
-
-        // Add the product to the cart
         $result = $woocommerce->cart->add_to_cart($prodID, $quantity);
 
-        $totalItemsProduct = $woocommerce->cart->get_cart_item($result)["quantity"];
-        $PrecioProducto = $woocommerce->cart->get_cart_item($result)["data"]->get_price();
-        $TotalProduct = $totalItemsProduct * $PrecioProducto;
-
-        $formatoColombiano = "$ " . number_format($TotalProduct, 0, ',', '.');
-
         $ValorTotal = $woocommerce->cart->get_cart_total();
-
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
-
-        ob_start();
-        ItemsCheckout();
-        $anotherOutput = ob_get_clean();
-
-        $search = array(
-            '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
-            '/[^\S ]+\</s',     // strip whitespaces before tags, except space
-            '/(\s)+/s',         // shorten multiple whitespace sequences
-            '/<!--(.|\s)*?-->/' // Remove HTML comments
-        );
-        $replace = array(
-            '>',
-            '<',
-            '\\1',
-            ''
-        );
-
-        $buffer = preg_replace($search, $replace, $itemsCart);
-        $buffer2 = preg_replace($search, $replace, $anotherOutput);
-
+        $count = $woocommerce->cart->get_cart_contents_count();
+        $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $itemsCart);
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
             "html" => $buffer,
-            "checkout" => $buffer2,
-            "total" => $ValorTotal,
-            "quantity" => count($woocommerce->cart->get_cart()),
-            "totalProducto" => $formatoColombiano
+            'counter' => $count,
+            "total" => $ValorTotal
         ));
 
         wp_die();
@@ -277,7 +226,7 @@ class SyEAjaxRequest
         global $woocommerce;
         $cart_variation_key = $_POST["cart_item_key"];
         $cart_product_key = $_POST["product_id"];
-       
+
         foreach ($woocommerce->cart->get_cart() as $key => $cart_item) {
             if ($cart_item['variation_id'] == $cart_variation_key) {
                 unset($woocommerce->cart->cart_contents[$key]);
@@ -285,7 +234,7 @@ class SyEAjaxRequest
                 break;
             }
         }
-      
+
         if ($cart_variation_key === 0) {
             $woocommerce->cart->remove_cart_item($cart_product_key);
         }
@@ -295,7 +244,7 @@ class SyEAjaxRequest
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
-
+        $count = $woocommerce->cart->get_cart_contents_count();
         $search = array(
             '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
             '/[^\S ]+\</s',     // strip whitespaces before tags, except space
@@ -310,12 +259,12 @@ class SyEAjaxRequest
         );
 
         $buffer = preg_replace($search, $replace, $itemsCart);
-       
+
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
             "html" => $buffer,
-            // "ordenList" => $buffer,
+            'counter' => $count,
             "total" => $ValorTotal,
             "quantity" => count($woocommerce->cart->get_cart())
         ));
