@@ -287,7 +287,6 @@ function initFavoritesPanelDelete() {
           }
         }
         $("#favoritesCounter").text(res.counter);
-        console.log(res.html);
         $(".offcanvas-body.ordenList.fav").html(res.html);
       },
     });
