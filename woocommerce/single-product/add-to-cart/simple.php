@@ -19,6 +19,7 @@
 defined('ABSPATH') || exit;
 
 global $product;
+$sessionFav = $_SESSION["prodsfavs"];
 
 if (!$product->is_purchasable()) {
 	return;
@@ -56,3 +57,15 @@ if ($product->is_in_stock()) : ?>
 	<?php do_action('woocommerce_after_add_to_cart_form'); ?>
 
 <?php endif; ?>
+
+<script>
+	var targetNode = document.getElementById('add-sprod-favs');
+	var productId = targetNode.getAttribute('data-product-id');
+
+	var sessionFav = <?php echo json_encode($sessionFav); ?>;
+	if (sessionFav.includes(productId)) {
+		$("#add-sprod-favs").addClass("active-fav");
+	} else {
+		$("#add-sprod-favs").removeClass("active-fav");
+	}
+</script>

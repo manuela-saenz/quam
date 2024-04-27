@@ -34,18 +34,15 @@ jQuery(document).ready(function ($) {
       success: function (response) {
         var res = JSON.parse(response);
         if (res.status === "success") {
-          // Si el botón existe, procede a agregar el elemento span
           if (botonCart) {
-            // Verifica si el elemento span con ID "cartItem" ya existe dentro del botón
             var spanElement = document.getElementById("cartItem");
 
-            // Si el elemento span no existe, entonces lo crea y lo agrega al botón
             if (!spanElement) {
               spanElement = document.createElement("span");
               spanElement.id = "cartItem";
               spanElement.className =
                 "cart-section-quantity rounded-pill position-absolute center-all text-white";
-              spanElement.textContent = ""; // Agrega el texto dinámico aquí
+              spanElement.textContent = ""; 
               botonCart.appendChild(spanElement);
             }
           }
@@ -131,40 +128,21 @@ $(document).on("click", ".qtyminus , .qtyplus", function () {
   var originalPrice = parseFloat(
     container.find("#price").text().replace("$", "").replace(",", "")
   );
-  // var originalRegularPrice = parseFloat(
-  //   container.find("#regular_price").text().replace("$", "").replace(",", "")
-  // );
   var priceOriginal = parseInt(container.find("#priceUnit").data("price"));
   let operacion;
   if ($(this).hasClass("qtyminus")) {
     if (currentQuantity > 1) {
-      // console.log(originalPrice * (parseInt(quantityInput.val()) - 1), "total");
       operacion = originalPrice * (parseInt(quantityInput.val()) - 1);
       currentQuantity = currentQuantity - 1;
       quantityInput.val(currentQuantity);
       originalPrice = originalPrice - priceOriginal;
-      // originalRegularPrice = originalRegularPrice - priceOriginal;
-      // container
-      //   .find("#price")
-      //   .text("$" + originalPrice.toLocaleString("en-US", {}));
-      // container
-      //   .find("#regular_price")
-      //   .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
     }
   } else if ($(this).hasClass("qtyplus")) {
     if (currentQuantity >= 1) {
-      // console.log(originalPrice * (parseInt(quantityInput.val()) + 1), "total");
       operacion = originalPrice * (parseInt(quantityInput.val()) + 1);
       currentQuantity = currentQuantity + 1;
       quantityInput.val(currentQuantity);
       originalPrice = originalPrice + priceOriginal;
-      // originalRegularPrice = originalRegularPrice + priceOriginal;
-      // container
-      //   .find("#price")
-      //   .text("$" + originalPrice.toLocaleString("en-US", {}));
-      // container
-      //   .find("#regular_price")
-      //   .text("$" + originalRegularPrice.toLocaleString("en-US", {}));
     }
   }
 
@@ -180,12 +158,6 @@ $(document).on("click", ".qtyminus , .qtyplus", function () {
         var quantity = parseInt(quantity[0].value);
         var total = price * quantity;
         totalGeneral += total;
-        // if (priceElement[0].innerText !== "") {
-        //   var price = parseFloat(
-        //     priceElement[0].innerText.replace(/[^0-9\.]/g, "")
-        //   );
-        //   total += price;
-        // }
       }
     });
   }
@@ -245,6 +217,7 @@ function initAddToFavoriteButton() {
         prodid: productId,
       },
       success: function (res) {
+        $("#add-sprod-favs").addClass("active-fav");
         var spanElement = document.getElementById("favoritesCounter");
         if (!spanElement) {
           spanElement = document.createElement("span");
@@ -292,6 +265,7 @@ function initFavoritesPanelDelete() {
     });
   });
 }
-initFavoritesPanelDelete();
 
+
+initFavoritesPanelDelete();
 initAddToFavoriteButton();
