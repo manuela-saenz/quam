@@ -85,9 +85,12 @@ if ($attachment_ids) {
 
             <div class="col-lg-6  information-product mt-4">
                 <div class="info-product">
-
+                    <div class="d-none">
+                            <?php woocommerce_content() ?>
+                    </div>
                     <div class="p-4 bg-white ">
                        <div class="d-none d-lg-block">
+                       
                        <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
                         <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
                         <div class="d-flex justify-content-between">
