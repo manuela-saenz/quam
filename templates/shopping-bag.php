@@ -14,7 +14,7 @@ get_header() ?>
         <div id="stepper1" class="bs-stepper">
           <div class="step_by_step row">
             <div class="col-md-2">
-              <a href=""> <i class="icon-arrow-left"></i> Continuar comprando</a>
+              <a href="https://www.quam.com.co/web_quam/"> <i class="icon-arrow-left"></i> Continuar comprando</a>
             </div>
             <div class="col-md-7 offsted-md-1 center-all">
               <div class="bs-stepper-header" role="tablist">
@@ -412,7 +412,7 @@ get_header() ?>
                                 </div>
                               </form>
                               <div class="btn-step-next">
-                                <button class="quam-btn blue next" onclick="stepper1.next()">Comprar ahora</button>
+                                <button class="quam-btn blue next" onclick="redirectToPaymentGateway()">Comprar ahora</button>
                               </div>
                             </div>
                           </div>
@@ -488,4 +488,10 @@ get_header() ?>
   </div>
 </section>
 
+<script>
+  function redirectToPaymentGateway() {
+    // Reemplaza 'url_de_tu_pasarela_de_pagos' con la URL de tu pasarela de pagos
+    window.location.href = 'https://sandbox.gateway.payulatam.com/ppp-web-gateway';
+  }
+</script>
 <?php get_footer() ?>

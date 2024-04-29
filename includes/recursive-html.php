@@ -80,7 +80,6 @@ function ItemsCart()
 function ItemsCheckout()
 {
     $items = WC()->cart->get_cart();
-    $total_items = count($items);
     $item_counter = 0;
 
     foreach ($items as $item => $values) {
@@ -129,10 +128,7 @@ function ItemsCheckout()
                         </div>
                     </div>
                 </td>
-                <td>
-                    <div class="d-flex align-items-center justify-content-center h-100 "> $<?= number_format($price * $quantity); ?>
-                    </div>
-                </td>
+             
                 <td>
                     <div class="d-flex align-items-center justify-content-center h-100 "> $<?= number_format($price * $quantity); ?>
                     </div>
