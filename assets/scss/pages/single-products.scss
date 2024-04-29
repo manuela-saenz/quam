@@ -329,6 +329,9 @@
       tbody {
         tr {
           display: grid;
+          .label{
+            display: block !important;
+          }
           .cfvsw-swatches-container {
             margin-bottom: 18px;
           }

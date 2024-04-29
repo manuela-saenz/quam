@@ -24,9 +24,11 @@
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php ") ?>";
   </script>
-  <?php wp_head(); ?>
+  <?php 
+   wp_meta();
+  wp_head(); ?>
 </head>
-
+<?php wp_body_open() ?>
 <body <?php body_class() ?>>
   <header>
     <div class="header-contact">

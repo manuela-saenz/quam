@@ -157,11 +157,16 @@ function disableDragBox() {
 }
 
 
+$(window).on('load resize', function () {
+  if ($(window).width() <= 991) {
+    if (!contentScrollable) {
+      initDragBox();
+    }
+    $('.mobile-container').scrollTop(1)
+  } 
+})
 
-if (!contentScrollable) {
-  initDragBox();
-}
-$('.mobile-container').scrollTop(1)
+
 
 
 function scrollEnable() {

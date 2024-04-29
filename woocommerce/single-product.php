@@ -28,6 +28,9 @@ if ($attachment_ids) {
 <section id="Singleimgprincipal" class="pt-0">
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <?php woocommerce_breadcrumb() ?>
+            </div>
             <div class="col-lg-1 imgP p-0 px-xl-3">
 
                 <div thumbsSlider="" class="swiper SingProducts mt-4">
@@ -90,7 +93,7 @@ if ($attachment_ids) {
                     </div>
                     <div class="p-4 bg-white ">
                        <div class="d-none d-lg-block">
-                       
+                      
                        <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
                         <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
                         <div class="d-flex justify-content-between">
@@ -106,8 +109,8 @@ if ($attachment_ids) {
                             <p> <?= $product->get_short_description() ?></p>
                         </div>
                        </div>
-                        <div class="product-actions mb-md-5" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-                            <div class="p-4 p-md-0">
+                        <div class="product-actions mb-lg-5" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                            <div class="p-4 p-lg-0">
                                 <?php
                                 global $product;
                                 if ($product->is_type('variable')) {
