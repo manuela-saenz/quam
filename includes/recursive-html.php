@@ -12,7 +12,7 @@ function ItemsCart()
         $regular_price = $_product->get_regular_price();
         $price = $_product->get_price();
         $link = get_permalink($values['product_id']);
-        $image = get_the_post_thumbnail_url($values['product_id'], array(95, 95));
+        $image = get_the_post_thumbnail_url($values['product_id']);
         $quantity = $values['quantity'];
         $title = $_product->get_name();
         $image = '';
@@ -22,9 +22,9 @@ function ItemsCart()
         if ($_product->is_type('variation')) {
             $variation_id = $values['variation_id'];
             $image_id = $_product->get_image_id();
-            $image = wp_get_attachment_image_url($image_id, array(95, 95));
+            $image = wp_get_attachment_image_url($image_id);
         } else {
-            $image = get_the_post_thumbnail_url($values['product_id'], array(95, 95));
+            $image = get_the_post_thumbnail_url($values['product_id']);
         }
         $identificador = $_product->get_id();
 ?>

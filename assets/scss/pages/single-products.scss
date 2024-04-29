@@ -205,7 +205,7 @@
 }
 
 .info-product {
-  max-width: 780px;
+  max-width: 740px;
 }
 
 .section-subtitle {
@@ -329,6 +329,9 @@
       tbody {
         tr {
           display: grid;
+          .label{
+            display: block !important;
+          }
           .cfvsw-swatches-container {
             margin-bottom: 18px;
           }

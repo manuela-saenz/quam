@@ -24,10 +24,12 @@
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php ") ?>";
   </script>
-  <?php wp_head(); ?>
+  <?php 
+   wp_meta();
+  wp_head(); ?>
 </head>
-
-<body>
+<?php wp_body_open() ?>
+<body <?php body_class() ?>>
   <header>
     <div class="header-contact">
       <div class="container d-flex align-items-center justify-content-lg-between justify-content-center position-relative">
