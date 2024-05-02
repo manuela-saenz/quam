@@ -59,13 +59,19 @@ if ($product->is_in_stock()) : ?>
 <?php endif; ?>
 
 <script>
-	var targetNode = document.getElementById('add-sprod-favs');
+	setTimeout(()=>{
+		var targetNode = document.getElementById('add-sprod-favs');
 	var productId = targetNode.getAttribute('data-product-id');
-
+		console.log(productId)
 	var sessionFav = <?php echo json_encode($sessionFav); ?>;
-	if (sessionFav.includes(productId)) {
+	if(!productId === 0){
+        if (sessionFav.includes(productId)) {
 		$("#add-sprod-favs").addClass("active-fav");
 	} else {
 		$("#add-sprod-favs").removeClass("active-fav");
 	}
+    }
+	
+	}, 500)
+	
 </script>

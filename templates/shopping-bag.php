@@ -3,59 +3,22 @@
 /**
  * Template Name: Bolsa de compra
  */
+require_once('../../wp-load.php');
+get_header();
 
+<<<<<<< HEAD
 
 get_header();
+=======
+?>
+>>>>>>> 0704d37e91db36c8652b5f7bed04e458b13a2b71
 
 ?>
 <section id="bag" class="  h-100">
-  <div class="container-fluid position-relative">
-    <div class="flex-grow-1 flex-shrink-0">
-      <div class="mb-5 ">
-        <div id="stepper1" class="bs-stepper">
-          <div class="step_by_step row">
-            <div class="col-md-2">
-              <a href="https://www.quam.com.co/web_quam/"> <i class="icon-arrow-left"></i> Continuar comprando</a>
-            </div>
-            <div class="col-md-7 offsted-md-1 center-all">
-              <div class="bs-stepper-header" role="tablist">
-                <div class="step" data-target="#test-l-1">
-                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger1" aria-controls="test-l-1">
-                    <span class="bs-stepper-circle">1</span>
-                    <span class="bs-stepper-label">Bolsa de la compra</span>
-                  </button>
-                </div>
-                <div class="bs-stepper-line"></div>
-                <div class="step" data-target="#test-l-2">
-                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-2">
-                    <span class="bs-stepper-circle">2</span>
-                    <span class="bs-stepper-label">Identificación</span>
-                  </button>
-                </div>
-                <div class="bs-stepper-line"></div>
-                <div class="step" data-target="#test-l-3">
-                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger3" aria-controls="test-l-3">
-                    <span class="bs-stepper-circle">3</span>
-                    <span class="bs-stepper-label">Ubicación</span>
-                  </button>
-                </div>
-                <div class="bs-stepper-line"></div>
-                <div class="step" data-target="#test-l-4">
-                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger4" aria-controls="test-l-4">
-                    <span class="bs-stepper-circle">4</span>
-                    <span class="bs-stepper-label">Pago</span>
-                  </button>
-                </div>
-                <!-- <div class="bs-stepper-line"></div> -->
-                <div class="step" data-target="#test-l-5" class="" style="display: none;">
-                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger4" aria-controls="test-l-4">
-                    <span class="bs-stepper-circle">5</span>
-                    <span class="bs-stepper-label">Pago</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+  <div class="container position-relative">
+    
 
+<<<<<<< HEAD
             <div class="col-md-4">
 
             </div>
@@ -415,10 +378,17 @@ get_header();
         </div>
       </div>
     </div>
+=======
+    <?php 
+    wc_get_template( 'checkout/form-checkout.php');
+    wc_get_order();
+    ?>
+>>>>>>> 0704d37e91db36c8652b5f7bed04e458b13a2b71
   </div>
 </section>
 
 <script>
+<<<<<<< HEAD
   function ShowError(menssage) {
     const btn_error = document.getElementById("error_alert");
     btn_error.innerHTML = menssage;
@@ -650,5 +620,34 @@ get_header();
       });
     }
   }
+=======
+  // function redirectToPaymentGateway() {
+  //   // Reemplaza 'url_de_tu_pasarela_de_pagos' con la URL de tu pasarela de pagos
+  //   window.location.href = 'https://sandbox.gateway.payulatam.com/ppp-web-gateway';
+  // }
+
+  $(document).ready(function () {
+  // Intercepta el evento de envío del formulario
+  $("#place_order").on("submit", function (e) {
+    // Previene la recarga de la página
+    e.preventDefault();
+
+    // Realiza una solicitud AJAX
+    $.ajax({
+      url: ajaxUrl, // URL del archivo PHP que procesará la solicitud
+      type: "POST", // Método de la solicitud
+      data: $(this).serialize(), // Datos del formulario
+      success: function (response) {
+        console.log(response);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        // Aquí puedes manejar los errores de la solicitud AJAX
+        // ...
+      },
+    });
+  });
+});
+
+>>>>>>> 0704d37e91db36c8652b5f7bed04e458b13a2b71
 </script>
 <?php get_footer() ?>

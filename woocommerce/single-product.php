@@ -26,11 +26,19 @@ if ($attachment_ids) {
 <div id="showAlertAddCart" class="alert alert-success add-to-cart-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Producto agregado al carrito.</div>
 <div id="showAlertAddFav" class="alert alert-success add-to-list-fav-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Lista de productos favoritos actualizada correctamente.</div>
 <section id="Singleimgprincipal" class="pt-0">
+    <div class="py-2 border-top border-bottom">
+        <div class="container">
+            <?php woocommerce_breadcrumb() ?>
+        </div>
+    </div>
     <div class="container">
-        <div class="row">
+        <div class="row d-none">
             <div class="col-md-12">
-                <?php woocommerce_breadcrumb() ?>
+                <?php woocommerce_content() ?>
             </div>
+        </div>
+        <div class="row">
+
             <div class="col-lg-1 imgP p-0 px-xl-3">
 
                 <div thumbsSlider="" class="swiper SingProducts mt-4">
@@ -59,12 +67,12 @@ if ($attachment_ids) {
             <div class="col-lg-5 gallery">
                 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper SingProducts2">
                     <div class="swiper-wrapper">
-                    <?php
+                        <?php
                         if ($attachment_ids) {
                             foreach ($images as $img) : ?>
                                 <div class="swiper-slide">
                                     <div class="img-contain h-100">
-                                        <img src="<?= $img ?>"  alt="<?= $post->post_title ?>" />
+                                        <img src="<?= $img ?>" alt="<?= $post->post_title ?>" />
                                     </div>
 
                                 </div>
@@ -88,27 +96,25 @@ if ($attachment_ids) {
 
             <div class="col-lg-6  information-product mt-4">
                 <div class="info-product">
-                    <div class="d-none">
-                            <?php woocommerce_content() ?>
-                    </div>
-                    <div class="p-4 bg-white ">
-                       <div class="d-none d-lg-block">
-                      
-                       <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
-                        <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center price">
-                                <p>$<?= $product->get_price() ?></p>
-                                <span><?= $product->get_regular_price() ?> </span>
-                            </div>
-                            <button class="button-heart d-lg-none"> <i class="icon-heart"></i> </button>
-                        </div>
-                        <button class="quam-btn blue d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
 
-                        <div>
-                            <p> <?= $product->get_short_description() ?></p>
+                    <div class="p-4 bg-white ">
+                        <div class="d-none d-lg-block">
+
+                            <span class="ref-number">SKU: <?= $sku = $product->get_sku() ?> </span>
+                            <h1 class="section-subtitle"> <?= $post->post_title ?></h1>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center price">
+                                    <p>$<?= $product->get_price() ?></p>
+                                    <span><?= $product->get_regular_price() ?> </span>
+                                </div>
+                                <button class="button-heart d-lg-none"> <i class="icon-heart"></i> </button>
+                            </div>
+                            <button class="quam-btn blue d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
+
+                            <div>
+                                <p> <?= $product->get_short_description() ?></p>
+                            </div>
                         </div>
-                       </div>
                         <div class="product-actions mb-lg-5" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                             <div class="p-4 p-lg-0">
                                 <?php
