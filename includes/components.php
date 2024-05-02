@@ -69,7 +69,8 @@ function desplegableProductos($titulo, $tipoDeLista)
 
     <?php if ($tipoDeLista == 'mini-carrito') { ?>
       <div class="offcanvas-body ordenList cart">
-        <?php get_template_part("templates/components/mini", "cart") ?>
+        <?php
+        get_template_part("templates/components/mini", "cart") ?>
       </div>
       <div class="offcanvas-footer">
         <?php
@@ -85,7 +86,7 @@ function desplegableProductos($titulo, $tipoDeLista)
             <p class="fs-4"> <b id="total"><?= $total; ?></b> </p>
           </div>
         </div>
-        <a href="https://www.quam.com.co/web_quam/bolsa-de-compras/" class="quam-btn blue w-100">Finalizar compra</a>
+        <a href="<?= get_permalink(wc_get_page_id( 'checkout' )) ?>" class="quam-btn blue w-100">Finalizar compra</a>
       </div>
     <?php } elseif ($tipoDeLista == 'mini-favoritos') { ?>
       <div class="offcanvas-body ordenListFav fav">
