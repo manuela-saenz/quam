@@ -38,6 +38,8 @@ class SyEAjaxRequest
             "woocommerce_confirm_payment",
             "woocommerce_ajax_favorites",
             "woocommerce_ajax_descargar_pdf",
+            "process_paymentU",
+            "process_payAddi",
             "add_product_to_favorites",
             "delete_favorite_product",
             "recoverPassword",
@@ -57,6 +59,139 @@ class SyEAjaxRequest
         }
     }
 
+    function process_payAddi()
+    {
+
+        $ally_slug = 'quamstore-ecommerce';
+        $amount = $_POST["amount"];
+
+        function get_addi_config($ally_slug, $amount)
+        {
+            $url = "https://channels-public-api.addi.com/allies/{$ally_slug}/config?requestedAmount={$amount}";
+            $response = file_get_contents($url);
+
+            // Decodificar la respuesta JSON
+            $data = json_decode($response, true);
+
+            return $data;
+        }
+
+
+        $data = get_addi_config($ally_slug, $amount);
+        if ($data['minAmount'] >  $amount) {
+            $response = array(
+                'success' => false,
+                'message' => 'El monto minimo para pagar con Addi es de ' . $data['minAmount']
+            );
+            echo json_encode($response);
+            exit();
+        }
+
+        // Generate JWT Auth Addi
+        function get_addi_token()
+        {
+            $url = "https://auth.addi-staging.com/oauth/token";
+
+            $data = array(
+                "audience" => "https://api.staging.addi.com",
+                "grant_type" => "client_credentials",
+                "client_id" => "TasR27VSFVAY9k7fewhPWIAi0Sv3bvy1",
+                "client_secret" => "5kzge06cigvhvngl9JnUaIgLBu4dsFeaKXyyak8eU76P7s1GOqaZ21e5nV7cg88J"
+            );
+
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+            $response = curl_exec($ch);
+
+            if (!$response) {
+                die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
+            }
+
+            curl_close($ch);
+
+            return json_decode($response, true);
+        }
+
+        $token = get_addi_token();
+        var_dump($token);
+    }
+
+    function process_paymentU()
+    {
+        global $woocommerce;
+
+        // Verifica si se han recibido los datos del formulario AJAX
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["amount"])) {
+            // Aquí puedes incluir la lógica para procesar los datos recibidos y construir el formulario de PayU
+            // Recibe los datos del formulario AJAX
+            $amount = $_POST["amount"];
+            $referenceOrder = $_POST["reference"];
+            $email = $_POST["email"];
+            $city = $_POST["city"];
+            $city = $_POST["city"];
+            $address = $_POST["address"];
+            $neighborhood = $_POST["neighborhood"];
+
+
+            $apikey = '3Fe1XI463W6gVi6Wdo93zBi1Px';
+            $merchantId = '975355';
+            $reference = $referenceOrder;
+            $price = $amount;
+            $currency = 'COP';
+
+            $signature = md5($apikey . '~' . $merchantId . '~' . $reference . '~' . $price . '~' . $currency);
+            // Lógica adicional para construir el formulario de PayU
+            // ...
+
+            // Construye el formulario de PayU (este es solo un ejemplo, asegúrate de incluir los campos correctos)
+            $payu_form = '<form id="payu-form" action="https://gateway.payulatam.com/ppp-web-gateway/" method="POST">';
+            $payu_form .= '<input type="hidden" name="merchantId" value="975355">';
+            $payu_form .= '<input type="hidden" name="accountId" value="983288">';
+            $payu_form .= '<input type="hidden" name="description" value="Pedido Quam #' . $referenceOrder . '">';
+            $payu_form .= '<input type="hidden" name="tax" value="0.00">';
+            $payu_form .= '<input type="hidden" name="referenceCode" value="' . $reference . '">';
+            $payu_form .= '<input type="hidden" name="amount" value="' . $amount . '">';
+            $payu_form .= '<input type="hidden" name="taxReturnBase" value="0">';
+            $payu_form .= '<input type="hidden" name="currency" value="COP">';
+            $payu_form .= '<input type="hidden" name="signature" value="' . $signature . '">';
+            $payu_form .= '<input type="hidden" name="test" value="0">';
+            $payu_form .= '<input type="hidden" name="buyerEmail" value="' . $email . '">';
+            $payu_form .= '<input type="hidden" name="responseUrl" value="https://www.quam.com.co/web_quam/wp-content/plugins/woocommerce-payu-latam/response.php">';
+            $payu_form .= '<input type="hidden" name="confirmationUrl" value="https://www.quam.com.co/web_quam/wp-content/plugins/woocommerce-payu-latam/response.php">';
+            $payu_form .= '<input type="hidden" name="shippingCountry" value="CO">';
+            $payu_form .= '<input type="hidden" name="billingCountry" value="CO">';
+            $payu_form .= '<input type="hidden" name="shippingAddress" value="' . $neighborhood . $address . '">';
+            $payu_form .= '<input type="hidden" name="billingAddress" value="' . $neighborhood . $address . '">';
+            $payu_form .= '<input type="hidden" name="billingCity" value="' . $city . '">';
+            $payu_form .= '<input type="hidden" name="shippingCity" value="' . $city . '">';
+            $payu_form .= '<input type="hidden" name="extra1" value="WOOCOMMERCE">';
+
+            $payu_form .= '<input type="submit" value="Pagar con PayU">';
+            $payu_form .= '</form>';
+            $woocommerce->cart->empty_cart();
+            // Devuelve el formulario de PayU como respuesta AJAX
+            $response = array(
+                'success' => true,
+                'form' => $payu_form
+            );
+            echo json_encode($response);
+            wp_die();
+        } else {
+            // Si los datos no se han recibido correctamente, devuelve un mensaje de error
+            $response = array(
+                'success' => false,
+                'message' => 'Error al procesar la solicitud.'
+            );
+            echo json_encode($response);
+            wp_die();
+        }
+    }
+
+
     function woocommerce_ajax_add_to_cart()
     {
         global $woocommerce;
@@ -69,22 +204,15 @@ class SyEAjaxRequest
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
-
-        ob_start();
-        ItemsCheckout();
-        $anotherOutput = ob_get_clean();
-        
         $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $itemsCart);
-        $buffer2 = preg_replace('/<!--(.|\s)*?-->/', '', $anotherOutput);
+
         echo json_encode(array(
             "item" => $result,
             "status" => "success",
             "html" => $buffer,
-            "checkout" => $buffer2,
             "counter" => count($woocommerce->cart->get_cart()),
             "total" => $ValorTotal
         ));
-
         wp_die();
     }
 
@@ -741,19 +869,21 @@ class SyEAjaxRequest
         $apellido = $_POST["apellido"];
         $telefono = $_POST["telefono"];
         $direccion = $_POST["direccion"];
-        $apartamento = $_POST["apartamento"];
-        $instrucciones = $_POST["instrucciones"];
+        $departamento = $_POST["departamento"];
+        $barrio = $_POST["barrio"];
+        $instrucciones = $_POST["info"];
+        $ciudad = $_POST["ciudad"];
 
 
-        $this->wc_create_account(array(
-            "email" => $email,
-            "nombre" => $nombre,
-            "apellido" => $apellido,
-            "telefono" => $telefono,
-            "direccion" => $direccion,
-            "apartamento" => $apartamento,
-            "instrucciones" => $instrucciones
-        ));
+        // $this->wc_create_account(array(
+        //     "email" => $email,
+        //     "nombre" => $nombre,
+        //     "apellido" => $apellido,
+        //     "telefono" => $telefono,
+        //     "direccion" => $direccion,
+        //     "apartamento" => $departamento,
+        //     "instrucciones" => $instrucciones
+        // ));
 
         $getAllCart = $woocommerce->cart->get_cart();
 
@@ -792,10 +922,10 @@ class SyEAjaxRequest
             'email'      => $email,
             'phone'      => $telefono,
             'address_1'  => $direccion,
-            'address_2'  => $apartamento,
-            'city'       => 'Bogota',
-            'state'      => 'Bogota',
-            'postcode'   => '110111',
+            'address_2'  => $departamento,
+            'city'       => $ciudad,
+            'state'      => $barrio,
+            'postcode'   => '0',
             'country'    => 'CO'
         ), 'billing');
 
@@ -805,10 +935,10 @@ class SyEAjaxRequest
             'email'      => $email,
             'phone'      => $telefono,
             'address_1'  => $direccion,
-            'address_2'  => $apartamento,
-            'city'       => 'Bogota',
-            'state'      => 'Bogota',
-            'postcode'   => '110111',
+            'address_2'  => $departamento,
+            'city'       => $ciudad,
+            'state'      => $barrio,
+            'postcode'   => '0',
             'country'    => 'CO'
         ), 'shipping');
 
@@ -824,6 +954,7 @@ class SyEAjaxRequest
 
         //optener el id de la orden
         $order_id = $order->get_id();
+        $total_orden = $order->get_total();
 
         $descripcion_productos = "";
 
@@ -834,13 +965,14 @@ class SyEAjaxRequest
         $descripcion_productos = substr($descripcion_productos, 0, -2);
 
 
-        $this->ConectBuyerAndOrder($email, $order_id);
+        // $this->ConectBuyerAndOrder($email, $order_id);
 
 
         $response = array(
             "status" => "success",
             "message" => "Orden creada correctamente",
             "order_id" => $order_id,
+            "total" => $total_orden,
             "descripcion_productos" => $descripcion_productos,
         );
 
@@ -1526,7 +1658,6 @@ class SyEAjaxRequest
             die();
         }
     }
-
 
     function woocommerce_ajax_descargar_pdf()
     {

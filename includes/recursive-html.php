@@ -2,7 +2,6 @@
 function ItemsCart()
 {
     $items = WC()->cart->get_cart();
-    $total_items = count($items);
     $item_counter = 0;
 
     foreach ($items as $item => $values) {
@@ -21,7 +20,8 @@ function ItemsCart()
         $variation_id = 0;
         if ($_product->is_type('variation')) {
             $variation_id = $values['variation_id'];
-            $image_id = $_product->get_image_id();
+            $variation = new WC_Product_Variation($variation_id); 
+            $image_id = $variation->get_image_id();
             $image = wp_get_attachment_image_url($image_id);
         } else {
             $image = get_the_post_thumbnail_url($values['product_id']);
@@ -101,6 +101,7 @@ function ItemsCheckout()
             $image_id = $_product->get_image_id();
             $image = wp_get_attachment_image_url($image_id, array(180, 180));
         } else {
+
             $image = get_the_post_thumbnail_url($values['product_id'], array(180, 180));
         }
         $identificador = $_product->get_id();
@@ -192,7 +193,7 @@ function ItemsSummary()
                 </div>
                 <div class="d-flex align-items-center price">
                     <p>$<?= number_format($price); ?></p>
-                    <span>$<?= number_format($regular_price); ?></span>
+                    <span>$<?= empty($regular_price) ? number_format($price) : number_format($regular_price); ?></span>
                 </div>
             </div>
         </div>
