@@ -2,3 +2,21 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap-utilities.scss";
 @import "../../../node_modules/bootstrap/scss/bootstrap-reboot.scss";
 @import "../../../node_modules/bootstrap/scss/buttons";
+
+
+.woocommerce-breadcrumb{
+    margin-bottom: 0 !important;
+}
+
+.product.type-product{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rtwpvg-trigger{
+    display: none !important;
+}
+
+.rtwpvg-slider-wrapper {
+    width: 100%;
+}

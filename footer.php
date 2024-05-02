@@ -114,6 +114,9 @@
   <script src="<?php bloginfo('template_url') ?>/assets/js/stepper.js"> </script>
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?=v<?= randomCode() ?>"> </script>
+<?php if (is_product()) { ?>
+<script src="<?php bloginfo('template_url') ?>/assets/js/product.js?=v<?= randomCode() ?>"> </script>
+<?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/variation.js?=v<?= randomCode() ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?=v<?= randomCode() ?>"> </script>
 

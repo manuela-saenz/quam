@@ -104,19 +104,8 @@ var swiper = new Swiper(".highlightsSwiper", {
 });
 
 // <!------------------------ Slider single product------------------------>//
-var swiper = new Swiper(".SingProducts", {
-  spaceBetween: 10,
-  slidesPerView: 4,
-  freeMode: true,
-  watchSlidesProgress: true,
 
-  breakpoints: {
-    991: {
-      direction: "vertical",
 
-    },
-  },
-});
 
 // --------- active cards --------------------
 
@@ -159,60 +148,93 @@ var swiper = new Swiper(".SingProducts", {
   };
   let allowScroll = false
   const enableSwiper = function () {
+
    
-    mySwiper = new Swiper(".SingProducts2", {
-      spaceBetween: 10,
-      mousewheel: true,
-      slidesPerView: "auto",
-      scrollbar: {
-        el: ".swiper-scrollbar",
-      },
-      navigation: {
-        nextEl: ".SingProducts-button-next",
-        prevEl: ".SingProducts-button-prev",
-      },
-      thumbs: {
-        swiper: swiper,
-      },
-      breakpoints: {
-        991: {
-          direction: "vertical",
-        },
-      },
-      // habilitar desplazamiento hacia abajo en el ultimo slide
-      on: {
-        slideChange: function () {
-          allowScroll = false
-          if (mySwiper.activeIndex === ($('.SingProducts2 .swiper-wrapper>div').length - 1)) {
-            setTimeout(() => {
-              allowScroll = true;
-            }, 100)
-          }
-        },
-      }
 
-    });
+    setTimeout(() => {
+      var elemento = $('.rtwpvg-thumbnail-slider');
+      elemento.removeClass(function (index, className) {
+        return (className.match(/\b(rtwpvg-thumbnail-slider)\b/g) || []).join(' ');
+      });
+      elemento.addClass('SingProducts swiper-vertical')
 
+      var elementoDos = $('.rtwpvg-slider');
+      elementoDos.removeClass(function (index, className) {
+        return (className.match(/\b(rtwpvg-slider)\b/g) || []).join(' ');
+      });
+      elementoDos.removeClass('swiper-horizontal swiper-autoheight')
+      elementoDos.addClass('SingProducts2 swiper-vertical');
+      elementoDos.append('<div class="swiper-scrollbar"></div>')
+
+      mySwiper = new Swiper(".SingProducts2", {
+        spaceBetween: 10,
+        mousewheel: true,
+        slidesPerView: "auto",
+        scrollbar: {
+          el: ".swiper-scrollbar",
+        },
+        navigation: {
+          nextEl: ".SingProducts-button-next",
+          prevEl: ".SingProducts-button-prev",
+        },
+        thumbs: {
+          swiper: swiper,
+        },
+        breakpoints: {
+          991: {
+            direction: "vertical",
+          },
+        },
+        // habilitar desplazamiento hacia abajo en el ultimo slide
+        on: {
+          slideChange: function () {
+            allowScroll = false
+            if (mySwiper.activeIndex === ($('.SingProducts2 .swiper-wrapper>div').length - 1)) {
+              setTimeout(() => {
+                allowScroll = true;
+              }, 100)
+            }
+          },
+        }
+  
+      });
+
+      var swiper = new Swiper(".SingProducts", {
+        spaceBetween: 10,
+        slidesPerView: 5,
+        freeMode: true,
+        watchSlidesProgress: true,
+      
+        breakpoints: {
+          991: {
+            direction: "vertical",
+      
+          },
+        },
+      });
+
+    }, 200)
+    
     // desplazamiento hacia abajo cuando haga scroll en el ultimo slide
     $(mySwiper.el).on('wheel', function (e) {
-        if (allowScroll) {
-           // si se desplaza hacia abajo cuando este parado sobre el ultimo slide
-          if(e.originalEvent.deltaY >= 0){
-            let valueToScroll = (($(window).height() - e.originalEvent.screenY )  + 100);
-            // si el valor que retorna screenY es negativo
-            if(e.originalEvent.screenY <= 0){
-              valueToScroll = e.originalEvent.screenY * -1;
-            } 
-            mySwiper.allowSlidePrev = false;
-            $(window).scrollTop(valueToScroll)
-          } else {
-            if($(window).scrollTop() > 0){
-              $(window).scrollTop(0)
-              mySwiper.allowSlidePrev = false;
-            } 
-            mySwiper.allowSlidePrev = true;
+      if (allowScroll) {
+        // si se desplaza hacia abajo cuando este parado sobre el ultimo slide
+        if (e.originalEvent.deltaY >= 0) {
+          let valueToScroll = (($(window).height() - e.originalEvent.screenY) + 100);
+          // si el valor que retorna screenY es negativo
+          if (e.originalEvent.screenY <= 0) {
+            valueToScroll = e.originalEvent.screenY * -1;
           }
+          mySwiper.allowSlidePrev = false;
+          $(window).scrollTop(valueToScroll)
+        } else {
+          if ($(window).scrollTop() > 0) {
+            $(window).scrollTop(0)
+            mySwiper.allowSlidePrev = false;
+          }
+          mySwiper.allowSlidePrev = true;
         }
+      }
     })
   };
 

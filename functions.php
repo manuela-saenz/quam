@@ -3,7 +3,19 @@ require "includes/components.php";
 require "includes/recursive-html.php";
 require "includes/ajax-request.php";
 add_theme_support('post-thumbnails');
+
+
 add_theme_support("woocommerce");
+function wc_remove_image_effect_support() {
+
+    remove_theme_support( 'wc-product-gallery-zoom' );
+    remove_theme_support( 'wc-product-gallery-lightbox' );
+    remove_theme_support( 'wc-product-gallery-slider' );
+
+}
+add_action( 'after_setup_theme', 'wc_remove_image_effect_support', 100 );
+
+	
 
 // Función para obtener productos por categoría
 function get_products_by_category_name($category_name) {
