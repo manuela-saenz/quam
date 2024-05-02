@@ -6,19 +6,61 @@
 require_once('../../wp-load.php');
 get_header();
 
-<<<<<<< HEAD
-
-get_header();
-=======
 ?>
->>>>>>> 0704d37e91db36c8652b5f7bed04e458b13a2b71
 
-?>
+
 <section id="bag" class="  h-100">
-  <div class="container position-relative">
-    
+  <?php the_content();
 
-<<<<<<< HEAD
+  ?>
+
+  <div class="container-fluid position-relative">
+    <div class="flex-grow-1 flex-shrink-0">
+      <div class="mb-5 ">
+        <div id="stepper1" class="bs-stepper">
+          <div class="step_by_step row">
+            <div class="col-md-2">
+              <a href="https://www.quam.com.co/web_quam/"> <i class="icon-arrow-left"></i> Continuar comprando</a>
+            </div>
+            <div class="col-md-7 offsted-md-1 center-all">
+              <div class="bs-stepper-header" role="tablist">
+                <div class="step" data-target="#test-l-1">
+                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger1" aria-controls="test-l-1">
+                    <span class="bs-stepper-circle">1</span>
+                    <span class="bs-stepper-label">Bolsa de la compra</span>
+                  </button>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-l-2">
+                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-2">
+                    <span class="bs-stepper-circle">2</span>
+                    <span class="bs-stepper-label">Identificación</span>
+                  </button>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-l-3">
+                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger3" aria-controls="test-l-3">
+                    <span class="bs-stepper-circle">3</span>
+                    <span class="bs-stepper-label">Ubicación</span>
+                  </button>
+                </div>
+                <div class="bs-stepper-line"></div>
+                <div class="step" data-target="#test-l-4">
+                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger4" aria-controls="test-l-4">
+                    <span class="bs-stepper-circle">4</span>
+                    <span class="bs-stepper-label">Pago</span>
+                  </button>
+                </div>
+                <!-- <div class="bs-stepper-line"></div> -->
+                <div class="step" data-target="#test-l-5" class="" style="display: none;">
+                  <button type="button" class="step-trigger" role="tab" id="stepper1trigger4" aria-controls="test-l-4">
+                    <span class="bs-stepper-circle">5</span>
+                    <span class="bs-stepper-label">Pago</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <div class="col-md-4">
 
             </div>
@@ -378,276 +420,37 @@ get_header();
         </div>
       </div>
     </div>
-=======
-    <?php 
-    wc_get_template( 'checkout/form-checkout.php');
-    wc_get_order();
-    ?>
->>>>>>> 0704d37e91db36c8652b5f7bed04e458b13a2b71
   </div>
+
+
 </section>
 
 <script>
-<<<<<<< HEAD
-  function ShowError(menssage) {
-    const btn_error = document.getElementById("error_alert");
-    btn_error.innerHTML = menssage;
-    btn_error.style.display = "block";
-    setTimeout(function() {
-      btn_error.style.display = "none";
-    }, 5000);
-
-    // Lanza una excepción para terminar el flujo de ejecución
-    throw new Error(menssage);
-  }
-
-  function generate_order() {
-    // Obtiene los valores de los campos de entrada
-    var fname = $('#fname').val();
-    var apellido = $('#lapellido').val();
-    var email = $('#lemail').val();
-    var cc = $('#lcc').val();
-    var tel = $('#ltel').val();
-    var Departamento = $('#Departamento').val();
-    var Municipio = $('#Municipio').val();
-    var Dir1 = $('#Dir1').val();
-    var barrio = $('#barrio').val();
-    var info = $('#info').val();
-    var destinario = $('#destinario').val();
-
-    // Define las expresiones regulares para la validación
-    var nameRegex = /^[a-zA-Z\s]*$/;
-    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    var ccRegex = /^[0-9]*$/;
-    var telRegex = /^[0-9]*$/;
-    var dirRegex = /^[a-zA-Z0-9\s\#]+$/;
-
-    if (fname == '') {
-      ShowError('El campo "Nombres" no puede estar vacío.');
-    } else if (!nameRegex.test(fname)) {
-      ShowError('El campo "Nombres" no puede contener caracteres especiales.');
-    }
-
-    if (apellido == '') {
-      ShowError('El campo "Apellidos" no puede estar vacío.');
-    } else if (!nameRegex.test(apellido)) {
-      ShowError('El campo "Apellidos" no puede contener caracteres especiales.');
-    }
-
-    if (email == '') {
-      ShowError('El campo "Correo electrónico" no puede estar vacío.');
-    } else if (!emailRegex.test(email)) {
-      ShowError('El campo "Correo electrónico" debe ser un correo electrónico válido.');
-    }
-
-    if (cc == '') {
-      ShowError('El campo "Identificación" no puede estar vacío.');
-    } else if (!ccRegex.test(cc)) {
-      ShowError('El campo "Identificación" no puede contener caracteres que no sean números.');
-    }
-
-    if (tel == '') {
-      ShowError('El campo "Teléfono" no puede estar vacío.');
-    } else if (!telRegex.test(tel)) {
-      ShowError('El campo "Teléfono" no puede contener caracteres que no sean números.');
-    }
-
-    if (Departamento == '') {
-      ShowError('El campo "Departamento" no puede estar vacío.');
-    } else if (!nameRegex.test(Departamento)) {
-      ShowError('El campo "Departamento" no puede contener caracteres especiales.');
-    }
-
-    if (Municipio == '') {
-      ShowError('El campo "Municipio" no puede estar vacío.');
-    } else if (!nameRegex.test(Municipio)) {
-      ShowError('El campo "Municipio" no puede contener caracteres especiales.');
-    }
-
-    if (Dir1 == '') {
-      ShowError('El campo "Dirección de entrega" no puede estar vacío.');
-    } else if (!dirRegex.test(Dir1)) {
-      ShowError('El campo "Dirección de entrega" no puede contener caracteres especiales.');
-    }
-
-    if (barrio == '') {
-      ShowError('El campo "Barrio" no puede estar vacío.');
-    } else if (!nameRegex.test(barrio)) {
-      ShowError('El campo "Barrio" no puede contener caracteres especiales.');
-    }
-
-    if (info == '') {
-      ShowError('El campo "Información adicional" no puede estar vacío.');
-    } else if (!nameRegex.test(info)) {
-      ShowError('El campo "Información adicional" no puede contener caracteres especiales.');
-    }
-
-    if (destinario == '') {
-      ShowError('El campo "Destinatario" no puede estar vacío.');
-    } else if (!nameRegex.test(destinario)) {
-      ShowError('El campo "Destinatario" no puede contener caracteres especiales.');
-    }
-
-    // Imprime los valores en la consola
-    var data = {
-      'action': 'woocommerce_generate_order',
-      'nombre': fname,
-      'apellido': apellido,
-      'email': email,
-      'cc': cc,
-      'telefono': tel,
-      'departamento': Departamento,
-      'ciudad': Municipio,
-      'direccion': Dir1,
-      'barrio': barrio,
-      'info': info,
-      'destinario': destinario
-    };
-
-    $.ajax({
-      url: ajaxUrl, // URL del archivo PHP que contiene la función generate_order()
-      type: 'POST',
-      data: data,
-      success: function(response) {
-
-        // La respuesta del servidor se encuentra en el parámetro 'response'
-        // Parsea la respuesta JSON
-        var data = JSON.parse(response);
-
-        // Comprueba si la petición fue exitosa
-        if (data.status === 'success') {
-          // Si la petición fue exitosa, muestra un mensaje de éxito
-          var orderData = {
-            order_id: data.order_id,
-            total: data.total
-          };
-
-          localStorage.setItem('orderData', JSON.stringify(orderData));
-          alert('Pedido generado exitosamente. ID del pedido: ' + data.order_id);
-          stepper1.next()
-        } else {
-          // Si hubo un error, muestra el mensaje de error
-          alert(data.message);
-        }
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        // Si hubo un error en la petición AJAX, muestra un mensaje de error
-        alert('Error al realizar la petición: ' + textStatus);
-      }
-    });
-  }
-</script>
-<script>
-  function redirectToPaymentGateway() {
-    var listItems = document.querySelectorAll('.nav.nav-pills.mb-3 li');
-    var activeButtonTexts = [];
-    for (var i = 0; i < listItems.length; i++) {
-      var button = listItems[i].querySelector('button');
-
-      if (button && button.classList.contains('active')) {
-        activeButtonTexts.push(button.innerText);
-      }
-    }
-
-    // Imprime el texto de los botones activos
-    if (activeButtonTexts[0] === 'PayU Latam') {
-      var orderData = JSON.parse(localStorage.getItem('orderData'));
-      var email = $('#lemail').val();
-      var Municipio = $('#Municipio').val();
-      var Dir1 = $('#Dir1').val();
-      var barrio = $('#barrio').val();
-
-      $.ajax({
-        url: ajaxUrl,
-        type: 'POST',
-        data: {
-          action: "process_paymentU",
-          reference: orderData.order_id,
-          amount: orderData.total,
-          email: email,
-          city: Municipio,
-          address: Dir1,
-          neighborhood: barrio
-        },
-        success: function(response) {
-          var data = JSON.parse(response);
-          if (data.success) {
-            localStorage.removeItem('orderData');
-            $('body').append(data.form);
-            $('#payu-form').submit();
-          } else {
-            alert(data.message);
-          }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          alert('Error al realizar la petición: ' + textStatus);
-        }
-      });
-
-    };
-
-    if(activeButtonTexts[0] === 'Paga a cuotas'){
-      // var orderData = JSON.parse(localStorage.getItem('orderData'));
-      // var email = $('#lemail').val();
-      // var Municipio = $('#Municipio').val();
-      // var Dir1 = $('#Dir1').val();
-      // var barrio = $('#barrio').val();
-
-      $.ajax({
-        url: ajaxUrl,
-        type: 'POST',
-        data: {
-          action: "process_payAddi",
-          amount: 70000,
-        },
-        success: function(response) {
-          var data = JSON.parse(response);
-          if(!data.success){
-            alert(data.message);
-          }
-
-          // if (data.success) {
-          //   localStorage.removeItem('orderData');
-          //   $('body').append(data.form);
-          //   $('#payu-form').submit();
-          // } else {
-          //   alert(data.message);
-          // }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          alert('Error al realizar la petición: ' + textStatus);
-        }
-      });
-    }
-  }
-=======
   // function redirectToPaymentGateway() {
   //   // Reemplaza 'url_de_tu_pasarela_de_pagos' con la URL de tu pasarela de pagos
   //   window.location.href = 'https://sandbox.gateway.payulatam.com/ppp-web-gateway';
   // }
 
-  $(document).ready(function () {
-  // Intercepta el evento de envío del formulario
-  $("#place_order").on("submit", function (e) {
-    // Previene la recarga de la página
-    e.preventDefault();
+  $(document).ready(function() {
+    // Intercepta el evento de envío del formulario
+    $("#place_order").on("submit", function(e) {
+      // Previene la recarga de la página
+      e.preventDefault();
 
-    // Realiza una solicitud AJAX
-    $.ajax({
-      url: ajaxUrl, // URL del archivo PHP que procesará la solicitud
-      type: "POST", // Método de la solicitud
-      data: $(this).serialize(), // Datos del formulario
-      success: function (response) {
-        console.log(response);
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        // Aquí puedes manejar los errores de la solicitud AJAX
-        // ...
-      },
+      // Realiza una solicitud AJAX
+      $.ajax({
+        url: ajaxUrl, // URL del archivo PHP que procesará la solicitud
+        type: "POST", // Método de la solicitud
+        data: $(this).serialize(), // Datos del formulario
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          // Aquí puedes manejar los errores de la solicitud AJAX
+          // ...
+        },
+      });
     });
   });
-});
-
->>>>>>> 0704d37e91db36c8652b5f7bed04e458b13a2b71
 </script>
 <?php get_footer() ?>
