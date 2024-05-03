@@ -53,7 +53,6 @@ if ($product->is_in_stock()) : ?>
 		</div>
 		<?php do_action('woocommerce_after_add_to_cart_button'); ?>
 	</form>
-
 	<?php do_action('woocommerce_after_add_to_cart_form'); ?>
 
 <?php endif; ?>

@@ -206,7 +206,7 @@
 .rtwpvg-container {
   flex-direction: row-reverse !important;
 }
-.rtwpvg-thumbnail-wrapper{
+.rtwpvg-thumbnail-wrapper {
   width: 110px;
   min-width: 110px;
 }
@@ -215,18 +215,18 @@
   .info-product {
     > div {
       .product_meta {
-        order: 1;
+        // order: 1;
       }
       .product_title {
-        order: 2;
+        // order: 2;
       }
       .price {
-        order: 3;
+        // order: 3;
         font-size: 40px !important;
         color: $black !important;
       }
-      .variations_form.cart {
-        order: 4;
+      .product-actions {
+        // order: 4;
         .reset_variations {
           display: none !important;
         }
@@ -555,10 +555,29 @@
 }
 
 .characteristics {
-  .nav-pills .nav-link {
-    border: 1px solid $dark_blue;
-    padding: 15px 0;
-    margin-bottom: 13px;
+  .tabs {
+    &:before, &::after{
+      display: none !important;
+    }
+    li {
+      margin-bottom: 13px;
+      &:before, &::after{
+        display: none;
+      }
+      a {
+        border: 1px solid $dark_blue;
+        padding: 15px !important;
+      }
+      &.active {
+        a {
+          background: $dark_blue;
+          color: $white !important;
+        }
+      }
+    }
+  }
+  .nav-pills .nav-link,
+  .tabs a {
     color: $black;
 
     @media (max-width: 768px) {
@@ -570,11 +589,6 @@
     @media (max-width: 420px) {
       min-width: 200px;
     }
-  }
-
-  .nav-pills .nav-link.active {
-    background: $dark_blue;
-    color: $white;
   }
 
   .nav {

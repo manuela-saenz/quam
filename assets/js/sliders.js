@@ -78,6 +78,31 @@ var swiper = new Swiper(".generationSwiper", {
 
 });
 
+
+
+  var swiper = new Swiper(".related-swiper", {
+    navigation: {
+      nextEl: ".generation-arrows.next",
+      prevEl: ".generation-arrows.prev",
+    },
+    breakpoints: {
+      1500: {
+        slidesPerView: 4,
+        spaceBetween: 20,
+      },
+      991: {
+        slidesPerView: 2.2,
+        spaceBetween: 20,
+      },
+  
+      200: {
+        spaceBetween: 50,
+        loop: true,
+        slidesPerView: 1,
+      },
+    },
+  });
+
 // <!------------------------ Slider grupos------------------------>//
 
 var swiper = new Swiper(".highlightsSwiper", {

@@ -58,18 +58,18 @@ $sessionFav = $_SESSION["prodsfavs"]
 
 <!-- Detectar el value de data-product por defecto al cargar la página-->
 <script>
-   setTimeout(()=>{
-		var targetNode = document.getElementById('add-sprod-favs');
-	var productId = targetNode.getAttribute('data-product-id');
-    console.log(productId)
-	var sessionFav = <?php echo json_encode($sessionFav); ?>;
-    if(!productId === 0){
-        if (sessionFav.includes(productId)) {
-		$("#add-sprod-favs").addClass("active-fav");
-	} else {
-		$("#add-sprod-favs").removeClass("active-fav");
-	}
-    }
-	
-	}, 500)
+    setTimeout(() => {
+        var targetNode = document.getElementById('add-sprod-favs');
+        var productId = targetNode.getAttribute('data-product-id');
+        console.log(productId)
+        var sessionFav = <?php echo json_encode($sessionFav); ?>;
+        if (!productId === 0) {
+            if (sessionFav.includes(productId)) {
+                $("#add-sprod-favs").addClass("active-fav");
+            } else {
+                $("#add-sprod-favs").removeClass("active-fav");
+            }
+        }
+
+    }, 500)
 </script>
