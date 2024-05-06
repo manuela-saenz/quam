@@ -42,7 +42,7 @@ jQuery(document).ready(function ($) {
               spanElement.id = "cartItem";
               spanElement.className =
                 "cart-section-quantity rounded-pill position-absolute center-all text-white";
-              spanElement.textContent = ""; 
+              spanElement.textContent = "";
               botonCart.appendChild(spanElement);
             }
           }
@@ -52,12 +52,11 @@ jQuery(document).ready(function ($) {
           var value = getTotalValue(totalString);
           $("#cartItem").text(res.counter);
           $("#subtotal, #total").html("$" + value);
-     
+
           $(".alert.alert-success.add-to-cart-message.d-none").show();
 
           var alertElement = $("#showAlertAddCart");
           alertElement.removeClass("d-none").show();
-
 
           setTimeout(function () {
             alertElement.hide().addClass("d-none");
@@ -74,13 +73,14 @@ function updateCartContents(succes) {
     $("#cartItem").text(succes.counter);
     var totalString = succes.total;
     var value = getTotalValue(totalString);
+    $(".woocommerce-Price-amount.amount").text("$ " + value);
     $("#subtotal, #total").html("$" + value);
   } else {
     alert("Hubo un problema con la operación.");
   }
 }
 
-function trashItem(id, idVariant) {
+function trashItem(id, idVariant, tbodyElementCheckout) {
   var data = {
     action: "woocommerce_remove_cart_item",
     cart_item_key: idVariant,
@@ -95,6 +95,9 @@ function trashItem(id, idVariant) {
       var res = JSON.parse(response);
       if (res.status === "success") {
         updateCartContents(res);
+        if (tbodyElementCheckout.length) {
+          tbodyElementCheckout.remove();
+        }
         if (res.counter === 0) {
           var spanElement = document.getElementById("cartItem");
           if (spanElement) {
@@ -114,12 +117,14 @@ function trashItem(id, idVariant) {
 $(document).on("click", ".remove", function () {
   var id = $(this).data("id");
   var idVariant = $(this).data("variant");
-  trashItem(id, idVariant);
+  var tbodyElementCheckout = $(this).closest("tbody");
+  trashItem(id, idVariant, tbodyElementCheckout);
 });
 
 var clickTimeout;
 
-$(document).on("click", ".qtyminus , .qtyplus", function () {
+$(document).on("click", ".qtyminus , .qtyplus", function (e) {
+  e.preventDefault();
   clearTimeout(clickTimeout);
 
   var container = $(this).parent().parent().parent();
@@ -131,6 +136,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function () {
   var priceOriginal = parseInt(container.find("#priceUnit").data("price"));
   let operacion;
   if ($(this).hasClass("qtyminus")) {
+    console.log(currentQuantity);
     if (currentQuantity > 1) {
       operacion = originalPrice * (parseInt(quantityInput.val()) - 1);
       currentQuantity = currentQuantity - 1;
@@ -161,9 +167,17 @@ $(document).on("click", ".qtyminus , .qtyplus", function () {
       }
     });
   }
+  if (totalGeneral !== undefined) {
+    var formattedTotal = totalGeneral.toLocaleString("es-CO");
+    $("#subtotal, #total").html("$" + formattedTotal);
+  }
 
-  var formattedTotal = totalGeneral.toLocaleString("es-CO");
-  $("#subtotal, #total").html("$" + formattedTotal);
+  var clickedElement = $(this);
+  var closestDiv = clickedElement.closest("div");
+
+  // Obtener los atributos data-id y data-variant del contenedor div
+  var dataIdCheckout = closestDiv.data("id");
+  var dataVariantCheckout = closestDiv.data("variant");
 
   clickTimeout = setTimeout(function () {
     var finalQuantity = quantityInput.val();
@@ -171,6 +185,11 @@ $(document).on("click", ".qtyminus , .qtyplus", function () {
     var id = trashCart.data("id");
     var variant = trashCart.data("variant");
     var idProduct = variant == 0 ? id : variant;
+    if (idProduct == undefined || idProduct == 0) {
+      idProduct =
+        dataVariantCheckout == 0 ? dataIdCheckout : dataVariantCheckout;
+    }
+
     var data = {
       action: "woocommerce_ajax_add_to_cart_remplace_qty",
       quantity: finalQuantity,
@@ -187,6 +206,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function () {
           var totalString = res.total;
           var value = getTotalValue(totalString);
           $(".quam-btn").prop("disabled", false);
+          $(".woocommerce-Price-amount.amount").text("$ " + value);
           console.log(value);
         } else {
           alert("Hubo un problema al actualizar la cantidad del producto.");
@@ -265,7 +285,6 @@ function initFavoritesPanelDelete() {
     });
   });
 }
-
 
 initFavoritesPanelDelete();
 initAddToFavoriteButton();

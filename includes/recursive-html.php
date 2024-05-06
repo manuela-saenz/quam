@@ -122,20 +122,20 @@ function ItemsCheckout()
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-end h-100 ">
-                        <div class="quantity">
-                            <button class="qtyminuscheck minus"><i class="icon-minus"></i></button>
+                        <div class="quantity" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
+                            <button class="qtyminus minus"><i class="icon-minus"></i></button>
                             <input type="text" id="singleProductQuantity" name="quantity" value="<?= esc_html($quantity); ?>" class="qtySingle">
-                            <button class="qtypluscheck plus"><i class="icon-add---copia"></i></button>
+                            <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
                         </div>
                     </div>
                 </td>
              
                 <td>
-                    <div class="d-flex align-items-center justify-content-center h-100 "> $<?= number_format($price * $quantity); ?>
+                    <div class="d-flex align-items-center justify-content-center h-100 "> $<?= number_format($price); ?>
                     </div>
                 </td>
                 <td>
-                    <div class="d-flex align-items-center justify-content-center h-100 ">
+                    <div id="trash_cart" style="cursor: pointer;" class="d-flex align-items-center justify-content-center h-100 remove" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>" >
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M4 7l16 0" />
