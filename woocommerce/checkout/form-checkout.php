@@ -35,8 +35,8 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 		<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-		<div class="col2-set" id="customer_details">
-			<div class="col-12 billing">
+		<div class="col2-set bg-green" id="customer_details">
+			<div class="col-12 billing ">
 				<?php do_action( 'woocommerce_checkout_billing' ); ?>
 			</div>
 
