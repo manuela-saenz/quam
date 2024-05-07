@@ -20,7 +20,7 @@ function ItemsCart()
         $variation_id = 0;
         if ($_product->is_type('variation')) {
             $variation_id = $values['variation_id'];
-            $variation = new WC_Product_Variation($variation_id); 
+            $variation = new WC_Product_Variation($variation_id);
             $image_id = $variation->get_image_id();
             $image = wp_get_attachment_image_url($image_id);
         } else {
@@ -29,6 +29,7 @@ function ItemsCart()
         $identificador = $_product->get_id();
 ?>
         <div class="mini-cart-product-card align-items-start d-flex bg-white">
+
             <div class="img-contain overflow-hidden rounded-1">
                 <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>">
             </div>
@@ -129,13 +130,13 @@ function ItemsCheckout()
                         </div>
                     </div>
                 </td>
-             
+
                 <td>
                     <div class="d-flex align-items-center justify-content-center h-100 "> $<?= number_format($price); ?>
                     </div>
                 </td>
                 <td>
-                    <div id="trash_cart" style="cursor: pointer;" class="d-flex align-items-center justify-content-center h-100 remove" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>" >
+                    <div id="trash_cart" style="cursor: pointer;" class="d-flex align-items-center justify-content-center h-100 remove" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M4 7l16 0" />

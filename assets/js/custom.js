@@ -94,12 +94,6 @@ function initQuantitySingle() {
 
 initQuantity();
 
-
-// obtener el id de la variante actual de producto y pasarlo al boton de  añadir a favoritos-carrito
-$('.variation_id').on('change', function () {
-  $('.add-fav , .single_add_to_cart_button').attr('data-product-id', $(this).attr('value'))
-})
-
 // -------- quitar productos del  carrito-----------
 
 $('.shopping-bag-offcanvas .select-bag a.remove').click(function (event) {
