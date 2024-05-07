@@ -13,12 +13,34 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
 
     var form = $(this);
-
     var productId = $(".variation_id").val();
     productId =
       productId == undefined || productId == 0
         ? $("[name='add-to-cart']")[0].value
         : productId;
+
+    // Inserta el HTML antes de la llamada AJAX
+    var htmlContent =
+      '<div class="mini-cart-product-card align-items-start d-flex bg-white" style="flex-direction: row;">' +
+      '<div class="img-contain overflow-hidden rounded-1">' +
+      '<img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b9526wp8z3xa5zpbmlfq1qdlzfalio7x1i098u3z18vx&ep=v1_gifs_search&rid=200w.gif&ct=g" alt="<?php echo esc_attr($title); ?>">' +
+      "</div>" +
+      '<div class="card" aria-hidden="true" style="flex-grow: 1;">' +
+      '<div class="card-body">' +
+      '<h5 class="card-title placeholder-glow">' +
+      '<span class="placeholder col-6"></span>' +
+      "</h5>" +
+      '<p class="card-text placeholder-glow">' +
+      '<span class="placeholder col-7"></span>' +
+      '<span class="placeholder col-4"></span>' +
+      '<span class="placeholder col-6"></span>' +
+      '<span class="placeholder col-4"></span>' +
+      "</p>" +
+      "</div>" +
+      "</div>" +
+      "</div>";
+
+    $(".offcanvas-body.ordenList.cart").append(htmlContent);
 
     var quantity = form.find("input.input-text.qty.text").val();
     var data = {
@@ -46,7 +68,7 @@ jQuery(document).ready(function ($) {
               botonCart.appendChild(spanElement);
             }
           }
-
+          $(".offcanvas-body.ordenList.cart").empty();
           $(".offcanvas-body.ordenList.cart").html(res.html);
           var totalString = res.total;
           var value = getTotalValue(totalString);
@@ -73,7 +95,10 @@ function updateCartContents(succes) {
     $("#cartItem").text(succes.counter);
     var totalString = succes.total;
     var value = getTotalValue(totalString);
-    $(".woocommerce-Price-amount.amount").text("$ " + value);
+    if (window.location.href.indexOf("bolsa-de-compras") > -1) {
+      $(".woocommerce-Price-amount.amount").text("$ " + value);
+    }
+
     $("#subtotal, #total").html("$" + value);
   } else {
     alert("Hubo un problema con la operación.");
@@ -206,8 +231,9 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
           var totalString = res.total;
           var value = getTotalValue(totalString);
           $(".quam-btn").prop("disabled", false);
-          $(".woocommerce-Price-amount.amount").text("$ " + value);
-          console.log(value);
+          if (window.location.href.indexOf("bolsa-de-compras") > -1) {
+            $(".woocommerce-Price-amount.amount").text("$ " + value);
+          }
         } else {
           alert("Hubo un problema al actualizar la cantidad del producto.");
         }
@@ -285,6 +311,19 @@ function initFavoritesPanelDelete() {
     });
   });
 }
+
+var previousValue = $(".variation_id").val();
+
+setInterval(function () {
+  var currentValue = $(".variation_id").val();
+  if (currentValue != previousValue) {
+    previousValue = currentValue;
+    $(".add-fav , .single_add_to_cart_button").attr(
+      "data-product-id",
+      currentValue
+    );
+  }
+}, 100);
 
 initFavoritesPanelDelete();
 initAddToFavoriteButton();
