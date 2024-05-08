@@ -35,7 +35,23 @@ add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_a
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 30 );
 
 
-	
+/**
+ * Register our sidebars and widgetized areas.
+ *
+ */
+function arphabet_widgets_init() {
+
+	register_sidebar( array(
+		'name'          => 'Home right sidebar',
+		'id'            => 'home_right_1',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+}
+add_action( 'widgets_init', 'arphabet_widgets_init' );
 
 // Función para obtener productos por categoría
 function get_products_by_category_name($category_name) {
