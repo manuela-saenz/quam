@@ -9,14 +9,8 @@ get_header();
 ?>
 
 
-<section id="bag" class="  h-100">
-  <?php the_content();
-
-  ?>
-
-  
-
-
+<section id="bag" class="pt-0 h-100">
+  <?php the_content(); ?>
 </section>
 
 <script>

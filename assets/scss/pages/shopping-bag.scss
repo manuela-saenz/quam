@@ -160,12 +160,12 @@
   }
 
   .form_contact {
-    padding: 32px;
+    padding: 30px;
+    margin-bottom: 30px;
     border-radius: 20px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
       rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     background: white;
-    padding-bottom: 94px;
 
     
   .form-row {
@@ -174,14 +174,6 @@
 
     @media (max-width: 991px) {
       padding: 20px;
-    }
-
-    .row div {
-      margin-bottom: 18px;
-
-      @media (max-width: 991px) {
-        margin-bottom: 15px;
-      }
     }
 
     input,
