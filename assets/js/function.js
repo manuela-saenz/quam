@@ -327,3 +327,57 @@ setInterval(function () {
 
 initFavoritesPanelDelete();
 initAddToFavoriteButton();
+
+// <!-- validar los campos identificacion -->
+function verificarCamposLlenos() {
+  var todosLlenos = true;
+
+  inputForms.forEach(function (inputForm) {
+    if (inputForm.value.trim() === "") {
+      todosLlenos = false;
+    }
+  });
+  return todosLlenos;
+}
+
+function actualizarEstadoBoton() {
+  var botonEnviar = document.getElementById("boton-id");
+  botonEnviar.disabled = !verificarCamposLlenos();
+}
+
+var inputForms = document.querySelectorAll(".input-form-name input");
+inputForms.forEach(function (inputForm) {
+  inputForm.addEventListener("input", function () {
+    actualizarEstadoBoton();
+  });
+});
+
+actualizarEstadoBoton();
+
+
+// validar campos de ubicacion
+function verificarCamposLlenosUbicacion() {
+  var todosLlenosLocation = true;
+
+inputFormsLocation.forEach(function(inputForm) {
+      if (inputForm.value.trim() === '') {
+          todosLlenosLocation = false;
+      }
+  });
+
+  return todosLlenosLocation;
+}
+
+function actualizarEstadoBotonLocation() {
+  var botonEnviar = document.getElementById('boton-lo');
+  botonEnviar.disabled = !verificarCamposLlenosUbicacion();
+}
+
+var inputFormsLocation = document.querySelectorAll('.input-form-location input');
+inputFormsLocation.forEach(function(inputForm) {
+  inputForm.addEventListener('input', function() {
+      actualizarEstadoBotonLocation();
+  });
+});
+
+actualizarEstadoBotonLocation();

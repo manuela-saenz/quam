@@ -756,3 +756,32 @@
   background: #27ae60;
   color: white;
 }
+
+
+// metodos de pago
+.container_payment_method{
+  background: white;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 184px;
+  height: 94px;
+  margin: 10px 20px 10px 0;
+  position: relative;
+    .payment_label{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      cursor: pointer;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+    }
+}
+.quam-btn[disabled]:hover {
+  background: #002d72;
+  color: white;
+}
