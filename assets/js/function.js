@@ -1,6 +1,6 @@
 function getTotalValue(totalString) {
   var match = totalString.match(
-    /<span class="woocommerce-Price-currencySymbol">[^<]*<\/span>&nbsp;(\d+\.?\d*)/
+    /<span class="woocommerce-Price-currencySymbol">[^<]*<\/span>&nbsp;((\d{1,3}(\.\d{3})*(\,\d+)?)|(\d+))/
   );
   var value = match ? match[1] : null;
   return value;
