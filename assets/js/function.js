@@ -256,6 +256,7 @@ function initAddToFavoriteButton() {
         : productId;
 
     var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
+
     $.ajax({
       url: ajaxUrl,
       method: "POST",
@@ -295,7 +296,7 @@ function initAddToFavoriteButton() {
 function initFavoritesPanelDelete() {
   $(document).on("click", "#trash_fav", function () {
     var prodid = $(this).data("id");
-
+    var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
     $.ajax({
       url: ajaxUrl,
       method: "POST",
@@ -304,6 +305,11 @@ function initFavoritesPanelDelete() {
         prodid: prodid,
       },
       success: function (res) {
+        if (sessionFav.includes(Number(prodid))) {
+          sessionFav = sessionFav.filter((item) => item !== Number(prodid));
+          localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
+        }
+
         if (res.counter === 0) {
           var spanElement = document.getElementById("favoritesCounter");
           if (spanElement) {
@@ -359,29 +365,30 @@ inputForms.forEach(function (inputForm) {
 
 actualizarEstadoBoton();
 
-
 // validar campos de ubicacion
 function verificarCamposLlenosUbicacion() {
   var todosLlenosLocation = true;
 
-inputFormsLocation.forEach(function(inputForm) {
-      if (inputForm.value.trim() === '') {
-          todosLlenosLocation = false;
-      }
+  inputFormsLocation.forEach(function (inputForm) {
+    if (inputForm.value.trim() === "") {
+      todosLlenosLocation = false;
+    }
   });
 
   return todosLlenosLocation;
 }
 
 function actualizarEstadoBotonLocation() {
-  var botonEnviar = document.getElementById('boton-lo');
+  var botonEnviar = document.getElementById("boton-lo");
   botonEnviar.disabled = !verificarCamposLlenosUbicacion();
 }
 
-var inputFormsLocation = document.querySelectorAll('.input-form-location input');
-inputFormsLocation.forEach(function(inputForm) {
-  inputForm.addEventListener('input', function() {
-      actualizarEstadoBotonLocation();
+var inputFormsLocation = document.querySelectorAll(
+  ".input-form-location input"
+);
+inputFormsLocation.forEach(function (inputForm) {
+  inputForm.addEventListener("input", function () {
+    actualizarEstadoBotonLocation();
   });
 });
 
