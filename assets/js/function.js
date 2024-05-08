@@ -255,6 +255,7 @@ function initAddToFavoriteButton() {
         ? $("[name='add-to-cart']")[0].value
         : productId;
 
+    var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
     $.ajax({
       url: ajaxUrl,
       method: "POST",
@@ -263,6 +264,10 @@ function initAddToFavoriteButton() {
         prodid: productId,
       },
       success: function (res) {
+        if (!sessionFav.includes(productId)) {
+          sessionFav.push(Number(productId));
+          localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
+        }
         $("#add-sprod-favs").addClass("active-fav");
         var spanElement = document.getElementById("favoritesCounter");
         if (!spanElement) {

@@ -39,15 +39,14 @@ $sessionFav = $_SESSION["prodsfavs"]
 
 <!-- Detectar los cambios de cada value de las variantes-->
 <script>
-    var sessionFav = <?php echo json_encode($sessionFav); ?>;
     var targetNode = document.getElementById('add-sprod-favs');
 
     var observer = new MutationObserver(function(mutationsList, observer) {
         for (var mutation of mutationsList) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'data-product-id') {
+                var sessionFavLocal = JSON.parse(localStorage.getItem('sessionFav')) || [];
                 var productId = targetNode.getAttribute('data-product-id');
-                if (sessionFav.includes(productId)) {
-                    console.log(productId)
+                if (sessionFavLocal.includes(Number(productId))) {
                     $("#add-sprod-favs").addClass("active-fav");
                 } else {
                     $("#add-sprod-favs").removeClass("active-fav");
@@ -67,7 +66,6 @@ $sessionFav = $_SESSION["prodsfavs"]
     setTimeout(() => {
         var targetNode = document.getElementById('add-sprod-favs');
         var productId = targetNode.getAttribute('data-product-id');
-        console.log(productId)
         var sessionFav = <?php echo json_encode($sessionFav); ?>;
         if (!productId === 0) {
             if (sessionFav.includes(productId)) {
