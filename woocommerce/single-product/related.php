@@ -44,7 +44,7 @@ if ($related_products) : ?>
 
 						?>
 						<div class="swiper-slide">
-							<a href="<?php ?>" class="CardProducts">
+							<a href="<?= get_permalink($related_product->get_id()) ?>" class="CardProducts">
 								<div class="img-contain" title="<?php ?>">
 									<?= $related_product->get_image('medium', 'alt=' . get_the_title())   ?>
 								</div>
