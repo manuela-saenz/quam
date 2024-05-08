@@ -386,9 +386,7 @@ function actualizarEstadoBotonLocation() {
   botonEnviar.disabled = !verificarCamposLlenosUbicacion();
 }
 
-var inputFormsLocation = document.querySelectorAll(
-  ".input-form-location input"
-);
+var inputFormsLocation = document.querySelectorAll(".input-form-location input");
 inputFormsLocation.forEach(function (inputForm) {
   inputForm.addEventListener("input", function () {
     actualizarEstadoBotonLocation();

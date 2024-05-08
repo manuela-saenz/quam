@@ -13295,7 +13295,7 @@ header .submenu > button:after {
   font-weight: 400;
   font-size: 17px;
   border: none;
-  padding: 10px;
+  padding: 0;
   min-width: 200px;
   justify-content: flex-start;
 }
@@ -13303,7 +13303,7 @@ header .submenu > button:after {
   #bag .informationBag .previous {
     top: 101px;
     left: 13px;
-    padding: 10px;
+    padding: 10px 3px;
   }
 }
 #bag .step_by_step {

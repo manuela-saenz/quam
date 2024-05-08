@@ -141,7 +141,7 @@ defined('ABSPATH') || exit;
 										</div>
 									</div>
 									<div class="d-flex justify-content-end">
-										<button type="button" class="quam-btn blue me-4 previous" onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>
+										<button type="button" class="quam-btn-responsive blue me-4 previous" onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>
 											Volver a la bolsa de la compra</button>
 										<!-- <button class=" quam-btn blue next" onclick="stepper1.next()">Next</button> -->
 									</div>
@@ -164,7 +164,7 @@ defined('ABSPATH') || exit;
 														</div>
 														<div class="col-md-6">
 															<label for="" class="mt-2 ms-1">Apartamento o habitacion</label>
-															<?php woocommerce_form_field(array_keys($fields)[6], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[6])); ?>
+															<?php woocommerce_form_field(array_keys($fields)[6], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[6]));?>
 														</div>
 														<div class="col-md-6">
 															<?php woocommerce_form_field(array_keys($fields)[7], $fields['billing_city'], $checkout->get_value(array_keys($fields)[7])); ?>
@@ -293,9 +293,11 @@ defined('ABSPATH') || exit;
 											información sobre productos y servicios de interés.
 										</div>
 									</label>
-									<div class="btn-next center-all w-100">
-										<button type="button" class="quam-btn blue w-100 next" onclick="stepper1.next()">Diligenciar
+									<div class="btn-next w-100">
+										<div class="btn-checkout-form">
+											<button type="button" class="quam-btn blue next " onclick="stepper1.next()">Diligenciar
 											información</button>
+										</div>										
 									</div>
 								</div>
 							</div>
