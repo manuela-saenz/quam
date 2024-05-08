@@ -7,7 +7,15 @@ require_once('../../wp-load.php');
 get_header();
 
 ?>
-
+<style>
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+</style>
 
 <section id="bag" class="pt-0 h-100">
   <?php the_content(); ?>

@@ -111,6 +111,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
     cart_item_key: idVariant,
     product_id: id,
   };
+  var blockUI = blockUICheckout();
 
   $.ajax({
     type: "POST",
@@ -129,6 +130,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
             botonCart.removeChild(spanElement);
           }
         }
+        blockUI.remove();
       } else {
         alert("Hubo un problema al eliminar el producto del carrito.");
       }
@@ -137,6 +139,28 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
       alert("Hubo un error con la solicitud AJAX.");
     },
   });
+}
+
+function blockUICheckout() {
+  var blockUI = $("<div>").addClass("blockUI blockOverlay").css({
+    "z-index": "1000",
+    border: "none",
+    margin: "0px",
+    padding: "0px",
+    width: "100%",
+    height: "100%",
+    top: "0px",
+    left: "0px",
+    background: "rgb(255, 255, 255)",
+    opacity: "0.6",
+    cursor: "default",
+    position: "absolute",
+  });
+
+  $(".shop_table.woocommerce-checkout-review-order-table.mb-0").append(
+    blockUI
+  );
+  return blockUI
 }
 
 $(document).on("click", ".remove", function () {
@@ -221,6 +245,8 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
       product_id: idProduct,
     };
 
+    var blockUI = blockUICheckout();
+
     $.ajax({
       type: "POST",
       url: ajaxUrl,
@@ -229,10 +255,27 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
         var res = JSON.parse(response);
         if (res.status === "success") {
           var totalString = res.total;
+          var shipping = res.shipping_total;
+          var amount = getTotalValue(shipping);
           var value = getTotalValue(totalString);
           $(".quam-btn").prop("disabled", false);
           if (window.location.href.indexOf("bolsa-de-compras") > -1) {
-            $(".woocommerce-Price-amount.amount").text("$ " + value);
+            $(".cart-subtotal .woocommerce-Price-amount.amount").text(
+              "$ " + value
+            );
+            var valueWithoutPoints = value.replace(/\./g, "");
+            var amountWithoutPoints = amount.replace(/\./g, "");
+            var total =
+              parseFloat(valueWithoutPoints) + parseFloat(amountWithoutPoints);
+            var totalWithThousandSeparator = total.toLocaleString("de-DE", {
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            });
+
+            $(".order-total .woocommerce-Price-amount.amount").text(
+              "$ " + totalWithThousandSeparator
+            );
+            blockUI.remove();
           }
         } else {
           alert("Hubo un problema al actualizar la cantidad del producto.");
@@ -362,8 +405,7 @@ inputForms.forEach(function (inputForm) {
     actualizarEstadoBoton();
   });
   inputForm.setAttribute("required", "true");
-  inputForm.classList.add("clase-input-p")
-
+  inputForm.classList.add("clase-input-p");
 });
 
 actualizarEstadoBoton();
@@ -386,7 +428,9 @@ function actualizarEstadoBotonLocation() {
   botonEnviar.disabled = !verificarCamposLlenosUbicacion();
 }
 
-var inputFormsLocation = document.querySelectorAll(".input-form-location input");
+var inputFormsLocation = document.querySelectorAll(
+  ".input-form-location input"
+);
 inputFormsLocation.forEach(function (inputForm) {
   inputForm.addEventListener("input", function () {
     actualizarEstadoBotonLocation();

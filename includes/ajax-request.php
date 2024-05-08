@@ -263,12 +263,13 @@ class SyEAjaxRequest
         );
 
         $buffer = preg_replace($search, $replace, $itemsCart);
-
+        $shipping_total = $woocommerce->cart->get_cart_shipping_total();
         echo json_encode(array(
             "item" => $cartItemKey,
             "status" => "success",
             "html" => $buffer,
             "total" => $ValorTotal,
+            "shipping_total" => $shipping_total,
             "quantity" => count($woocommerce->cart->get_cart()),
             "totalProducto" => $formatoColombiano
         ));
@@ -457,10 +458,11 @@ class SyEAjaxRequest
             "html" => $buffer,
             "totalProducto" => $formatoColombiano,
             "total" => $ValorTotal,
+            // Añade el total del envío a la respuesta
             "quantity" => count($woocommerce->cart->get_cart())
         ));
 
-        die();
+        wp_die();
     }
 
     function woocommerce_ajax_search()
