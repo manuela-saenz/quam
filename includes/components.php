@@ -7,14 +7,14 @@ function productCard($product)
   // print_r($product->id);
   // echo "</pre>";
 ?>
-    <a href="<?= get_permalink($wcProd->id) ?>" class="CardProducts <?= $wcProd->get_sale_price()  ? 'CardOffers' : '' ?>">
-      <div class="img-contain" title="<?= $product->get_name() ?>">
-        <img src="<?= $product->image_src ?>" alt="<?= $product->get_name() ?>">
+    <a href="<?= get_permalink($product->ID) ?>" class="CardProducts">
+      <div class="img-contain" title="<?= get_the_title($product) ?>">
+      <?=  $wcProd->get_image('medium', 'alt=' . get_the_title())   ?>
       </div>
       <div class="info-highlights">
-        <h5 title="<?= $product->get_name() ?>"><?= $product->get_name(); ?></h5>
+        <h5 title="<?= get_the_title() ?>"><?= get_the_title($product) ?></h5>
         <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
-          <p class=" mb-0 d-flex gap-2"><?= wc_price($wcProd->price) . "COP" ?> </p>
+          <p class=" mb-0 d-flex gap-2"><?= $wcProd->get_price_html() .  "COP" ?> </p>
         </div>
       </div>
     </a>

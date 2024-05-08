@@ -1,12 +1,12 @@
 <?php
 get_header();
-                 
-                    $banners  = (new WP_Query(array(
-                        'post_type' => 'banner',
-                        'posts_per_page' => -1,
-                        
-                    )))->posts;
-                   
+
+$banners  = (new WP_Query(array(
+  'post_type' => 'banner',
+  'posts_per_page' => -1,
+
+)))->posts;
+
 ?>
 
 <section id="banner">
@@ -15,24 +15,24 @@ get_header();
       <div class="col-md-12 p-0">
         <div class="swiper banner">
           <div class="swiper-wrapper">
-            <?php foreach( $banners as $banner): ?>
-            <div class="swiper-slide">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-6 col-xxl-6 offset-xxl-1 info-banner" style="z-index: 3;">
-                    <span>Some text here</span>
-                    <h1 class="section-title"><?= $banner->post_title ?></h1>
-                    <p>The Two golden rules professional graphic designer don’t want you to know about.</p>
-                    <a href="" class="quam-btn red">Ver ofertas</a>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="img-contain">
-                      <img src="<?= get_the_post_thumbnail_url($banner->ID)  ?>" title="<?= $banner->post_title ?>" alt="<?= $banner->post_title ?>">
+            <?php foreach ($banners as $banner) : ?>
+              <div class="swiper-slide">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-6 col-xxl-6 offset-xxl-1 info-banner" style="z-index: 3;">
+                      <span>Some text here</span>
+                      <h1 class="section-title"><?= $banner->post_title ?></h1>
+                      <p>The Two golden rules professional graphic designer don’t want you to know about.</p>
+                      <a href="" class="quam-btn red">Ver ofertas</a>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="img-contain">
+                        <img src="<?= get_the_post_thumbnail_url($banner->ID)  ?>" title="<?= $banner->post_title ?>" alt="<?= $banner->post_title ?>">
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
             <?php endforeach; ?>
           </div>
           <div class="swiperBanner-button-next"> <i class="icon-arrowlongline-right"></i> </div>
@@ -69,63 +69,27 @@ get_header();
         </div>
 
       <?php endforeach; ?>
-
-
-
-      <!-- <div class="col-md-4 p-0 position-relative">
-        <a href="" class="card-categories">
-          <div class="img-fit">
-            <img src="<?php bloginfo('template_url') ?>/media/images/category-men.jpg" alt="">
-          </div>
-          <a href="" class="info-categories center-all flex-column">
-            <h5>Hombre</h5>
-            <div class="red">Ver colección</div>
-          </a>
-        </a>
-      </div>
-
-      <div class="col-md-4 p-0 position-relative">
-        <a href="" class="card-categories">
-          <div class="img-fit">
-            <img src="<?php bloginfo('template_url') ?>/media/images/category-women.png" alt="">
-          </div>
-          <a href="" class="info-categories center-all flex-column">
-            <h5>Mujer</h5>
-            <div class="red">Ver colección</div>
-          </a>
-        </a>
-      </div>
-
-      <div class="col-md-4 p-0 position-relative">
-        <a href="" class="card-categories">
-          <div class="img-fit">
-            <img src="<?php bloginfo('template_url') ?>/media/images/category-children.jpg" alt="">
-          </div>
-          <a href="" class="info-categories center-all flex-column">
-            <h5>Niño</h5>
-            <div class="red">Ver colección</div>
-          </a>
-        </a>
-      </div> -->
     </div>
   </div>
 </section>
 
 <section id="generation">
   <div class="container slideGeneration">
-    <div class="row">
-      <div class="col-xxl-3 col-md-12 col-md-4 position-relative">
-        <h3 class="section-subtitle mb-5">Última generación</h3>
-        <div class="d-xl-flex d-none">
-          <div class="arrow-prev-container">
-            <button class="generation-arrows prev">
-              <i class="icon-arrowline-left"> </i>
-            </button>
-          </div>
-          <div class="arrow-next-container">
-            <button class="generation-arrows next">
-              <i class="icon-arrowline-right"> </i>
-            </button>
+    <div class="row align-items-center">
+      <div class="col-xxl-3 col-md-12 col-md-4">
+        <div class="position-relative">
+          <h3 class="section-subtitle mb-4">Última generación</h3>
+          <div class="d-xl-flex d-none">
+            <div class="arrow-prev-container">
+              <button class="generation-arrows prev">
+                <i class="icon-arrowline-left"> </i>
+              </button>
+            </div>
+            <div class="arrow-next-container">
+              <button class="generation-arrows next">
+                <i class="icon-arrowline-right"> </i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -270,132 +234,13 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
   </div>
 </section>
 
-<!-- <section id="product_highlights">
-  <div class="container slideGeneration">
-    <div class="row center-all">
-      <div class="col-md-4 col-md-12 position-relative">
-        <h2 class="section-subtitle">Productos destacados</h2>
-        <div class="d-none d-lg-flex">
-          <div class="arrow-prev-container">
-            <button class="highlights-arrows prev">
-              <i class="icon-arrowline-left"> </i>
-            </button>
-            <div class="white-mask"></div>
-          </div>
-          <div class="arrow-next-container">
-            <button class="highlights-arrows next">
-              <i class="icon-arrowline-right"> </i>
-            </button>
-            <div class="white-mask"></div>
-          </div>
-        </div>
-
-      </div>
-      <div class="col-md-8 col-md-12 highlights">
-        <div class="swiper highlightsSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="img-contain">
-                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-1.jpg" alt="" title="">
-              </div>
-              <div class="info-highlights">
-                <h5>Example Midi Bodycon Dress</h5>
-                <div class="d-flex align-items-center">
-                  <p>$70.000</p>
-                  <span>$100.000</span>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="img-contain">
-                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-2.jpg" alt="" title="">
-              </div>
-              <div class="info-highlights">
-                <h5>Example Midi Bodycon Dress</h5>
-                <div class="d-flex align-items-center">
-                  <p>$70.000</p>
-                  <span>$100.000</span>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="img-contain">
-                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-3.jpg" alt="" title="">
-              </div>
-              <div class="info-highlights">
-                <h5>Example Midi Bodycon Dress</h5>
-                <div class="d-flex align-items-center">
-                  <p>$70.000</p>
-                  <span>$100.000</span>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="img-contain">
-                <img src="<?php bloginfo('template_url') ?>/media/images/Destacados-3.jpg" alt="" title="">
-              </div>
-              <div class="info-highlights">
-                <h5>Example Midi Bodycon Dress</h5>
-                <div class="d-flex align-items-center">
-                  <p>$70.000</p>
-                  <span>$100.000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="d-lg-none d-flex">
-            <div class="arrow-prev-container">
-              <button class="highlights-arrows prev">
-                <i class="icon-arrowline-left"> </i>
-              </button>
-              <div class="white-mask"></div>
-            </div>
-            <div class="arrow-next-container">
-              <button class="highlights-arrows next">
-                <i class="icon-arrowline-right"> </i>
-              </button>
-              <div class="white-mask"></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-</section>
 
 <?php
 $ofertas = get_field('ofertas');
 $coleccionOf = $ofertas['oferta_principal'];
 $oferta = $ofertas['oferta'];
 ?>
-<section id="offers" class="p-0">
-  <div class="container-fluid p-0">
-    <div class="row m-0">
-      <div class="col-md-4 p-0">
-        <a href="" class="position-relative">
-          <div class="img-fit">
-            <img src="<?= $oferta["fondo_de_imagen"]["url"]; ?>" alt="">
-          </div>
-          <div class="info_offers">
-            <p class="mb-0"><?= $oferta["subtitulo"]; ?></p>
-            <h5 class="title"><?= $oferta["titulo"]; ?></h5>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-8 p-0 position-relative">
-        <div class="img-fit backgroundImg">
-          <img src="<?= $coleccionOf["fondo_de_imagen"]["url"]; ?>" alt="">
-        </div>
-        <div class="info_offers offers">
-          <p class="mb-0"><?= $coleccionOf["subtitulo"]; ?></p>
-          <h5 class="section-title"><?= $coleccionOf["titulo"]; ?></h5>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
+
 
 <?php
 get_footer();

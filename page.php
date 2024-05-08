@@ -1,15 +1,15 @@
-<?php 
+<?php
 
 /**
  * Página para mostrar contenido por defecto
- */ 
+ */
 
- get_header(); ?>
+get_header(); ?>
 
 <section>
-    <div class="container">
-      <?php the_content(); ?>
-    </div>
+  <div class="container">
+    <?php the_content(); ?>
+  </div>
 </section>
 
 

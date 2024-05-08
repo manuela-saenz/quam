@@ -258,14 +258,15 @@ defined('ABSPATH') || exit;
 							</div>
 						</div>
 						<?php do_action('woocommerce_after_checkout_billing_form', $checkout); ?>
-						<div class="col-lg-4 col-md-12">
+						<div class="col-lg-4 col-md-12 ps-md-4">
 							<div class="code">
 								<form method="post" class="position-relative">
 									<div class="position-relative">
 										<input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
 										<input type="submit" class="quam-btn blue codigo" value="Aplicar">
 									</div>
-									<div class="mt-4">
+									<?php woocommerce_order_review() ?>
+									<div class="mt-4 d-none">
 										<div class="d-flex justify-content-between">
 											<p class="fw-bolder" style="color: #00000075;">
 												Subtotal</p>

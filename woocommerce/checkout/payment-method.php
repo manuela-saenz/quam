@@ -42,17 +42,3 @@ if (!defined('ABSPATH')) {
 	?>
 
 </div>
-
-
-<script>
-	var labels = document.querySelectorAll(".payment_label");
-
-	labels.forEach(function (label) {
-		label.addEventListener("click", function (event) {
-			labels.forEach(function (otherLabel) {
-				otherLabel.style.border = "none";
-			});
-			label.style.border = "2px solid red";
-		});
-	});
-</script>

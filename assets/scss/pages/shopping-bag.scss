@@ -768,6 +768,9 @@
   height: 120px;
   margin: 20px 20px 20px 5px;
   position: relative;
+  input:checked + label{
+    border: 2px solid $dark_blue;
+  }
     .payment_label{
       display: flex;
       align-items: center;
