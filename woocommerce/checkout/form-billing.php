@@ -71,9 +71,8 @@ defined('ABSPATH') || exit;
 					</div>
 				</div>
 				<div class="container informationBag">
-					<div class="row center-all">
+					<div class="row center-start">
 						<div class="col-lg-8 col-md-12">
-
 							<?php do_action('woocommerce_before_checkout_billing_form', $checkout); ?>
 							<div class="bs-stepper-content">
 								<div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
@@ -100,7 +99,7 @@ defined('ABSPATH') || exit;
 														información sobre productos y servicios de interés.
 													</div>
 												</label>
-												<button type="button" class="quam-btn blue next" onclick="stepper1.next()">Diligenciar información</button>
+												<button type="button" class="shop-info-btn blue next" onclick="stepper1.next()">Diligenciar información</button>
 											</div>
 										</div>
 										<?php
@@ -133,11 +132,11 @@ defined('ABSPATH') || exit;
 
 														</div>
 													</div>
-													<!-- <input class="quam-btn blue" onclick="stepper1.next()" value="Diligenciar ubicación"> -->
+													<div class="btn-step-next">
+														<button id="boton-id" type="button" class="shop-info-btn blue next mt-4" onclick="stepper1.next()">Diligenciar ubicación</button>
+													</div>
 												</div>
-												<div class="btn-step-next">
-													<button id="boton-id" type="button" class="quam-btn blue next mt-2" onclick="stepper1.next()">Diligenciar ubicación</button>
-												</div>
+												
 											</div>
 										</div>
 									</div>
@@ -151,7 +150,7 @@ defined('ABSPATH') || exit;
 									<div class="form-group row">
 										<div class="col-lg-12">
 											<h3 class="mb-4"> Ubicación</h3>
-											<div class="position-relative">
+											<form class="position-relative">
 												<div class="form_contact">
 													<div class="row input-form-location">
 														<div class="col-md-6">
@@ -164,6 +163,7 @@ defined('ABSPATH') || exit;
 															<?php woocommerce_form_field(array_keys($fields)[5], $fields['billing_address_1'], $checkout->get_value(array_keys($fields)[5])); ?>
 														</div>
 														<div class="col-md-6">
+															<label for="" class="mt-2 ms-1">Apartamento o habitacion</label>
 															<?php woocommerce_form_field(array_keys($fields)[6], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[6])); ?>
 														</div>
 														<div class="col-md-6">
@@ -180,12 +180,12 @@ defined('ABSPATH') || exit;
 													</div>
 													<div class="alert alert-success" role="alert" id="success_alert" style="display:none; color: #155724; background-color: #d4eddaa1; border:1px solid #c3e6cb; #f5c6cb; padding: 13px; margin-bottom: 10px;">
 													</div>
-												</div>
-												<div class="btn-step-next">
+													<div class="btn-step-next">
 													<!-- <button type="button" class="quam-btn blue next" onclick="generate_order()">Generar pedido</button> -->
-													<button id="boton-lo" type="button" class="quam-btn blue next mt-2" onclick="stepper1.next()">Generar pedido</button>
+													<button id="boton-lo" type="button" class="shop-info-btn blue next mt-4" onclick="stepper1.next()">Generar pedido</button>
 												</div>
-											</div>
+												</div>
+											</form>
 										</div>
 									</div>
 
@@ -198,12 +198,11 @@ defined('ABSPATH') || exit;
 								</div>
 
 								<div id="test-l-4" role="tabpanel" class="bs-stepper-pane form-group" aria-labelledby="stepper1trigger4">
-									<div class="form-group row">
+									<h3 class=" mb-4">Pago</h3>	
+									<div class="form-group row bg-white p-3 rounded">
 										<div class="col-lg-12 position-relative">
-											<h3 class=" mb-4">Pago</h3>
-											<div class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
-
-
+											
+											<div class="nav nav-pills m-5" id="pills-tab" role="tablist">
 												<div>
 													<?php woocommerce_checkout_payment(); ?>
 												</div>
@@ -284,7 +283,6 @@ defined('ABSPATH') || exit;
 													<?php echo $total; ?></b> </p>
 										</div>
 									</div>
-
 								</form>
 								<div class="d-lg-none d-flex flex-column check">
 									<label class="custom-checkbox d-flex align-items-baseline mb-4 "><input class="politicy check me-3" type="checkbox" id="cboxtwo" value="first_checkbox">

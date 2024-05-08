@@ -310,7 +310,7 @@
 .code {
   max-width: 400px;
   padding: 20px;
-  margin-top: 125px;
+  margin-top: 90px;
   border-radius: 14px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background: white;
@@ -752,14 +752,14 @@
 
 // metodos de pago
 .container_payment_method{
-  background: white;
-  margin-right: 20px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 0px 5px rgb(221, 221, 221);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 184px;
-  height: 94px;
-  margin: 10px 20px 10px 0;
+  width: 224px;
+  height: 120px;
+  margin: 20px 20px 20px 5px;
   position: relative;
     .payment_label{
       display: flex;
@@ -773,7 +773,34 @@
       border-radius: 15px;
     }
 }
-.quam-btn[disabled]:hover {
+.shop-info-btn[disabled]{
+  background: #dfdfdf;
+  color: white;
+  cursor: default;
+  border: 1px solid #ffffff;
+}
+.shop-info-btn[disabled]:hover{
+  background: #dfdfdf;
+  color: white;
+  cursor: default;
+  border: 1px solid #ffffff;
+}
+.shop-info-btn{
   background: #002d72;
   color: white;
+  width: 350px;
+  padding: 14px 25px;
+  font-size: 20px;
+  font-weight: 500;
+  text-align-last:center;
+  letter-spacing:1px;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 1px solid #002d72;
+  transition: .2s;
+}
+.shop-info-btn:hover{
+  background: #ffffff;
+  color: #002d72;
+  border: 1px solid #002d72;
 }

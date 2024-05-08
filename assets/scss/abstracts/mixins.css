@@ -1,0 +1,15 @@
+.center-horizontal {
+  display: flex;
+  justify-content: center;
+}
+
+.center-vertical {
+  display: flex;
+  align-items: center;
+}
+
+.center-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}/*# sourceMappingURL=mixins.css.map */

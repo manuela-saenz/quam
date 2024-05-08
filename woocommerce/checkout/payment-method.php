@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <div
-	class="container_payment_method rounded-4 p-4 wc_payment_method payment_method_<?php echo esc_attr($gateway->id); ?>">
+	class="container_payment_method rounded-4 p-4 wc_payment_method payment_method_<?php echo esc_attr($gateway->id); ?> ">
 	<input id="payment_method_<?php echo esc_attr($gateway->id); ?>" type="radio" class="input-radio d-none"
 		name="payment_method" value="<?php echo esc_attr($gateway->id); ?>" <?php checked($gateway->chosen, true); ?>
 		data-order_button_text="<?php echo esc_attr($gateway->order_button_text); ?>" />
@@ -52,7 +52,7 @@ if (!defined('ABSPATH')) {
 			labels.forEach(function (otherLabel) {
 				otherLabel.style.border = "none";
 			});
-			label.style.border = "1.5px solid red";
+			label.style.border = "2px solid red";
 		});
 	});
 </script>

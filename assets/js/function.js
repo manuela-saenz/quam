@@ -361,6 +361,9 @@ inputForms.forEach(function (inputForm) {
   inputForm.addEventListener("input", function () {
     actualizarEstadoBoton();
   });
+  inputForm.setAttribute("required", "true");
+  inputForm.classList.add("clase-input-p")
+
 });
 
 actualizarEstadoBoton();
