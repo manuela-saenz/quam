@@ -10,8 +10,6 @@
  
  <section id="bag" class="  h-100">
    <div class="container position-relative">
-     
- 
      <?php 
     //  $data = new WC_Order($order_id);
      echo do_shortcode('[woocommerce_checkout]');
