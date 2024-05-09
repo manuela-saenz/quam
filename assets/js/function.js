@@ -364,39 +364,8 @@ function initAddToFavoriteButton() {
   });
 }
 // <!-- Eliminación de favoritos en el contexto de favoritos -->
-function initFavoritesPanelDelete() {
-  $(document).on("click", "#trash_fav", function () {
-    var prodid = $(this).data("id");
-    var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
-    $.ajax({
-      url: ajaxUrl,
-      method: "POST",
-      data: {
-        action: "delete_favorite_product",
-        prodid: prodid,
-      },
-      success: function (res) {
-        if (sessionFav.includes(Number(prodid))) {
-          sessionFav = sessionFav.filter((item) => item !== Number(prodid));
-          localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
-        }
-
-        if (res.counter === 0) {
-          var spanElement = document.getElementById("favoritesCounter");
-          if (spanElement) {
-            botonFav.removeChild(spanElement);
-          }
-        }
-        $("#favoritesCounter").text(res.counter);
-        $(".offcanvas-body.ordenListFav.fav").html(res.html);
-      },
-    });
-  });
-}
-// <!-- Eliminación de favoritos en el mismo contexto -->
-function deleteFavoriteSameContext(prodid) {
+function deleteFavorite(prodid) {
   var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
-  $("#add-sprod-favs").removeClass("active-fav");
   $.ajax({
     url: ajaxUrl,
     method: "POST",
@@ -413,13 +382,25 @@ function deleteFavoriteSameContext(prodid) {
       if (res.counter === 0) {
         var spanElement = document.getElementById("favoritesCounter");
         if (spanElement) {
-          botonFav.removeChild(spanElement);
+          spanElement.parentNode.removeChild(spanElement);
         }
       }
       $("#favoritesCounter").text(res.counter);
       $(".offcanvas-body.ordenListFav.fav").html(res.html);
     },
   });
+}
+
+function initFavoritesPanelDelete() {
+  $(document).on("click", "#trash_fav", function () {
+    var prodid = $(this).data("id");
+    deleteFavorite(prodid);
+  });
+}
+
+function deleteFavoriteSameContext(prodid) {
+  $("#add-sprod-favs").removeClass("active-fav");
+  deleteFavorite(prodid);
 }
 
 var previousValue = $(".variation_id").val();
