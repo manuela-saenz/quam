@@ -21,12 +21,10 @@ defined('ABSPATH') || exit;
 ?>
 
 <div class="woocommerce-order pt-5 pb-5">
-
 	<?php
 	if ($order):
 		do_action('woocommerce_before_thankyou', $order->get_id());
 		?>
-
 		<?php if ($order->has_status('failed')): ?>
 
 			<p class="woocommerce-notice woocommerce-notice--error woocommerce-thankyou-order-failed">
@@ -96,7 +94,7 @@ defined('ABSPATH') || exit;
 					</li>
 
 					<li>
-						<a class="" href="https://www.quam.com.co/web_quam/">Seguir comprando</a>
+						<a href="<?= get_home_url()?>">Seguir comprando</a>
 					</li>
 				</ul>
 
