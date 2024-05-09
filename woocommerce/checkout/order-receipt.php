@@ -20,11 +20,6 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <div class="min-vh-100 ticket-order">
-
-	<div>
-		<img src="<?php bloginfo('template_url') ?>/assets/media/pago-en-linea-payu.svg" alt="">
-	</div>
-
 	<ul class="order_details">
 		<li class="order">
 			<?php /* esc_html_e('Order number:', 'woocommerce'); echo esc_html($order->get_order_number()); */ ?>
@@ -32,7 +27,7 @@ if (!defined('ABSPATH')) {
 		</li>
 		<li class="date">
 			<?php /*  esc_html_e('Fecha de solicitud de compra: ', 'woocommerce');
-					echo esc_html(wc_format_datetime($order->get_date_created())) */ ?>
+						echo esc_html(wc_format_datetime($order->get_date_created())) */ ?>
 			<!-- <strong><?php /* echo esc_html(wc_format_datetime($order->get_date_created())); */ ?></strong>  -->
 		</li>
 		<li class="total">
@@ -47,6 +42,10 @@ if (!defined('ABSPATH')) {
 		<?php /* endif; */ ?>
 	</ul>
 	<div class="cont-btn-payu">
+
+		<div>
+			<img src="<?php bloginfo('template_url') ?>/media/images/pago-payu.svg" alt="">
+		</div>
 		<?php
 		// Obtenemos el texto devuelto por la acción woocommerce_receipt_ y lo almacenamos en una variable
 		ob_start();
