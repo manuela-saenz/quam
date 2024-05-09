@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 ?>
-<div>
+<div class="min-vh-100">
 
 	<ul class="order_details">
 		<li class="order">

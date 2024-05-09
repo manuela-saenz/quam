@@ -20,7 +20,7 @@
 defined('ABSPATH') || exit;
 ?>
 
-<div class="woocommerce-order pt-5 pb-5">
+<div class="woocommerce-order pt-5 pb-5 min-vh-100">
 	<?php
 	if ($order):
 		do_action('woocommerce_before_thankyou', $order->get_id());
