@@ -396,6 +396,7 @@ function initFavoritesPanelDelete() {
 // <!-- Eliminación de favoritos en el mismo contexto -->
 function deleteFavoriteSameContext(prodid) {
   var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
+  $("#add-sprod-favs").removeClass("active-fav");
   $.ajax({
     url: ajaxUrl,
     method: "POST",
@@ -417,7 +418,6 @@ function deleteFavoriteSameContext(prodid) {
       }
       $("#favoritesCounter").text(res.counter);
       $(".offcanvas-body.ordenListFav.fav").html(res.html);
-      $("#add-sprod-favs").removeClass("active-fav");
     },
   });
 }
