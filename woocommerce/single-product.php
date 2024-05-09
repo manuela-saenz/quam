@@ -25,6 +25,7 @@ if ($attachment_ids) {
 
 <div id="showAlertAddCart" class="alert alert-success add-to-cart-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Producto agregado al carrito.</div>
 <div id="showAlertAddFav" class="alert alert-success add-to-list-fav-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Lista de productos favoritos actualizada correctamente.</div>
+<div id="showAlertDeleteFav" class="alert alert-danger add-to-list-fav-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Se eliminó el producto de tus favoritos</div>
 <section id="Singleimgprincipal" class="pt-0">
     <div class="py-2 border-top border-bottom">
         <div class="container">

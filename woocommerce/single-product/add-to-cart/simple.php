@@ -49,8 +49,12 @@ if ($product->is_in_stock()) : ?>
 			?>
 			<style>
 				.active-fav {
-					color: red;
-					fill: red;
+					background: url('https://i.ibb.co/6DjjjKf/dia-de-san-valentin.gif') no-repeat center center;
+					background-size: 30px 30px;
+					width: 50px;
+					height: 50px;
+					color: transparent;
+					fill: transparent;
 				}
 			</style>
 			<button type="submit" name="add-to-cart" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito" value="<?php echo esc_attr($product->get_id()); ?>" class="single_add_to_cart_button quam-btn blue button alt<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>"><?php echo esc_html($product->single_add_to_cart_text()); ?></button>

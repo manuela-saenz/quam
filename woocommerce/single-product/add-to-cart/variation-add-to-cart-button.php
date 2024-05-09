@@ -23,8 +23,12 @@ $sessionFav = $_SESSION["prodsfavs"]
         <button type="submit" data-bs-toggle="offcanvas" data-product-id="0" data-bs-target="#mini-carrito" aria-controls="mini-carrito" class="single_add_to_cart_button quam-btn blue alt<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>"><?php echo esc_html($product->single_add_to_cart_text()); ?></button>
         <style>
             .active-fav {
-                color: red;
-                fill: red;
+                background: url('https://i.ibb.co/6DjjjKf/dia-de-san-valentin.gif') no-repeat center center;
+                background-size: 30px 30px;
+                width: 50px;
+                height: 50px;
+                color: transparent;
+                fill: transparent;
             }
         </style>
         <button class="button-heart d-none d-lg-flex add-fav" id="add-sprod-favs" data-product-id="0" type="button"> <i class="icon-heart"></i> </button>

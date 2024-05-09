@@ -1,3 +1,4 @@
+// <!-- Parseando los valores que llegan de Woocomerce desde etiquetas   -->
 function getTotalValue(totalString) {
   var match = totalString.match(
     /<span class="woocommerce-Price-currencySymbol">[^<]*<\/span>&nbsp;((\d{1,3}(\.\d{3})*(\,\d+)?)|(\d+))/
@@ -6,6 +7,8 @@ function getTotalValue(totalString) {
   return value;
 }
 
+
+// <!-- Lógica de añadir articulo al carrito   -->
 var botonCart = document.getElementById("bottonCart");
 
 jQuery(document).ready(function ($) {
@@ -19,7 +22,6 @@ jQuery(document).ready(function ($) {
         ? $("[name='add-to-cart']")[0].value
         : productId;
 
-    // Inserta el HTML antes de la llamada AJAX
     var htmlContent =
       '<div class="mini-cart-product-card align-items-start d-flex bg-white" style="flex-direction: row;">' +
       '<div class="img-contain overflow-hidden rounded-1">' +
@@ -89,6 +91,7 @@ jQuery(document).ready(function ($) {
   });
 });
 
+// <!-- Actualizando carrito   -->
 function updateCartContents(succes) {
   if (succes.status === "success") {
     $(".ordenList").html(succes.html);
@@ -105,6 +108,7 @@ function updateCartContents(succes) {
   }
 }
 
+// <!-- Eliminación de articulos del carrito  -->
 function trashItem(id, idVariant, tbodyElementCheckout) {
   var data = {
     action: "woocommerce_remove_cart_item",
@@ -141,6 +145,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
   });
 }
 
+// <!-- Bloque de carga para el checkout  -->
 function blockUICheckout() {
   var blockUI = $("<div>").addClass("blockUI blockOverlay").css({
     "z-index": "1000",
@@ -157,12 +162,11 @@ function blockUICheckout() {
     position: "absolute",
   });
 
-  $(".shop_table.woocommerce-checkout-review-order-table.mb-0").append(
-    blockUI
-  );
-  return blockUI
+  $(".shop_table.woocommerce-checkout-review-order-table.mb-0").append(blockUI);
+  return blockUI;
 }
 
+// <!-- Lógica para selección de cantidad de productos  -->
 $(document).on("click", ".remove", function () {
   var id = $(this).data("id");
   var idVariant = $(this).data("variant");
@@ -179,25 +183,16 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
   var container = $(this).parent().parent().parent();
   var quantityInput = container.find("#singleProductQuantity");
   var currentQuantity = parseInt(quantityInput.val());
-  var originalPrice = parseFloat(
-    container.find("#price").text().replace("$", "").replace(",", "")
-  );
-  var priceOriginal = parseInt(container.find("#priceUnit").data("price"));
-  let operacion;
+
   if ($(this).hasClass("qtyminus")) {
-    console.log(currentQuantity);
     if (currentQuantity > 1) {
-      operacion = originalPrice * (parseInt(quantityInput.val()) - 1);
       currentQuantity = currentQuantity - 1;
       quantityInput.val(currentQuantity);
-      originalPrice = originalPrice - priceOriginal;
     }
   } else if ($(this).hasClass("qtyplus")) {
     if (currentQuantity >= 1) {
-      operacion = originalPrice * (parseInt(quantityInput.val()) + 1);
       currentQuantity = currentQuantity + 1;
       quantityInput.val(currentQuantity);
-      originalPrice = originalPrice + priceOriginal;
     }
   }
 
@@ -288,10 +283,26 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
   }, 500);
 });
 
+// <!-- Añadiendo a favoritos -->
 var botonFav = document.getElementById("bottonFav");
+
 function initAddToFavoriteButton() {
+
   $("#add-sprod-favs , .add-fav").on("click", function (e) {
     e.preventDefault();
+
+    $(".icon-heart").prop("hidden", true);
+
+    var loadingGif = $("<img>")
+      .attr("src", "https://i.ibb.co/kmc0zRN/corazon.gif")
+      .addClass("loading-gif")
+      .css({
+        width: "30px",
+        height: "30px",
+      });
+
+    $(".icon-heart").parent().append(loadingGif);
+
     var productId = $(".variation_id").val();
     productId =
       productId == undefined || productId == 0
@@ -308,12 +319,29 @@ function initAddToFavoriteButton() {
         prodid: productId,
       },
       success: function (res) {
-        if (!sessionFav.includes(productId)) {
+        $(".loading-gif").remove();
+        $(".icon-heart").prop("hidden", false);
+
+        // <!-- Usando lógica reactiva sin necesidad de petición al backend -->
+        if (!sessionFav.includes(Number(productId))) {
           sessionFav.push(Number(productId));
           localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
+        } else {
+           // <!-- Petición para la eliminación desde el contexto del boton de favoritos -->
+          deleteFavoriteSameContext(productId);
+          var alertElement = $("#showAlertDeleteFav");
+          alertElement.removeClass("d-none").show();
+  
+          setTimeout(function () {
+            alertElement.hide().addClass("d-none");
+          }, 2000);
+          return;
         }
+
         $("#add-sprod-favs").addClass("active-fav");
+
         var spanElement = document.getElementById("favoritesCounter");
+
         if (!spanElement) {
           spanElement = document.createElement("span");
           spanElement.id = "favoritesCounter";
@@ -335,7 +363,7 @@ function initAddToFavoriteButton() {
     });
   });
 }
-
+// <!-- Eliminación de favoritos en el contexto de favoritos -->
 function initFavoritesPanelDelete() {
   $(document).on("click", "#trash_fav", function () {
     var prodid = $(this).data("id");
@@ -363,6 +391,34 @@ function initFavoritesPanelDelete() {
         $(".offcanvas-body.ordenListFav.fav").html(res.html);
       },
     });
+  });
+}
+// <!-- Eliminación de favoritos en el mismo contexto -->
+function deleteFavoriteSameContext(prodid) {
+  var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
+  $.ajax({
+    url: ajaxUrl,
+    method: "POST",
+    data: {
+      action: "delete_favorite_product",
+      prodid: prodid,
+    },
+    success: function (res) {
+      if (sessionFav.includes(Number(prodid))) {
+        sessionFav = sessionFav.filter((item) => item !== Number(prodid));
+        localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
+      }
+
+      if (res.counter === 0) {
+        var spanElement = document.getElementById("favoritesCounter");
+        if (spanElement) {
+          botonFav.removeChild(spanElement);
+        }
+      }
+      $("#favoritesCounter").text(res.counter);
+      $(".offcanvas-body.ordenListFav.fav").html(res.html);
+      $("#add-sprod-favs").removeClass("active-fav");
+    },
   });
 }
 
