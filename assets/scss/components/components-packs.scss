@@ -3,6 +3,7 @@
 @import "titles";
 @import "icons";
 @import "product-card";
+@import "alerts";
 
 .quantity {
   input::-webkit-outer-spin-button,
@@ -14,5 +15,25 @@
   /* Firefox */
   input[type="number"] {
     -moz-appearance: textfield;
+  }
+}
+
+.generation-arrows {
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  border-radius: 50px;
+  padding: 0;
+  border: none;
+  border: 2px solid $dark_blue;
+  background: white;
+  color:  $dark_blue;
+  width: 80px;
+  height: 40px;
+  font-size: 25px;
+  @include center-all;
+  transition: all 0.1s;
+  &:active{
+    transform: scale(0.9);
   }
 }

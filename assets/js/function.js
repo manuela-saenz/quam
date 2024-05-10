@@ -291,17 +291,8 @@ function initAddToFavoriteButton() {
   $("#add-sprod-favs , .add-fav").on("click", function (e) {
     e.preventDefault();
 
-    $(".icon-heart").prop("hidden", true);
 
-    var loadingGif = $("<img>")
-      .attr("src", "https://i.ibb.co/kmc0zRN/corazon.gif")
-      .addClass("loading-gif")
-      .css({
-        width: "30px",
-        height: "30px",
-      });
-
-    $(".icon-heart").parent().append(loadingGif);
+    $(this).addClass('adding');
 
     var productId = $(".variation_id").val();
     productId =
@@ -319,22 +310,21 @@ function initAddToFavoriteButton() {
         prodid: productId,
       },
       success: function (res) {
-        $(".loading-gif").remove();
-        $(".icon-heart").prop("hidden", false);
+        $("#add-sprod-favs , .add-fav").removeClass('adding');
 
         // <!-- Usando lógica reactiva sin necesidad de petición al backend -->
         if (!sessionFav.includes(Number(productId))) {
           sessionFav.push(Number(productId));
           localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
         } else {
-           // <!-- Petición para la eliminación desde el contexto del boton de favoritos -->
+          // <!-- Petición para la eliminación desde el contexto del boton de favoritos -->
           deleteFavoriteSameContext(productId);
           var alertElement = $("#showAlertDeleteFav");
           alertElement.removeClass("d-none").show();
-  
+
           setTimeout(function () {
             alertElement.hide().addClass("d-none");
-          }, 2000);
+          }, 2200);
           return;
         }
 
@@ -358,7 +348,7 @@ function initAddToFavoriteButton() {
 
         setTimeout(function () {
           alertElement.hide().addClass("d-none");
-        }, 2000);
+        }, 2200);
       },
     });
   });

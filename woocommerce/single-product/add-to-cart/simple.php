@@ -33,7 +33,7 @@ if ($product->is_in_stock()) : ?>
 
 	<form class="cart" action="<?php echo esc_url(apply_filters('woocommerce_add_to_cart_form_action', $product->get_permalink())); ?>" method="post" enctype='multipart/form-data'>
 		<?php do_action('woocommerce_before_add_to_cart_button'); ?>
-		<div class="d-flex gap-3">
+		<div class="center-vertical gap-3">
 			<?php
 			do_action('woocommerce_before_add_to_cart_quantity');
 
@@ -47,18 +47,12 @@ if ($product->is_in_stock()) : ?>
 
 			do_action('woocommerce_after_add_to_cart_quantity');
 			?>
-			<style>
-				.active-fav {
-					background: url('https://i.ibb.co/6DjjjKf/dia-de-san-valentin.gif') no-repeat center center;
-					background-size: 30px 30px;
-					width: 50px;
-					height: 50px;
-					color: transparent;
-					fill: transparent;
-				}
-			</style>
+			
 			<button type="submit" name="add-to-cart" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito" value="<?php echo esc_attr($product->get_id()); ?>" class="single_add_to_cart_button quam-btn blue button alt<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>"><?php echo esc_html($product->single_add_to_cart_text()); ?></button>
-			<button class="button-heart d-none d-lg-flex add-fav" id="add-sprod-favs" data-product-id="<?php echo esc_attr($product->get_id()); ?>" type="button"> <i class="icon-heart"></i> </button>
+			<button class="button-heart d-none d-lg-flex add-fav" id="add-sprod-favs" data-product-id="<?php echo esc_attr($product->get_id()); ?>" type="button">   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+            </svg> </button>
 		</div>
 		<?php do_action('woocommerce_after_add_to_cart_button'); ?>
 	</form>

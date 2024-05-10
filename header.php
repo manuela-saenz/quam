@@ -106,7 +106,7 @@
               </div>
             </div>
             <div class="center-vertical">
-              <div class="header-actions d-flex ms-4 gap-2 gap-sm-3">
+              <div class="header-actions d-flex ms-4 gap-sm-3">
                 <button id="bottonFav" class="position-relative btn center-all p-0 " data-bs-toggle="offcanvas" data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i>
                   <?php if (!empty($_SESSION["prodsfavs"])) { ?>
                     <span id="favoritesCounter" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count($_SESSION["prodsfavs"]) ?>

@@ -20,9 +20,13 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if ($related_products) : ?>
+if ($related_products) : 
+	// echo '<pre>';
+	// print_r($related_products);
+	// echo '</pre>';
+?>
 
-	<section class="related products">
+	<section class="related products overflow-hidden">
 		<div class="container">
 
 
@@ -34,7 +38,7 @@ if ($related_products) : ?>
 				<h6 class="section-subtitle  mb-4 text-center">También te podría interesar</h6>
 			<?php endif; ?>
 
-			<div class="related-swiper swiper">
+			<div class="related-swiper swiper overflow-visible">
 				<div class="swiper-wrapper">
 					<?php foreach ($related_products as $related_product) : ?>
 

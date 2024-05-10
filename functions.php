@@ -53,6 +53,12 @@ add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_s
 // }
 // add_action( 'widgets_init', 'arphabet_widgets_init' );
 
+function related_products_quantity( $args ) {
+    $args['posts_per_page'] = 10;
+    return $args;
+}
+add_filter( 'woocommerce_output_related_products_args', 'related_products_quantity' );
+
 // Función para obtener productos por categoría
 function get_products_by_category_name($category_name) {
     // Obtener el término (categoría) por su nombre

@@ -81,6 +81,7 @@ header {
           align-items: center !important;
         }
         .header-actions {
+          gap: 14px;
           button {
             width: 35px;
             height: 35px;
@@ -366,6 +367,7 @@ header {
         gap: 6px;
         align-items: self-end;
         justify-content: center;
+        margin-left: 5px;
 
         div {
           width: 24px;

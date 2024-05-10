@@ -57,7 +57,7 @@ $banners  = (new WP_Query(array(
       ?>
 
         <div class="col-md-4 p-0 position-relative">
-          <div class="card-categories d-flex position-relative">
+          <div class="card-categories d-flex position-relative overflow-hidden">
             <a href="<?= get_term_link($cat->term_id) ?>" class="img-fit w-100 h-100">
               <img src="<?= $thumbUrl ?>" title="<?= $cat->name ?>" alt="<?= $cat->name ?>">
             </a>
@@ -75,11 +75,11 @@ $banners  = (new WP_Query(array(
 
 <section id="generation">
   <div class="container slideGeneration">
-    <div class="row align-items-center">
-      <div class="col-xxl-3 col-md-12 col-md-4">
-        <div class="position-relative">
+    <div class="row ">
+      <div class="col-xxl-3 col-md-12 col-md-4 position-relative z-2 center-vertical">
+        <div>
           <h3 class="section-subtitle mb-4">Última generación</h3>
-          <div class="d-xl-flex d-none">
+          <div class="d-xl-flex gap-2 d-none">
             <div class="arrow-prev-container">
               <button class="generation-arrows prev">
                 <i class="icon-arrowline-left"> </i>

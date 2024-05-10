@@ -115,7 +115,9 @@
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?=v<?= randomCode() ?>"> </script>
 <?php if (is_product()) { ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/product.js?=v<?= randomCode() ?>"> </script>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script> -->
+  <script src="<?php bloginfo('template_url') ?>/assets/js/product.js?=v<?= randomCode() ?>"> </script>
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/function.js?=v<?= randomCode() ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?=v<?= randomCode() ?>"> </script>
@@ -123,4 +125,5 @@
 
 
 </body>
+
 </html>

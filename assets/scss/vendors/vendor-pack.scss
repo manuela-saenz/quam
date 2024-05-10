@@ -3,24 +3,39 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap-reboot.scss";
 @import "../../../node_modules/bootstrap/scss/buttons";
 
-
-.woocommerce-breadcrumb{
-    margin-bottom: 0 !important;
+.woocommerce-breadcrumb {
+  margin-bottom: 0 !important;
 }
 
-.product.type-product{
-    display: flex;
-    flex-wrap: wrap;
+.product.type-product {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.rtwpvg-trigger{
-    display: none !important;
+.rtwpvg-trigger {
+  display: none !important;
 }
 
 .rtwpvg-slider-wrapper {
-    width: 100%;
+  width: 100%;
+  @media (min-width: 991px) {
+    margin-left: 20px !important;
+  }
 }
 
-.rtwpvg-images{
-    width: 50%;
+.rtwpvg-images {
+  width: 50%;
+}
+
+// rr
+
+.footer-section {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ddd;
+  height: 100px;
+  overflow-y: hidden;
+  transition: height 0.3s ease;
 }
