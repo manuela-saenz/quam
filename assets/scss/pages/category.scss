@@ -37,7 +37,7 @@
   position: relative;
   display: inline-block;
   margin-right: 20px;
-  *{
+  * {
     margin-bottom: 0 !important;
   }
   select {
@@ -65,29 +65,28 @@
     border-top: 6px solid black;
     transition: transform 0.3s ease;
   }
-  select:focus+.arrow {
+  select:focus + .arrow {
     transform: translateY(-50%) rotate(180deg);
   }
 }
 
-.yith-wcan-filters{
+.yith-wcan-filters {
   margin-bottom: 0 !important;
-  .yith-wcan-filter{
+  .yith-wcan-filter {
     margin-bottom: 0 !important;
     min-width: 200px;
   }
-  .yith-wcan-dropdown{
+  .yith-wcan-dropdown {
     padding: 10px 15px !important;
   }
-  form{
+  form {
     display: flex;
     gap: 10px;
   }
-  h4{
+  h4 {
     display: none;
   }
 }
-
 
 .products p {
   font-weight: 600;
@@ -97,12 +96,37 @@
   }
 }
 
-
-
 #infoProducts {
   position: relative;
   overflow: hidden;
-
+  &.loading {
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(238, 238, 238, 0.4);
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+    .galleryP {
+      .product {
+        animation: load 1.5s infinite;
+      }
+      @keyframes load {
+        0%{
+          opacity: 1;
+        }
+        50%{
+          opacity: 0.7;
+        }
+        100%{
+          opacity: 1;
+        }
+      }
+    }
+  }
   @media (max-width: 991px) {
     padding-bottom: 0;
   }
@@ -130,7 +154,6 @@
 
   .galleryP {
     .productS {
-
       &:nth-child(10n - 1),
       &:nth-child(10n) {
         width: 50%;

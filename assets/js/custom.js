@@ -116,3 +116,6 @@ $('.open-selector , .add-fav').on('click', (event) => {
 
 
 
+$('.woocommerce-ordering select').on('change', function(){
+  $('#infoProducts').addClass('loading');
+})

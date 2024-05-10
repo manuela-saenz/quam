@@ -108,8 +108,8 @@ function ItemsCheckout()
             <tr>
                 <td scope="row d-flex align-items-center ">
                     <div class=" d-flex align-items-center h-100  p-3">
-                        <div class="img-fit">
-                            <img src="<?= esc_url($image); ?>" alt="<?= esc_attr($title); ?>">
+                        <div class="img-contain">
+                        <?= $_product->get_image('medium', 'alt=' . get_the_title())   ?>
                         </div>
                         <div>
                             <h5><?= esc_attr($title); ?></h5>

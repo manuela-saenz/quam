@@ -27,7 +27,7 @@ if (empty($product) || !$product->is_visible()) {
 ?>
 <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?>>
 	<a href="<?= get_permalink($product->get_id()) ?>" class="CardProducts w-100">
-		<div class="img-contain" title="<?php ?>">
+		<div class="img-contain border" title="<?php ?>">
 			<?= $product->get_image('medium', 'alt=' . get_the_title())   ?>
 		</div>
 		<div class="info-highlights">

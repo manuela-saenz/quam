@@ -537,7 +537,7 @@ header {
       margin-right: 20px;
       width: 110px;
       min-width: 110px;
-      aspect-ratio: 1;
+      aspect-ratio: 1 / 1.2;
       @media (max-width:991px){
         width: 100px;
         min-width: 100px;

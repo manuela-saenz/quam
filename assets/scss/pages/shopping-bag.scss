@@ -261,10 +261,10 @@
   }
 
   td {
-    height: 150px;
+    // height: 150px;
     // padding: 20px 0;
     padding: 0;
-    width: 180px;
+    // width: 180px;
     background: transparent;
     border-bottom-width: inherit;
     margin-bottom: 20px;
@@ -276,8 +276,9 @@
     }
   }
 
-  .img-fit {
-    min-width: 130px;
+  .img-contain {
+    min-width: 120px;
+    width: 120px;
     aspect-ratio: 1 / 1.2;
     margin-right: 20px;
   }
