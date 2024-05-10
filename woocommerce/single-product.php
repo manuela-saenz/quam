@@ -45,8 +45,7 @@ if ($attachment_ids) {
           <div class="">
             <h1 class="section-subtitle mb-1"><?= $post->post_title ?></h1>
             <div class="d-flex align-items-center price">
-              <p class="mb-0">$<?= $product->get_price() ?></p>
-              <span><?= $product->get_regular_price() ?> </span>
+              <?=  $product->get_price_html() ?>
             </div>
           </div>
           <button class="button-heart add-fav" data-product-id="0" type="button">

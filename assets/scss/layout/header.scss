@@ -548,14 +548,12 @@ header {
       }
     }
     .quantity {
-      max-height: 30px;
-      padding: 3px 3px;
       button {
-        width: 22px;
-        height: 22px;
-        i {
-          font-size: 15px;
-        }
+        width: 28px;
+        height: 28px;
+      }
+      input{
+        height: 28px;
       }
     }
   }
@@ -586,13 +584,10 @@ header {
 
   p {
     margin-bottom: 0;
-    font-size: 15px;
-    color: #1c1c1c;
     font-weight: 600;
   }
 
   h5 {
-    font-size: 15px;
     font-weight: 700;
   }
 

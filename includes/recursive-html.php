@@ -31,7 +31,7 @@ function ItemsCart()
         <div class="mini-cart-product-card align-items-start d-flex bg-white">
 
             <div class="img-contain overflow-hidden rounded-1">
-            <?= $_product->get_image('medium', 'alt=' . $title)   ?>
+                <?= $_product->get_image('medium', 'alt=' . $title)   ?>
             </div>
             <div>
                 <h5 class="mb-1"><?= $title ?></h5>
@@ -46,7 +46,7 @@ function ItemsCart()
                 </div>
 
                 <div class="d-flex align-items-center price mb-3">
-                    <p id="price"><?=$_product->get_price_html() ?> COP</p>
+                    <p id="price"><?= $_product->get_price_html() ?> COP</p>
                     <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -56,7 +56,7 @@ function ItemsCart()
                         <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
                     </div>
                     <button id="trash_cart" class="remove" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M4 7l16 0"></path>
                             <path d="M10 11l0 6"></path>
@@ -108,8 +108,8 @@ function ItemsCheckout()
             <tr>
                 <td scope="row d-flex align-items-center ">
                     <div class=" d-flex align-items-center h-100  p-3">
-                        <div class="img-contain">
-                        <?= $_product->get_image('medium', 'alt=' . get_the_title())   ?>
+                        <div class="img-contain border">
+                            <?= $_product->get_image('medium', 'alt=' . get_the_title())   ?>
                         </div>
                         <div>
                             <h5><?= esc_attr($title); ?></h5>
@@ -119,18 +119,15 @@ function ItemsCheckout()
                     </div>
                 </td>
                 <td>
-                    <div class="d-flex align-items-center justify-content-end h-100 ">
-                        <div class="quantity" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
-                            <button class="qtyminus minus"><i class="icon-minus"></i></button>
-                            <input type="text" id="singleProductQuantity" name="quantity" value="<?= esc_html($quantity); ?>" class="qtySingle">
-                            <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
-                        </div>
+                    <div class="quantity" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">
+                        <button class="qtyminus minus"><i class="icon-minus"></i></button>
+                        <input type="text" id="singleProductQuantity" readonly name="quantity" value="<?= esc_html($quantity); ?>" class="qtySingle">
+                        <button class="qtyplus plus"><i class="icon-add---copia"></i></button>
                     </div>
                 </td>
 
                 <td>
-                    <div class="d-flex align-items-center justify-content-center h-100 "> $<?= number_format($price); ?>
-                    </div>
+                    <?= $_product->get_price_html() ?>
                 </td>
                 <td>
                     <div id="trash_cart" style="cursor: pointer;" class="d-flex align-items-center justify-content-center h-100 remove" data-id="<?php echo esc_attr($product_id); ?>" data-variant="<?php echo isset($variation_id) ? esc_attr($variation_id) : 0; ?>">

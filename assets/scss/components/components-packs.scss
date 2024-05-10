@@ -7,6 +7,46 @@
 @import "mini-cart";
 
 .quantity {
+  @include center-vertical;
+  border: 1px solid black;
+  height: 100%;
+  padding: 4px;
+  width: fit-content;
+
+  @media (max-width: 600px) {
+    padding: 4px;
+  }
+
+  button {
+    width: 34px;
+    height: 34px;
+    @include center-all;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 22px;
+    &:hover {
+      background: #f2f2f2;
+    }
+    &:active{
+      background:#ddd;
+    }
+  }
+
+  input {
+    margin: 0 8px;
+    height: 32px;
+    width: 35px;
+    font-size: 20px;
+    border: 1px solid transparent;
+    text-align: center;
+    color: black;
+    border-radius: 4px;
+    background: transparent;
+
+    @media (max-width: 768px) {
+      margin: 0 0px;
+    }
+  }
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -28,13 +68,13 @@
   border: none;
   border: 2px solid $dark_blue;
   background: white;
-  color:  $dark_blue;
+  color: $dark_blue;
   width: 80px;
   height: 40px;
   font-size: 25px;
   @include center-all;
   transition: all 0.1s;
-  &:active{
+  &:active {
     transform: scale(0.9);
   }
 }

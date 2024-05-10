@@ -86,16 +86,16 @@ defined('ABSPATH') || exit;
 											<table class="table table-bag">
 												<thead>
 													<tr>
-														<th scope="col">Producto (s)</th>
-														<th scope="col" class="text-center">Cantidad</th>
-														<th scope="col" class="">Precio</th>
-														<th scope="col" style="color: transparent;">dd</th>
+														<th>Producto (s)</th>
+														<th>Cantidad</th>
+														<th>Precio</th>
+														<th></th>
 													</tr>
 												</thead>
 												<?php ItemsCheckout(); ?>
 											</table>
-											<div class="d-lg-flex d-none flex-column">
-												<label class="custom-checkbox d-flex align-items-baseline mb-4"><input class="politicy check me-3" type="checkbox" id="cboxtwo" value="first_checkbox">
+											<div class="">
+												<label class="custom-checkbox d-flex align-items-baseline mb-4">
 													<div style="font-size: 15px;">
 														Autorizo el uso de mis datos personales con fines
 														comerciales y publicitarios para
