@@ -44,9 +44,9 @@ $sessionFav = $_SESSION["prodsfavs"]
                 var sessionFavLocal = JSON.parse(localStorage.getItem('sessionFav')) || [];
                 var productId = targetNode.getAttribute('data-product-id');
                 if (sessionFavLocal.includes(Number(productId))) {
-                    $("#add-sprod-favs").addClass("active-fav");
+                    $(".add-fav").addClass("active-fav");
                 } else {
-                    $("#add-sprod-favs").removeClass("active-fav");
+                    $(".add-fav").removeClass("active-fav");
                 }
             }
         }
@@ -66,9 +66,9 @@ $sessionFav = $_SESSION["prodsfavs"]
         var sessionFav = <?php echo json_encode($sessionFav); ?>;
         if (!productId === 0) {
             if (sessionFav.includes(productId)) {
-                $("#add-sprod-favs").addClass("active-fav");
+               $(".add-fav").addClass("active-fav");
             } else {
-                $("#add-sprod-favs").removeClass("active-fav");
+               $(".add-fav").removeClass("active-fav");
             }
         }
 

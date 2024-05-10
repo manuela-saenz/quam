@@ -103,7 +103,7 @@ defined('ABSPATH') || exit;
 														información sobre productos y servicios de interés.
 													</div>
 												</label>
-												<button type="button" class="shop-info-btn blue next" onclick="stepper1.next()">Diligenciar información</button>
+												<button type="button" class="quam-btn blue" onclick="stepper1.next()">Diligenciar información</button>
 											</div>
 										</div>
 										<?php
@@ -118,7 +118,7 @@ defined('ABSPATH') || exit;
 											<h3 class="mb-4"> Identificación</h3>
 											<div class="position-relative">
 												<div class="form_contact">
-													<div class="row input-form-name">
+													<div class="row input-form-name mb-4">
 														<div class="col-md-6 fw-bold ">
 															<?php woocommerce_form_field(array_keys($fields)[0], $fields['billing_first_name'], $checkout->get_value(array_keys($fields)[0])); ?>
 														</div>
@@ -137,10 +137,10 @@ defined('ABSPATH') || exit;
 														</div>
 													</div>
 													<div class="btn-step-next">
-														<button id="boton-id" type="button" class="shop-info-btn blue next mt-4" onclick="stepper1.next()">Diligenciar ubicación</button>
+														<button id="boton-id" type="button" class="quam-btn blue" onclick="stepper1.next()">Diligenciar ubicación</button>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 									</div>
@@ -154,9 +154,9 @@ defined('ABSPATH') || exit;
 									<div class="form-group row">
 										<div class="col-lg-12">
 											<h3 class="mb-4"> Ubicación</h3>
-											<form class="position-relative">
+											<div class="position-relative">
 												<div class="form_contact">
-													<div class="row input-form-location">
+													<div class="row input-form-location mb-4">
 														<div class="col-md-6">
 															<?php woocommerce_form_field(array_keys($fields)[3], $fields['billing_company'], $checkout->get_value(array_keys($fields)[3])); ?>
 														</div>
@@ -168,7 +168,7 @@ defined('ABSPATH') || exit;
 														</div>
 														<div class="col-md-6">
 															<label for="" class="mt-2 ms-1">Apartamento o habitacion</label>
-															<?php woocommerce_form_field(array_keys($fields)[6], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[6]));?>
+															<?php woocommerce_form_field(array_keys($fields)[6], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[6])); ?>
 														</div>
 														<div class="col-md-6">
 															<?php woocommerce_form_field(array_keys($fields)[7], $fields['billing_city'], $checkout->get_value(array_keys($fields)[7])); ?>
@@ -185,11 +185,11 @@ defined('ABSPATH') || exit;
 													<div class="alert alert-success" role="alert" id="success_alert" style="display:none; color: #155724; background-color: #d4eddaa1; border:1px solid #c3e6cb; #f5c6cb; padding: 13px; margin-bottom: 10px;">
 													</div>
 													<div class="btn-step-next">
-													<!-- <button type="button" class="quam-btn blue next" onclick="generate_order()">Generar pedido</button> -->
-													<button id="boton-lo" type="button" class="shop-info-btn blue next mt-4" onclick="stepper1.next()">Generar pedido</button>
+														<!-- <button type="button" class="quam-btn blue next" onclick="generate_order()">Generar pedido</button> -->
+														<button id="boton-lo" type="button" class="quam-btn blue" onclick="stepper1.next()">Generar pedido</button>
+													</div>
 												</div>
-												</div>
-											</form>
+											</div>
 										</div>
 									</div>
 
@@ -202,10 +202,10 @@ defined('ABSPATH') || exit;
 								</div>
 
 								<div id="test-l-4" role="tabpanel" class="bs-stepper-pane form-group" aria-labelledby="stepper1trigger4">
-									<h3 class=" mb-4">Pago</h3>	
+									<h3 class=" mb-4">Pago</h3>
 									<div class="form-group row bg-white p-3 rounded">
 										<div class="col-lg-12 position-relative">
-											
+
 											<div class="nav nav-pills m-5" id="pills-tab" role="tablist">
 												<div>
 													<?php woocommerce_checkout_payment(); ?>
@@ -289,22 +289,7 @@ defined('ABSPATH') || exit;
 										</div>
 									</div>
 								</form>
-								<div class="d-lg-none d-flex flex-column check">
-									<label class="custom-checkbox d-flex align-items-baseline mb-4 "><input class="politicy check me-3" type="checkbox" id="cboxtwo" value="first_checkbox">
-										<div style="font-size: 14px;">
-											Autorizo el uso de mis datos personales con fines
-											comerciales y publicitarios para
-											recibir
-											información sobre productos y servicios de interés.
-										</div>
-									</label>
-									<div class="btn-next w-100">
-										<div class="btn-checkout-form">
-											<button type="button" class="quam-btn blue next " onclick="stepper1.next()">Diligenciar
-											información</button>
-										</div>										
-									</div>
-								</div>
+
 							</div>
 						</div>
 					</div>

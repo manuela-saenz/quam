@@ -7,6 +7,10 @@
   margin-bottom: 0 !important;
 }
 
+.woocommerce-notices-wrapper{
+  display: none;
+}
+
 .product.type-product {
   display: flex;
   flex-wrap: wrap;
@@ -27,15 +31,3 @@
   width: 50%;
 }
 
-// rr
-
-.footer-section {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #f8f9fa;
-  border-top: 1px solid #ddd;
-  height: 100px;
-  overflow-y: hidden;
-  transition: height 0.3s ease;
-}

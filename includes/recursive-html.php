@@ -31,7 +31,7 @@ function ItemsCart()
         <div class="mini-cart-product-card align-items-start d-flex bg-white">
 
             <div class="img-contain overflow-hidden rounded-1">
-                <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($title); ?>">
+            <?= $_product->get_image('medium', 'alt=' . $title)   ?>
             </div>
             <div>
                 <h5 class="mb-1"><?= $title ?></h5>
@@ -46,10 +46,7 @@ function ItemsCart()
                 </div>
 
                 <div class="d-flex align-items-center price mb-3">
-                    <p id="price">$<?php echo number_format($price); ?></p>
-                    <?php if ($regular_price) { ?>
-                        <span id="regular_price">$<?php echo number_format($regular_price); ?></span>
-                    <?php } ?>
+                    <p id="price"><?=$_product->get_price_html() ?> COP</p>
                     <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
                 </div>
                 <div class="d-flex justify-content-between">

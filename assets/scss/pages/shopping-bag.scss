@@ -185,27 +185,7 @@
       font-weight: 500;
     }
 
-    .quam-btn {
-      width: auto;
-      color: #fff;
-      font-size: 20px;
-      padding: 14px 25px;
-      margin: inherit;
-      @include center-all;
-      cursor: pointer;
-      font-weight: 500;
-      text-align-last: center;
-      letter-spacing: 1px;
-
-      &:hover {
-        color: $dark_blue;
-      }
-
-      @media (max-width: 1200px) {
-        width: 100%;
-        padding: 14px 25px;
-      }
-    }
+    
   }
 
   .circle {
@@ -297,8 +277,8 @@
   }
 
   .img-fit {
-    height: 100%;
-    width: 130px;
+    min-width: 130px;
+    aspect-ratio: 1 / 1.2;
     margin-right: 20px;
   }
 

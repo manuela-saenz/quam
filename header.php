@@ -90,11 +90,11 @@
                   "hide_empty" => false,
                   "parent" => 0,
                   'exclude'    => 69,
-                  'orderby'    => 'asc',
+                  'orderby' => 'term_order',
                 ));
                 foreach ($categories as $cat) :
                 ?>
-                  <a class="" href="<?= get_term_link($cat) ?>">
+                  <a href="<?= get_term_link($cat) ?>" class="<?= is_page( $cat->name ) ? 'active' : '' ?>" data-id="<?=  $cat->slug ?>">
                     <?= $cat->name ?>
                   </a>
                 <?php endforeach; ?>

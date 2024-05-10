@@ -7,11 +7,13 @@
   height: 52px;
   transform-origin: center;
   will-change: transform;
-  transition: all .2s;
+  transition: all 0.2s;
   position: relative;
   z-index: 4;
-
-  @media(max-width:1200px) {
+  &:disabled {
+    opacity: 0.5;
+  }
+  @media (max-width: 1200px) {
     height: auto;
   }
 
@@ -42,20 +44,21 @@
     background: $dark_blue;
     color: $white;
     border: 1px solid transparent;
-
-    &:hover {
-      border: 1px solid $white;
-      color: $dark_blue;
-      background: $white;
-      border: 1px solid $blue;
+    &:not(:disabled) {
+      &:hover {
+        border: 1px solid $white;
+        color: $dark_blue;
+        background: $white;
+        border: 1px solid $blue;
+      }
     }
   }
-  &.sm-btn{
+  &.sm-btn {
     padding: 10px 25px;
     font-size: 16px;
   }
 }
 
-.red{
+.red {
   color: $red;
 }

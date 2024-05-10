@@ -68,9 +68,9 @@ if ($product->is_in_stock()) : ?>
 		var sessionFav = <?php echo json_encode($sessionFav); ?>;
 		if (!productId === 0) {
 			if (sessionFav.includes(productId)) {
-				$("#add-sprod-favs").addClass("active-fav");
+				$(".add-fav").addClass("active-fav");
 			} else {
-				$("#add-sprod-favs").removeClass("active-fav");
+				$(".add-fav").removeClass("active-fav");
 			}
 		}
 

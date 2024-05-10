@@ -27,7 +27,7 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
           <div>
             <h5><?php echo ($wcProd->get_name()); ?> </h5>
             <div class="d-flex align-items-center priceFav mb-3">
-              <p id="priceFav">$ <?= ($wcProd->get_price()); ?></p>
+              <p id="priceFav"><?= $wcProd->get_price_html() ?> COP</p>
             </div>
             <div class="d-flex justify-content-end">
               <button id="trash_fav" data-id="<?php echo ($prod->ID) ?>">
@@ -49,7 +49,6 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
   </div>
 
 <?php else : ?>
-  <div class="no-favs-products text-center">
-    <h4>No tienes productos favoritos</h4>
+  <div class="no-favs-products text-center center-all text-center p-4 h-100">
   </div>
 <?php endif; ?>

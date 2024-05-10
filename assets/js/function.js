@@ -288,7 +288,7 @@ var botonFav = document.getElementById("bottonFav");
 
 function initAddToFavoriteButton() {
 
-  $("#add-sprod-favs , .add-fav").on("click", function (e) {
+  $(".add-fav").on("click", function (e) {
     e.preventDefault();
 
 
@@ -310,7 +310,7 @@ function initAddToFavoriteButton() {
         prodid: productId,
       },
       success: function (res) {
-        $("#add-sprod-favs , .add-fav").removeClass('adding');
+        $(".add-fav").removeClass('adding');
 
         // <!-- Usando lógica reactiva sin necesidad de petición al backend -->
         if (!sessionFav.includes(Number(productId))) {
@@ -328,7 +328,7 @@ function initAddToFavoriteButton() {
           return;
         }
 
-        $("#add-sprod-favs").addClass("active-fav");
+        $(".add-fav").addClass("active-fav");
 
         var spanElement = document.getElementById("favoritesCounter");
 
@@ -389,7 +389,7 @@ function initFavoritesPanelDelete() {
 }
 
 function deleteFavoriteSameContext(prodid) {
-  $("#add-sprod-favs").removeClass("active-fav");
+  $(".add-fav").removeClass("active-fav");
   deleteFavorite(prodid);
 }
 
