@@ -30,11 +30,11 @@ function ItemsCart()
 ?>
         <div class="mini-cart-product-card align-items-start d-flex bg-white">
 
-            <div class="img-contain overflow-hidden rounded-1">
+            <a href="<?= get_permalink($_product->get_id()) ?>" class="img-contain overflow-hidden rounded-1">
                 <?= $_product->get_image('medium', 'alt=' . $title)   ?>
-            </div>
+            </a>
             <div>
-                <h5 class="mb-1"><?= $title ?></h5>
+                <h5 class="mb-1"><a href="<?= get_permalink($_product->get_id()) ?>"><?= $title ?></a></h5>
                 <div class="d-flex gap-2">
                     <?php if ($talla) { ?>
                         <p><b>Talla:</b> <?= $talla ?></p>

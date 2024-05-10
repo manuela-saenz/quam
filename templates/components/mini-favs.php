@@ -21,11 +21,11 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
         $product_name = $wcProd->get_name();
       ?>
         <div class="mini-cart-product-card d-flex align-items-start bg-white fav">
-          <div class="img-contain">
+          <a href="<?= get_permalink($prod->ID) ?>" class="img-contain">
             <img src="<?php echo get_the_post_thumbnail_url($prod->ID) ?>" alt="">
-          </div>
+          </a>
           <div>
-            <h5><?php echo ($wcProd->get_name()); ?> </h5>
+            <h5> <a href="<?= get_permalink($prod->ID) ?>"><?php echo ($wcProd->get_name()); ?> </a></h5>
             <div class="d-flex align-items-center priceFav mb-3">
               <p id="priceFav"><?= $wcProd->get_price_html() ?> COP</p>
             </div>

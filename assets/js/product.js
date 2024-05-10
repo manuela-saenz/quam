@@ -1,7 +1,7 @@
 const elemento = document.querySelector('#box-draggable');
 const mainBox = document.querySelector('.main-box');
 const contenedorContenido = document.querySelector('.mobile-container');
-const mainBoxHeight = mainBox.offsetHeight + 48;
+const mainBoxHeight = mainBox.offsetHeight;
 const wh = window.innerHeight - (80 + mainBoxHeight);
 
 let contentScrollable = false;

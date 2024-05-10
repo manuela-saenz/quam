@@ -72,6 +72,10 @@ function initQuantity() {
 
 }
 
+$('.cfvsw-swatches-option').on('click', function(){
+  $(window).scrollTop(0)
+})
+
 function initQuantitySingle() {
 
   $('.quantity').on('click', '.plus', function (e) {

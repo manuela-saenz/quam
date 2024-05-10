@@ -244,16 +244,13 @@
 .entry-summary {
   .info-product {
     > div {
-      .product_meta {
-        // order: 1;
-      }
-      .product_title {
-        // order: 2;
-      }
       .price {
         // order: 3;
-        font-size: 40px !important;
+        font-size: 35px !important;
         color: $black !important;
+        + .hydrated{
+          display: none;
+        }
       }
       .product-actions {
         // order: 4;
@@ -304,9 +301,15 @@
         width: 100%;
         height: auto;
         padding: 10px;
-        font-size: 16px;
       }
     }
+  }
+  @media (max-width:991px){
+    margin-bottom: 0;
+    .product_meta, .product_title, .price, .share {
+      display: none;
+    }
+    
   }
 }
 
@@ -687,7 +690,7 @@
     }
 
     .product-actions {
-      @media (max-width: 768px) {
+      @media (max-width: 991px) {
         position: fixed;
         bottom: 0;
         left: 0;

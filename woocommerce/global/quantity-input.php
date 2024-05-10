@@ -34,7 +34,7 @@ $label = !empty($args['product_name']) ? sprintf(esc_html__('%s quantity', 'wooc
 	 */
 	do_action('woocommerce_before_quantity_input_field');
 	?>
-	<button class="rounded-pill minus" type="button" data-cuanty="1">
+	<button class="minus" type="button" data-cuanty="1">
 		<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="26" height="26" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path d="M5 12l14 0" />
@@ -42,7 +42,7 @@ $label = !empty($args['product_name']) ? sprintf(esc_html__('%s quantity', 'wooc
 	</button>
 	<label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>"><?php echo esc_attr($label); ?></label>
 	<input type="<?php echo esc_attr($type); ?>" <?php echo $readonly ? 'readonly="readonly"' : ''; ?> id="<?php echo esc_attr($input_id); ?>" class="<?php echo esc_attr(join(' ', (array) $classes)); ?> qty" name="<?php echo esc_attr($input_name); ?>" value="<?php echo esc_attr($input_value); ?>" aria-label="<?php esc_attr_e('Product quantity', 'woocommerce'); ?>" size="4" min="<?php echo esc_attr($min_value); ?>" max="<?php echo esc_attr(0 < $max_value ? $max_value : ''); ?>" <?php if (!$readonly) : ?> step="<?php echo esc_attr($step); ?>" placeholder="<?php echo esc_attr($placeholder); ?>" inputmode="<?php echo esc_attr($inputmode); ?>" autocomplete="<?php echo esc_attr(isset($autocomplete) ? $autocomplete : 'on'); ?>" <?php endif; ?> />
-	<button class="rounded-pill plus" type="button" data-id="<?php echo esc_attr($idProducto); ?>" data-price="<?php echo esc_attr($price); ?>" data-cuanty="1" id="ProductAddSingle">
+	<button class="plus" type="button" data-id="<?php echo esc_attr($idProducto); ?>" data-price="<?php echo esc_attr($price); ?>" data-cuanty="1" id="ProductAddSingle">
 		<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="26" height="26" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path d="M12 5l0 14" />

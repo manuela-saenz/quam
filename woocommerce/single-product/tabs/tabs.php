@@ -31,7 +31,7 @@ $product_tabs = apply_filters('woocommerce_product_tabs', array());
 
 if (!empty($product_tabs)) : ?>
 	
-	<div class="woocommerce-tabs wc-tabs-wrapper characteristics align-items-start row col-12 p-0">
+	<div class="woocommerce-tabs wc-tabs-wrapper characteristics align-items-start row">
 		<div class="col-md-3">
 			<ul class="tabs wc-tabs flex-column d-flex p-0" role="tablist">
 				<?php foreach ($product_tabs as $key => $product_tab) : ?>

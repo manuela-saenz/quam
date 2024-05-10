@@ -62,12 +62,12 @@ if ($related_products) :
 						</div>
 					<?php endforeach; ?>
 				</div>
-				<div class="arrow-prev-container">
+				<div class="arrow-prev-container d-none d-md-flex">
 					<button class="generation-arrows prev">
 						<i class="icon-arrowline-left"> </i>
 					</button>
 				</div>
-				<div class="arrow-next-container">
+				<div class="arrow-next-container d-none d-md-flex">
 					<button class="generation-arrows next">
 						<i class="icon-arrowline-right"> </i>
 					</button>

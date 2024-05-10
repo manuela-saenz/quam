@@ -20,14 +20,14 @@ var homeSwiper = new Swiper(".generationSwiper", {
     prevEl: ".generation-arrows.prev",
   },
   effect: "creative",
-  
+
   breakpoints: {
     1500: {
       slidesPerView: 3.2,
       spaceBetween: 24,
-      centeredSlides:false,
+      centeredSlides: false,
       loop: false,
-      creativeEffect: { 
+      creativeEffect: {
         progressMultiplier: 2,
         limitProgress: 5,
         prev: {
@@ -44,16 +44,16 @@ var homeSwiper = new Swiper(".generationSwiper", {
     991: {
       slidesPerView: 2.2,
       spaceBetween: 24,
-      centeredSlides:false,
+      centeredSlides: false,
       loop: false,
     },
 
     200: {
       spaceBetween: 20,
       loop: true,
-      centeredSlides:true,
+      centeredSlides: true,
       slidesPerView: 1.3,
-      creativeEffect: { 
+      creativeEffect: {
         progressMultiplier: 2,
         limitProgress: 2,
         prev: {
@@ -90,9 +90,9 @@ var swiper = new Swiper(".related-swiper", {
     },
 
     200: {
-      spaceBetween: 50,
+      spaceBetween: 20,
       loop: true,
-      slidesPerView: 1,
+      slidesPerView: 1.3,
     },
   },
 });
@@ -153,8 +153,14 @@ var swiper = new Swiper(".highlightsSwiper", {
       // clean up old instances and inline styles when available
       if (mySwiper !== undefined) mySwiper.destroy(true, true);
 
-      // or/and do nothing
+      // mostrar galeria del producto una imagen bajo otra
+      $('.rtwpvg-slider .swiper-wrapper').addClass('flex-column d-flex');
+      var currentOptions = JSON.parse($('.rtwpvg-slider').attr('data-options'));
+      $('.rtwpvg-slider').attr('data-options', JSON.stringify(currentOptions));
+
+
       return;
+
 
       // else if a small viewport and single column layout needed
     } else if (breakpoint.matches === true) {
@@ -248,17 +254,12 @@ var swiper = new Swiper(".highlightsSwiper", {
     }
 
     setTimeout(() => {
-      elemento.removeClass()
-      elemento.addClass('SingProducts swiper')
-
-      elementoDos.removeClass()
+      elemento.removeClass();
+      elemento.addClass('SingProducts swiper');
+      elementoDos.removeClass();
       elementoDos.append('<div class="swiper-scrollbar"></div>');
       elementoDos.addClass('SingProducts2 swiper');
-
       gallerySliders();
-
-
-
     }, 300)
     var elementoDataValue = elemento.attr('data-options');
     if (elementoDataValue) {

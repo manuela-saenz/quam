@@ -39,8 +39,8 @@ if ($attachment_ids) {
 
 <div class="sm-floating-box ">
   <div id="box-draggable">
-    <div class="p-4 p-md-0 bg-white mobile-container">
-      <div class="main-box d-lg-none mb-4">
+    <div class="bg-white mobile-container">
+      <div class="main-box d-lg-none p-4">
         <div class="d-flex justify-content-between mb-2">
           <div class="">
             <h1 class="section-subtitle mb-1"><?= $post->post_title ?></h1>
@@ -61,7 +61,7 @@ if ($attachment_ids) {
         <p> <?= $product->get_short_description() ?></p>
       </div>
       <section class="characteristics">
-        <div class="container p-0">
+        <div class="container">
           <?php woocommerce_output_product_data_tabs() ?>
         </div>
       </section>

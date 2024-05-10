@@ -95,14 +95,7 @@ defined('ABSPATH') || exit;
 												<?php ItemsCheckout(); ?>
 											</table>
 											<div class="">
-												<label class="custom-checkbox d-flex align-items-baseline mb-4">
-													<div style="font-size: 15px;">
-														Autorizo el uso de mis datos personales con fines
-														comerciales y publicitarios para
-														recibir
-														información sobre productos y servicios de interés.
-													</div>
-												</label>
+												
 												<button type="button" class="quam-btn blue" onclick="stepper1.next()">Diligenciar información</button>
 											</div>
 										</div>

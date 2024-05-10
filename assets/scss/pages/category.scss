@@ -91,9 +91,6 @@
 .products p {
   font-weight: 600;
 
-  @media (max-width: 991px) {
-    padding-top: 20px;
-  }
 }
 
 #infoProducts {
@@ -153,24 +150,21 @@
   }
 
   .galleryP {
-    .productS {
+    row-gap: 20px;
+    .product {
       &:nth-child(10n - 1),
       &:nth-child(10n) {
         width: 50%;
       }
 
       @media (max-width: 768px) {
-        padding: 0;
-        margin-bottom: 20px;
 
         &:first-child {
           width: 100%;
-          padding: 0;
         }
 
         &:nth-child(9n - 1) {
           width: 100%;
-          padding: 0;
         }
 
         &:nth-child(2n),
