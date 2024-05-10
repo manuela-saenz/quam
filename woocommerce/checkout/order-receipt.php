@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) {
 		</li>
 		<li class="date">
 			<?php /*  esc_html_e('Fecha de solicitud de compra: ', 'woocommerce');
-						echo esc_html(wc_format_datetime($order->get_date_created())) */ ?>
+							echo esc_html(wc_format_datetime($order->get_date_created())) */ ?>
 			<!-- <strong><?php /* echo esc_html(wc_format_datetime($order->get_date_created())); */ ?></strong>  -->
 		</li>
 		<li class="total">
@@ -42,33 +42,39 @@ if (!defined('ABSPATH')) {
 		<?php /* endif; */ ?>
 	</ul>
 	<div class="cont-btn-payu">
-
 		<div>
 			<img src="<?php bloginfo('template_url') ?>/media/images/pago-payu.svg" alt="">
 		</div>
 		<?php
-		// Obtenemos el texto devuelto por la acción woocommerce_receipt_ y lo almacenamos en una variable
 		ob_start();
 		do_action('woocommerce_receipt_' . $order->get_payment_method(), $order->get_id());
 		$texto = ob_get_clean();
 
-		// Buscamos la posición de la frase "Gracias por su pedido" en el texto devuelto
-		$posicion = strpos($texto, "Gracias por su pedido");
+		$gracias_texto = "Gracias por su pedido";
+		$gracias_texto_modificado = "¡Compelta tu pago!";
 
-		// Si la frase está presente, agregamos un span alrededor de ella
+		$posicion = strpos($texto, $gracias_texto);
+
 		if ($posicion !== false) {
 			$texto_modificado = substr_replace($texto, '<span>', $posicion, 0);
-			$posicion_final = $posicion + strlen('<span>');
-			$texto_modificado = substr_replace($texto_modificado, '</span>', $posicion_final + strlen("Gracias por su pedido"), 0);
-			// Agregamos "!¡" al mensaje
-			$texto_modificado = str_replace('Gracias por su pedido', '¡Gracias por su pedido!', $texto_modificado);
-			// Eliminamos la coma después de la frase
+			$texto_modificado = substr_replace($texto_modificado, '</span>', $posicion + strlen('<span>') + strlen($gracias_texto), 0);
+			$texto_modificado = str_replace($gracias_texto, $gracias_texto_modificado, $texto_modificado);
+			$texto_modificado = str_replace('de', 'De', $texto_modificado);
 			$texto_modificado = str_replace(',', '', $texto_modificado);
 			echo $texto_modificado;
+
 		} else {
-			echo $texto; // Si la frase no está presente, imprimimos el texto original
+			echo $texto;
 		}
 		?>
+		<script>
+			const btnPayu = document.getElementById("submit_payu_latam")
+			if(btnPayu){
+				console.log(btnPayu);
+			}
+			btnPayu.classList.add("quam-btn","blue")
+
+		</script>
 	</div>
 
 

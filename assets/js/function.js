@@ -7,7 +7,6 @@ function getTotalValue(totalString) {
   return value;
 }
 
-
 // <!-- Lógica de añadir articulo al carrito   -->
 var botonCart = document.getElementById("bottonCart");
 
@@ -287,12 +286,10 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
 var botonFav = document.getElementById("bottonFav");
 
 function initAddToFavoriteButton() {
-
   $(".add-fav").on("click", function (e) {
     e.preventDefault();
 
-
-    $(this).addClass('adding');
+    $(this).addClass("adding");
 
     var productId = $(".variation_id").val();
     productId =
@@ -310,7 +307,7 @@ function initAddToFavoriteButton() {
         prodid: productId,
       },
       success: function (res) {
-        $(".add-fav").removeClass('adding');
+        $(".add-fav").removeClass("adding");
 
         // <!-- Usando lógica reactiva sin necesidad de petición al backend -->
         if (!sessionFav.includes(Number(productId))) {
@@ -465,3 +462,4 @@ inputFormsLocation.forEach(function (inputForm) {
 });
 
 actualizarEstadoBotonLocation();
+

@@ -62,7 +62,7 @@ defined('ABSPATH') || exit;
 						<!-- <strong><?php /* echo wc_format_datetime($order->get_date_created()); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?></strong>-->
 					</li>
 
-					<li class="fs-6 text-body-tertiary">
+					<li class="fs-6 text-body-tertiary border-0">
 						Tu pedido se encuentra en proceso de validación, en breve recibirás un correo con el detalle de tu
 						compra.
 					</li>
@@ -94,7 +94,7 @@ defined('ABSPATH') || exit;
 					</li>
 
 					<li>
-						<a href="<?= get_home_url()?>">Seguir comprando</a>
+						<a class="quam-btn blue" href="<?= get_home_url()?>">Seguir comprando</a>
 					</li>
 				</ul>
 
