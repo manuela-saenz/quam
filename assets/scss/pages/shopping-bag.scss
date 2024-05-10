@@ -879,31 +879,12 @@
       color: #1C1C1C;
       font-size: 18px;
       a{
-        max-width: 300px;
-        margin: 10px auto; 
-        width: 100%;
-        padding: 20px;
-        background: #002d72;
-        display: block;
-        color: white;
-        font-weight: 700;
-        font-size: 20px;
-        border-radius: 2px;
+        margin: 0 auto; 
       }
     }
   }
   .cont-btn-payu form #submit_payu_latam{
-    max-width: 300px;
-    margin: 30px auto; 
-    width: 100%;
-    padding: 10px;
-    background: #002d72;
-    display: block;
-    color: white;
-    font-weight: 700;
-    font-size: 20px;
-    border-radius: 2px;
-    border: none;
+    margin:auto; 
   }
   .cont-btn-payu{
     p span{
@@ -911,7 +892,7 @@
         width: 100%;
         font-size: 35px;
         font-weight: 700;
-        margin: 20px 0;
+        margin: 15px 0 10px;
       }    
   }
 }
@@ -958,15 +939,6 @@
     }
   
   }  a{
-    max-width: 300px;
-    margin: 30px auto 10px; 
-    width: 100%;
-    padding: 10px;
-    background: #002d72;
-    display: block;
-    color: white;
-    font-weight: 700;
-    font-size: 20px;
-    border-radius: 2px;
+    margin: 0 auto ; 
   }
 }

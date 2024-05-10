@@ -145,7 +145,7 @@ defined('ABSPATH') || exit;
 										</div>
 									</div>
 									<div class="d-flex justify-content-end">
-										<button type="button" class="quam-btn-responsive blue me-4 previous" onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>
+										<button type="button" class="quam-btn blue me-4 previous" onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>
 											Volver a la bolsa de la compra</button>
 										<!-- <button class=" quam-btn blue next" onclick="stepper1.next()">Next</button> -->
 									</div>
