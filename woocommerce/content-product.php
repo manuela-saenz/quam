@@ -28,7 +28,8 @@ if (empty($product) || !$product->is_visible()) {
 <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?>>
 	<a href="<?= get_permalink($product->get_id()) ?>" class="CardProducts w-100">
 		<div class="img-contain" title="<?php ?>">
-			<?= $product->get_image('medium', 'alt=' . get_the_title())   ?>
+			<?= $product->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()))   ?>
+			<?php // $image = wp_get_attachment_image(get_post_thumbnail_id(), 'medium', false, array('loading' => 'lazy', 'alt' => get_the_title())); ?>
 		</div>
 		<div class="info-highlights">
 			<h5 title="<?= get_the_title() ?>"><?= get_the_title() ?></h5>

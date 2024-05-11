@@ -28,7 +28,7 @@ if (!defined('ABSPATH')) {
 ?>
 
 <div class="share center-vertical">
-	<p class="m-0"> <b>Compartir: </b> </p>
+	<p class="m-0"> <b>Compartir producto: </b> </p>
 
 	<div>
 		<i class="icon-facebook"></i>

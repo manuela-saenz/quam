@@ -23,7 +23,7 @@ var homeSwiper = new Swiper(".generationSwiper", {
 
   breakpoints: {
     1500: {
-      slidesPerView: 3.2,
+      slidesPerView: 3.3,
       spaceBetween: 24,
       centeredSlides: false,
       loop: false,

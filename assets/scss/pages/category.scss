@@ -6,7 +6,7 @@
   text-align: center;
 
   @media (max-width: 991px) {
-    height: 220px;
+    height: 150px;
   }
 
   &:before {
@@ -20,6 +20,7 @@
     bottom: -82px;
     left: 50%;
     transform: translateX(-50%);
+    opacity: 0.5;
 
     @media (max-width: 991px) {
       height: 103px;
@@ -36,7 +37,6 @@
 .select-box {
   position: relative;
   display: inline-block;
-  margin-right: 20px;
   * {
     margin-bottom: 0 !important;
   }
@@ -184,7 +184,6 @@
     @media (max-width: 768px) {
       flex-direction: column;
       width: 100%;
-      align-items: flex-start !important;
     }
   }
 
@@ -196,15 +195,8 @@
 
     div {
       @media (max-width: 991px) {
-        margin-right: 20px;
         margin-bottom: 10px;
       }
-    }
-  }
-
-  .products {
-    @media (max-width: 768px) {
-      width: 100%;
     }
   }
 }

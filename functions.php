@@ -35,23 +35,19 @@ add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_a
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 30 );
 
 
-/**
- * Register our sidebars and widgetized areas.
- *
- */
-// function arphabet_widgets_init() {
 
-// 	register_sidebar( array(
-// 		'name'          => 'Home right sidebar',
-// 		'id'            => 'home_right_1',
-// 		'before_widget' => '<div>',
-// 		'after_widget'  => '</div>',
-// 		'before_title'  => '<h2 class="rounded">',
-// 		'after_title'   => '</h2>',
-// 	) );
 
-// }
-// add_action( 'widgets_init', 'arphabet_widgets_init' );
+add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
+
+function custom_override_checkout_fields( $fields ) {
+    // Elimina el campo "Empresa" del formulario de facturación
+    unset($fields['billing']['billing_company']);
+    unset($fields['billing']['billing_id']);
+    // unset($fields['billing']['billing_country']);
+    
+    return $fields;
+}
+
 
 function related_products_quantity( $args ) {
     $args['posts_per_page'] = 10;

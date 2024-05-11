@@ -10,7 +10,8 @@ body {
     overflow: hidden;
     height: 100vh;
   }
-  &.customize-support, &.admin-bar {
+  &.customize-support,
+  &.admin-bar {
     // --header-height: 150px;
     // @media (max-width: 1200px) {
     //   --header-height: 58px;
@@ -41,19 +42,20 @@ main {
 }
 
 section {
-  padding: 60px 0;
+  padding: 50px 0;
 
   @media (max-width: 578px) {
     padding: 40px 0;
   }
 }
 
-button {
+button,
+select {
   border: none;
   background: none;
   padding: 0;
   -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   -webkit-appearance: none;
 }
 

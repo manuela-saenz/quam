@@ -48,11 +48,8 @@ $products = get_products_by_category_name($currentCat->name);
     <div class="container">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-between align-items-center select_men">
-                <div class="select d-lg-flex d-none gap-2">
-                    <?php if (is_search()) {
-                    } else{ 
-                       echo do_shortcode('[yith_wcan_filters slug="default-preset"]');
-                    } ?>
+                <div class="select d-flex gap-2">
+                    
                     <!-- The second value will be selected initially -->
                     <div class="select-box">
                         <?php woocommerce_catalog_ordering(); ?>
@@ -66,30 +63,6 @@ $products = get_products_by_category_name($currentCat->name);
                     </div>
                 </div>
 
-                <div class="select d-lg-none d-flex center-all w-100">
-                    <!-- The second value will be selected initially -->
-                    <div class="select-box">
-
-                        <select>
-                            <option value="opcion1">Filtros</option>
-                            <option value="opcion2">Opción 2</option>
-                            <option value="opcion3">Opción 3</option>
-                            <option value="opcion4">Opción 4</option>
-                        </select>
-                        <div class="arrow"></div>
-                    </div>
-
-                    <!-- The second value will be selected initially -->
-                    <div class="select-box">
-                        <select>
-                            <option value="opcion1">Ordenar</option>
-                            <option value="opcion2">Opción 2</option>
-                            <option value="opcion3">Opción 3</option>
-                            <option value="opcion4">Opción 4</option>
-                        </select>
-                        <div class="arrow"></div>
-                    </div>
-                </div>
 
                 <div class="products text-center text-lg-end">
                     <?= woocommerce_result_count() ?>

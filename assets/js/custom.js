@@ -72,7 +72,7 @@ function initQuantity() {
 
 }
 
-$('.cfvsw-swatches-option').on('click', function(){
+$('.cfvsw-swatches-option, .btn-step-next button').on('click', function(){
   $(window).scrollTop(0)
 })
 
