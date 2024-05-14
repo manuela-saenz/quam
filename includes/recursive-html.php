@@ -33,7 +33,7 @@ function ItemsCart()
             <a href="<?= get_permalink($_product->get_id()) ?>" class="img-contain overflow-hidden rounded-1">
                 <?= $_product->get_image('medium', 'alt=' . $title)   ?>
             </a>
-            <div>
+            <div class="w-100">
                 <h5 class="mb-1"><a href="<?= get_permalink($_product->get_id()) ?>"><?= $title ?></a></h5>
                 <div class="d-flex gap-2">
                     <?php if ($talla) { ?>

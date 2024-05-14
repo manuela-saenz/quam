@@ -123,8 +123,7 @@ defined('ABSPATH') || exit;
 										<?php woocommerce_checkout_payment(); ?>
 									</div>
 									<div class="form-group row  p-3 rounded">
-										
-										<div class="d-flex justify-content-end">
+										<div class="d-flex justify-cñontent-end">
 											<!-- <button type="button" class="quam-btn blue me-4 previous" onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>
 												Volver a la ubicación </button></button> -->
 											<!-- <button type="submit" class="quam-btn blue">Submit</button> -->
