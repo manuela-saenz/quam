@@ -262,9 +262,9 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
               "$ " + value
             );
             var valueWithoutPoints = value.replace(/\./g, "");
-            var amountWithoutPoints = amount.replace(/\./g, "");
+            // var amountWithoutPoints = amount.replace(/\./g, "");
             var total =
-              parseFloat(valueWithoutPoints) + parseFloat(amountWithoutPoints);
+              parseFloat(valueWithoutPoints);
             var totalWithThousandSeparator = total.toLocaleString("de-DE", {
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
