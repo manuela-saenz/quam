@@ -185,7 +185,6 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
 
   if ($(this).hasClass("qtyminus")) {
     if (currentQuantity > 1) {
-      console.log(currentQuantity);
       currentQuantity = currentQuantity - 1;
       quantityInput.val(currentQuantity);
     }
@@ -205,7 +204,6 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
         var price = parseFloat(
           priceElement[0].innerText.replace(/[^0-9\.]/g, "")
         );
-        console.log(price);
         var quantity = parseInt(quantity[0].value);
         var total = price * quantity;
         totalGeneral += total;
