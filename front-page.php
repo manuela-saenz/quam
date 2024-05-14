@@ -123,8 +123,8 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
   <div class="container-fluid p-0">
     <div class="row m-0">
       <div class="col-md-8 p-0 position-relative">
-        <a href="" class="position-relative">
-          <div class="img-fit backgroundImg">
+        <a href="" class="position-relative d-flex">
+          <div class="img-fit backgroundImg w-100">
             <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="">
           </div>
           <div class="info_summer text-black">
@@ -134,8 +134,8 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
         </a>
       </div>
       <div class="col-md-4 p-0">
-        <a href="" class="position-relative">
-          <div class="img-fit">
+        <a href="" class="position-relative d-flex">
+          <div class="img-fit w-100">
             <img src="<?= $segunda_coleccion["fondo_de_imagen"]["url"]; ?>" alt="">
           </div>
           <div class="info_summer">

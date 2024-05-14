@@ -51,7 +51,7 @@ if (!defined('ABSPATH')) {
 		$texto = ob_get_clean();
 
 		$gracias_texto = "Gracias por su pedido";
-		$gracias_texto_modificado = "¡Compelta tu pago!";
+		$gracias_texto_modificado = "¡Casi listo, ve a PayU y completa tu pago!";
 
 		$posicion = strpos($texto, $gracias_texto);
 
@@ -72,7 +72,8 @@ if (!defined('ABSPATH')) {
 			if(btnPayu){
 				console.log(btnPayu);
 			}
-			btnPayu.classList.add("quam-btn","blue")
+			btnPayu.setAttribute('value', 'Ir a pagar');
+			btnPayu.classList.add("quam-btn","blue");
 
 		</script>
 	</div>

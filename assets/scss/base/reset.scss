@@ -6,6 +6,9 @@ body {
   font-family: "Raleway", sans-serif;
   font-size: 16px;
   --header-height: 120px;
+  *{
+    color: $black;
+  }
   &.no-scroll {
     overflow: hidden;
     height: 100vh;
@@ -54,9 +57,7 @@ select {
   border: none;
   background: none;
   padding: 0;
-  -moz-appearance: none;
   appearance: none;
-  -webkit-appearance: none;
 }
 
 img {

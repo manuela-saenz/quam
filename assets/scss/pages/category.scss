@@ -41,9 +41,6 @@
     margin-bottom: 0 !important;
   }
   select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     min-width: 150px;
     max-width: 200px;
     padding: 10px;
@@ -51,7 +48,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
-    font-weight: 600;
+    appearance: none;
   }
   .arrow {
     position: absolute;
