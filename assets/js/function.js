@@ -185,6 +185,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
 
   if ($(this).hasClass("qtyminus")) {
     if (currentQuantity > 1) {
+      console.log(currentQuantity);
       currentQuantity = currentQuantity - 1;
       quantityInput.val(currentQuantity);
     }
@@ -195,7 +196,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
     }
   }
 
-  if (currentQuantity > 1) {
+  if (currentQuantity >= 1) {
     var totalGeneral = 0;
     $(".mini-cart-product-card").each(function () {
       var priceElement = $(this).find("#price");
@@ -204,6 +205,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
         var price = parseFloat(
           priceElement[0].innerText.replace(/[^0-9\.]/g, "")
         );
+        console.log(price);
         var quantity = parseInt(quantity[0].value);
         var total = price * quantity;
         totalGeneral += total;
@@ -211,8 +213,12 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
     });
   }
   if (totalGeneral !== undefined) {
-    var formattedTotal = totalGeneral.toLocaleString("es-CO");
-    $("#subtotal, #total").html("$" + formattedTotal);
+    var totalWithThousandSeparator = totalGeneral.toLocaleString("de-DE", {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
+    });
+   
+    $("#subtotal, #total").html("$" + totalWithThousandSeparator);
   }
 
   var clickedElement = $(this);

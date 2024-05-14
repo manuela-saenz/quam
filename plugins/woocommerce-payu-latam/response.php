@@ -68,7 +68,7 @@ if ($transactionState == 6 && $polResponseCode == 5) {
 } else if ($transactionState == 4 && $polResponseCode == 1) {
 	$estadoTx = "Transacci&oacute;n aprobada";
 	$agradecimiento = '¡Gracias por tu compra!';
-	$order->update_status('completed', 'Transacción autorizada por PayU');
+	$order->update_status('processing', 'Transacción autorizada por PayU');
 } else {
 	if (isset($_REQUEST['message'])) {
 		$estadoTx = $_REQUEST['message'];
