@@ -42,7 +42,7 @@
   }
   select {
     min-width: 150px;
-    max-width: 200px;
+    max-width: 250px;
     padding: 10px;
     padding-right: 30px;
     border: 1px solid #ccc;
@@ -220,4 +220,54 @@
 /* Add a grey background color on mouse-over */
 .pagination a:hover:not(.active) {
   background-color: #ddd;
+}
+
+// estilos filtros
+.filtro-activo-contenedor{
+  margin-top: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  ul{
+    margin: 0;
+    padding: 0;
+    li{
+      padding: 5px;
+      background: #eeeeee;
+      margin: 5px;
+      border-radius: 5px;
+    }
+  }
+  button{
+    background: rgb(97, 97, 97);
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    height: max-content;
+  }
+}
+.input-box{
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 5px;
+  input{
+    border: 0px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+      box-shadow: 0 0 0 1000px white inset !important; /* Para navegadores basados en WebKit como Chrome y Safari */
+      -webkit-text-fill-color: inherit !important; /* Para asegurar que el texto sea visible */
+  }
+}
+
+#min_price{
+  
+}
+#max_price{
+
 }

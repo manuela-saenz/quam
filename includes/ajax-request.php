@@ -1,5 +1,5 @@
 <?php
-require_once(get_template_directory() . '/functions.php');
+require_once (get_template_directory() . '/functions.php');
 // require_once(get_template_directory() . '/includes/mail/PHPMailer.php');
 // require_once(get_template_directory() . '/includes/mail/SMTP.php');
 // require_once(get_template_directory() . '/includes/mail/Exception.php');
@@ -78,7 +78,7 @@ class SyEAjaxRequest
 
 
         $data = get_addi_config($ally_slug, $amount);
-        if ($data['minAmount'] >  $amount) {
+        if ($data['minAmount'] > $amount) {
             $response = array(
                 'success' => false,
                 'message' => 'El monto minimo para pagar con Addi es de ' . $data['minAmount']
@@ -206,13 +206,15 @@ class SyEAjaxRequest
         $itemsCart = ob_get_clean();
         $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $itemsCart);
 
-        echo json_encode(array(
-            "item" => $result,
-            "status" => "success",
-            "html" => $buffer,
-            "counter" => count($woocommerce->cart->get_cart()),
-            "total" => $ValorTotal
-        ));
+        echo json_encode(
+            array(
+                "item" => $result,
+                "status" => "success",
+                "html" => $buffer,
+                "counter" => count($woocommerce->cart->get_cart()),
+                "total" => $ValorTotal
+            )
+        );
         wp_die();
     }
 
@@ -264,15 +266,17 @@ class SyEAjaxRequest
 
         $buffer = preg_replace($search, $replace, $itemsCart);
         $shipping_total = $woocommerce->cart->get_cart_shipping_total();
-        echo json_encode(array(
-            "item" => $cartItemKey,
-            "status" => "success",
-            "html" => $buffer,
-            "total" => $ValorTotal,
-            "shipping_total" => $shipping_total,
-            "quantity" => count($woocommerce->cart->get_cart()),
-            "totalProducto" => $formatoColombiano
-        ));
+        echo json_encode(
+            array(
+                "item" => $cartItemKey,
+                "status" => "success",
+                "html" => $buffer,
+                "total" => $ValorTotal,
+                "shipping_total" => $shipping_total,
+                "quantity" => count($woocommerce->cart->get_cart()),
+                "totalProducto" => $formatoColombiano
+            )
+        );
         die();
     }
 
@@ -287,18 +291,22 @@ class SyEAjaxRequest
         $product = wc_get_product($variantID ? $variantID : $prodID); // Obtén la variante del producto si existe
 
         if (!$product) {
-            echo json_encode(array(
-                "status" => "error",
-                "message" => "Producto no encontrado"
-            ));
+            echo json_encode(
+                array(
+                    "status" => "error",
+                    "message" => "Producto no encontrado"
+                )
+            );
             die();
         }
 
         if (!$product->is_in_stock()) {
-            echo json_encode(array(
-                "status" => "error",
-                "message" => "Agotado. Por favor elige un producto diferente."
-            ));
+            echo json_encode(
+                array(
+                    "status" => "error",
+                    "message" => "Agotado. Por favor elige un producto diferente."
+                )
+            );
             die();
         }
 
@@ -342,15 +350,17 @@ class SyEAjaxRequest
         $buffer = preg_replace($search, $replace, $itemsCart);
         $buffer2 = preg_replace($search, $replace, $anotherOutput);
 
-        echo json_encode(array(
-            "item" => $result,
-            "status" => "success",
-            "html" => $buffer,
-            "ordenList" => $buffer2,
-            "total" => $ValorTotal,
-            "quantity" => count($woocommerce->cart->get_cart()),
-            "totalProducto" => $formatoColombiano
-        ));
+        echo json_encode(
+            array(
+                "item" => $result,
+                "status" => "success",
+                "html" => $buffer,
+                "ordenList" => $buffer2,
+                "total" => $ValorTotal,
+                "quantity" => count($woocommerce->cart->get_cart()),
+                "totalProducto" => $formatoColombiano
+            )
+        );
 
         wp_die();
     }
@@ -395,13 +405,15 @@ class SyEAjaxRequest
 
         $buffer = preg_replace($search, $replace, $itemsCart);
 
-        echo json_encode(array(
-            "status" => "success",
-            "html" => $buffer,
-            // "ordenList" => $buffer,
-            "total" => $ValorTotal,
-            "counter" => count($woocommerce->cart->get_cart())
-        ));
+        echo json_encode(
+            array(
+                "status" => "success",
+                "html" => $buffer,
+                // "ordenList" => $buffer,
+                "total" => $ValorTotal,
+                "counter" => count($woocommerce->cart->get_cart())
+            )
+        );
 
         wp_die();
     }
@@ -412,10 +424,12 @@ class SyEAjaxRequest
         $cart_item_key = $_POST["cart_item_key"];
         $cuanty = intval($_POST["cuanty"]);
         if ($cuanty == 0) {
-            echo json_encode(array(
-                "status" => "error",
-                "message" => "La cantidad no puede ser 0"
-            ));
+            echo json_encode(
+                array(
+                    "status" => "error",
+                    "message" => "La cantidad no puede ser 0"
+                )
+            );
         }
 
 
@@ -452,15 +466,17 @@ class SyEAjaxRequest
 
         $buffer = preg_replace($search, $replace, $itemsCart);
 
-        echo json_encode(array(
-            "item" => $result,
-            "status" => "success",
-            "html" => $buffer,
-            "totalProducto" => $formatoColombiano,
-            "total" => $ValorTotal,
-            // Añade el total del envío a la respuesta
-            "quantity" => count($woocommerce->cart->get_cart())
-        ));
+        echo json_encode(
+            array(
+                "item" => $result,
+                "status" => "success",
+                "html" => $buffer,
+                "totalProducto" => $formatoColombiano,
+                "total" => $ValorTotal,
+                // Añade el total del envío a la respuesta
+                "quantity" => count($woocommerce->cart->get_cart())
+            )
+        );
 
         wp_die();
     }
@@ -474,10 +490,12 @@ class SyEAjaxRequest
             ob_start();
             ItemsSearchASD(array());
             $itemsSearch = ob_get_clean();
-            echo json_encode(array(
-                "status" => "success",
-                "SearchInput" => $itemsSearch,
-            ));
+            echo json_encode(
+                array(
+                    "status" => "success",
+                    "SearchInput" => $itemsSearch,
+                )
+            );
             die();
         }
 
@@ -523,10 +541,12 @@ class SyEAjaxRequest
 
         $buffer = preg_replace($search, $replace, $itemsSearch);
 
-        echo json_encode(array(
-            "status" => "success",
-            "SearchInput" => $buffer,
-        ));
+        echo json_encode(
+            array(
+                "status" => "success",
+                "SearchInput" => $buffer,
+            )
+        );
         die();
     }
 
@@ -554,15 +574,19 @@ class SyEAjaxRequest
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {
-                echo json_encode(array(
-                    "status" => "success",
-                    "message" => "Producto eliminado de favoritos"
-                ));
+                echo json_encode(
+                    array(
+                        "status" => "success",
+                        "message" => "Producto eliminado de favoritos"
+                    )
+                );
             } else {
-                echo json_encode(array(
-                    "status" => "error",
-                    "message" => "Error al eliminar el producto de favoritos"
-                ));
+                echo json_encode(
+                    array(
+                        "status" => "error",
+                        "message" => "Error al eliminar el producto de favoritos"
+                    )
+                );
             }
         } else {
             $stmt = $conn->prepare("INSERT INTO $table (`id_user`, `id_producto`, `created-at`)
@@ -571,15 +595,19 @@ class SyEAjaxRequest
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {
-                echo json_encode(array(
-                    "status" => "success",
-                    "message" => "Producto agregado a favoritos"
-                ));
+                echo json_encode(
+                    array(
+                        "status" => "success",
+                        "message" => "Producto agregado a favoritos"
+                    )
+                );
             } else {
-                echo json_encode(array(
-                    "status" => "error",
-                    "message" => "Error al agregar el producto a favoritos"
-                ));
+                echo json_encode(
+                    array(
+                        "status" => "error",
+                        "message" => "Error al agregar el producto a favoritos"
+                    )
+                );
             }
         }
 
@@ -600,20 +628,24 @@ class SyEAjaxRequest
 
         if (empty($username) || empty($email) || empty($password) || empty($password2)) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Todos los campos son obligatorios'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Todos los campos son obligatorios'
+                )
+            );
 
             die();
         }
 
         if ($password != $password2) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Las contraseñas no coinciden'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Las contraseñas no coinciden'
+                )
+            );
             die();
         }
 
@@ -623,10 +655,12 @@ class SyEAjaxRequest
 
         if ($result->num_rows > 0) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'El email ya esta registrado'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El email ya esta registrado'
+                )
+            );
             die();
         }
         $password = $_POST["password"];
@@ -635,10 +669,12 @@ class SyEAjaxRequest
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'El email no es valido'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El email no es valido'
+                )
+            );
 
             die();
         }
@@ -659,16 +695,19 @@ class SyEAjaxRequest
         global $wpdb;
         $wpdb->insert($table, $data, $format);
 
-        if (!session_id()) session_start();
+        if (!session_id())
+            session_start();
         session_regenerate_id();
         $_SESSION['user_id'] = $wpdb->insert_id;
         $_SESSION['user_login'] = $username;
         $redirect_url = get_permalink(wc_get_page_id('myaccount'));
-        echo json_encode(array(
-            'status' => '200',
-            'message' => 'Usuario registrado correctamente',
-            'redirect_url' => $redirect_url
-        ));
+        echo json_encode(
+            array(
+                'status' => '200',
+                'message' => 'Usuario registrado correctamente',
+                'redirect_url' => $redirect_url
+            )
+        );
 
         die();
     }
@@ -680,20 +719,24 @@ class SyEAjaxRequest
 
         if (empty($email) || empty($password)) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Todos los campos son obligatorios'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Todos los campos son obligatorios'
+                )
+            );
             die();
         }
 
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         if ($conn->connect_error) {
             http_response_code(500);
-            echo json_encode(array(
-                'status' => '500',
-                'message' => 'Error en la conexión a la base de datos'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '500',
+                    'message' => 'Error en la conexión a la base de datos'
+                )
+            );
             die();
         }
         $table = "wp_buyers";
@@ -706,10 +749,12 @@ class SyEAjaxRequest
 
         if ($result->num_rows == 0) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'El email no está registrado'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El email no está registrado'
+                )
+            );
             die();
         }
 
@@ -717,16 +762,19 @@ class SyEAjaxRequest
 
         if (!password_verify($password, $user["password"])) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'La contraseña es incorrecta'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'La contraseña es incorrecta'
+                )
+            );
             die();
         }
 
         $user_id = $user["id"];
 
-        if (!session_id()) session_start();
+        if (!session_id())
+            session_start();
         session_regenerate_id();
         $_SESSION['user_id'] = $user_id;
         $_SESSION['user_login'] = $user["username"];
@@ -734,18 +782,21 @@ class SyEAjaxRequest
         $redirect_url = get_permalink(wc_get_page_id('myaccount'));
 
         http_response_code(200);
-        echo json_encode(array(
-            'status' => '200',
-            'message' => 'Usuario autenticado correctamente',
-            'redirect_url' => $redirect_url
-        ));
+        echo json_encode(
+            array(
+                'status' => '200',
+                'message' => 'Usuario autenticado correctamente',
+                'redirect_url' => $redirect_url
+            )
+        );
 
         exit();
     }
 
     function logout()
     {
-        if (!session_id()) session_start();
+        if (!session_id())
+            session_start();
 
         $_SESSION = array();
 
@@ -762,10 +813,12 @@ class SyEAjaxRequest
 
         if (empty($id_user) || empty($password)) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Todos los campos son obligatorios'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Todos los campos son obligatorios'
+                )
+            );
             die();
         }
 
@@ -791,18 +844,22 @@ class SyEAjaxRequest
         $result = $conn->query($sql);
 
         if ($result) {
-            echo json_encode(array(
-                'status' => '200',
-                'message' => 'Contraseña actualizada correctamente',
-                'redirect_url' => get_permalink(wc_get_page_id('myaccount'))
-            ));
+            echo json_encode(
+                array(
+                    'status' => '200',
+                    'message' => 'Contraseña actualizada correctamente',
+                    'redirect_url' => get_permalink(wc_get_page_id('myaccount'))
+                )
+            );
             die();
         } else {
 
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Error al actualizar la contraseña'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Error al actualizar la contraseña'
+                )
+            );
             die();
         }
     }
@@ -826,10 +883,12 @@ class SyEAjaxRequest
         $html = ob_get_clean();
 
         header('Content-Type: application/json');
-        echo json_encode(array(
-            "html" => $html,
-            "counter" => count($_SESSION[$sessionName])
-        ));
+        echo json_encode(
+            array(
+                "html" => $html,
+                "counter" => count($_SESSION[$sessionName])
+            )
+        );
 
         wp_die();
     }
@@ -850,10 +909,12 @@ class SyEAjaxRequest
         $html = ob_get_clean();
 
         header('Content-Type: application/json');
-        echo json_encode(array(
-            "html" => $html,
-            "counter" => count($_SESSION[$sessionName])
-        ));
+        echo json_encode(
+            array(
+                "html" => $html,
+                "counter" => count($_SESSION[$sessionName])
+            )
+        );
 
         wp_die();
     }
@@ -918,31 +979,33 @@ class SyEAjaxRequest
 
         //add customer to order
 
-        $order->set_address(array(
-            'first_name' => $nombre,
-            'last_name'  => $apellido,
-            'email'      => $email,
-            'phone'      => $telefono,
-            'address_1'  => $direccion,
-            'address_2'  => $departamento,
-            'city'       => $ciudad,
-            'state'      => $barrio,
-            'postcode'   => '0',
-            'country'    => 'CO'
-        ), 'billing');
+        $order->set_address(
+            array(
+                'first_name' => $nombre,
+                'last_name' => $apellido,
+                'email' => $email,
+                'phone' => $telefono,
+                'address_1' => $direccion,
+                'address_2' => $departamento,
+                'city' => $ciudad,
+                'state' => $barrio,
+                'postcode' => '0',
+                'country' => 'CO'
+            ), 'billing');
 
-        $order->set_address(array(
-            'first_name' => $nombre,
-            'last_name'  => $apellido,
-            'email'      => $email,
-            'phone'      => $telefono,
-            'address_1'  => $direccion,
-            'address_2'  => $departamento,
-            'city'       => $ciudad,
-            'state'      => $barrio,
-            'postcode'   => '0',
-            'country'    => 'CO'
-        ), 'shipping');
+        $order->set_address(
+            array(
+                'first_name' => $nombre,
+                'last_name' => $apellido,
+                'email' => $email,
+                'phone' => $telefono,
+                'address_1' => $direccion,
+                'address_2' => $departamento,
+                'city' => $ciudad,
+                'state' => $barrio,
+                'postcode' => '0',
+                'country' => 'CO'
+            ), 'shipping');
 
         //add payment to order
 
@@ -1040,7 +1103,7 @@ class SyEAjaxRequest
                                 case 'Rechazada':
                                     $order->update_status('failed');
                                     break;
-                                    // Agregar casos adicionales si es necesario...
+                                // Agregar casos adicionales si es necesario...
                                 case 'Pendiente':
                                     $order->update_status('pending');
                                     break;
@@ -1098,7 +1161,7 @@ class SyEAjaxRequest
                                 case 'Rechazada':
                                     $order->update_status('failed');
                                     break;
-                                    // Agregar casos adicionales si es necesario...
+                                // Agregar casos adicionales si es necesario...
                                 case 'Pendiente':
                                     $order->update_status('pending');
                                     break;
@@ -1171,10 +1234,12 @@ class SyEAjaxRequest
 
         if ($result->num_rows > 0) {
 
-            return json_encode(array(
-                'status' => '400',
-                'message' => 'El email ya está registrado'
-            ));
+            return json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El email ya está registrado'
+                )
+            );
         } else {
             $RamdomPassword = wp_generate_password(12, false);
             $password = password_hash($RamdomPassword, PASSWORD_DEFAULT);
@@ -1240,16 +1305,20 @@ class SyEAjaxRequest
             $body = ob_get_clean();
             $mail->Body = $body;
             $mail->send();
-            return json_encode(array(
-                'status' => '200',
-                'message' => 'Usuario registrado correctamente'
-            ));
+            return json_encode(
+                array(
+                    'status' => '200',
+                    'message' => 'Usuario registrado correctamente'
+                )
+            );
         } catch (DeliriosException $e) {
 
-            return json_encode(array(
-                'status' => '400',
-                'message' => 'Error al enviar el correo'
-            ));
+            return json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Error al enviar el correo'
+                )
+            );
         }
     }
 
@@ -1359,28 +1428,34 @@ class SyEAjaxRequest
 
         if ($result->num_rows > 0) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Ya se ha enviado un correo para recuperar la contraseña'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Ya se ha enviado un correo para recuperar la contraseña'
+                )
+            );
             die();
         }
 
         if (empty($email)) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'El campo email es obligatorio'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El campo email es obligatorio'
+                )
+            );
             die();
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'El email no es valido'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El email no es valido'
+                )
+            );
             die();
         }
 
@@ -1395,10 +1470,12 @@ class SyEAjaxRequest
 
         if ($result->num_rows == 0) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'El email no está registrado'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El email no está registrado'
+                )
+            );
             die();
         }
 
@@ -1433,10 +1510,12 @@ class SyEAjaxRequest
 
         $this->EmailResetPassword($email, $token);
 
-        echo json_encode(array(
-            'status' => '200',
-            'message' => 'Se ha enviado un correo para recuperar la contraseña'
-        ));
+        echo json_encode(
+            array(
+                'status' => '200',
+                'message' => 'Se ha enviado un correo para recuperar la contraseña'
+            )
+        );
 
         die();
     }
@@ -1467,16 +1546,20 @@ class SyEAjaxRequest
             $body = ob_get_clean();
             $mail->Body = $body;
             $mail->send();
-            return json_encode(array(
-                'status' => '200',
-                'message' => 'Usuario registrado correctamente'
-            ));
+            return json_encode(
+                array(
+                    'status' => '200',
+                    'message' => 'Usuario registrado correctamente'
+                )
+            );
         } catch (DeliriosException $e) {
 
-            return json_encode(array(
-                'status' => '400',
-                'message' => 'Error al enviar el correo'
-            ));
+            return json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Error al enviar el correo'
+                )
+            );
         }
     }
 
@@ -1489,28 +1572,34 @@ class SyEAjaxRequest
 
         if (empty($CurrentPassword) || empty($NewPassword) || empty($ConfirmPassword)) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Todos los campos son obligatorios'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Todos los campos son obligatorios'
+                )
+            );
             die();
         }
 
         if ($NewPassword != $ConfirmPassword) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Las contraseñas no coinciden'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Las contraseñas no coinciden'
+                )
+            );
             die();
         }
 
         if (strlen($NewPassword) < 8) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'La contraseña debe tener minimo 8 caracteres'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'La contraseña debe tener minimo 8 caracteres'
+                )
+            );
             die();
         }
 
@@ -1528,10 +1617,12 @@ class SyEAjaxRequest
 
         if ($result->num_rows == 0) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'El usuario no existe'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El usuario no existe'
+                )
+            );
             die();
         }
 
@@ -1539,10 +1630,12 @@ class SyEAjaxRequest
 
         if (!password_verify($CurrentPassword, $user["password"])) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'La contraseña actual es incorrecta'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'La contraseña actual es incorrecta'
+                )
+            );
             die();
         }
 
@@ -1554,18 +1647,22 @@ class SyEAjaxRequest
 
         if ($result) {
             http_response_code(200);
-            echo json_encode(array(
-                'status' => '200',
-                'message' => 'Contraseña actualizada correctamente'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '200',
+                    'message' => 'Contraseña actualizada correctamente'
+                )
+            );
             die();
         } else {
 
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Error al actualizar la contraseña'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Error al actualizar la contraseña'
+                )
+            );
             die();
         }
     }
@@ -1586,19 +1683,23 @@ class SyEAjaxRequest
 
         if (empty($emailField) || empty($nameField) || empty($lastNameField) || empty($adressField) || empty($phoneField)) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Todos los campos son obligatorios'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Todos los campos son obligatorios'
+                )
+            );
             die();
         }
 
         if (!filter_var($emailField, FILTER_VALIDATE_EMAIL)) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'El email no es valido'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El email no es valido'
+                )
+            );
             die();
         }
 
@@ -1613,10 +1714,12 @@ class SyEAjaxRequest
 
         if ($result->num_rows > 0) {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'El email ya está registrado'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'El email ya está registrado'
+                )
+            );
             die();
         }
 
@@ -1646,17 +1749,21 @@ class SyEAjaxRequest
 
         if ($result) {
             http_response_code(200);
-            echo json_encode(array(
-                'status' => '200',
-                'message' => 'Información actualizada correctamente'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '200',
+                    'message' => 'Información actualizada correctamente'
+                )
+            );
             die();
         } else {
             http_response_code(400);
-            echo json_encode(array(
-                'status' => '400',
-                'message' => 'Error al actualizar la información'
-            ));
+            echo json_encode(
+                array(
+                    'status' => '400',
+                    'message' => 'Error al actualizar la información'
+                )
+            );
             die();
         }
     }
@@ -1670,10 +1777,12 @@ class SyEAjaxRequest
         error_reporting(E_ALL);
 
         if (empty($_POST["id"]) || empty($_POST["Informacion_cliente_mas_productos"]) || empty($_POST["ProductosCliente"])) {
-            echo json_encode(array(
-                "status" => "error",
-                "message" => "Todos los campos son obligatorios"
-            ));
+            echo json_encode(
+                array(
+                    "status" => "error",
+                    "message" => "Todos los campos son obligatorios"
+                )
+            );
             die();
         }
 
@@ -1747,6 +1856,115 @@ class SyEAjaxRequest
         echo json_encode(array("status" => "success", "pdf" => $pdfBase64));
         die();
     }
+
+    // configuracion filtro
+    private function _loadConfiguration()
+    {
+        remove_all_filters('posts_orderby'); // ADDED
+        $categories = isset($_POST["categories"]) ? $_POST["categories"] : false;
+        $tags = isset($_POST["tags"]) ? $_POST["tags"] : false;
+        $price = isset($_POST["price"]) ? $_POST["price"] : false;
+        $paged = isset($_POST["paged"]) && is_numeric($_POST["paged"]) ? $_POST["paged"] : false;
+        $metaQuery = array();
+
+
+        if ($price) {
+            $metaQuery = array(
+                "relation" => "AND",
+                array(
+                    'key' => '_price',
+                    'value' => [$price[0], $price[1]],
+                    "type" => "NUMERIC",
+                    'compare' => 'BETWEEN',
+                ),
+            );
+        }
+        $this->prodBaseQuery["meta_query"] = $metaQuery;
+
+        if ($paged) {
+            $this->prodBaseQuery["paged"] = $paged;
+        }
+
+        if (isset($_POST["order"]) && isset($_POST["orderby"])) {
+            $order = $_POST["order"];
+            $orderby = $_POST["orderby"];
+            if (($order === "asc" || $order === "desc")) {
+                $this->prodBaseQuery["order"] = $order;
+                if ($orderby === "_price") {
+                    $this->prodBaseQuery["orderby"] = "meta_value_num";
+                    $this->prodBaseQuery["meta_key"] = $orderby;
+                } else if ($orderby === "publish_date") {
+                    $this->prodBaseQuery["orderby"] = "publish_date";
+                }
+            }
+        }
+
+        $taxQuery = array();
+        if ($categories) {
+            $taxQuery[] = array(
+                "taxonomy" => "product_cat",
+                "terms" => $categories
+            );
+        }
+        if ($tags) {
+            $taxQuery[] = array(
+                "taxonomy" => "product_tag",
+                "terms" => $tags
+            );
+        }
+
+        if (count($taxQuery) > 0) {
+            $this->prodBaseQuery["tax_query"] = $taxQuery;
+        }
+    }
+
+    public function shop_wrapper()
+    {
+        $this->_loadConfiguration();
+
+        $query = new WP_Query($this->prodBaseQuery);
+        ob_start();
+
+        sc_render_shop_wrapper($query);
+
+        $html = ob_get_clean();
+
+        json(
+            array(
+                "error" => false,
+                "html" => $html
+            )
+        );
+
+        wp_die();
+    }
+
+    public function shop_wrapper_paginator()
+    {
+        $this->_loadConfiguration();
+
+        $query = new WP_Query($this->prodBaseQuery);
+
+        ob_start();
+
+        foreach ($query->posts as $post) {
+            echo "<div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3'>";
+            sc_render_product_single($post);
+            echo "</div>";
+        }
+
+        $html = ob_get_clean();
+
+        json(
+            array(
+                "error" => false,
+                "html" => $html
+            )
+        );
+
+        wp_die();
+    }
+
 }
 
 

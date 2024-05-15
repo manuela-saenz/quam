@@ -35,9 +35,23 @@ add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_a
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 30 );
 
 
-
-
 add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
+
+// funcion search
+function arphabet_widgets_init() {
+
+	register_sidebar( array(
+		'name'          => 'Home right sidebar',
+		'id'            => 'home_right_1',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+}
+add_action( 'widgets_init', 'arphabet_widgets_init' );
+
 
 function custom_override_checkout_fields( $fields ) {
     // Elimina el campo "Empresa" del formulario de facturación
