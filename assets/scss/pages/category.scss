@@ -250,13 +250,17 @@
 }
 .input-box{
   border: 1px solid #ccc;
-  padding: 8px;
+  padding: 28px;
   border-radius: 5px;
+ display: block;
+ height: 150px;
   input{
     border: 0px;
     border-bottom: 1px solid #ccc;
+    display: block;
     border-radius: 5px;
     outline: none;
+    height: 150px;
   }
   input:-webkit-autofill,
   input:-webkit-autofill:focus {
@@ -265,9 +269,8 @@
   }
 }
 
-#min_price{
-  
-}
-#max_price{
-
+#filterForm{
+  .select-box{
+    height: 250px;
+  }
 }
