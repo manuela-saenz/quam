@@ -74,7 +74,7 @@
     <div class="info-contact">
       <div class="container">
         <nav class="d-flex align-items-center justify-content-between position-relative">
-          <div class="nav_links align-items-center">
+          <div class="nav_links align-items-center justify-content-between">
             <h1 class="mb-0">
               <a href="<?= get_home_url() ?>" class="logo img-fit">
                 <img src="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" alt="Logo Quam" title="Logo Quam" />

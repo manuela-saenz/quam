@@ -47,6 +47,10 @@ $(window).on("load resize", function () {
 // })
 
 
+// $(document).ready(function(){
+//   alert($(window).width());
+// })
+
 
 // <--------- cuntificador ---------->
 /**

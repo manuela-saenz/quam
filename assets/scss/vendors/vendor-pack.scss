@@ -29,6 +29,9 @@
 
 .rtwpvg-images {
   width: 50%;
+  @media (max-width:991px){
+    max-width: 100% !important;
+  }
 }
 
 

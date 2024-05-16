@@ -837,6 +837,7 @@
       > div {
         overflow: auto;
         max-height: calc(100vh - 80px);
+        box-shadow: 0 -5px 15px rgba($dark_blue, 0.15);
       }
     }
     position: fixed;

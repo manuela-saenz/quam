@@ -156,6 +156,7 @@ var swiper = new Swiper(".highlightsSwiper", {
       // mostrar galeria del producto una imagen bajo otra
       $('.rtwpvg-slider .swiper-wrapper').addClass('flex-column d-flex');
       var currentOptions = JSON.parse($('.rtwpvg-slider').attr('data-options'));
+      currentOptions.enabled = false;
       $('.rtwpvg-slider').attr('data-options', JSON.stringify(currentOptions));
 
 
