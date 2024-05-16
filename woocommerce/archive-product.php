@@ -36,9 +36,8 @@ $products = get_products_by_category_name($currentCat->name);
         <div class="row">
             <div class="col-md-12">
                 <!-- <h2 class="section-subtitle mb-0"><?= $currentCat->name ?></h2> -->
-                <?php if (apply_filters('woocommerce_show_page_title', true)): ?>
-                    <h1
-                        class="woocommerce-products-header__title page-title <?= is_search() ? 'section-subtitle-2' : 'section-subtitle' ?>  mb-0">
+                <?php if (apply_filters('woocommerce_show_page_title', true)) : ?>
+                    <h1 class="woocommerce-products-header__title page-title <?= is_search() ? 'section-subtitle-2' : 'section-subtitle' ?>  mb-0">
                         <?php woocommerce_page_title(); ?>
                     </h1>
                 <?php endif; ?>
@@ -53,16 +52,32 @@ $products = get_products_by_category_name($currentCat->name);
             <div class="col-md-12 d-flex justify-content-between align-items-center select_men">
                 <div class="select d-flex gap-2">
                     <!-- form filter -->
-                    <?php /* dynamic_sidebar('home_right_1') */ ?>
+                    <?php /* dynamic_sidebar('home_right_1') */
+                    $cate = get_queried_object();
+                    $cateSlug = $cate->slug;
+                    //Get all products from this category
+                    $products = wc_get_products(array(
+                        'category' => array($cateSlug),
+                        'posts_per_page' => -1
+                    ));
+                    
 
-                    <?php $cate = get_queried_object();
-                    $cateID = $cate->term_id;
+                    //get all prices from this category
+                    $all_prices[] = array();
+                   
+                    foreach ($products as $product) {
+                        $all_prices[] = $product->get_price();
+                    }
+                    // print_r($all_prices);
+
+                    ?>
+
+                    <?php
                     ?>
                     <?php
-                    $cate = get_queried_object();
-                    $cateID = $cate->slug;
+
                     // Here define the product category SLUG
-                    $category_slug = $cateID;
+                    $category_slug = $cateSlug;
 
                     $query_args = array(
                         'status' => 'publish',
@@ -99,9 +114,7 @@ $products = get_products_by_category_name($currentCat->name);
                     <!-- form filter -->
 
 
-                    <form id="filterForm"
-                        onsubmit="clearCurrencyFormat(document.getElementById('min_price')); clearCurrencyFormat(document.getElementById('max_price')); if(document.getElementById('min_price').value === '') { document.getElementById('min_price').value = '25000'; }if(document.getElementById('max_price').value === '') { document.getElementById('max_price').value = '500000'; }"
-                        action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="get">
+                    <form id="filterForm" onsubmit="clearCurrencyFormat(document.getElementById('min_price')); clearCurrencyFormat(document.getElementById('max_price')); if(document.getElementById('min_price').value === '') { document.getElementById('min_price').value = '25000'; }if(document.getElementById('max_price').value === '') { document.getElementById('max_price').value = '500000'; }" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="get">
 
                         <div class="select-box">
                             <select name="filter_color">
@@ -129,11 +142,9 @@ $products = get_products_by_category_name($currentCat->name);
 
                         <div class="select-box input-box">
                             <label for="min_price">Precio:</label>
-                            <input type="text" name="min_price" id="min_price" oninput="formatCurrency(this)"
-                                onblur="updateValue(this)" placeholder="$25.000">
+                            <input type="text" name="min_price" id="min_price" oninput="formatCurrency(this)" onblur="updateValue(this)" placeholder="$25.000">
                             <label for="max_price">-</label>
-                            <input type="text" name="max_price" id="max_price" oninput="formatCurrency(this)"
-                                onblur="updateValue(this)" placeholder="$500.000">
+                            <input type="text" name="max_price" id="max_price" oninput="formatCurrency(this)" onblur="updateValue(this)" placeholder="$500.000">
                         </div>
 
                         <button type="submit" class="quam-btn blue">Filtrar</button>
@@ -146,8 +157,8 @@ $products = get_products_by_category_name($currentCat->name);
                 </div>
                 <div class="products text-center text-lg-end d-flex flex-wrap align-items-center flex-column">
                     <?= woocommerce_result_count() ?>
-                      <!-- The second value will be selected initially -->
-                      <div class="select-box">
+                    <!-- The second value will be selected initially -->
+                    <div class="select-box">
                         <?php woocommerce_catalog_ordering(); ?>
                         <!-- <select>
                             <option value="opcion1">Orden</option>
