@@ -20,6 +20,7 @@ jQuery(document).ready(function ($) {
       productId == undefined || productId == 0
         ? $("[name='add-to-cart']")[0].value
         : productId;
+    clearEmptyCart();
 
     var htmlContent =
       '<div class="mini-cart-product-card align-items-start d-flex bg-white" style="flex-direction: row;">' +
@@ -215,7 +216,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
       minimumFractionDigits: 3,
       maximumFractionDigits: 3,
     });
-   
+
     $("#subtotal, #total").html("$" + totalWithThousandSeparator);
   }
 
@@ -263,8 +264,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
             );
             var valueWithoutPoints = value.replace(/\./g, "");
             // var amountWithoutPoints = amount.replace(/\./g, "");
-            var total =
-              parseFloat(valueWithoutPoints);
+            var total = parseFloat(valueWithoutPoints);
             var totalWithThousandSeparator = total.toLocaleString("de-DE", {
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
@@ -467,3 +467,7 @@ inputFormsLocation.forEach(function (inputForm) {
 
 actualizarEstadoBotonLocation();
 
+function clearEmptyCart() {
+  var cartElement = document.querySelector(".offcanvas-body.ordenList.cart");
+  cartElement.classList.remove("empty");
+}

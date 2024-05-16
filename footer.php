@@ -122,7 +122,15 @@
 <script src="<?php bloginfo('template_url') ?>/assets/js/function.js?=v<?= randomCode() ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?=v<?= randomCode() ?>"> </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var cartElement = document.querySelector('.offcanvas-body.ordenList.cart');
+    if (cartElement && cartElement.children.length > 0) {
+      cartElement.classList.remove('empty');
+    }
+  });
 
+</script>
 
 </body>
 
