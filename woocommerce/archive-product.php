@@ -50,7 +50,7 @@ $products = get_products_by_category_name($currentCat->name);
 <section id="infoProducts" class="pt-4">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 d-flex justify-content-between align-items-center select_men">
+            <div class="col-md-12 d-flex justify-content-between select_men align-items-end">
                 <div class="select d-flex gap-2">
                     <!-- form filter -->
                     <?php /* dynamic_sidebar('home_right_1') */
@@ -64,7 +64,6 @@ $products = get_products_by_category_name($currentCat->name);
                         )
                     );
 
-
                     //get all prices from this category
                     $all_prices[] = array();
 
@@ -73,13 +72,36 @@ $products = get_products_by_category_name($currentCat->name);
                     }
                     // print_r($all_prices);
                     
+                    $max_price = null;
+                    $min_price = null;
+
+                    $numeric_prices = array_filter($all_prices, function ($price) {
+                        return is_numeric($price);
+                    });
+
+                    if (!empty($numeric_prices)) {
+                        $max_price = reset($numeric_prices);
+                        $min_price = reset($numeric_prices);
+                    }
+
+                    foreach ($numeric_prices as $price) {
+                        if ($price > $max_price) {
+                            $max_price = $price;
+                        }
+                        if ($price < $min_price) {
+                            $min_price = $price;
+                        }
+                    }
+
+                    $precio_maximo = $max_price;
+                    $precio_minimo = $min_price;
+
                     ?>
 
                     <?php
                     ?>
                     <?php
 
-                    // Here define the product category SLUG
                     $category_slug = $cateSlug;
 
                     $query_args = array(
@@ -115,46 +137,82 @@ $products = get_products_by_category_name($currentCat->name);
                      } */ ?>
 
                     <!-- form filter -->
-                    <form id="filterForm" class="woocommerce-ordering-price d-flex align-items-center"
-                        action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="get">
-                        <div class="select-box">
-                            <select name="filter_color">
-                                <option value="">Selecciona un color</option>
-                                <?php
-                                foreach ($data['pa_color'] as $value) {
-                                    echo '<option value="' . $value . '">' . $value . '</option>';
-                                }
-                                ?>
-                            </select>
-                            <div class="arrow"></div>
+                    <div class="btn-filter-responsive">
+                        <div class="cont-select-box">
+                            <div class="select-box input-box cerrar-filtros">
+                                <label for="">Filtro</label>
+                            </div>
                         </div>
-
-                        <div class="select-box">
-                            <select name="filter_talla">
-                                <option value="">Selecciona una talla</option>
-                                <?php
-                                foreach ($data['pa_talla'] as $value) {
-                                    echo '<option value="' . $value . '">' . $value . '</option>';
-                                }
-                                ?>
-                            </select>
-                            <div class="arrow"></div>
+                    </div>
+                    <div class="cont-form-responsive ">
+                        <div class="close-filtros">
+                            <h2>Filtro:</h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="cerrar-filtros" width="16" height="16" fill="currentColor"
+                                class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            </svg>
                         </div>
+                        <form id="filterForm" class="woocommerce-ordering-price d-flex align-items-end"
+                            action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="get">
+                            <div class="cont-select-box">
+                                <label for="">Color:</label>
+                                <div class="select-box input-box">
+                                    <select name="filter_color" id="color-filter" require>
+                                        <option value="">Selecciona Color</option>
+                                        <?php
+                                        foreach ($data['pa_color'] as $value) {
+                                            echo '<option value="' . $value . '">' . $value . '</option>';
+                                        }
+                                        ?>
+                                    </select>
 
-                        <div class="input-box">
-                            <label for="min_price">Precio:</label>
-                            <input type="text" name="min_price" id="min_price" oninput="formatCurrency(this)"
-                                onblur="updateValue(this)" placeholder="$25.000">
-                            <label for="max_price">-</label>
-                            <input type="text" name="max_price" id="max_price" oninput="formatCurrency(this)"
-                                onblur="updateValue(this)" placeholder="$500.000">
-                        </div>
+                                    <div class="cont-flecha">
+                                        <label for="color-filter">
+                                            <div class="arrow"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cont-select-box">
+                                <label for="">Talla</label>
+                                <div class="select-box input-box">
+                                    <select name="filter_talla" require>
+                                        <option value="">Selecciona Talla</option>
+                                        <?php
+                                        foreach ($data['pa_talla'] as $value) {
+                                            echo '<option value="' . $value . '">' . $value . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    <div class="cont-flecha">
+                                        <label for="color-filter">
+                                            <div class="arrow"></div>
+                                        </label>
+                                    </div>
 
-
-                        <button type="submit" class="quam-btn blue">Filtrar</button>
-                        <div id="appliedFilters" class="filtro-activo-contenedor"></div>
-
-                    </form>
+                                </div>
+                            </div>
+                            <div class="cont-select-box">
+                                <label>Precio</label>
+                                <div class="select-box input-box">
+                                    <input type="text" name="min_price" id="min_price" oninput="formatCurrency(this)"
+                                        onblur="updateValue(this)" placeholder="Min: <?= $precio_minimo ?>">
+                                </div>
+                            </div>
+                            <div class="select-box">
+                                <span class="span-price-sign">-</span>
+                            </div>
+                            <div class="cont-select-box">
+                                <div class="select-box input-box">
+                                    <input type="text" name="max_price" id="max_price" oninput="formatCurrency(this)"
+                                        onblur="updateValue(this)" placeholder="Max: <?= $precio_maximo ?>">
+                                </div>
+                            </div>
+                            <button type="submit" class="quam-btn blue">Filtrar</button>
+                            <div id="appliedFilters" class="filtro-activo-contenedor"></div>
+                        </form>
+                    </div>
                     <!-- Campos ocultos para mantener los parámetros de la URL -->
                     <?php /* wc_query_string_form_fields(null, array('size', 'color', 'min_price', 'max_price')); */ ?>
                 </div>

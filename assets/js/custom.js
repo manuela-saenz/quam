@@ -165,11 +165,13 @@ function getUrlParams() {
   for (const [key, value] of urlParams) {
     params[key] = value;
   }
+
   return params;
 }
 
 // obtener los filtros aplicados
 function showAppliedFilters() {
+  console.log(params);
   var params = getUrlParams();
   var appliedFiltersDiv = document.getElementById("appliedFilters");
   var filtersHtml = "";
@@ -206,7 +208,6 @@ function showAppliedFilters() {
     // Mostrar el botón para restablecer los filtros
     filtersHtml +=
       '<button type="button" class="quam-btn" onclick="resetFilters()">Restablecer filtros</button>';
-
     appliedFiltersDiv.innerHTML = filtersHtml;
   } else {
     appliedFiltersDiv.style.display = "none";
@@ -255,7 +256,7 @@ function resetFilters() {
 
   // Remover los parámetros específicos de la URL
   url = url.replace(
-    /([&?]filter_color=|&filter_talla=|&min_price=|&max_price=)[^&]+/g,
+    /([&?]filter_color=|&filter_talla=|&min_price=|&max_price=|orderby=)[^&]*/g,
     ""
   );
 
@@ -272,11 +273,15 @@ function handleFormSubmit() {
   clearCurrencyFormat(document.getElementById("max_price"));
 
   if (document.getElementById("min_price").value === "") {
-    document.getElementById("min_price").value = "25000";
+    var placeholderValue = document.getElementById("min_price").placeholder;
+    var numericValue = placeholderValue.replace("Min:", "").trim();
+    document.getElementById("min_price").value = numericValue;
   }
 
   if (document.getElementById("max_price").value === "") {
-    document.getElementById("max_price").value = "500000";
+    var placeholderValueMax = document.getElementById("max_price").placeholder;
+    var numericValueMax = placeholderValueMax.replace("Min:", "").trim();
+    document.getElementById("max_price").value = numericValue;
   }
 }
 
@@ -284,4 +289,53 @@ document
   .getElementById("filterForm")
   .addEventListener("submit", function (event) {
     handleFormSubmit();
+  });
+
+window.addEventListener("scroll", function () {
+  var scrollPosition = window.scrollY;
+  var formContainer = document.querySelector(".cont-form-responsive");
+
+  if (scrollPosition > 0) {
+    if (window.innerWidth < 991) {
+      formContainer.style.top = "69px";
+    } else {
+      formContainer.style.top = "69px";
+    }
+  } else {
+    if (window.innerWidth < 991) {
+      formContainer.style.top = "69px";
+    } else {
+      formContainer.style.top = "119px";
+    }
+  }
+});
+
+window.addEventListener("load", function () {
+  var scrollPosition = window.scrollY;
+  var formContainer = document.querySelector(".cont-form-responsive");
+
+  if (scrollPosition > 0) {
+    if (window.innerWidth < 991) {
+      formContainer.style.top = "69px";
+    } else {
+      formContainer.style.top = "69px";
+    }
+  } else {
+    if (window.innerWidth < 991) {
+      formContainer.style.top = "69";
+    } else {
+      formContainer.style.top = "119px";
+    }
+  }
+});
+
+  var formContainer = document.querySelector(".cont-form-responsive");
+  var cerrarFiltros = document.querySelectorAll(".cerrar-filtros");
+
+  cerrarFiltros.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      console.log('A');
+      formContainer.classList.toggle("toggle");
+      console.log("Button clicked:", btn);
+    });
   });

@@ -179,7 +179,7 @@
 
   .select_men {
     @media (max-width: 768px) {
-      flex-direction: column;
+      flex-direction: row;
       width: 100%;
     }
   }
@@ -188,12 +188,6 @@
     @media (max-width: 991px) {
       flex-wrap: wrap;
       @include center-all;
-    }
-
-    div {
-      @media (max-width: 991px) {
-        margin-bottom: 10px;
-      }
     }
   }
 }
@@ -223,12 +217,18 @@
 }
 
 // estilos filtros
+#filterForm{
+  button{
+    border-radius: 5px;
+  }
+}
 .filtro-activo-contenedor{
   margin-top: 10px;
   border-radius: 5px;
   display: flex;
-  align-items: center;
-  justify-content: start;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: end;
   ul{
     margin: 0;
     padding: 0;
@@ -240,27 +240,30 @@
     }
   }
   button{
-    background: rgb(97, 97, 97);
-    border-radius: 5px;
+    background: rgb(194, 194, 194);
+    margin-left: 5px;
     color: white;
     font-size: 14px;
     padding: 5px 10px;
-    height: max-content;
   }
 }
 .input-box{
-  border: 1px solid #ccc;
-  padding: 28px;
+  border: 1px solid #e2e2e2;
   border-radius: 5px;
- display: block;
- height: 150px;
-  input{
-    border: 0px;
-    border-bottom: 1px solid #ccc;
-    display: block;
-    border-radius: 5px;
+  height: 51px;
+  overflow: hidden;
+  width: 120px;
+  
+  input{    
+    padding: 15px;
+    border: none;
     outline: none;
-    height: 150px;
+    height: 50px;
+  }
+  select{
+    height: 100%;
+    border: none;
+    cursor: pointer;
   }
   input:-webkit-autofill,
   input:-webkit-autofill:focus {
@@ -268,9 +271,141 @@
       -webkit-text-fill-color: inherit !important; /* Para asegurar que el texto sea visible */
   }
 }
-
-#filterForm{
-  .select-box{
-    height: 250px;
+.cont-select-box{
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  label{
+    font-weight: 800;
   }
+}
+.span-price-sign{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.cont-flecha{
+  background: rgb(255, 255, 255);
+  height: 22px;
+  top: 14px;
+  width: 22px;
+  position: absolute;
+  right: 0px;
+  z-index: 1;
+  .arrow{
+    right: 5px;
+  }
+}
+.btn-filter-responsive{
+  display: none;
+}
+
+// elementos filtros-responsivos
+.close-filtros{
+ display: none;
+}
+
+@media (max-width:1200px) {
+  .btn-filter-responsive{
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    .select-box{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 45px;
+    }
+  } 
+  .cont-form-responsive{
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    overflow: auto;
+    padding-bottom: 50px;
+    top: 119px;
+    padding-top: 20px;
+    right: -300px;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    transition: all .3s;
+    justify-content: start;
+    .cont-flecha{
+      background: transparent;
+    }
+    #filterForm{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: start;
+      width: 80%;
+      margin: 10px auto;
+    }
+    .span-price-sign{
+      display: none;
+    }
+    .close-filtros{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 90%;
+      margin: 2px auto;
+      padding: 13px;
+      border-bottom: 1px solid #ccc;
+      h2{
+        font-size: 16px;
+        margin: 0;
+        font-weight: 600;
+      }
+      svg{
+        color: rgb(107, 107, 107);
+        width: 35px;
+        height: 35px;
+      }
+    }
+    .titulo-menu-filtro{
+      margin-top: 50px;
+    }
+    .select-box{
+      margin: 0px 0 10px 0;
+    }
+    .select-box select{
+      width: 100%;
+      background: white;
+    }
+    input{
+      width: 100%;
+      margin-bottom: 0px;
+    }
+    .cont-select-box{
+      width: 100%;
+      margin: 0;
+      .input-box{
+        max-width: 100%;
+        min-width: 100%;
+      }
+    }
+    #filterForm button{
+      width: 100%;
+      margin: 0;
+    }
+    .filtro-activo-contenedor{
+      width: 100%;
+      margin-bottom: 50px;
+    }
+  }
+}
+@media (max-width: 991px) {
+  .cont-form-responsive{
+    top: 70px;
+    padding-top: 5px;
+  }
+}
+
+.toggle{
+  right: 0;
 }
