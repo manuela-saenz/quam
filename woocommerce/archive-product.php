@@ -53,6 +53,7 @@ $products = get_products_by_category_name($currentCat->name);
             <div class="col-md-12 d-flex justify-content-between select_men align-items-end">
                 <div class="select d-flex gap-2">
                     <!-- form filter -->
+
                     <?php /* dynamic_sidebar('home_right_1') */
                     $cate = get_queried_object();
                     $cateSlug = $cate->slug;
@@ -96,45 +97,104 @@ $products = get_products_by_category_name($currentCat->name);
                     $precio_maximo = $max_price;
                     $precio_minimo = $min_price;
 
-                    ?>
-
-                    <?php
-                    ?>
-                    <?php
-
+                    // categorias
+                    
                     $category_slug = $cateSlug;
 
-                    $query_args = array(
-                        'status' => 'publish',
-                        'limit' => -1,
-                        'category' => array($category_slug),
-                    );
 
-                    $data = array();
-                    foreach (wc_get_products($query_args) as $product) {
-                        foreach ($product->get_attributes() as $taxonomy => $attribute) {
-                            $attribute_name = wc_attribute_label($taxonomy); // Attribute name
-                            // Or: $attribute_name = get_taxonomy( $taxonomy )->labels->singular_name;
-                            foreach ($attribute->get_terms() as $term) {
-                                $data[$taxonomy][$term->term_id] = $term->name;
-                                // Or with the product attribute label name instead:
-                                // $data[$attribute_name][$term->term_id] = $term->name;
+                    function get_all_product_categories_and_attributes()
+                    {
+                        // Obtener todas las categorías de productos
+                        $product_categories = get_terms(
+                            array(
+                                'taxonomy' => 'product_cat',
+                                'hide_empty' => false,
+                                'parent' => 0,
+                            )
+                        );
+
+                        // Array para almacenar las categorías y sus atributos
+                        $categories_and_attributes = array();
+
+                        // Iterar sobre cada categoría de producto
+                        foreach ($product_categories as $category) {
+                            // Obtener los productos de la categoría actual
+                            $args = array(
+                                'post_type' => 'product',
+                                'posts_per_page' => -1,
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy' => 'product_cat',
+                                        'field' => 'term_id',
+                                        'terms' => $category->term_id,
+                                    ),
+                                ),
+                            );
+                            $products = get_posts($args);
+
+                            // Array para almacenar los atributos de los productos en esta categoría
+                            $attributes = array();
+
+                            // Iterar sobre cada producto
+                            foreach ($products as $product_post) {
+                                $product = wc_get_product($product_post->ID);
+
+                                // Obtener los atributos del producto
+                                $product_attributes = $product->get_attributes();
+
+                                // Iterar sobre cada atributo y almacenarlo en el array de atributos
+                                foreach ($product_attributes as $attribute) {
+                                    if ($attribute->get_variation()) { // Verifica si el atributo se usa para variaciones
+                                        if ($attribute->is_taxonomy()) {
+                                            $taxonomy = $attribute->get_taxonomy_object();
+                                            $terms = wp_get_post_terms($product_post->ID, $attribute->get_name());
+                                            foreach ($terms as $term) {
+                                                $attributes[$taxonomy->attribute_label][] = $term->name;
+                                            }
+                                        } else {
+                                            $attribute_name = $attribute->get_name();
+                                            $options = $attribute->get_options();
+                                            foreach ($options as $option) {
+                                                $attributes[$attribute_name][] = $option;
+                                            }
+                                        }
+                                    }
+                                }
                             }
+
+                            // Eliminar duplicados y almacenar en el array principal
+                            foreach ($attributes as $key => $values) {
+                                $attributes[$key] = array_unique($values);
+                            }
+
+                            // Almacenar los atributos en la categoría correspondiente
+                            $categories_and_attributes[$category->name] = $attributes;
+
+
+                            // echo '<pre>';
+                            // echo "Categoría: " . $category->name . "\n";
+                            // print_r($attributes);
+                            // echo '</pre>';
                         }
+
+                        return $categories_and_attributes;
                     }
 
-                    // Raw output (testing)
-                    /* echo '
-                     <pre>';
-                     print_r($data);
-                     echo '</pre>';
+                    // Llamar a la función y obtener los datos
+                    $categories_and_attributes = get_all_product_categories_and_attributes();
 
-                     function printSelectOptions($array)
-                     {
-                     foreach ($array as $value => $label) {
-                     echo "<option value=\"$value\">$label</option>";
-                     }
-                     } */ ?>
+
+                    // // Raw output (testing)
+                    echo '<pre>';
+                    print_r($categories_and_attributes);
+                    echo '</pre>';
+                    
+                    function printSelectOptions($array)
+                    {
+                        foreach ($array as $value => $label) {
+                            echo "<option value=\"$value\">$label</option>";
+                        }
+                    } ?>
 
                     <!-- form filter -->
                     <div class="btn-filter-responsive">
@@ -147,70 +207,94 @@ $products = get_products_by_category_name($currentCat->name);
                     <div class="cont-form-responsive ">
                         <div class="close-filtros">
                             <h2>Filtro:</h2>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="cerrar-filtros" width="16" height="16" fill="currentColor"
-                                class="bi bi-x" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="cerrar-filtros" width="16" height="16"
+                                fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                 <path
                                     d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
                         </div>
+                        <?php foreach ($categories_and_attributes as $category => $attributes): ?>
+                            <option data-color="<?= $category ?>" value="<?= $category ?>"><?= $category ?></option>
+                        <?php endforeach; ?>
+                        
                         <form id="filterForm" class="woocommerce-ordering-price d-flex align-items-end"
                             action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="get">
                             <div class="cont-select-box">
-                                <label for="">Color:</label>
+                                <label for="category-filter">Categoría:</label>
                                 <div class="select-box input-box">
-                                    <select name="filter_color" id="color-filter" require>
-                                        <option value="">Selecciona Color</option>
-                                        <?php
-                                        foreach ($data['pa_color'] as $value) {
-                                            echo '<option value="' . $value . '">' . $value . '</option>';
-                                        }
-                                        ?>
+                                    <select name="filter_category" id="category-filter">
+                                        <option value="">Selecciona Categoría</option>
+                                        <?php foreach ($categories_and_attributes as $category => $attributes): ?>
+                                            <option data-color="<?= $category ?>" value="<?= $category ?>"><?= $category ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
-
                                     <div class="cont-flecha">
-                                        <label for="color-filter">
+                                        <label for="category-filter">
                                             <div class="arrow"></div>
                                         </label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="cont-select-box">
-                                <label for="">Talla</label>
-                                <div class="select-box input-box">
-                                    <select name="filter_talla" require>
-                                        <option value="">Selecciona Talla</option>
-                                        <?php
-                                        foreach ($data['pa_talla'] as $value) {
-                                            echo '<option value="' . $value . '">' . $value . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    <div class="cont-flecha">
-                                        <label for="color-filter">
-                                            <div class="arrow"></div>
-                                        </label>
-                                    </div>
+                          
+                           <div class="" data-current-cat="">
+                                <div class="cont-select-box">
+                                    <label for="">Color:</label>
+                                    <div class="select-box input-box">
+                                        <select name="filter_color" id="color-filter">
+                                            <option value="">Selecciona Color</option>
+                                            <?php
+                                            foreach ($data['pa_color'] as $value) {
+                                                echo '<option value="' . $value . '">' . $value . '</option>';
+                                            }
+                                            ?>
+                                        </select>
 
+                                        <div class="cont-flecha">
+                                            <label for="color-filter">
+                                                <div class="arrow"></div>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="cont-select-box">
-                                <label>Precio</label>
-                                <div class="select-box input-box">
-                                    <input type="text" name="min_price" id="min_price" oninput="formatCurrency(this)"
-                                        onblur="updateValue(this)" placeholder="Min: <?= $precio_minimo ?>">
+                                <div class="cont-select-box">
+                                    <label for="">Talla</label>
+                                    <div class="select-box input-box">
+                                        <select name="filter_talla" require>
+                                            <option value="">Selecciona Talla</option>
+                                            <?php
+                                            foreach ($data['pa_talla'] as $value) {
+                                                echo '<option value="' . $value . '">' . $value . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                        <div class="cont-flecha">
+                                            <label for="color-filter">
+                                                <div class="arrow"></div>
+                                            </label>
+                                        </div>
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="select-box">
-                                <span class="span-price-sign">-</span>
-                            </div>
-                            <div class="cont-select-box">
-                                <div class="select-box input-box">
-                                    <input type="text" name="max_price" id="max_price" oninput="formatCurrency(this)"
-                                        onblur="updateValue(this)" placeholder="Max: <?= $precio_maximo ?>">
+                                <div class="cont-select-box">
+                                    <label>Precio</label>
+                                    <div class="select-box input-box">
+                                        <input type="text" name="min_price" id="min_price" oninput="formatCurrency(this)"
+                                            onblur="updateValue(this)" placeholder="Min: <?= $precio_minimo ?>">
+                                    </div>
                                 </div>
-                            </div>
-                            <button type="submit" class="quam-btn blue">Filtrar</button>
-                            <div id="appliedFilters" class="filtro-activo-contenedor"></div>
+                                <div class="select-box">
+                                    <span class="span-price-sign">-</span>
+                                </div>
+                                <div class="cont-select-box">
+                                    <div class="select-box input-box">
+                                        <input type="text" name="max_price" id="max_price" oninput="formatCurrency(this)"
+                                            onblur="updateValue(this)" placeholder="Max: <?= $precio_maximo ?>">
+                                    </div>
+                                </div>
+                                <button type="submit" class="quam-btn blue">Filtrar</button>
+                                <div id="appliedFilters" class="filtro-activo-contenedor"></div>
+                                </div>
                         </form>
                     </div>
                     <!-- Campos ocultos para mantener los parámetros de la URL -->
