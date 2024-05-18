@@ -5,28 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-        <?php
-        if (is_front_page()) {
-            bloginfo('description');
-            echo ' - ';
-            bloginfo('name');
-        } elseif (function_exists('is_tag') && is_tag()) {
-            single_tag_title("Archivo de &quot;");
-        } elseif (is_archive()) {
-            wp_title('');
-        } elseif (is_search()) {
-            echo 'Búsqueda para &quot;' . wp_specialchars($s) . '&quot; - ';
-            bloginfo('name');
-        } elseif (!(is_404()) && (is_single()) || (is_page()) || (is_home())) {
-            wp_title('');
-        } elseif (is_404()) {
-            echo 'No encontrado - ';
-        }
-        if ($paged > 1) {
-            echo ' - página ' . $paged;
-        }
-        ?>
-    </title>
+    <?php
+    if (is_front_page()) {
+      bloginfo('description');
+      echo ' - ';
+      bloginfo('name');
+    } elseif (function_exists('is_tag') && is_tag()) {
+      single_tag_title("Archivo de &quot;");
+    } elseif (is_archive()) {
+      wp_title('');
+    } elseif (is_search()) {
+      echo 'Búsqueda para &quot;' . wp_specialchars($s) . '&quot; - ';
+      bloginfo('name');
+    } elseif (!(is_404()) && (is_single()) || (is_page()) || (is_home())) {
+      wp_title('');
+    } elseif (is_404()) {
+      echo 'No encontrado - ';
+    }
+    if ($paged > 1) {
+      echo ' - página ' . $paged;
+    }
+    ?>
+  </title>
   <link rel="icon" href="favicon/favicon-1.ico" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -94,7 +94,7 @@
                 ));
                 foreach ($categories as $cat) :
                 ?>
-                  <a href="<?= get_term_link($cat) ?>" class="<?= is_page( $cat->name ) ? 'active' : '' ?>" data-id="<?=  $cat->slug ?>">
+                  <a href="<?= get_term_link($cat) ?>" class="<?= is_page($cat->name) ? 'active' : '' ?>" data-id="<?= $cat->slug ?>">
                     <?= $cat->name ?>
                   </a>
                 <?php endforeach; ?>

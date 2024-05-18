@@ -23,8 +23,6 @@ if (is_tax()) {
 //     die("Error de conexión: " . $conn->connect_error);
 // }
 
-$products = get_products_by_category_name($currentCat->name);
-
 
 // Obtener el término (categoría) por su nombre
 // $category = get_term_by('name', $currentCat->name, 'product_cat');
@@ -36,9 +34,8 @@ $products = get_products_by_category_name($currentCat->name);
         <div class="row">
             <div class="col-md-12">
                 <!-- <h2 class="section-subtitle mb-0"><?= $currentCat->name ?></h2> -->
-                <?php if (apply_filters('woocommerce_show_page_title', true)): ?>
-                    <h1
-                        class="woocommerce-products-header__title page-title <?= is_search() ? 'section-subtitle-2' : 'section-subtitle' ?>  mb-0">
+                <?php if (apply_filters('woocommerce_show_page_title', true)) : ?>
+                    <h1 class="woocommerce-products-header__title page-title <?= is_search() ? 'section-subtitle-2' : 'section-subtitle' ?>  mb-0">
                         <?php woocommerce_page_title(); ?>
                     </h1>
                 <?php endif; ?>
@@ -52,9 +49,7 @@ $products = get_products_by_category_name($currentCat->name);
         <div class="row">
             <div class="col-md-12 d-flex justify-content-between select_men align-items-end">
                 <div class="select d-flex gap-2">
-                    <!-- form filter -->
-
-                    <?php /* dynamic_sidebar('home_right_1') */
+                    <?php
                     $cate = get_queried_object();
                     $cateSlug = $cate->slug;
                     //Get all products from this category
@@ -72,7 +67,7 @@ $products = get_products_by_category_name($currentCat->name);
                         $all_prices[] = $product->get_price();
                     }
                     // print_r($all_prices);
-                    
+
                     $max_price = null;
                     $min_price = null;
 
@@ -98,8 +93,6 @@ $products = get_products_by_category_name($currentCat->name);
                     $precio_minimo = $min_price;
 
                     // categorias
-                    
-                    $category_slug = $cateSlug;
 
 
                     function get_all_product_categories_and_attributes()
@@ -110,6 +103,7 @@ $products = get_products_by_category_name($currentCat->name);
                                 'taxonomy' => 'product_cat',
                                 'hide_empty' => false,
                                 'parent' => 0,
+                                'exclude'    => array(26, 15),
                             )
                         );
 
@@ -181,51 +175,33 @@ $products = get_products_by_category_name($currentCat->name);
                     }
 
                     // Llamar a la función y obtener los datos
-                    $categories_and_attributes = get_all_product_categories_and_attributes();
-
-
-                    // // Raw output (testing)
-                    echo '<pre>';
-                    print_r($categories_and_attributes);
-                    echo '</pre>';
-                    
-                    function printSelectOptions($array)
-                    {
-                        foreach ($array as $value => $label) {
-                            echo "<option value=\"$value\">$label</option>";
-                        }
-                    } ?>
+                    $categories_and_attributes = get_all_product_categories_and_attributes(); ?>
 
                     <!-- form filter -->
                     <div class="btn-filter-responsive">
                         <div class="cont-select-box">
                             <div class="select-box input-box cerrar-filtros">
-                                <label for="">Filtro</label>
+                                <label>Filtro</label>
                             </div>
                         </div>
                     </div>
                     <div class="cont-form-responsive ">
                         <div class="close-filtros">
                             <h2>Filtro:</h2>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="cerrar-filtros" width="16" height="16"
-                                fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="cerrar-filtros" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
                         </div>
-                        <?php foreach ($categories_and_attributes as $category => $attributes): ?>
-                            <option data-color="<?= $category ?>" value="<?= $category ?>"><?= $category ?></option>
-                        <?php endforeach; ?>
-                        
-                        <form id="filterForm" class="woocommerce-ordering-price d-flex align-items-end"
-                            action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="get">
+
+
+                        <form id="filterForm" class="woocommerce-ordering-price d-flex align-items-end" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="get">
                             <div class="cont-select-box">
                                 <label for="category-filter">Categoría:</label>
                                 <div class="select-box input-box">
                                     <select name="filter_category" id="category-filter">
-                                        <option value="">Selecciona Categoría</option>
-                                        <?php foreach ($categories_and_attributes as $category => $attributes): ?>
-                                            <option data-color="<?= $category ?>" value="<?= $category ?>"><?= $category ?>
+                                        <option value="" disabled selected>Selecciona Categoría</option>
+                                        <?php foreach ($categories_and_attributes as $category => $attributes) : ?>
+                                            <option <?= convertToSlug($category) === $cate->slug ? 'selected' : 'false' ?> value="<?= $category ?>"><?= $category ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -236,65 +212,51 @@ $products = get_products_by_category_name($currentCat->name);
                                     </div>
                                 </div>
                             </div>
-                          
-                           <div class="" data-current-cat="">
-                                <div class="cont-select-box">
-                                    <label for="">Color:</label>
-                                    <div class="select-box input-box">
-                                        <select name="filter_color" id="color-filter">
-                                            <option value="">Selecciona Color</option>
-                                            <?php
-                                            foreach ($data['pa_color'] as $value) {
-                                                echo '<option value="' . $value . '">' . $value . '</option>';
-                                            }
-                                            ?>
-                                        </select>
+                            <div class="d-flex flex-column">
+                                <?php foreach ($categories_and_attributes as $category => $attributes) : ?>
+                                    <div class=" align-items-end <?= $cateSlug === convertToSlug($category) ? 'd-flex' : 'd-none' ?>" data-current-cat="<?= convertToSlug($category) ?>">
+                                        <?php foreach ($attributes as $key => $attribute) : ?>
+                                            <div class="cont-select-box">
+                                                <label for=""><?= $key ?>:</label>
+                                                <div class="select-box input-box">
+                                                    <select name="filter_color" id="color-filter">
+                                                        <option value="" disabled selected>Selecciona Color</option>
+                                                        <?php foreach ($attribute as $item) : ?>
+                                                            <option value="<?= $item ?>"> <?= $item ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
 
-                                        <div class="cont-flecha">
-                                            <label for="color-filter">
-                                                <div class="arrow"></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cont-select-box">
-                                    <label for="">Talla</label>
-                                    <div class="select-box input-box">
-                                        <select name="filter_talla" require>
-                                            <option value="">Selecciona Talla</option>
-                                            <?php
-                                            foreach ($data['pa_talla'] as $value) {
-                                                echo '<option value="' . $value . '">' . $value . '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                        <div class="cont-flecha">
-                                            <label for="color-filter">
-                                                <div class="arrow"></div>
-                                            </label>
+                                                    <div class="cont-flecha">
+                                                        <label for="color-filter">
+                                                            <div class="arrow"></div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+
+                                        <div class="cont-select-box">
+                                            <label>Precio</label>
+                                            <div class="d-flex align-items-center">
+                                                <div class="select-box input-box">
+                                                    <input type="text" name="min_price" id="min_price" oninput="formatCurrency(this)" onblur="updateValue(this)" placeholder="Min: <?= $precio_minimo ?>">
+                                                </div>
+                                                <div class="select-box">
+                                                    <span class="span-price-sign">-</span>
+                                                </div>
+                                                <div class="cont-select-box">
+                                                    <div class="select-box input-box">
+                                                        <input type="text" name="max_price" id="max_price" oninput="formatCurrency(this)" onblur="updateValue(this)" placeholder="Max: <?= $precio_maximo ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
+                                        <button type="submit" class="quam-btn blue">Filtrar</button>
+                                        <div id="appliedFilters" class="filtro-activo-contenedor"></div>
                                     </div>
-                                </div>
-                                <div class="cont-select-box">
-                                    <label>Precio</label>
-                                    <div class="select-box input-box">
-                                        <input type="text" name="min_price" id="min_price" oninput="formatCurrency(this)"
-                                            onblur="updateValue(this)" placeholder="Min: <?= $precio_minimo ?>">
-                                    </div>
-                                </div>
-                                <div class="select-box">
-                                    <span class="span-price-sign">-</span>
-                                </div>
-                                <div class="cont-select-box">
-                                    <div class="select-box input-box">
-                                        <input type="text" name="max_price" id="max_price" oninput="formatCurrency(this)"
-                                            onblur="updateValue(this)" placeholder="Max: <?= $precio_maximo ?>">
-                                    </div>
-                                </div>
-                                <button type="submit" class="quam-btn blue">Filtrar</button>
-                                <div id="appliedFilters" class="filtro-activo-contenedor"></div>
-                                </div>
+                                <?php endforeach; ?>
+                            </div>
                         </form>
                     </div>
                     <!-- Campos ocultos para mantener los parámetros de la URL -->

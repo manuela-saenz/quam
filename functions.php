@@ -62,6 +62,38 @@ function custom_override_checkout_fields( $fields ) {
     return $fields;
 }
 
+function convertToSlug($str) { 
+      
+    // Convertir cadena a minúsculas 
+    $str = strtolower($str); 
+      
+    // Reemplazar los espacios con guiones 
+    $str = str_replace(' ', '-', $str); 
+      
+    // Reemplazar los acentos
+    $acentos = array(
+      'á' => 'a',
+      'é' => 'e',
+      'í' => 'i',
+      'ó' => 'o',
+      'ú' => 'u',
+      'ü' => 'u',
+      'ñ' => 'n'
+    );
+    $str = strtr($str, $acentos);
+      
+    // Quitar los caracteres especiales excepto letras, números y guiones 
+    $str = preg_replace('/[^a-z0-9\-]/', '', $str); 
+      
+    // Quitar los guiones consecutivos 
+    $str = preg_replace('/-+/', '-', $str); 
+      
+    // Recortar los guiones del principio y final de la cadena 
+    $str = trim($str, '-'); 
+      
+    return $str; 
+  } 
+
 
 function related_products_quantity( $args ) {
     $args['posts_per_page'] = 10;
