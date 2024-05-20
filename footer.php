@@ -131,6 +131,11 @@
   });
 
 </script>
+<?php if (is_product_category()) { ?>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script> -->
+  <script src="<?php bloginfo('template_url') ?>/assets/js/cat.js?=v<?= randomCode() ?>"> </script>
+<?php } ?>
 
 </body>
 

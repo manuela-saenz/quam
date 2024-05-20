@@ -329,13 +329,13 @@ window.addEventListener("load", function () {
   }
 });
 
-  var formContainer = document.querySelector(".cont-form-responsive");
-  var cerrarFiltros = document.querySelectorAll(".cerrar-filtros");
+var formContainer = document.querySelector(".cont-form-responsive");
+var cerrarFiltros = document.querySelectorAll(".cerrar-filtros");
 
-  cerrarFiltros.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      console.log('A');
-      formContainer.classList.toggle("toggle");
-      console.log("Button clicked:", btn);
-    });
+cerrarFiltros.forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    formContainer.classList.toggle("toggle");
+    console.log("Button clicked:", btn);
   });
+});
+// filtro

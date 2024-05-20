@@ -89,7 +89,7 @@
                   "taxonomy" => "product_cat",
                   "hide_empty" => false,
                   "parent" => 0,
-                  'exclude'    => 69,
+                  'exclude' => array(26, 15),
                   'orderby' => 'term_order',
                 ));
                 foreach ($categories as $cat) :
@@ -144,4 +144,4 @@
   <?php desplegableProductos("Mis favoritos", "mini-favoritos") ?>
 
 
-  <main>
+  <main></main>
