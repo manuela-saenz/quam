@@ -48,7 +48,7 @@ get_header()
           <p> In marketing a product is an object or system made available for consumer use it is anything that can be offered to a market to the desire or need of a \retailing, products are often referred to as merchandise, and in</p>
           <div class="center-all">
             <button>+8 80025.9890.11</button>
-            <button>info@quamservice.com</button>
+            <!-- <button>info@quamservice.com</button> -->
           </div>
         </div>
       </div>

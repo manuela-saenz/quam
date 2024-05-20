@@ -57,7 +57,7 @@
       <div class="container d-flex align-items-center justify-content-lg-between justify-content-center position-relative">
         <div class="contact d-flex">
           <a href="tel:" target="_blank"><i class="icon-phone1"></i><span>+8 80025.9890.11 </span></a>
-          <a href="mailto:" target="_blank"><i class="icon-email"></i><span>info@quamservice.com</span> </a>
+          <!-- <a href="mailto:" target="_blank"><i class="icon-email"></i><span>info@quamservice.com</span> </a> -->
           <a href="" target="_blank"><i class="icon-delivery"></i>
             <p class="mb-0">Rastrear paquete</p>
           </a>
