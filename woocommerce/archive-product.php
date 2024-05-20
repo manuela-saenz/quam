@@ -262,7 +262,7 @@ if (is_tax()) {
                     <!-- Campos ocultos para mantener los parámetros de la URL -->
                     <?php /* wc_query_string_form_fields(null, array('size', 'color', 'min_price', 'max_price')); */ ?>
                 </div>
-                <div class="products text-center text-lg-end d-flex flex-wrap align-items-center flex-column">
+                <div class="products text-center text-lg-end d-flex flex-wrap align-items-center flex-column ">
                     <?= woocommerce_result_count() ?>
                     <!-- The second value will be selected initially -->
                     <div class="select-box">
