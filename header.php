@@ -156,7 +156,7 @@
   <?php desplegableProductos("Mis favoritos", "mini-favoritos") ?>
 
   <main>
-    <a href="https://wa.me/573114482684"  class="btn-whatsapp position-fixed" target="_blank">
+    <a href="https://web.whatsapp.com/send?phone=3114482684&amp;text=Hola estoy interesado en sus productos y quiero más información."  class="btn-whatsapp position-fixed d-none" target="_blank">
       <img src="<?php bloginfo('template_url') ?>/media/images/social-whatsapp.png" alt="">
     </a>
   </main>
