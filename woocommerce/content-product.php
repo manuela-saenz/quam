@@ -20,11 +20,13 @@ defined('ABSPATH') || exit;
 
 global $product;
 
-// Ensure visibility.
 if (empty($product) || !$product->is_visible()) {
 	return;
 }
 $color = $_GET['filter_color'];
+$filter_color = isset($_GET['filter_color']) ? $_GET['filter_color'] : null;
+$filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
+
 if ($color) {
 	$available_variations = $product->get_available_variations();
 	$available_variations = array_filter($available_variations, function ($e) use ($color) {
@@ -38,17 +40,54 @@ if ($color) {
 }
 
 ?>
-<div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?>>
-	<a href="<?= get_permalink($product->get_id()) ?>" class="CardProducts w-100">
-		<div class="img-contain" title="<?php ?>">
-			<?= $image ?>
-		</div>
-		<div class="info-highlights">
-			<h5 title="<?= get_the_title() ?>"><?= get_the_title() ?></h5>
-			<div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
-				<p class=" mb-0 d-flex gap-2"><?= $product->get_price_html() .  "COP" ?> </p>
-			</div>
-		</div>
-		<?php // do_action( 'woocommerce_after_shop_loop_item_title' ); ?>
-	</a>
+<?php if ($filter_color !== null || $filter_talla !== null): ?>
+<div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id=<?= $product->get_id();?>>
+    <a href="<?= get_permalink($product->get_id()) ?>" class="CardProducts w-100">
+        <div class="img-contain" title="<?= get_the_title() ?>">
+            <?= $image ?>
+        </div>
+        <div class="info-highlights">
+            <h5 title="<?= get_the_title() ?>"><?= get_the_title() ?></h5>
+            <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
+                <p class="mb-0 d-flex gap-2"><?= $product->get_price_html() .  " COP" ?></p>
+            </div>
+        </div>
+    </a>
 </div>
+<?php endif; ?>
+
+<?php 
+    if ($product->is_type('variable') && $filter_color === null): 
+?>
+    <?php
+        $available_variations = $product->get_available_variations();
+        $shown_colors = array();
+        
+        foreach ($available_variations as $variation) {
+            $variation_obj = wc_get_product($variation['variation_id']);
+            $color = $variation['attributes']['attribute_pa_color'];
+            
+            if (!in_array($color, $shown_colors)) {
+                $shown_colors[] = $color;
+                $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_obj->get_id()), 'woocommerce_thumbnail');
+                $variation_title = $variation_obj->get_name();
+                $variation_price = $variation_obj->get_price_html();
+                ?>
+                <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?> data-id=<?= $variation_obj->get_id();?>>
+                    <a href="<?= get_permalink($variation_obj->get_id()) ?>" class="CardProducts w-100">
+                        <div class="img-contain" title="<?= $variation_title ?>">
+                            <?= $variation_image ?>
+                        </div>
+                        <div class="info-highlights">
+                            <h5 title="<?= $variation_title ?>"><?= $variation_title ?></h5>
+                            <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
+                                <p class="mb-0 d-flex gap-2"><?= $variation_price .  " COP" ?></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <?php
+            }
+        }
+    ?>
+<?php endif; ?>
