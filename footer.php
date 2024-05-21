@@ -27,7 +27,8 @@
             </div>
             <div class="col-md-4">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Escribe tu correo electrónico" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <input type="text" class="form-control" placeholder="Escribe tu correo electrónico"
+                  aria-label="Example text with button addon" aria-describedby="button-addon1">
                 <button class="quam-btn white" type="button" id="button-addon1">Suscribirme</button>
               </div>
             </div>
@@ -48,10 +49,10 @@
       <div class="col-md-12 col-lg-3">
         <ul>
           <li class="mb-4"> <b>Categorias</b></li>
-          <li> <a href="https://www.quam.com.co/"> Inicio</a> </li>
-          <li> <a href="https://www.quam.com.co/categoria-producto/hombre/"> Hombre</a></li>
-          <li> <a href="https://www.quam.com.co/categoria-producto/mujer/"> Mujer</a> </li>
-          <li> <a href="https://www.quam.com.co/categoria-producto/nino/"> Niño</a> </li>
+          <li><a href="<?= get_home_url(); ?>">Inicio</a></li>
+          <li><a href="<?= get_home_url(); ?>/categoria-producto/hombre/">Hombre</a></li>
+          <li><a href="<?= get_home_url(); ?>/categoria-producto/mujer/">Mujer</a></li>
+          <li><a href="<?= get_home_url(); ?>/categoria-producto/nino/">Niño</a></li>
         </ul>
       </div>
 
@@ -105,8 +106,9 @@
 <?php wp_footer(); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+  integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+  </script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <?php if (is_page(78)) { ?>
@@ -123,7 +125,7 @@
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?=v<?= randomCode() ?>"> </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     var cartElement = document.querySelector('.offcanvas-body.ordenList.cart');
     if (cartElement && cartElement.children.length > 0) {
       cartElement.classList.remove('empty');
