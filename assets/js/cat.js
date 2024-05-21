@@ -1,57 +1,56 @@
 // Función para obtener el valor de un parámetro de la URL
+
+$('#cat-selector').on('change', function () {
+    var cat_attr = $('#categories-attributes-full [data-cat-name="' + $(this).val() + '"] div').attr('data-attributes');
+    var cat_max = $('#categories-attributes-full [data-cat-name="' + $(this).val() + '"] div').attr('data-max-price');
+    var cat_min = $('#categories-attributes-full [data-cat-name="' + $(this).val() + '"] div').attr('data-min-price');
+
+    $('#cat-attributes').empty();
+    $('#cat-attributes').html(filterSelects(JSON.parse(cat_attr)));
+    $('#cat-attributes').next('.cont-select-box').find('#max_price').attr('placeholder', "Max: " + cat_max + "");
+    $('#cat-attributes').next('.cont-select-box').find('#min_price').attr('placeholder', "Min: " + cat_min + "");
+    // filterSelects(JSON.parse(cat_attr))
+})
+
+$('#filterForm select').on('change', function (e) {
+    updateURL()
+})
+function filterSelects(attributes) {
+    var html = '';
+    $.each(attributes, function (attributeName, options) {
+        html += '<div class="cont-select-box">';
+        html += '<label>' + attributeName + '</label>';
+        html += '<div class="select-box input-box">';
+        html += '<select class="w-100" data-name="' + attributeName.toLowerCase() + '">';
+        html += '<option selected value=""> Selecciona ' + attributeName + ' </option>';
+        $.each(options, function (optionValue, optionText) {
+            html += '<option value="' + optionValue + '">' + optionText + '</option>';
+        });
+        html += '</select>';
+        html += '</div>';
+        html += '</div>';
+    });
+    return html;
+}
+
+
 function getQueryParam(param) {
     var params = new URLSearchParams(window.location.search);
     return params.get(param);
 }
 
-// Función para actualizar los selects según la categoría seleccionada
-function updateSelectsForCategory(selectedValue, resetSelects = false) {
-    categoryContents.forEach(function(content) {
-        if (content.dataset.currentCat === selectedValue) {
-            content.style.display = "block";
-            var attributeDivs = content.querySelectorAll('div[data-options]');
-            attributeDivs.forEach(function(attributeDiv) {
-                var selectElement = attributeDiv.querySelector('select');
-                var options = JSON.parse(attributeDiv.dataset.options);
-                var attributeName = attributeDiv.dataset.name.toLowerCase();
-
-                // Limpiar las opciones anteriores del select
-                selectElement.innerHTML = `<option value="" disabled selected>Selecciona ${attributeName}</option>`;
-
-                for (var key in options) {
-                    if (options.hasOwnProperty(key)) {
-                        var option = document.createElement("option");
-                        option.value = options[key];
-                        option.textContent = options[key];
-                        selectElement.appendChild(option);
-                    }
-                }
-
-                if (!resetSelects) {
-                    // Marcar la opción seleccionada basada en el parámetro de la URL
-                    var queryValue = getQueryParam(`filter_${attributeName}`);
-                    if (queryValue) {
-                        selectElement.value = queryValue;
-                    }
-                }
-            });
-        } else {
-            content.style.display = "none";
-        }
-    });
-}
-
 // Función para actualizar la URL cuando se envía el formulario
 function updateURL(event) {
-    event.preventDefault();
-    var selectedCategory = selectElement.value || document.querySelector("#category-filter option[selected]").value;
-    selectedCategory = selectedCategory.replace(/ñ/g, 'n'); // Reemplazar 'ñ' por 'n'
+    if (event) {
+        event.preventDefault();
+    }
+    var selectedCategory = selectElement.value || $('#cat-selector').val()
 
     var params = new URLSearchParams();
-    var nuevoFiltroSelects = document.querySelectorAll('#container-filters select');
+    var nuevoFiltroSelects = document.querySelectorAll('#cat-attributes select');
 
     // Obtener los valores seleccionados en los nuevos filtros
-    nuevoFiltroSelects.forEach(function(select) {
+    nuevoFiltroSelects.forEach(function (select) {
         var dataName = select.getAttribute('data-name').toLowerCase();
         var selectedOption = select.value;
         if (selectedOption) {
@@ -74,111 +73,124 @@ function updateURL(event) {
 
     var currentURL = window.location.href.split('/categoria-producto/')[0];
     var newURL = `${currentURL}/categoria-producto/${selectedCategory}/?${params.toString()}`;
-    window.location.href = newURL;
+    if (event) {
+        window.location.href = newURL;
+    }
+
 }
-
-// Nuevo filtro
-document.addEventListener("DOMContentLoaded", function() {
-    var categoriesContainer = document.getElementById("categories-container");
-    var dataOptions = {};
-
-    // Recorrer todos los divs con el atributo data-current-cat
-    var categoryDivs = categoriesContainer.querySelectorAll("div[data-current-cat]");
-    categoryDivs.forEach(function(categoryDiv) {
-        var category = categoryDiv.getAttribute("data-current-cat");
-        dataOptions[category] = {};
-
-        // Recorrer todos los divs con el atributo data-name dentro del div de la categoría
-        var attributeDivs = categoryDiv.querySelectorAll("div[data-name]");
-        attributeDivs.forEach(function(attributeDiv) {
-            var name = attributeDiv.getAttribute("data-name");
-            var options = JSON.parse(attributeDiv.getAttribute("data-options"));
-            dataOptions[category][name] = options;
-        });
-    });
-
-    // Manejar el evento onchange del select
-    const categoria = document.getElementById('category-filter');
-    const contenedorFiltros = document.getElementById('container-filters');
-
-    categoria.addEventListener('change', () => {
-        const categoriaSeleccionada = categoria.value;
-        const datosCategoria = dataOptions[categoriaSeleccionada];
-
-        // Limpiar el contenido del contenedor de filtros
-        contenedorFiltros.innerHTML = '';
-
-        // Crear select para cada tipo de filtro y agregar opciones
-        for (let tipoFiltro in datosCategoria) {
-            if (datosCategoria.hasOwnProperty(tipoFiltro)) {
-                const filtroDiv = document.createElement('div');
-                filtroDiv.classList.add('cont-select-box', 'position-relative', 'd-flex', 'align-items-center');
-
-                const label = document.createElement('label');
-                label.textContent = `${tipoFiltro}:`;
-
-                const select = document.createElement('select');
-                select.classList.add('select-box', 'input-box', 'p-1');
-                select.setAttribute('data-name', tipoFiltro);
-
-                const opciones = datosCategoria[tipoFiltro];
-
-                // Agregar la opción "Selecciona una opción" como primer elemento en el select
-                const optionPlaceholder = document.createElement('option');
-                optionPlaceholder.setAttribute('value', '');
-                optionPlaceholder.setAttribute('disabled', 'disabled');
-                optionPlaceholder.setAttribute('selected', 'selected');
-                optionPlaceholder.textContent = `Selecciona ${tipoFiltro}`;
-                select.appendChild(optionPlaceholder);
-
-                for (let clave in opciones) {
-                    if (opciones.hasOwnProperty(clave)) {
-                        const opcion = opciones[clave];
-                        const optionElement = document.createElement('option');
-                        optionElement.setAttribute('value', opcion);
-                        optionElement.textContent = opcion;
-                        select.appendChild(optionElement);
-                    }
-                }
-
-                // Crear el div de flecha
-                const flechaDiv = document.createElement('div');
-                flechaDiv.classList.add('cont-flecha');
-
-                const flechaLabel = document.createElement('label');
-                flechaLabel.setAttribute('for', 'color-filter');
-
-                const arrowDiv = document.createElement('div');
-                arrowDiv.classList.add('arrow');
-
-                flechaLabel.appendChild(arrowDiv);
-                flechaDiv.appendChild(flechaLabel);
-
-                filtroDiv.appendChild(label);
-                filtroDiv.appendChild(select);
-                filtroDiv.appendChild(flechaDiv);
-                contenedorFiltros.appendChild(filtroDiv);
-            }
-        }
-    });
-
-    // Simular el evento onchange para cargar los datos de la categoría inicialmente seleccionada
-    categoria.dispatchEvent(new Event('change'));
-});
+function getQueryParams(url) {
+    let params = {};
+    let parser = document.createElement('a');
+    parser.href = url;
+    let query = parser.search.substring(1);
+    let vars = query.split('&');
+    for (let i = 0; i < vars.length; i++) {
+        let pair = vars[i].split('=');
+        params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+    }
+    return params;
+}
+$(window).on('load', function () {
+    var params = getQueryParams(window.location.href);
+    for (var param in params) {
+        $("select[data-name='" + param.replace('filter_', '') + "']").val(params[param]);
+    }
+    $('#min_price').val(params.min_price)
+    $('#max_price').val(params.max_price)
+})
 
 // Actualizar selects en la carga inicial de la página
-var selectElement = document.getElementById("category-filter");
+var selectElement = document.getElementById("cat-selector");
 var form = document.getElementById("filterForm");
-var categoryContents = document.querySelectorAll(".category-content");
-
-var initialSelectedValue = selectElement.value || document.querySelector("#category-filter option[selected]").value;
-updateSelectsForCategory(initialSelectedValue);
-
-// Actualizar selects cuando cambia la categoría seleccionada
-selectElement.addEventListener("change", function() {
-    var selectedValue = selectElement.value;
-    updateSelectsForCategory(selectedValue, true); // Reset selects to default options
-});
 
 // Manejar el submit del formulario
 form.addEventListener("submit", updateURL);
+
+
+// precios filtro
+function formatCurrency(input) {
+    // Eliminar todos los caracteres que no sean dígitos
+    var value = input.value.replace(/\D/g, "");
+
+    // Si el valor es vacío, retornar
+    if (!value) return;
+
+    // Formatear como número con separadores de miles
+    var formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Agregar símbolo de dólar
+    formattedValue = "$" + formattedValue;
+
+    // Asignar el valor formateado de nuevo al campo de entrada
+    input.value = formattedValue;
+}
+
+function clearCurrencyFormat(input) {
+    // Eliminar símbolo de dólar y puntos
+    var value = input.value.replace(/[$.]/g, "");
+
+    // Si el valor es vacío, mostrar el placeholder
+    if (!value) {
+        input.value = "";
+        input.placeholder = input.getAttribute("placeholder");
+        return;
+    }
+
+    // Asignar el valor sin formato de nuevo al campo de entrada
+    input.value = value;
+}
+
+function updateValue(input) {
+    // Formatear el valor cuando el usuario sale del campo
+    formatCurrency(input);
+}
+
+// obtener los filtros aplicados
+
+window.addEventListener("scroll", function () {
+    var scrollPosition = window.scrollY;
+    var formContainer = document.querySelector(".cont-form-responsive");
+
+    if (scrollPosition > 0) {
+        if (window.innerWidth < 991) {
+            formContainer.style.top = "69px";
+        } else {
+            formContainer.style.top = "69px";
+        }
+    } else {
+        if (window.innerWidth < 991) {
+            formContainer.style.top = "69px";
+        } else {
+            formContainer.style.top = "119px";
+        }
+    }
+});
+
+window.addEventListener("load", function () {
+    var scrollPosition = window.scrollY;
+    var formContainer = document.querySelector(".cont-form-responsive");
+
+    if (scrollPosition > 0) {
+        if (window.innerWidth < 991) {
+            formContainer.style.top = "69px";
+        } else {
+            formContainer.style.top = "69px";
+        }
+    } else {
+        if (window.innerWidth < 991) {
+            formContainer.style.top = "69";
+        } else {
+            formContainer.style.top = "119px";
+        }
+    }
+});
+
+var formContainer = document.querySelector(".cont-form-responsive");
+var cerrarFiltros = document.querySelectorAll(".cerrar-filtros");
+
+cerrarFiltros.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+        formContainer.classList.toggle("toggle");
+        console.log("Button clicked:", btn);
+    });
+});

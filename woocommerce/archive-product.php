@@ -22,11 +22,11 @@ if (is_tax()) {
         <div class="row">
             <div class="col-md-12">
                 <!-- <h2 class="section-subtitle mb-0"><?= $currentCat->name ?></h2> -->
-                <?php if (apply_filters('woocommerce_show_page_title', true)): ?>
-                    <h1
-                        class="woocommerce-products-header__title page-title <?= is_search() ? 'section-subtitle-2' : 'section-subtitle' ?>  mb-0">
+                <?php if (apply_filters('woocommerce_show_page_title', true)) : ?>
+                    <h1 class="woocommerce-products-header__title page-title <?= is_search() ? 'section-subtitle-2' : 'section-subtitle' ?>  mb-0">
                         <?php woocommerce_page_title(); ?>
                     </h1>
+
                 <?php endif; ?>
             </div>
         </div>
@@ -56,7 +56,7 @@ if (is_tax()) {
                         $all_prices[] = $product->get_price();
                     }
                     // print_r($all_prices);
-                    
+
                     $max_price = null;
                     $min_price = null;
 
@@ -82,7 +82,7 @@ if (is_tax()) {
                     $precio_minimo = $min_price;
 
                     // categorias
-                    
+
 
                     function get_all_product_categories_and_attributes()
                     {
@@ -163,9 +163,6 @@ if (is_tax()) {
 
 
                         return $categories_and_attributes;
-
-
-
                     }
 
                     // Llamar a la función y obtener los datos
@@ -182,121 +179,98 @@ if (is_tax()) {
                             </div>
                         </div>
                     </div>
-                    <div class="cont-form-responsive ">
+                    <div class="cont-form-responsive bg-white">
                         <div class="close-filtros">
                             <h2>Filtro:</h2>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="cerrar-filtros" width="16" height="16"
-                                fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="cerrar-filtros" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
                         </div>
 
-                        <form id="filterForm" class="woocommerce-ordering-price d-flex align-items-end"
-                            action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="get">
+                        <?php
+                        $categories_data = get_all_product_categories_attributes_and_prices();
+                        $current_category = get_queried_object();
+                        ?>
+                        <form id="filterForm" class="woocommerce-ordering-price d-flex align-items-end" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="get">
                             <div class="cont-select-box">
-                                <label for="category-filter">Categoría:</label>
+                                <label for="">Categoria</label>
                                 <div class="select-box input-box">
-                                    <select name="filter_category" id="category-filter">
-                                        <option value="" disabled selected>Selecciona Categoría</option>
-                                        <?php foreach ($categories_and_attributes as $category => $attributes): ?>
-                                            <option <?= convertToSlug($category) === $cate->slug ? 'selected' : '' ?>
-                                                value="<?= convertToSlug($category) ?>"><?= $category ?></option>
+                                    <select name="" id="cat-selector" class="w-100">
+                                        <?php foreach ($categories_data[1] as $cat) : ?>
+                                            <option value="<?= $cat->slug ?>" <?= $current_category->slug === $cat->slug ? 'selected' : '' ?>><?= $cat->name ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <div class="cont-flecha">
-                                        <label for="category-filter">
-                                            <div class="arrow"></div>
-                                        </label>
-                                    </div>
                                 </div>
                             </div>
-
-                            <div id="categories-container">
-                                <?php foreach ($categories_and_attributes as $category => $attributes): ?>
-                                    <div data-current-cat="<?= convertToSlug($category) ?>">
-                                        <?php foreach ($attributes as $key => $attribute): ?>
-                                            <div id="container-filters" data-name="<?= $key ?>" class="d-flex"
-                                                data-options="<?= htmlspecialchars(json_encode($attribute), ENT_QUOTES, 'UTF-8') ?>">
-                                                <div class="cont-flecha">
-                                                    <label for="color-filter">
-                                                        <div class="arrow"></div>
-                                                    </label>
-                                                </div>
+                            <div id="cat-attributes" class="d-flex flex-column flex-xl-row">
+                                <?php if (isset($categories_data[0][$current_category->slug])) {
+                                    foreach ($categories_data[0][$current_category->slug]['attributes'] as $key => $cat_attributes) : ?>
+                                        <div class="cont-select-box">
+                                            <label><?= $key ?></label>
+                                            <div class="select-box input-box">
+                                                <select data-name="<?= convertToSlug($key) ?>" id="" class="w-100">
+                                                    <option value="">Selecciona <?= $key ?></option>
+                                                    <?php foreach ($cat_attributes as $cat_slug => $cat_attr) : ?>
+                                                        <option value="<?= $cat_slug ?>"><?= $cat_attr ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
                                             </div>
-                                        <?php endforeach; ?>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-
-                            <div id="category-content">
-                                <?php /* foreach ($categories_and_attributes as $category => $attributes): ?>
-                     <div data-current-cat="<?= convertToSlug($category) ?>" class="category-content"
-                         style="<?= convertToSlug($category) === $cate->slug ? 'display:block;' : 'display:none;' ?>">
-                         <div class="d-flex">
-                             <?php foreach ($attributes as $key => $attribute): ?>
-                                 <div data-name="<?= $key ?>"
-                                     data-options="<?= htmlspecialchars(json_encode($attribute), ENT_QUOTES, 'UTF-8') ?>">
-                                     <div class="cont-select-box">
-                                         <label for=""><?= $key ?>:</label>
-                                         <div class="select-box input-box">
-                                             <select data-name="<?= $key ?>">
-                                                 <option value="" disabled selected>Selecciona <?= $key ?>
-                                                 </option>
-                                             </select>
-                                             <div class="cont-flecha">
-                                                 <label for="color-filter">
-                                                     <div class="arrow"></div>
-                                                 </label>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             <?php endforeach; ?>
-                         </div>
-                     </div>
-                 <?php endforeach;*/ ?>
+                                        </div>
+                                <?php
+                                    endforeach;
+                                }
+                                ?>
                             </div>
                             <div class="cont-select-box">
                                 <label>Precio</label>
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center flex-column flex-xl-row">
                                     <div class="select-box input-box">
-                                        <input type="text" name="min_price" id="min_price"
-                                            oninput="formatCurrency(this)" onblur="updateValue(this)"
-                                            placeholder="Min: <?= $precio_minimo ?>">
+                                        <input type="text" name="min_price" id="min_price" oninput="formatCurrency(this)" onblur="updateValue(this)" placeholder="Min: <?= $categories_data[0][$current_category->slug]['min_price'] ?>">
                                     </div>
                                     <div class="select-box">
                                         <span class="span-price-sign">-</span>
                                     </div>
                                     <div class="cont-select-box">
                                         <div class="select-box input-box">
-                                            <input type="text" name="max_price" id="max_price"
-                                                oninput="formatCurrency(this)" onblur="updateValue(this)"
-                                                placeholder="Max: <?= $precio_maximo ?>">
+                                            <input type="text" name="max_price" id="max_price" oninput="formatCurrency(this)" onblur="updateValue(this)" placeholder="Max: <?= $categories_data[0][$current_category->slug]['max_price'] ?>">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <button type="submit" class="quam-btn blue">Filtrar</button>
-                            <div class="d-flex flex-column">
-                            </div>
+
                         </form>
+                        <div id="categories-attributes-full">
+                            <?php foreach ($categories_data[0] as $key => $catData) : ?>
+                                <div data-cat-name="<?= $key ?>">
+                                    <div data-attributes='<?= htmlspecialchars(json_encode($catData['attributes']), ENT_QUOTES, 'UTF-8') ?>' data-max-price="<?= $catData['max_price'] ?>" data-min-price="<?= $catData['min_price'] ?>"></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div id="categories-attributes-full">
+                            <?php foreach ($categories_data[0] as $key => $catData) : ?>
+                                <div data-cat-name="<?= $key ?>">
+                                    <div data-attributes='<?= htmlspecialchars(json_encode($catData['attributes']), ENT_QUOTES, 'UTF-8') ?>' data-max-price="<?= $catData['max_price'] ?>" data-min-price="<?= $catData['min_price'] ?>"></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
+
                 <div class="products text-center text-lg-end d-flex flex-wrap align-items-center flex-column ">
-                    <?= woocommerce_result_count() ?>
+
                     <div class="select-box">
                         <?php woocommerce_catalog_ordering(); ?>
                         <div class="arrow"></div>
                     </div>
                 </div>
-
-
+            </div>
+            <div class="col-12">
+                <div class="center-all border-top border-bottom mt-3 py-2"><?= woocommerce_result_count() ?></div>
             </div>
         </div>
         <?php
         if (woocommerce_product_loop()) {
-
 
             woocommerce_product_loop_start();
 

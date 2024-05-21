@@ -180,3 +180,91 @@ function randomCode()
 
     return $codigo;
 }
+
+
+function get_all_product_categories_attributes_and_prices()
+{
+     // Obtener todas las categorías de productos
+     $product_categories = get_terms(array(
+        'taxonomy' => 'product_cat',
+        'hide_empty' => false,
+        'parent' => 0,
+        'exclude' => array(26, 15),
+    ));
+
+    $categories_data = array();
+
+    // Iterar sobre cada categoría de producto
+    foreach ($product_categories as $category) {
+        // Obtener los productos de la categoría actual
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => -1,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field' => 'term_id',
+                    'terms' => $category->term_id,
+                ),
+            ),
+        );
+        $products = get_posts($args);
+
+        // Array para almacenar los atributos de los productos en esta categoría
+        $attributes = array();
+        $prices = array(); ?>
+
+        
+
+            <?php // Iterar sobre cada producto
+            foreach ($products as $product_post) {
+                $product = wc_get_product($product_post->ID);
+
+                // Almacenar el precio del producto
+                $prices[] = $product->get_price();
+
+                // Obtener los atributos del producto
+                $product_attributes = $product->get_attributes();
+
+                // Iterar sobre cada atributo y almacenarlo en el array de atributos si es usado para variaciones
+                foreach ($product_attributes as $attribute) {
+                    if ($attribute->get_variation()) { // Verifica si el atributo se usa para variaciones
+                        if ($attribute->is_taxonomy()) {
+                            $taxonomy = $attribute->get_taxonomy_object();
+                            $terms = wp_get_post_terms($product_post->ID, $attribute->get_name());
+                            foreach ($terms as $term) {
+                                $attributes[$taxonomy->attribute_label][$term->slug] = $term->name;
+                            }
+                        } else {
+                            $attribute_name = $attribute->get_name();
+                            $options = $attribute->get_options();
+                            foreach ($options as $option) {
+                                $attributes[$attribute_name][] = $option;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Eliminar duplicados en el array de atributos
+            foreach ($attributes as $key => $values) {
+                $attributes[$key] = array_unique($values);
+            }
+
+            // Calcular el precio mínimo y máximo de la categoría
+            $min_price = !empty($prices) ? min($prices) : 0;
+            $max_price = !empty($prices) ? max($prices) : 0;
+
+            // Añadir la categoría, sus atributos y precios al array final
+            $categories_data[$category->slug] = array(
+                'attributes' => $attributes,
+                'min_price' => $min_price,
+                'max_price' => $max_price,
+            );
+            
+    } 
+
+    return [$categories_data, $product_categories];
+}        
+
+?>

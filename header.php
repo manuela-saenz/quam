@@ -58,9 +58,9 @@
         <div class="contact d-flex">
           <a href="tel:" target="_blank"><i class="icon-phone1"></i><span>+8 80025.9890.11 </span></a>
           <!-- <a href="mailto:" target="_blank"><i class="icon-email"></i><span>info@quamservice.com</span> </a> -->
-          <a href="" target="_blank"><i class="icon-delivery"></i>
+          <!-- <a href="" target="_blank"><i class="icon-delivery"></i>
             <p class="mb-0">Rastrear paquete</p>
-          </a>
+          </a> -->
         </div>
 
         <div class="d-lg-flex d-none">
@@ -121,7 +121,7 @@
                   <?php } ?>
                 </button>
                 </span></button>
-                <button type="button" class="position-relative btn center-all p-0 d-none d-sm-flex"><i class="icon-user"></i></button>
+                <!-- <button type="button" class="position-relative btn center-all p-0 d-none d-sm-flex"><i class="icon-user"></i></button> -->
               </div>
 
 

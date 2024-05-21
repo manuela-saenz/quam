@@ -3,8 +3,7 @@
     <div class="row center-all">
       <div class="col-md-12 col-xxl-10">
         <div class="d-flex text-shipping position-relative mb-5">
-          <h6 class="title"> <b> Disfruta de Envío gratis en </b> todos los pedidos con valor superior
-            a <b class="number">$100.000</b> </h6>
+          <h6 class="title">Realizamos envios a todo el país</h6>
           <div class="img-fit img-shipping">
             <img src="<?php bloginfo('template_url') ?>/media/images/repartidor.png" alt="">
           </div>
@@ -19,7 +18,7 @@
             <div class="col-md-6">
               <div>
                 <b class="title"> Suscríbete a nuestro boletín </b> <br>
-                ...y recibe un cupón de <b>$20.000 </b> para tu primera compra.
+                <!-- ...y recibe un cupón de <b>$20.000 </b> para tu primera compra. -->
               </div>
               <div class="redes d-flex">
                 <div class="ms-2"> <i class="icon-facebook"></i>Facebook </div>

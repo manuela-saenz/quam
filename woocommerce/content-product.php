@@ -24,12 +24,24 @@ global $product;
 if (empty($product) || !$product->is_visible()) {
 	return;
 }
+$color = $_GET['filter_color'];
+if ($color) {
+	$available_variations = $product->get_available_variations();
+	$available_variations = array_filter($available_variations, function ($e) use ($color) {
+		return $e['attributes']['attribute_pa_color'] == $color;
+	});
+	$available_variations = array_values($available_variations);
+	$variation = new WC_Product_Variation($available_variations[0]['variation_id']);
+	$image = $variation->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()));
+} else {
+	$image = $product->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()));
+}
+
 ?>
 <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?>>
 	<a href="<?= get_permalink($product->get_id()) ?>" class="CardProducts w-100">
 		<div class="img-contain" title="<?php ?>">
-			<?= $product->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()))   ?>
-			<?php // $image = wp_get_attachment_image(get_post_thumbnail_id(), 'medium', false, array('loading' => 'lazy', 'alt' => get_the_title())); ?>
+			<?= $image ?>
 		</div>
 		<div class="info-highlights">
 			<h5 title="<?= get_the_title() ?>"><?= get_the_title() ?></h5>
@@ -37,5 +49,7 @@ if (empty($product) || !$product->is_visible()) {
 				<p class=" mb-0 d-flex gap-2"><?= $product->get_price_html() .  "COP" ?> </p>
 			</div>
 		</div>
+		<?php // do_action( 'woocommerce_after_shop_loop_item_title' ); 
+		?>
 	</a>
 </div>
