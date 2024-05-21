@@ -567,3 +567,18 @@ header {
     padding: 24px;
   }
 }
+// btn whatsapp
+.btn-whatsapp{
+  width: 60px;
+  height: 60px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.btn-whatsapp:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 8px 15px rgba(255, 255, 255, 0.2);
+}
