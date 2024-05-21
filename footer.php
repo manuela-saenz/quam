@@ -107,7 +107,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
 </script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <?php if (is_page(78)) { ?>
   <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
@@ -115,8 +114,6 @@
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?=v<?= randomCode() ?>"> </script>
 <?php if (is_product()) { ?>
-  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script> -->
   <script src="<?php bloginfo('template_url') ?>/assets/js/product.js?=v<?= randomCode() ?>"> </script>
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/function.js?=v<?= randomCode() ?>"> </script>
@@ -132,8 +129,6 @@
 
 </script>
 <?php if (is_product_category()) { ?>
-  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script> -->
   <script src="<?php bloginfo('template_url') ?>/assets/js/cat.js?=v<?= randomCode() ?>"> </script>
 <?php } ?>
 
