@@ -69,7 +69,7 @@ if ($color) {
             
             if (!in_array($color, $shown_colors)) {
                 $shown_colors[] = $color;
-                $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_obj->get_id()), 'woocommerce_thumbnail');
+				$variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_obj->get_id()), 'full');
                 $variation_title = $variation_obj->get_name();
                 $variation_price = $variation_obj->get_price_html();
                 ?>
