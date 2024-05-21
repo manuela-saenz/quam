@@ -15,6 +15,8 @@ if (is_tax()) {
         )
     );
 }
+$filter_color = isset($_GET['filter_color']) ? $_GET['filter_color'] : null;
+$filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
 ?>
 
 <section id="bannerCategory" class=" position-relative overflow-hidden p-0">
@@ -294,7 +296,7 @@ if (is_tax()) {
              *
              * @hooked woocommerce_pagination - 10
              */
-            do_action('woocommerce_after_shop_loop');
+            // do_action('woocommerce_after_shop_loop');
         } else {
             /**
              * Hook: woocommerce_no_products_found.
@@ -304,6 +306,61 @@ if (is_tax()) {
             do_action('woocommerce_no_products_found');
         }
         ?>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            var page = 1;
+
+            var color = '<?= empty($filter_color) ? null : $filter_color ?>';
+            var talla = '<?= empty($filter_talla) ? null : $filter_talla ?>';
+
+            $(window).scroll(function() {
+                var $gallery = $('.row.galleryP');
+                var galleryBottom = $gallery.offset().top + $gallery.outerHeight();
+                if ($(window).scrollTop() + $(window).height() > galleryBottom - 10000) {
+                    if(color !== 'null' || talla !== 'null'){
+                        loadMoreProducts();
+                    }
+                }
+            });
+            var isLoading = false;
+
+            function loadMoreProducts() {
+                if (!isLoading) {
+                    isLoading = true;
+                    $.ajax({
+                        url: ajaxUrl,
+                        type: "POST",
+                        data: {
+                            'paged': page,
+                            'action': 'load_products',
+                            'category': '<?= $currentCat->slug ?>'
+                        },
+                        success: function(data) {
+                            var $newProducts = $(data);
+                            var dataInserted = false;
+
+                            $newProducts.each(function() {
+                                var newProductId = $(this).data('id');
+                                if ($('.row.galleryP [data-id="' + newProductId + '"]').length === 0) {
+                                    $('.row.galleryP').append(this);
+                                    dataInserted = true;
+                                }
+                            });
+
+                            if (!dataInserted) {
+                                console.log('Llegaste al final de la página');
+                            }
+                            page++;
+                        },
+                        complete: function() {
+                            isLoading = false;
+                        }
+                    });
+                }
+            }
+        </script>
 
     </div>
 

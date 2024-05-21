@@ -1,4 +1,4 @@
-<?php 
+<?php
 require "includes/components.php";
 require "includes/recursive-html.php";
 require "includes/ajax-request.php";
@@ -6,103 +6,107 @@ add_theme_support('post-thumbnails');
 
 
 add_theme_support("woocommerce");
-function wc_remove_image_effect_support() {
+function wc_remove_image_effect_support()
+{
 
-    remove_theme_support( 'wc-product-gallery-zoom' );
-    remove_theme_support( 'wc-product-gallery-lightbox' );
-    remove_theme_support( 'wc-product-gallery-slider' );
-
+    remove_theme_support('wc-product-gallery-zoom');
+    remove_theme_support('wc-product-gallery-lightbox');
+    remove_theme_support('wc-product-gallery-slider');
 }
-add_action( 'after_setup_theme', 'wc_remove_image_effect_support', 100 );
+add_action('after_setup_theme', 'wc_remove_image_effect_support', 100);
 
-remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
-remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
 
 // Elimina los ganchos actuales
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 50 );
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 50);
 
 // Agrega los ganchos en el orden deseado
-add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 5 );
-add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 10 );
-add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 15 );
-add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
-add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 30 );
+add_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 5);
+add_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 10);
+add_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 15);
+add_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+add_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 25);
+add_action('woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 30);
 
 
-add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
+add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');
 
 // funcion search
-function arphabet_widgets_init() {
+function arphabet_widgets_init()
+{
 
-	register_sidebar( array(
-		'name'          => 'Home right sidebar',
-		'id'            => 'home_right_1',
-		'before_widget' => '<div>',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h2 class="rounded">',
-		'after_title'   => '</h2>',
-	) );
-
+    register_sidebar(array(
+        'name'          => 'Home right sidebar',
+        'id'            => 'home_right_1',
+        'before_widget' => '<div>',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="rounded">',
+        'after_title'   => '</h2>',
+    ));
 }
-add_action( 'widgets_init', 'arphabet_widgets_init' );
+add_action('widgets_init', 'arphabet_widgets_init');
 
 
-function custom_override_checkout_fields( $fields ) {
+function custom_override_checkout_fields($fields)
+{
     // Elimina el campo "Empresa" del formulario de facturación
     unset($fields['billing']['billing_company']);
     unset($fields['billing']['billing_id']);
     // unset($fields['billing']['billing_country']);
-    
+
     return $fields;
 }
 
-function convertToSlug($str) { 
-      
+function convertToSlug($str)
+{
+
     // Convertir cadena a minúsculas 
-    $str = strtolower($str); 
-      
+    $str = strtolower($str);
+
     // Reemplazar los espacios con guiones 
-    $str = str_replace(' ', '-', $str); 
-      
+    $str = str_replace(' ', '-', $str);
+
     // Reemplazar los acentos
     $acentos = array(
-      'á' => 'a',
-      'é' => 'e',
-      'í' => 'i',
-      'ó' => 'o',
-      'ú' => 'u',
-      'ü' => 'u',
-      'ñ' => 'n'
+        'á' => 'a',
+        'é' => 'e',
+        'í' => 'i',
+        'ó' => 'o',
+        'ú' => 'u',
+        'ü' => 'u',
+        'ñ' => 'n'
     );
     $str = strtr($str, $acentos);
-      
+
     // Quitar los caracteres especiales excepto letras, números y guiones 
-    $str = preg_replace('/[^a-z0-9\-]/', '', $str); 
-      
+    $str = preg_replace('/[^a-z0-9\-]/', '', $str);
+
     // Quitar los guiones consecutivos 
-    $str = preg_replace('/-+/', '-', $str); 
-      
+    $str = preg_replace('/-+/', '-', $str);
+
     // Recortar los guiones del principio y final de la cadena 
-    $str = trim($str, '-'); 
-      
-    return $str; 
-  } 
+    $str = trim($str, '-');
+
+    return $str;
+}
 
 
-function related_products_quantity( $args ) {
+function related_products_quantity($args)
+{
     $args['posts_per_page'] = 10;
     return $args;
 }
-add_filter( 'woocommerce_output_related_products_args', 'related_products_quantity' );
+add_filter('woocommerce_output_related_products_args', 'related_products_quantity');
 
 // Función para obtener productos por categoría
-function get_products_by_category_name($category_name) {
+function get_products_by_category_name($category_name)
+{
     // Obtener el término (categoría) por su nombre
     $category = get_term_by('name', $category_name, 'product_cat');
 
@@ -184,8 +188,8 @@ function randomCode()
 
 function get_all_product_categories_attributes_and_prices()
 {
-     // Obtener todas las categorías de productos
-     $product_categories = get_terms(array(
+    // Obtener todas las categorías de productos
+    $product_categories = get_terms(array(
         'taxonomy' => 'product_cat',
         'hide_empty' => false,
         'parent' => 0,
@@ -261,10 +265,50 @@ function get_all_product_categories_attributes_and_prices()
                 'min_price' => $min_price,
                 'max_price' => $max_price,
             );
-            
-    } 
+        }
 
-    return [$categories_data, $product_categories];
-}        
+        return [$categories_data, $product_categories];
+    }
 
-?>
+    add_action('wp_ajax_load_products', 'load_products');
+    add_action('wp_ajax_nopriv_load_products', 'load_products');
+
+    function load_products()
+    {
+        $paged = $_POST['paged'];
+        $category = $_POST['category'];
+
+        $args1 = array(
+            'post_type' => 'product',
+            'paged' => $paged,
+            'product_cat' => $category,
+        );
+
+        $args2 = array(
+            'post_type' => 'product_variation',
+            'paged' => $paged,
+            'post_parent__in' => get_posts(array(
+                'post_type' => 'product',
+                'fields' => 'ids',
+                'product_cat' => $category,
+            )),
+        );
+
+        $posts1 = new WP_Query($args1);
+        $posts2 = new WP_Query($args2);
+
+        $combined_posts = array_merge($posts1->posts, $posts2->posts);
+
+        foreach ($combined_posts as $post) {
+            setup_postdata($post);
+            wc_get_template_part('content', 'product');
+        }
+
+        wp_reset_postdata();
+
+        die();
+    }
+
+            ?>
+
+
