@@ -44,14 +44,15 @@
 
 <footer class="<?= is_singular('product') ? "footer-product-none" : "" ?>">
   <div class="container">
-    <div class="row position-relative">
+    <div class="row position-relative justify-content-evenly">
 
       <div class="col-md-12 col-lg-3">
         <ul>
-          <li class="mb-4"> <b> COMPAÑIA</b></li>
-          <li> <a href=""> Nuestra historia</a></li>
-          <li> <a href=""> Blog</a> </li>
-          <li> <a href=""> Venta al por mayor</a> </li>
+          <li class="mb-4"> <b>Categorias</b></li>
+          <li> <a href="https://www.quam.com.co/"> Inicio</a> </li>
+          <li> <a href="https://www.quam.com.co/categoria-producto/hombre/"> Hombre</a></li>
+          <li> <a href="https://www.quam.com.co/categoria-producto/mujer/"> Mujer</a> </li>
+          <li> <a href="https://www.quam.com.co/categoria-producto/nino/"> Niño</a> </li>
         </ul>
       </div>
 
@@ -66,7 +67,7 @@
 
       </div>
 
-      <div class="col-md-4 col-lg-3">
+      <!-- <div class="col-md-4 col-lg-3">
         <ul>
           <li class="mb-4"> <b> SERVICIO AL CLIENTE</b></li>
           <li> <a href=""> Preguntas frecuentes</a></li>
@@ -74,19 +75,19 @@
           <li> <a href=""> Devoluciones / Cambios</a> </li>
           <li><a href=""> Tarjetas de regalo</a></li>
         </ul>
-      </div>
+      </div> -->
 
       <div class="col-md-4 col-lg-3">
         <ul class="direction">
           <li class="mb-4"> <b> CONTACTO</b></li>
-          <li> <a href="mailto:infoquam@contacto.com" target="_blank"> infoquam@contacto.com</a> </li>
-          <li class="pb-20"> <a href="tel:6578 55587" target="_blank"> +01 6578 55587</a> </li>
-          <li class="pb-20"> <a href="#"> Lunes a jueves: 9 a. m. a 7 p. m.</a></li>
+          <!-- <li> <a href="mailto:infoquam@contacto.com" target="_blank"> infoquam@contacto.com</a> </li> -->
+          <li class="pb-20"> <a href="tel:6013 886 004" target="_blank">6013 886 004</a> </li>
+          <!-- <li class="pb-20"> <a href="#"> Lunes a jueves: 9 a. m. a 7 p. m.</a></li> -->
         </ul>
-        <div class="footer-icons">
+        <!-- <div class="footer-icons">
           <a href="" class="" target="_blank"><i class="icon-facebook"></i></a>
           <a href="" target="_blank"><i class="icon-instagram mx-2 ms-2"></i></a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
