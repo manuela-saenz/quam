@@ -57,7 +57,7 @@ if ($color) {
 <?php endif; ?>
 
 <?php 
-    if ($product->is_type('variable') && $filter_color === null): 
+    if ($product->is_type('variable') && $filter_color === null && $filter_talla === null): 
 ?>
     <?php
         $available_variations = $product->get_available_variations();
