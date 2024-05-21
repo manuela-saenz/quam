@@ -847,3 +847,26 @@
     left: 0;
   }
 }
+
+
+// estilos single products r
+@media (max-width: 991px) {
+  .sm-floating-box {
+    bottom: 0;
+    height: 150px;
+    /* Initial height */
+    overflow-y: hidden;
+    /* Hide overflow */
+    transition: height 0.3s ease;
+
+
+    top: unset;
+  }
+
+  .sm-floating-box.expanded {
+    overflow-y: auto;
+    /* Enable scrolling */
+    overscroll-behavior: none;
+
+  }
+}
