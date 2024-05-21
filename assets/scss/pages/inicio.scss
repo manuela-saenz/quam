@@ -742,10 +742,10 @@
 
         button {
             position: absolute;
-            right: 5px;
+            right: 0;
             padding: 14px 18px;
-            height: 83%;
-            top: 4px;
+            top: 50%;
+            transform: translateY(-50%);
             border-radius: 4px;
         }
     }

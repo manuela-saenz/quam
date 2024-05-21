@@ -28,16 +28,8 @@
     ?>
   </title>
   <link rel="icon" href="favicon/favicon-1.ico" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -156,7 +148,7 @@
   <?php desplegableProductos("Mis favoritos", "mini-favoritos") ?>
 
   <main>
-    <a href="https://wa.me/573114482684"  class="btn-whatsapp position-fixed" target="_blank">
+    <a href="https://web.whatsapp.com/send?phone=3114482684&amp;text=Hola estoy interesado en sus productos y quiero más información."  class="btn-whatsapp position-fixed d-none" target="_blank">
       <img src="<?php bloginfo('template_url') ?>/media/images/social-whatsapp.png" alt="">
     </a>
   </main>

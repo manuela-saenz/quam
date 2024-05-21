@@ -26,8 +26,8 @@
               </div>
             </div>
             <div class="col-md-4">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Escribe tu correo electrónico" aria-label="Example text with button addon" aria-describedby="button-addon1">
+              <div class="input-group position-relative">
+                <input type="text" class="form-control border border-white" placeholder="Escribe tu correo electrónico" aria-label="Example text with button addon" aria-describedby="button-addon1">
                 <button class="quam-btn white" type="button" id="button-addon1">Suscribirme</button>
               </div>
             </div>
@@ -107,7 +107,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <?php if (is_page(78)) { ?>
   <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
