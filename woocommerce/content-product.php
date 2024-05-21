@@ -32,9 +32,9 @@ if ($color) {
 	});
 	$available_variations = array_values($available_variations);
 	$variation = new WC_Product_Variation($available_variations[0]['variation_id']);
-	$image = $variation->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()));
+	$image = $variation->get_image('large', array('loading' => 'lazy', 'alt' => get_the_title()));
 } else {
-	$image = $product->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()));
+	$image = $product->get_image('large', array('loading' => 'lazy', 'alt' => get_the_title()));
 }
 
 ?>
@@ -49,7 +49,6 @@ if ($color) {
 				<p class=" mb-0 d-flex gap-2"><?= $product->get_price_html() .  "COP" ?> </p>
 			</div>
 		</div>
-		<?php // do_action( 'woocommerce_after_shop_loop_item_title' ); 
-		?>
+		<?php // do_action( 'woocommerce_after_shop_loop_item_title' ); ?>
 	</a>
 </div>

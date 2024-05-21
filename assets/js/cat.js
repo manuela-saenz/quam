@@ -9,7 +9,8 @@ $('#cat-selector').on('change', function () {
     $('#cat-attributes').html(filterSelects(JSON.parse(cat_attr)));
     $('#cat-attributes').next('.cont-select-box').find('#max_price').attr('placeholder', "Max: " + cat_max + "");
     $('#cat-attributes').next('.cont-select-box').find('#min_price').attr('placeholder', "Min: " + cat_min + "");
-    // filterSelects(JSON.parse(cat_attr))
+
+    
 })
 
 $('#filterForm select').on('change', function (e) {
@@ -58,16 +59,12 @@ function updateURL(event) {
         }
     });
 
-    // Añadir valores de los campos de precio a los parámetros si han sido modificados
-    var minPriceInput = document.getElementById("min_price");
-    var maxPriceInput = document.getElementById("max_price");
-    var minPrice = minPriceInput.value.replace(/[^\d]/g, ''); // Remover símbolos y dejar números
-    var maxPrice = maxPriceInput.value.replace(/[^\d]/g, ''); // Remover símbolos y dejar números
-
-    if (minPriceInput.value) {
+    if($('#min_price').val()){
+        var minPrice = $('#min_price').val().replace(/[^\d]/g, '');
         params.append("min_price", minPrice);
     }
-    if (maxPriceInput.value) {
+    if($('#max_price').val()){
+        var maxPrice = $('#max_price').val().replace(/[^\d]/g, '');
         params.append("max_price", maxPrice);
     }
 
