@@ -17,7 +17,6 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
       
       foreach ($combined_posts as $prod) :
         $wcProd = wc_get_product($prod);
-
         $product_name = $wcProd->get_name();
       ?>
         <div class="mini-cart-product-card d-flex align-items-start bg-white fav">

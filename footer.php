@@ -48,10 +48,10 @@
       <div class="col-md-12 col-lg-3">
         <ul>
           <li class="mb-4"> <b>Categorias</b></li>
-          <li> <a href="https://www.quam.com.co/"> Inicio</a> </li>
-          <li> <a href="https://www.quam.com.co/categoria-producto/hombre/"> Hombre</a></li>
-          <li> <a href="https://www.quam.com.co/categoria-producto/mujer/"> Mujer</a> </li>
-          <li> <a href="https://www.quam.com.co/categoria-producto/nino/"> Niño</a> </li>
+          <li><a href="<?= get_home_url(); ?>">Inicio</a></li>
+          <li><a href="<?= get_home_url(); ?>/categoria-producto/hombre/">Hombre</a></li>
+          <li><a href="<?= get_home_url(); ?>/categoria-producto/mujer/">Mujer</a></li>
+          <li><a href="<?= get_home_url(); ?>/categoria-producto/nino/">Niño</a></li>
         </ul>
       </div>
 
@@ -123,7 +123,7 @@
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?=v<?= randomCode() ?>"> </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     var cartElement = document.querySelector('.offcanvas-body.ordenList.cart');
     if (cartElement && cartElement.children.length > 0) {
       cartElement.classList.remove('empty');

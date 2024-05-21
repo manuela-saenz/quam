@@ -311,14 +311,13 @@ function initAddToFavoriteButton() {
         prodid: productId,
       },
       success: function (res) {
+        var resJson = JSON.parse(res);
         $(".add-fav").removeClass("adding");
 
-        // <!-- Usando lógica reactiva sin necesidad de petición al backend -->
         if (!sessionFav.includes(Number(productId))) {
           sessionFav.push(Number(productId));
           localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
         } else {
-          // <!-- Petición para la eliminación desde el contexto del boton de favoritos -->
           deleteFavoriteSameContext(productId);
           var alertElement = $("#showAlertDeleteFav");
           alertElement.removeClass("d-none").show();
@@ -342,8 +341,8 @@ function initAddToFavoriteButton() {
           botonFav.appendChild(spanElement);
         }
 
-        $("#favoritesCounter").text(res.counter);
-        $(".offcanvas-body.ordenListFav.fav").html(res.html);
+        $("#favoritesCounter").text(resJson.counter);
+        $(".offcanvas-body.ordenListFav.fav").html(resJson.html);
         var alertElement = $("#showAlertAddFav");
         alertElement.removeClass("d-none").show();
 
@@ -365,6 +364,7 @@ function deleteFavorite(prodid) {
       prodid: prodid,
     },
     success: function (res) {
+      var res = JSON.parse(res);
       if (sessionFav.includes(Number(prodid))) {
         sessionFav = sessionFav.filter((item) => item !== Number(prodid));
         localStorage.setItem("sessionFav", JSON.stringify(sessionFav));

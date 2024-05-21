@@ -34,7 +34,7 @@ if ($attachment_ids) {
   style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Se eliminó el producto de tus
   favoritos</div>
 <section id="Singleimgprincipal" class="pt-0">
-  <div class="py-2 border-top border-bottom">
+  <div class="py-2 px-2 border-top border-bottom">
     <div class="container">
       <?php woocommerce_breadcrumb() ?>
     </div>
