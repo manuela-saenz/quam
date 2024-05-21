@@ -96,6 +96,11 @@ function convertToSlug($str)
     return $str;
 }
 
+function removerTalla($texto)
+{
+    $resultado = preg_replace('/ - .+/', '', $texto);
+    return $resultado;
+}
 
 function related_products_quantity($args)
 {

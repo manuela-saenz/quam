@@ -34,9 +34,9 @@ if ($color) {
 	});
 	$available_variations = array_values($available_variations);
 	$variation = new WC_Product_Variation($available_variations[0]['variation_id']);
-	$image = $variation->get_image('large', array('loading' => 'lazy', 'alt' => get_the_title()));
+	$image = $variation->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()));
 } else {
-	$image = $product->get_image('large', array('loading' => 'lazy', 'alt' => get_the_title()));
+	$image = $product->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()));
 }
 
 ?>
@@ -79,7 +79,7 @@ if ($color) {
                             <?= $variation_image ?>
                         </div>
                         <div class="info-highlights">
-                            <h5 title="<?= $variation_title ?>"><?= $variation_title ?></h5>
+                            <h5 title="<?= $variation_title ?>"><?= removerTalla( $variation_title) ?></h5>
                             <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
                                 <p class="mb-0 d-flex gap-2"><?= $variation_price .  " COP" ?></p>
                             </div>
