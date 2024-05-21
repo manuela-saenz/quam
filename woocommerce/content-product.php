@@ -57,7 +57,7 @@ if ($color) {
 <?php endif; ?>
 
 <?php 
-    if ($product->is_type('variable') && $filter_color === null): 
+    if ($product->is_type('variable') && $filter_color === null && $filter_talla === null): 
 ?>
     <?php
         $available_variations = $product->get_available_variations();
@@ -69,7 +69,7 @@ if ($color) {
             
             if (!in_array($color, $shown_colors)) {
                 $shown_colors[] = $color;
-                $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_obj->get_id()), 'woocommerce_thumbnail');
+				$variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_obj->get_id()), 'full');
                 $variation_title = $variation_obj->get_name();
                 $variation_price = $variation_obj->get_price_html();
                 ?>
