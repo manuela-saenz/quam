@@ -79,7 +79,7 @@ if ($color) {
                             <?= $variation_image ?>
                         </div>
                         <div class="info-highlights">
-                            <h5 title="<?= $variation_title ?>"><?= $variation_title ?></h5>
+                            <h5 title="<?= $variation_title ?>"><?= removerTalla( $variation_title) ?></h5>
                             <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
                                 <p class="mb-0 d-flex gap-2"><?= $variation_price .  " COP" ?></p>
                             </div>

@@ -267,7 +267,7 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                     </div>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 d-none">
                 <div class="center-all border-top border-bottom mt-3 py-2"><?= woocommerce_result_count() ?></div>
             </div>
         </div>
