@@ -131,17 +131,18 @@ $(document).ready(function() {
 
     labels.on("click", function (e) {
       var labelText = $(this).text().trim();
+      var button = $(".woocommerce-checkout-payment button:submit");
       if (labelText === "PayU Latam") {
-        $("button:submit").attr("id", "PayU_Latam");
-        $("button:submit").text("Realizar el pedido con PayU Latam");
+        button.attr("id", "PayU_Latam");
+        button.text("Paga con PayU");
       }
       if (labelText === "Paga a cuotas") {
-        $("button:submit").attr("id", "Paga_addi");
-        $("button:submit").text("Realizar el pedido con Paga con Addi");
+        button.attr("id", "Paga_addi");
+        button.text("Paga con Addi");
       }
       if (labelText === "Pago contra entrega") {
-        $("button:submit").attr("id", "Pago_contra_entrega");
-        $("button:submit").text("Realizar el pedido con Pago contra entrega");
+        button.attr("id", "Pago_contra_entrega");
+        button.text("Pago contra entrega");
       }
     });
   }, 3000);
