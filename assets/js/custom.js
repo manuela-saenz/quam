@@ -133,15 +133,17 @@ $(document).ready(function() {
       var labelText = $(this).text().trim();
       if (labelText === "PayU Latam") {
         $("button:submit").attr("id", "PayU_Latam");
+        $("button:submit").text("Realizar el pedido con PayU Latam");
       }
       if (labelText === "Paga a cuotas") {
         $("button:submit").attr("id", "Paga_addi");
+        $("button:submit").text("Realizar el pedido con Paga con Addi");
       }
       if (labelText === "Pago contra entrega") {
         $("button:submit").attr("id", "Pago_contra_entrega");
+        $("button:submit").text("Realizar el pedido con Pago contra entrega");
       }
     });
   }, 3000);
 });
-
 // filtro
