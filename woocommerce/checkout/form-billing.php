@@ -23,12 +23,17 @@ defined('ABSPATH') || exit;
 	<?php
 	$fields = $checkout->get_checkout_fields('billing');
 
-	// foreach ( $fields as $key => $field ) {
-	// 	woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+	// foreach ($fields as $key => $field) {
+	// 	woocommerce_form_field($key, $field, $checkout->get_value($key));
 	// }
-	// echo '<pre>';
-	// print_r($fields);
-	// echo '</pre>'
+	// $i = 0;
+	// foreach ($fields as $key => $field) {
+	// 	echo "Posición: " . $i . "<br>";
+	// 	echo '<pre>';
+	// 	print_r($field);
+	// 	echo '</pre>';
+	// 	$i++;
+	// }
 	?>
 	<div class="container-fluid position-relative">
 		<div class="flex-grow-1 flex-shrink-0">
@@ -76,6 +81,9 @@ defined('ABSPATH') || exit;
 															<?php woocommerce_form_field(array_keys($fields)[1], $fields['billing_last_name'], $checkout->get_value(array_keys($fields)[1])); ?>
 														</div>
 														<div class="col-md-6 fw-bold">
+															<?php woocommerce_form_field(array_keys($fields)[2], $fields['billing_id'], $checkout->get_value(array_keys($fields)[2])); ?>
+														</div>
+														<div class="col-md-6 fw-bold">
 															<?php woocommerce_form_field(array_keys($fields)[9], $fields['billing_email'], $checkout->get_value(array_keys($fields)[9])); ?>
 														</div>
 														<div class="col-md-6 fw-bold">
@@ -83,28 +91,27 @@ defined('ABSPATH') || exit;
 
 														</div>
 														<div class="col-md-6 d-none">
-															<?php woocommerce_form_field(array_keys($fields)[2], $fields['billing_country'], $checkout->get_value(array_keys($fields)[2])); ?>
+															<?php woocommerce_form_field(array_keys($fields)[3], $fields['billing_country'], $checkout->get_value(array_keys($fields)[3])); ?>
 														</div>
-
-														<div class="col-md-6 fw-bold">
+														<div class="col-md-6">
 															<?php woocommerce_form_field(array_keys($fields)[6], $fields['billing_state'], $checkout->get_value(array_keys($fields)[6])); ?>
 														</div>
-														<div class="col-md-6 fw-bold">
-															<?php woocommerce_form_field(array_keys($fields)[5], $fields['billing_city'], $checkout->get_value(array_keys($fields)[5])); ?>
-														</div>
-														<div class="col-md-6 fw-bold">
-															<?php woocommerce_form_field(array_keys($fields)[3], $fields['billing_address_1'], $checkout->get_value(array_keys($fields)[3])); ?>
+														<div class="col-md-6">
+															<label for="" class="mt-2 ms-1"><b>Ciudad <span class="text-danger">*</span></b></label>
+															<?php woocommerce_form_field(array_keys($fields)[5], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[5])); ?>
 														</div>
 														<div class="col-md-6 fw-bold">
 															<?php woocommerce_form_field(array_keys($fields)[7], $fields['billing_postcode'], $checkout->get_value(array_keys($fields)[7])); ?>
 														</div>
-														<div class="col-md-12">
-															<label for="" class="mt-2 ms-1">Información adicional (ej. casa, primer piso)</label>
-															<?php woocommerce_form_field(array_keys($fields)[4], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[4])); ?>
+														
+														<div class="col-md-12 fw-bold">
+															<?php woocommerce_form_field(array_keys($fields)[4], $fields['billing_address_1'], $checkout->get_value(array_keys($fields)[4])); ?>
 														</div>
+													
 													</div>
 													<div class="btn-step-next">
-														<button id="boton-id" type="button" class="quam-btn blue" onclick="stepper1.next()">Elegir metodo de pago</button>
+														<button id="boton-id" type="button" class="quam-btn blue"
+															onclick="stepper1.next()">Elegir metodo de pago</button>
 													</div>
 												</div>
 
@@ -132,19 +139,23 @@ defined('ABSPATH') || exit;
 									</div>
 
 									<div class="d-flex justify-content-end">
-										<button type="button" class="quam-btn blue me-4 previous" onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>
+										<button type="button" class="quam-btn blue me-4 previous"
+											onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>
 											Volver a envío </button>
 										<!-- <button type="button" class="quam-btn blue next" onclick="stepper1.next()">Next</button> -->
 									</div>
 								</div>
-								<div id="test-l-3" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger3">
+								<div id="test-l-3" role="tabpanel" class="bs-stepper-pane"
+									aria-labelledby="stepper1trigger3">
 
 
 								</div>
 
-								<div id="test-l-4" role="tabpanel" class="bs-stepper-pane form-group" aria-labelledby="stepper1trigger4">
+								<div id="test-l-4" role="tabpanel" class="bs-stepper-pane form-group"
+									aria-labelledby="stepper1trigger4">
 
-									<div id="test-l-5" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger5">
+									<div id="test-l-5" role="tabpanel" class="bs-stepper-pane"
+										aria-labelledby="stepper1trigger5">
 										<div class="form-group row center-all">
 											<div class="col-md-6 position-relative center-all text-center flex-column">
 												<div class="circle">
@@ -158,12 +169,15 @@ defined('ABSPATH') || exit;
 													<b>Pedido: VUY-0229</b>
 												</div>
 												<div class="btn-step-next mt-4">
-													<button type="button" class="quam-btn blue next" onclick="stepper1.next()">Seguir comprando</button>
+													<button type="button" class="quam-btn blue next"
+														onclick="stepper1.next()">Seguir comprando</button>
 												</div>
 											</div>
 										</div>
 										<div class="d-flex justify-content-end">
-											<button type="button" class="quam-btn blue me-4 previous" onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>Volver al pago</button>
+											<button type="button" class="quam-btn blue me-4 previous"
+												onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>Volver
+												al pago</button>
 											<!-- <button type="button" class="quam-btn blue" onclick="stepper1.next()">Next</button> -->
 										</div>
 									</div>
@@ -173,13 +187,13 @@ defined('ABSPATH') || exit;
 						<?php do_action('woocommerce_after_checkout_billing_form', $checkout); ?>
 						<div class="col-lg-4 col-md-12 ps-md-4">
 							<div class="code">
-								<div  class="position-relative">
+								<div class="position-relative">
 									<!-- <div class="position-relative">
 										<input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
 										<input type="submit" class="quam-btn blue codigo" value="Aplicar">
 									</div> -->
 									<?php woocommerce_order_review() ?>
-									
+
 								</div>
 
 							</div>
@@ -189,21 +203,23 @@ defined('ABSPATH') || exit;
 			</div>
 		</div>
 	</div>
-	<?php if (!is_user_logged_in() && $checkout->is_registration_enabled()) : ?>
+	<?php if (!is_user_logged_in() && $checkout->is_registration_enabled()): ?>
 		<div class="woocommerce-account-fields">
-			<?php if (!$checkout->is_registration_required()) : ?>
+			<?php if (!$checkout->is_registration_required()): ?>
 
 				<p class="form-row form-row-wide create-account">
 					<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-						<input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="createaccount" <?php checked((true === $checkout->get_value('createaccount') || (true === apply_filters('woocommerce_create_account_default_checked', false))), true); ?> type="checkbox" name="createaccount" value="1" />
+						<input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox"
+							id="createaccount" <?php checked((true === $checkout->get_value('createaccount') || (true === apply_filters('woocommerce_create_account_default_checked', false))), true); ?>
+							type="checkbox" name="createaccount" value="1" />
 						<span><?php esc_html_e('Create an account?', 'woocommerce'); ?></span>
 					</label>
 				</p>
 			<?php endif; ?>
 			<?php do_action('woocommerce_before_checkout_registration_form', $checkout); ?>
-			<?php if ($checkout->get_checkout_fields('account')) : ?>
+			<?php if ($checkout->get_checkout_fields('account')): ?>
 				<div class="create-account">
-					<?php foreach ($checkout->get_checkout_fields('account') as $key => $field) : ?>
+					<?php foreach ($checkout->get_checkout_fields('account') as $key => $field): ?>
 						<?php woocommerce_form_field($key, $field, $checkout->get_value($key)); ?>
 					<?php endforeach; ?>
 					<div class="clear"></div>
@@ -212,3 +228,15 @@ defined('ABSPATH') || exit;
 			<?php do_action('woocommerce_after_checkout_registration_form', $checkout); ?>
 		</div>
 	<?php endif; ?>
+
+<script>
+	
+	  window.onload = function() {
+            const ciudadInput = document.getElementById('billing_address_2');
+			
+            if (ciudadInput) {
+                ciudadInput.placeholder = "Ingresa tu ciudad (ej. Bogotá, Medellín, etc.)";
+            }
+        };
+
+</script>

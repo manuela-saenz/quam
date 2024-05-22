@@ -21,9 +21,9 @@ if ( ! wp_doing_ajax() ) {
 	do_action( 'woocommerce_review_order_before_payment' );
 }
 ?>
-<div class="woocommerce-checkout-payment ">
+<div class="woocommerce-checkout-payment">
 	<?php if ( WC()->cart->needs_payment() ) : ?>
-		<ul class="wc_payment_methods payment_methods methods d-flex p-0 flex-wrap mb-3">
+		<ul class="wc_payment_methods payment_methods methods d-flex p-0 flex-wrap mb-3 container-pay">
 			<?php
 			if ( ! empty( $available_gateways ) ) {
 				foreach ( $available_gateways as $gateway ) {

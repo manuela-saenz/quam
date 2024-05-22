@@ -20,9 +20,9 @@ $banners  = (new WP_Query(array(
                 <div class="container">
                   <div class="row">
                     <div class="col-lg-6 col-xxl-6 offset-xxl-1 info-banner" style="z-index: 3;">
-                      <span>Some text here</span>
+                      <!-- <span>Some text here</span> -->
                       <h1 class="section-title"><?= $banner->post_title ?></h1>
-                      <p>The Two golden rules professional graphic designer don’t want you to know about.</p>
+                      <!-- <p>The Two golden rules professional graphic designer don’t want you to know about.</p> -->
                       <a href="" class="quam-btn red">Ver ofertas</a>
                     </div>
                     <div class="col-md-4">

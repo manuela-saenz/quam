@@ -20,10 +20,10 @@
                 <b class="title"> Suscríbete a nuestro boletín </b> <br>
                 <!-- ...y recibe un cupón de <b>$20.000 </b> para tu primera compra. -->
               </div>
-              <div class="redes d-flex">
+              <!-- <div class="redes d-flex">
                 <div class="ms-2"> <i class="icon-facebook"></i>Facebook </div>
                 <div class="ms-2"> <i class="icon-instagram"></i>Instagram </div>
-              </div>
+              </div> -->
             </div>
             <div class="col-md-4">
               <div class="input-group position-relative">
@@ -102,7 +102,6 @@
     </div>
   </div>
 </footer>
-<?php wp_footer(); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
@@ -131,7 +130,7 @@
 <?php if (is_product_category()) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/cat.js?=v<?= randomCode() ?>"> </script>
 <?php } ?>
-
+<?php wp_footer(); ?>
 </body>
 
 </html>

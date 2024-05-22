@@ -191,3 +191,9 @@ cerrarFiltros.forEach(function (btn) {
         console.log("Button clicked:", btn);
     });
 });
+
+// Activa el botón cuando la página está completamente cargada
+window.addEventListener('load', function() {
+    const button = document.querySelector('#filterForm button');
+    button.disabled = false;
+});

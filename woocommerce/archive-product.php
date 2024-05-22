@@ -239,7 +239,7 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="quam-btn blue">Filtrar</button>
+                            <button type="submit" disabled class="quam-btn blue">Filtrar</button>
 
                         </form>
                         <div id="categories-attributes-full">

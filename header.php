@@ -35,7 +35,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 
   <link rel="icon" href="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" type="image/svg+xml">
 
@@ -52,7 +53,8 @@
 <body <?php body_class() ?>>
   <header>
     <div class="header-contact">
-      <div class="container d-flex align-items-center justify-content-lg-between justify-content-center position-relative">
+      <div
+        class="container d-flex align-items-center justify-content-lg-between justify-content-center position-relative">
         <div class="contact d-flex">
           <a href="tel:6013 886 004" target="_blank"><i class="icon-phone1"></i><span> 6013 886 004 </span></a>
           <!-- <a href="mailto:" target="_blank"><i class="icon-email"></i><span>info@quamservice.com</span> </a> -->
@@ -75,7 +77,8 @@
           <div class="nav_links align-items-center justify-content-between">
             <h1 class="mb-0">
               <a href="<?= get_home_url() ?>" class="logo img-fit">
-                <img src="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" alt="Logo Quam" title="Logo Quam" />
+                <img src="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" alt="Logo Quam"
+                  title="Logo Quam" />
               </a>
             </h1>
 
@@ -92,9 +95,10 @@
                     'orderby' => 'term_order',
                   )
                 );
-                foreach ($categories as $cat) :
-                ?>
-                  <a href="<?= get_term_link($cat) ?>" class="<?= is_page($cat->name) ? 'active' : '' ?>" data-id="<?= $cat->slug ?>">
+                foreach ($categories as $cat):
+                  ?>
+                  <a href="<?= get_term_link($cat) ?>" class="<?= is_page($cat->name) ? 'active' : '' ?>"
+                    data-id="<?= $cat->slug ?>">
                     <?= $cat->name ?>
                   </a>
                 <?php endforeach; ?>
@@ -107,17 +111,21 @@
             </div>
             <div class="center-vertical">
               <div class="header-actions d-flex ms-4 gap-sm-3">
-                <button id="bottonFav" class="position-relative btn center-all p-0 " data-bs-toggle="offcanvas" data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i>
+                <button id="bottonFav" class="position-relative btn center-all p-0 " data-bs-toggle="offcanvas"
+                  data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i>
                   <?php if (!empty($_SESSION["prodsfavs"])) { ?>
-                    <span id="favoritesCounter" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count($_SESSION["prodsfavs"]) ?>
+                    <span id="favoritesCounter"
+                      class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count($_SESSION["prodsfavs"]) ?>
                     </span>
                   <?php } ?>
                 </button>
 
-                <button id="bottonCart" class="position-relative btn center-all p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
+                <button id="bottonCart" class="position-relative btn center-all p-0" type="button"
+                  data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
                   <i class="icon-shopping-bag"></i>
                   <?php if (count(WC()->cart->get_cart()) > 0) { ?>
-                    <span id="cartItem" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count(WC()->cart->get_cart()) ?></span>
+                    <span id="cartItem"
+                      class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count(WC()->cart->get_cart()) ?></span>
                   <?php } ?>
                 </button>
                 </span></button>
@@ -142,7 +150,35 @@
   <?php desplegableProductos("Mis favoritos", "mini-favoritos") ?>
 
   <main>
-    <a href="https://web.whatsapp.com/send?phone=3114482684&amp;text=Hola estoy interesado en sus productos y quiero más información." class="btn-whatsapp position-fixed d-none" target="_blank">
+    <a href="https://web.whatsapp.com/send?phone=3114482684&amp;text=Hola estoy interesado en sus productos y quiero más información."
+      class="btn-whatsapp position-fixed" target="_blank">
       <img src="<?php bloginfo('template_url') ?>/media/images/social-whatsapp.png" alt="">
     </a>
   </main>
+
+  <script>
+    const btn = document.querySelector('.btn-whatsapp');
+    // Función para verificar la URL
+    function checkURL() {
+      const url = window.location.href;
+      return url.includes('/producto/');
+    }
+
+    // Función para verificar el ancho de la ventana
+    function checkWidth() {
+      return window.innerWidth <= 991;
+    }
+
+    // Función para aplicar estilos al botón según las condiciones
+    function applyStyles() {
+      if (checkURL() && checkWidth()) {
+        btn.classList.add('small');
+      } else {
+        btn.classList.remove('small');
+      }
+    }
+
+    // Aplicar estilos al cargar y al redimensionar la ventana
+    applyStyles();
+    window.addEventListener('resize', applyStyles);
+  </script>

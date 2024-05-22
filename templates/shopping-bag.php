@@ -22,31 +22,28 @@ get_header();
 </section>
 
 <script>
-  // function redirectToPaymentGateway() {
-  //   // Reemplaza 'url_de_tu_pasarela_de_pagos' con la URL de tu pasarela de pagos
-  //   window.location.href = 'https://sandbox.gateway.payulatam.com/ppp-web-gateway';
-  // }
+  document.addEventListener('DOMContentLoaded', () =>{
+  const paymentMethodCod = document.getElementById('payment_method_cod');
+  const text = document.querySelector('.woocommerce-privacy-policy-text p')
 
-  $(document).ready(function() {
-    // Intercepta el evento de envío del formulario
-    $("#place_order").on("submit", function(e) {
-      // Previene la recarga de la página
-      e.preventDefault();
+  console.log(text.textContent);
+  text.addEventListener('click',()=>{
+    console.log('text');
+  })
 
-      // Realiza una solicitud AJAX
-      $.ajax({
-        url: ajaxUrl, // URL del archivo PHP que procesará la solicitud
-        type: "POST", // Método de la solicitud
-        data: $(this).serialize(), // Datos del formulario
-        success: function(response) {
-          console.log(response);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          // Aquí puedes manejar los errores de la solicitud AJAX
-          // ...
-        },
-      });
+  if (paymentMethodCod) {
+    paymentMethodCod.addEventListener('change', (event) => {
+      if (event.target.checked) {
+        console.log('El método de pago "Pago contra entrega" está activo');
+      } else {
+        console.log('El método de pago "Pago contra entrega" está inactivo');
+      }
     });
-  });
+  } else {
+    console.log('No se encontró el elemento con ID payment_method_cod');
+  }
+})
 </script>
+
+
 <?php get_footer() ?>

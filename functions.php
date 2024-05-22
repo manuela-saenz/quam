@@ -57,8 +57,9 @@ function custom_override_checkout_fields($fields)
 {
     // Elimina el campo "Empresa" del formulario de facturación
     unset($fields['billing']['billing_company']);
-    unset($fields['billing']['billing_id']);
+    // unset($fields['billing']['billing_id']);
     // unset($fields['billing']['billing_country']);
+    unset($fields['billing']['billing_city']);
 
     return $fields;
 }
@@ -312,6 +313,4 @@ function get_all_product_categories_attributes_and_prices()
         wp_reset_postdata();
 
         die();
-    };
-
- ?>
+    }

@@ -27,7 +27,7 @@ function desplegableProductos($titulo, $tipoDeLista)
   ?>
   <div class="offcanvas offcanvas-end shopping-bag-offcanvas" tabindex="-1" id="<?= $tipoDeLista ?>" aria-labelledby="<?= $tipoDeLista ?>-label">
     <div class="offcanvas-header center-vertical justify-content-start border-bottom border-light">
-      <button type="button" class="btn-close me-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button type="button" class="btn-close me-3" data-bs-dismiss="offcanvas" aria-label="Close"><img src="<?php bloginfo('template_url') ?>/media/images/x.svg" alt=""></button>
       <h5 class="offcanvas-title" id="<?= $tipoDeLista ?>-label"><?= $titulo ?></h5>
     </div>
 

@@ -236,6 +236,7 @@ header {
             font-weight: 500;
             position: relative;
             transition: all 0.3s;
+            padding: 2px;
             // text-transform: lowercase;
 
             // ::first-letter {
@@ -265,8 +266,7 @@ header {
             }
 
             @media (max-width: 1200px) {
-              padding-left: 0;
-              padding-bottom: 4px;
+              padding: 4px;
             }
 
             i {
@@ -298,12 +298,23 @@ header {
               transform: translateY(-50%);
               color: black;
             }
+            @media (max-width:1200px) {
+              input {
+                background: rgba(236, 236, 236, 0.2);
+                color: #fff;
+                width: 100%;
+                &::placeholder{
+                  color: #ddd;
+                }
+              }
+            }
             @media (max-width: 991px) {
               max-width: 350px;
               width: 100%;
               input {
                 background: rgba(236, 236, 236, 0.2);
                 color: #fff;
+                width: 100%;
                 &::placeholder{
                   color: #ddd;
                 }
@@ -520,6 +531,9 @@ header {
 
 .shopping-bag-offcanvas {
   .btn-close {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
   }
 
   .offcanvas-title {
@@ -573,10 +587,21 @@ header {
   height: 60px;
   right: 20px;
   bottom: 20px;
-  z-index: 99;
+  z-index: 9;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 50%;
   cursor: pointer;
+  background:  #25D366;
+  padding: 8px;
+  @media (max-width:990px) {
+    width: 45px;
+    height: 45px;
+    padding: 5px;
+  }
+}
+.small{
+  transition: .2s;
+  bottom: 165px;
 }
 .btn-whatsapp:hover {
   transform: scale(1.1) rotate(10deg);
