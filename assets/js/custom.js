@@ -118,5 +118,30 @@ $(".woocommerce-ordering-price button").on("click", function () {
   $("#infoProducts").addClass("loading");
 });
 
+$(document).ready(function() {
+  setTimeout(function() {
+    var labels = $(".container_payment_method label");
+    var payULatamLabel = labels.filter(function() {
+      return $(this).text().trim() === "PayU Latam";
+    });
+
+    setTimeout(function() { 
+      payULatamLabel.trigger("click");
+    }, 1000);
+
+    labels.on("click", function (e) {
+      var labelText = $(this).text().trim();
+      if (labelText === "PayU Latam") {
+        $("button:submit").attr("id", "PayU_Latam");
+      }
+      if (labelText === "Paga a cuotas") {
+        $("button:submit").attr("id", "Paga_addi");
+      }
+      if (labelText === "Pago contra entrega") {
+        $("button:submit").attr("id", "Pago_contra_entrega");
+      }
+    });
+  }, 3000);
+});
 
 // filtro
