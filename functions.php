@@ -312,8 +312,6 @@ function get_all_product_categories_attributes_and_prices()
         wp_reset_postdata();
 
         die();
-    }
+    };
 
-            ?>
-
-
+ ?>
