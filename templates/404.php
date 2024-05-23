@@ -4,10 +4,16 @@
  */
 get_header();
 ?>
-    <div class="container pt-5">
-        <h2 class="title-404">4<span>0</span>4</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem ex voluptatem libero fugit ad optio illo minima provident similique velit quibusdam dolor magnam corporis labore excepturi error, nisi expedita quasi.</p>
+<div class="pt-5 container-404">
+    <div class="container-info-404">
+        <h2 class="title-404"><span class="first-four">4</span> <span class="zero">0</span> <span
+                class="second-four">4</span></h2>
+        <h3>Página no encontrada</h3>
+        <p>La página que estás buscando no existe.</p>
+        <button class="quam-btn blue m-auto">Seguir comprando</button>
     </div>
+</div>
+
 
 
 <?php get_footer(); ?>

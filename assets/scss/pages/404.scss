@@ -1,11 +1,48 @@
+.container-404{
+    height: 60vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.container-info-404{
+    width: 350px;
+    text-align: center;
+}
+.container-elements-duck{
+    width: 350px;
+    height: 500px;
+}
 .title-404{
     color:#002d72;
-    font-size: 78px;
-    letter-spacing: 10px;
-    font-weight: 600;
-    span{
+    font-size: 84px;
+    letter-spacing: 5px;
+    font-weight: 800;
+    position: relative;
+    margin-bottom: 30px;
+    .first-four{
+        position: relative;
+        animation: mov 1s infinite linear alternate;
+    }
+    .zero {
         color: #cecece;
         position: relative;
-        top: 25px;
+        animation: mov 1s infinite linear alternate;
+        animation-delay: .3s;
+    }
+    .second-four{
+        position: relative;
+        animation: mov 1s infinite linear alternate;
+        animation-delay: .6s;
+    }
+    
+    @keyframes mov {
+        0% {
+            top: 0px;
+        }
+        100% {
+            top: 15px;
+        }
     }
 }
