@@ -10,7 +10,7 @@ get_header();
                 class="second-four">4</span></h2>
         <h3>Página no encontrada</h3>
         <p>La página que estás buscando no existe.</p>
-        <button class="quam-btn blue m-auto">Seguir comprando</button>
+        <a href="<?= get_home_url(); ?>" class="quam-btn blue m-auto">Seguir comprando</a>
     </div>
 </div>
 
