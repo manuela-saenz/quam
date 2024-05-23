@@ -4,7 +4,14 @@
     line-height: 1.1;
     margin-bottom: 22px;
     @media (max-width:991px){
+        font-size: 64px;
+        width: 450px;
+        margin-left: 50px;
+    }
+    @media (max-width:768px) {
         font-size: 45px;
+        width: 100%;
+        margin-left: auto;
     }
 }
 

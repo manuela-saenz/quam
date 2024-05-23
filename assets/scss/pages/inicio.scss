@@ -46,7 +46,14 @@
             @include center-all;
             flex-direction: column;
         }
-
+        a{
+            @media (max-width:991px) {
+                margin-left: 55px;
+            }
+            @media (max-width:768px) {
+                margin-left: 0;
+            }
+        }
         span {
             font-size: 24px;
         }
