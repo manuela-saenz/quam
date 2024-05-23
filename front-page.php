@@ -23,7 +23,7 @@ $banners  = (new WP_Query(array(
                       <!-- <span>Some text here</span> -->
                       <h1 class="section-title"><?= $banner->post_title ?></h1>
                       <!-- <p>The Two golden rules professional graphic designer don’t want you to know about.</p> -->
-                      <a href="" class="quam-btn red">Ver ofertas</a>
+                      <a href="<?= $banner->btn_url ?>" class="quam-btn red">Ver ofertas</a>
                     </div>
                     <div class="col-md-4">
                       <div class="img-contain">

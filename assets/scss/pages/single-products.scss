@@ -257,7 +257,7 @@
         .reset_variations {
           display: none !important;
         }
-        tbody {
+        .variations tbody {
           tr {
             display: grid;
             .label {
@@ -874,5 +874,19 @@
 @media (max-width:450px) {
   .sm-floating-box{
     height: 155px;
+  }
+}
+
+.single_variation_wrap{
+  h4{
+    font-size: 16px;
+    font-weight: 600px;
+  }
+  tr td:nth-child(1){
+    font-weight: 600;
+  }
+  td{
+    padding: 5px 10px;
+    font-size: 12px;
   }
 }

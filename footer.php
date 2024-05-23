@@ -2,7 +2,7 @@
   <div class="container position-relative">
     <div class="row center-all">
       <div class="col-md-12 col-xxl-10">
-        <div class="d-flex text-shipping position-relative mb-5">
+        <div class="d-none text-shipping position-relative mb-5">
           <h6 class="title">Realizamos envios a todo el país</h6>
           <div class="img-fit img-shipping">
             <img src="<?php bloginfo('template_url') ?>/media/images/repartidor.png" alt="">
@@ -102,6 +102,8 @@
     </div>
   </div>
 </footer>
+
+<?php wp_footer(); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
@@ -130,7 +132,6 @@
 <?php if (is_product_category()) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/cat.js?=v<?= randomCode() ?>"> </script>
 <?php } ?>
-<?php wp_footer(); ?>
 </body>
 
 </html>
