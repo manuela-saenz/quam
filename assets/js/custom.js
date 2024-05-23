@@ -118,33 +118,45 @@ $(".woocommerce-ordering-price button").on("click", function () {
   $("#infoProducts").addClass("loading");
 });
 
-$(document).ready(function() {
-  setTimeout(function() {
-    var labels = $(".container_payment_method label");
-    var payULatamLabel = labels.filter(function() {
-      return $(this).text().trim() === "PayU Latam";
-    });
+// $(window).on('load', function() {
+// jQuery(document).ready(function ($) {
 
+$('#boton-id').on("click" , function (){
+  console.log($(".container_payment_method label").length,"log");
+  // setTimeout(function() {
+   
+
+    // console.log(payULatamLabel);
     setTimeout(function() { 
-      payULatamLabel.trigger("click");
-    }, 1000);
+      
+      var labels = $(".container_payment_method label");
+      // var payULatamLabel = labels.filter(function() {
+      //   return $(this).text().trim() === "PayU Latam";
+      // });
+      // payULatamLabel.trigger("click");
+      $('#payment_method_payulatam').prop('checked',true)
+      var button = $(".woocommerce-checkout-payment button:submit"); 
+      button.text("Paga con PayU");
+      labels.on("click", function (e) {
+        console.log("click",e);
+        var labelText = $(this).text().trim();
+      
+        if (labelText === "PayU Latam") {
+          button.attr("id", "PayU_Latam");
+          button.text("Paga con PayU");
+        }
+        if (labelText === "Paga a cuotas") {
+          button.attr("id", "Paga_addi");
+          button.text("Paga con Addi");
+        }
+        if (labelText === "Pago contra entrega") {
+          button.attr("id", "Pago_contra_entrega");
+          button.text("Pago contra entrega");
+        }
+      });
+    }, 200);
 
-    labels.on("click", function (e) {
-      var labelText = $(this).text().trim();
-      var button = $(".woocommerce-checkout-payment button:submit");
-      if (labelText === "PayU Latam") {
-        button.attr("id", "PayU_Latam");
-        button.text("Paga con PayU");
-      }
-      if (labelText === "Paga a cuotas") {
-        button.attr("id", "Paga_addi");
-        button.text("Paga con Addi");
-      }
-      if (labelText === "Pago contra entrega") {
-        button.attr("id", "Pago_contra_entrega");
-        button.text("Pago contra entrega");
-      }
-    });
-  }, 3000);
+  
+  // }, 3000);
 });
 // filtro
