@@ -116,6 +116,14 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
     product_id: id,
   };
   var blockUI = blockUICheckout();
+  var button = $(".quam-btn.blue.w-100");
+  button.html(
+    '<div class="spinner-border text-light" role="status"><span class="sr-only">Eliminando...</span></div>'
+  );
+  button.css({
+    "pointer-events": "none",
+    opacity: "0.6",
+  });
 
   $.ajax({
     type: "POST",
@@ -135,6 +143,13 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
           }
         }
         blockUI.remove();
+        if (button) {
+          button.html("Finalizar compra");
+          button.css({
+            "pointer-events": "auto",
+            opacity: "1",
+          });
+        }
       } else {
         alert("Hubo un problema al eliminar el producto del carrito.");
       }
@@ -311,7 +326,6 @@ function initAddToFavoriteButton() {
         prodid: productId,
       },
       success: function (res) {
-        var resJson = JSON.parse(res);
         $(".add-fav").removeClass("adding");
 
         if (!sessionFav.includes(Number(productId))) {
@@ -341,8 +355,8 @@ function initAddToFavoriteButton() {
           botonFav.appendChild(spanElement);
         }
 
-        $("#favoritesCounter").text(resJson.counter);
-        $(".offcanvas-body.ordenListFav.fav").html(resJson.html);
+        $("#favoritesCounter").text(res.counter);
+        $(".offcanvas-body.ordenListFav.fav").html(res.html);
         var alertElement = $("#showAlertAddFav");
         alertElement.removeClass("d-none").show();
 
@@ -353,9 +367,12 @@ function initAddToFavoriteButton() {
     });
   });
 }
+
 // <!-- Eliminación de favoritos en el contexto de favoritos -->
 function deleteFavorite(prodid) {
   var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
+  var variationId = $(".variation_id").val();
+  var productId = $(".product_id").val();
   $.ajax({
     url: ajaxUrl,
     method: "POST",
@@ -364,7 +381,6 @@ function deleteFavorite(prodid) {
       prodid: prodid,
     },
     success: function (res) {
-      var res = JSON.parse(res);
       if (sessionFav.includes(Number(prodid))) {
         sessionFav = sessionFav.filter((item) => item !== Number(prodid));
         localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
@@ -374,6 +390,12 @@ function deleteFavorite(prodid) {
         var spanElement = document.getElementById("favoritesCounter");
         if (spanElement) {
           spanElement.parentNode.removeChild(spanElement);
+        }
+      }
+      var button = $("#add-sprod-favs");
+      if (button.hasClass("active-fav")) {
+        if (Number(variationId) === prodid || Number(productId) === prodid) {
+          button.removeClass("active-fav");
         }
       }
       $("#favoritesCounter").text(res.counter);
