@@ -46,15 +46,20 @@ function desplegableProductos($titulo, $tipoDeLista)
           </div>
           <?php // echo woocommerce_cart_totals_before_order_total();
           ?>
-          <?php foreach (WC()->cart->get_coupons() as $code => $coupon) : 
-             if (is_string($coupon)) {
+          <?php foreach (WC()->cart->get_coupons() as $code => $coupon) :
+            if (is_string($coupon)) {
               $coupon = new WC_Coupon($coupon);
             }
-            ?>
-            
+            echo '<div class="d-none">';
+            echo 'pre';
+            print_r($coupon);
+            echo 'pre';
+            echo '</div>';
+          ?>
+
             <div class="cart-discount d-flex justify-content-between coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
-              <p class="text-capitalize"><?= ($coupon->get_code());?></p>
-              <span><?=  wc_cart_totals_coupon_html($coupon); ?></span>
+              <p class="text-capitalize"><?= ($coupon->get_code()); ?></p>
+              <span><?= wc_cart_totals_coupon_html($coupon); ?></span>
             </div>
           <?php endforeach; ?>
           <div class="d-flex justify-content-between mb-2">

@@ -7,6 +7,34 @@ function getTotalValue(totalString) {
   return value;
 }
 
+function discountValue(res) {
+  if (res.discount !== false) {
+    var discountDiv = $(
+      '<div class="cart-discount d-flex justify-content-between coupon-descuento-ctd">' +
+        '<p class="text-capitalize">descuento ctd.</p>' +
+        "<span>-" +
+        res.discount +
+        ' <a href="https://www.quam.com.co/carrito/?remove_coupon=descuento%20ctd." class="woocommerce-remove-coupon" data-coupon="descuento ctd.">[Eliminar]</a></span>' +
+        "</div>"
+    );
+
+    if ($(".coupon-descuento-ctd").length) {
+      $(".coupon-descuento-ctd").replaceWith(discountDiv);
+    } else {
+      discountDiv.insertAfter(
+        ".offcanvas-footer .d-flex.justify-content-between.mb-2:first"
+      );
+    }
+  } else {
+    var discountDiv = $(
+      ".cart-discount.d-flex.justify-content-between.coupon-descuento-ctd"
+    );
+    if (discountDiv.length) {
+      discountDiv.remove();
+    }
+  }
+}
+
 // <!-- Lógica de añadir articulo al carrito   -->
 var botonCart = document.getElementById("bottonCart");
 
@@ -57,10 +85,10 @@ jQuery(document).ready(function ($) {
       data: data,
       success: function (response) {
         var res = JSON.parse(response);
+        console.log(res);
         if (res.status === "success") {
           if (botonCart) {
             var spanElement = document.getElementById("cartItem");
-
             if (!spanElement) {
               spanElement = document.createElement("span");
               spanElement.id = "cartItem";
@@ -72,10 +100,17 @@ jQuery(document).ready(function ($) {
           }
           $(".offcanvas-body.ordenList.cart").empty();
           $(".offcanvas-body.ordenList.cart").html(res.html);
+          var subtotal = res.subtotal;
           var totalString = res.total;
+          var subvalue = getTotalValue(subtotal);
           var value = getTotalValue(totalString);
+
+          // Actualizar descuento
+          discountValue(res);
+
           $("#cartItem").text(res.counter);
-          $("#subtotal, #total").html("$" + value);
+          $("#subtotal").html("$" + subvalue);
+          $("#total").html("$" + value);
 
           $(".alert.alert-success.add-to-cart-message.d-none").show();
 
@@ -142,6 +177,10 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
             botonCart.removeChild(spanElement);
           }
         }
+
+        // Actualizar descuento
+        discountValue(res);
+
         blockUI.remove();
         if (button) {
           button.html("Finalizar compra");
@@ -232,7 +271,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
       maximumFractionDigits: 3,
     });
 
-    $("#subtotal, #total").html("$" + totalWithThousandSeparator);
+    $("#subtotal").html("$" + totalWithThousandSeparator);
   }
 
   var clickedElement = $(this);
@@ -259,8 +298,26 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
       product_id: idProduct,
     };
 
-    var blockUI = blockUICheckout();
+    var style = document.createElement("style");
+    style.innerHTML = `
+    .loaderPrice {
+      width: 25px;
+      height: 25px;
+      
+      border: 8px solid #0000001a;
+      border-radius: 50%;
+      border-right-color: #002d72;
+      animation: spin 1s ease infinite;
+    }
 
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }`;
+    document.head.appendChild(style);
+
+    $("#total").html('<div class="loaderPrice"></div>');
+    // var blockUI = blockUICheckout();
     $.ajax({
       type: "POST",
       url: ajaxUrl,
@@ -269,27 +326,28 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
         var res = JSON.parse(response);
         if (res.status === "success") {
           var totalString = res.total;
-          var shipping = res.shipping_total;
-          var amount = getTotalValue(shipping);
           var value = getTotalValue(totalString);
-          $(".quam-btn").prop("disabled", false);
-          if (window.location.href.indexOf("bolsa-de-compras") > -1) {
-            $(".cart-subtotal .woocommerce-Price-amount.amount").text(
-              "$ " + value
-            );
-            var valueWithoutPoints = value.replace(/\./g, "");
-            // var amountWithoutPoints = amount.replace(/\./g, "");
-            var total = parseFloat(valueWithoutPoints);
-            var totalWithThousandSeparator = total.toLocaleString("de-DE", {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-            });
+          // Actualizar descuento
+          discountValue(res);
+          $("#total").html("$" + value);
+          // $(".quam-btn").prop("disabled", false);
+          // if (window.location.href.indexOf("bolsa-de-compras") > -1) {
+          //   $(".cart-subtotal .woocommerce-Price-amount.amount").text(
+          //     "$ " + value
+          //   );
+          //   var valueWithoutPoints = value.replace(/\./g, "");
+          //   // var amountWithoutPoints = amount.replace(/\./g, "");
+          //   var total = parseFloat(valueWithoutPoints);
+          //   var totalWithThousandSeparator = total.toLocaleString("de-DE", {
+          //     minimumFractionDigits: 0,
+          //     maximumFractionDigits: 0,
+          //   });
 
-            $(".order-total .woocommerce-Price-amount.amount").text(
-              "$ " + totalWithThousandSeparator
-            );
-            blockUI.remove();
-          }
+          //   $(".order-total .woocommerce-Price-amount.amount").text(
+          //     "$ " + totalWithThousandSeparator
+          //   );
+          //   blockUI.remove();
+          // }
         } else {
           alert("Hubo un problema al actualizar la cantidad del producto.");
         }

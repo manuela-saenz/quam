@@ -317,9 +317,9 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
 
             $(window).scroll(function() {
                 var $gallery = $('.row.galleryP');
-                var galleryBottom = $gallery.offset().top + $gallery.outerHeight();
-                if ($(window).scrollTop() + $(window).height() > galleryBottom - 10000) {
-                    if(color !== 'null' || talla !== 'null'){
+                var galleryMidPoint = $gallery.offset().top + ($gallery.outerHeight() / 3);
+                if ($(window).scrollTop() + $(window).height() > galleryMidPoint) {
+                    if (color !== 'null' || talla !== 'null') {
                         loadMoreProducts();
                     }
                 }

@@ -1,5 +1,5 @@
 <?php
-require_once (get_template_directory() . '/functions.php');
+require_once(get_template_directory() . '/functions.php');
 // require_once(get_template_directory() . '/includes/mail/PHPMailer.php');
 // require_once(get_template_directory() . '/includes/mail/SMTP.php');
 // require_once(get_template_directory() . '/includes/mail/Exception.php');
@@ -200,7 +200,23 @@ class SyEAjaxRequest
         $quantity = $_POST["quantity"];
         $result = $woocommerce->cart->add_to_cart($prodID, $quantity);
 
+
+        // $coupons = $woocommerce->cart->get_coupons();
+        $itemsCount = $woocommerce->cart->get_cart_contents_count();
+        $total_discount = 0;
+
+        // foreach ($coupons as $code => $coupon) {
+        //     $discount_amount = $coupon->get_amount();
+        //     $total_discount = ($discount_amount * $itemsCount);
+        //     var_dump($total_discount);
+        //     $coupon->set_amount($total_discount);
+        //     $coupon->save();
+        // }
+
+        $ValorTotalSinDescuento = $woocommerce->cart->get_cart_subtotal();
         $ValorTotal = $woocommerce->cart->get_cart_total();
+        $DescuentoTotal = $woocommerce->cart->get_total_discount();
+
         ob_start();
         ItemsCart();
         $itemsCart = ob_get_clean();
@@ -212,7 +228,12 @@ class SyEAjaxRequest
                 "status" => "success",
                 "html" => $buffer,
                 "counter" => count($woocommerce->cart->get_cart()),
-                "total" => $ValorTotal
+                "total" => $ValorTotal,
+                "discount" => $DescuentoTotal,
+                "quantity" => $itemsCount,
+                "subtotal" => $ValorTotalSinDescuento,
+                "coupon" => $coupon,
+                "discount_amount" => $total_discount
             )
         );
         wp_die();
@@ -245,7 +266,10 @@ class SyEAjaxRequest
 
         $formatoColombiano = "$ " . number_format($TotalProduct, 0, ',', '.');
 
+        $ValorTotalSinDescuento = $woocommerce->cart->get_cart_subtotal();
         $ValorTotal = $woocommerce->cart->get_cart_total();
+        $DescuentoTotal = $woocommerce->cart->get_total_discount();
+
 
         ob_start();
         ItemsCart();
@@ -271,6 +295,8 @@ class SyEAjaxRequest
                 "item" => $cartItemKey,
                 "status" => "success",
                 "html" => $buffer,
+                'subtotal' => $ValorTotalSinDescuento,
+                'discount' => $DescuentoTotal,
                 "total" => $ValorTotal,
                 "shipping_total" => $shipping_total,
                 "quantity" => count($woocommerce->cart->get_cart()),
@@ -385,6 +411,8 @@ class SyEAjaxRequest
         }
 
         $ValorTotal = $woocommerce->cart->get_cart_total();
+        $DescuentoTotal = $woocommerce->cart->get_total_discount();
+        $itemsCount = $woocommerce->cart->get_cart_contents_count();
 
         ob_start();
         ItemsCart();
@@ -411,7 +439,9 @@ class SyEAjaxRequest
                 "html" => $buffer,
                 // "ordenList" => $buffer,
                 "total" => $ValorTotal,
-                "counter" => count($woocommerce->cart->get_cart())
+                "counter" => count($woocommerce->cart->get_cart()),
+                "discount" => $DescuentoTotal,
+                "quantity" => $itemsCount
             )
         );
 
@@ -991,7 +1021,9 @@ class SyEAjaxRequest
                 'state' => $barrio,
                 'postcode' => '0',
                 'country' => 'CO'
-            ), 'billing');
+            ),
+            'billing'
+        );
 
         $order->set_address(
             array(
@@ -1005,7 +1037,9 @@ class SyEAjaxRequest
                 'state' => $barrio,
                 'postcode' => '0',
                 'country' => 'CO'
-            ), 'shipping');
+            ),
+            'shipping'
+        );
 
         //add payment to order
 
@@ -1103,7 +1137,7 @@ class SyEAjaxRequest
                                 case 'Rechazada':
                                     $order->update_status('failed');
                                     break;
-                                // Agregar casos adicionales si es necesario...
+                                    // Agregar casos adicionales si es necesario...
                                 case 'Pendiente':
                                     $order->update_status('pending');
                                     break;
@@ -1161,7 +1195,7 @@ class SyEAjaxRequest
                                 case 'Rechazada':
                                     $order->update_status('failed');
                                     break;
-                                // Agregar casos adicionales si es necesario...
+                                    // Agregar casos adicionales si es necesario...
                                 case 'Pendiente':
                                     $order->update_status('pending');
                                     break;
@@ -1964,7 +1998,6 @@ class SyEAjaxRequest
 
         wp_die();
     }
-
 }
 
 

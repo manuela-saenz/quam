@@ -8,28 +8,18 @@ function ItemsCart()
         $item_counter++;
         $product_id = $values['product_id'];
         $_product = wc_get_product($values['data']->get_id());
-        $regular_price = $_product->get_regular_price();
         $price = $_product->get_price();
-        $link = get_permalink($values['product_id']);
-        $image = get_the_post_thumbnail_url($values['product_id']);
         $quantity = $values['quantity'];
         $title = $_product->get_name();
-        $image = '';
         $color = $_product->get_attribute('pa_color');
         $talla = $_product->get_attribute('pa_talla');
         $variation_id = 0;
         if ($_product->is_type('variation')) {
             $variation_id = $values['variation_id'];
-            $variation = new WC_Product_Variation($variation_id);
-            $image_id = $variation->get_image_id();
-            $image = wp_get_attachment_image_url($image_id);
-        } else {
-            $image = get_the_post_thumbnail_url($values['product_id']);
         }
-        $identificador = $_product->get_id();
-?>
+        
+    ?>
         <div class="mini-cart-product-card align-items-start d-flex bg-white">
-
             <a href="<?= get_permalink($_product->get_id()) ?>" class="img-contain overflow-hidden rounded-1">
                 <?= $_product->get_image('medium', 'alt=' . $title)   ?>
             </a>
@@ -66,10 +56,7 @@ function ItemsCart()
                         </svg>
                     </button>
                 </div>
-
-
             </div>
-
         </div>
     <?php
     }

@@ -34,9 +34,9 @@ if ($color) {
 	});
 	$available_variations = array_values($available_variations);
 	$variation = new WC_Product_Variation($available_variations[0]['variation_id']);
-	$image = $variation->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()));
+	$image = $variation->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title(), 'data-src' => get_the_post_thumbnail_url()));
 } else {
-	$image = $product->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title()));
+	$image = $product->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title(), 'data-src' => get_the_post_thumbnail_url()));
 }
 
 ?>
