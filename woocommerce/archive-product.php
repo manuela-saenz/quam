@@ -314,14 +314,17 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
 
             var color = '<?= empty($filter_color) ? null : $filter_color ?>';
             var talla = '<?= empty($filter_talla) ? null : $filter_talla ?>';
-
+            console.log(color, talla);
             $(window).scroll(function() {
                 var $gallery = $('.row.galleryP');
                 var galleryMidPoint = $gallery.offset().top + ($gallery.outerHeight() / 3);
                 if ($(window).scrollTop() + $(window).height() > galleryMidPoint) {
-                    if (color !== 'null' || talla !== 'null') {
+
+                    if (!color && !talla) {
+                        // Ejecconsole.log(color, talla);
                         loadMoreProducts();
                     }
+                  
                 }
             });
             var isLoading = false;
