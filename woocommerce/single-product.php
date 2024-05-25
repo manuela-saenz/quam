@@ -60,7 +60,7 @@ if ($attachment_ids) {
             </svg>
           </button>
         </div>
-        <button class="quam-btn blue d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
+        <button id="btn-single-mobile" class="quam-btn blue d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
       </div>
       <div class="d-md-none">
         <p> <?= $product->get_short_description() ?></p>
@@ -108,3 +108,19 @@ if ($attachment_ids) {
 </script>
 
 <?php get_footer() ?>
+
+
+<script>
+        // Función que se ejecutará cuando se haga clic en el Botón Escritorio
+        function accionBotonEscritorio() {
+          console.log('clickead');
+        }
+
+        // Asignar la función de clic al Botón Escritorio
+        document.getElementById('btn-desktop').addEventListener('click', accionBotonEscritorio);
+
+        // Simular el clic en el Botón Escritorio cuando se clickee el Botón Móvil
+        document.getElementById('btn-single-mobile').addEventListener('click', function() {
+            document.getElementById('btn-desktop').click();
+        });
+    </script>
