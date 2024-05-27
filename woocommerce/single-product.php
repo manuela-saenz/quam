@@ -60,7 +60,7 @@ if ($attachment_ids) {
             </svg>
           </button>
         </div>
-        <button class="quam-btn blue d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
+        <button id="btn-single-mobile" class="quam-btn blue d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
       </div>
       <div class="d-md-none">
         <p> <?= $product->get_short_description() ?></p>
