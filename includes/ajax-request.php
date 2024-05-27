@@ -200,19 +200,22 @@ class SyEAjaxRequest
         $quantity = $_POST["quantity"];
         $result = $woocommerce->cart->add_to_cart($prodID, $quantity);
 
-
-        // $coupons = $woocommerce->cart->get_coupons();
         $itemsCount = $woocommerce->cart->get_cart_contents_count();
         $total_discount = 0;
+        $coupon_details = array();
 
-        // foreach ($coupons as $code => $coupon) {
-        //     $discount_amount = $coupon->get_amount();
-        //     $total_discount = ($discount_amount * $itemsCount);
-        //     var_dump($total_discount);
-        //     $coupon->set_amount($total_discount);
-        //     $coupon->save();
-        // }
-
+        $applied_coupons = $woocommerce->cart->get_applied_coupons();
+        foreach ($applied_coupons as $code) {
+            $coupon = new WC_Coupon($code);
+            $amount = $woocommerce->cart->get_coupon_discount_amount( $coupon->get_code(), $woocommerce->cart->display_cart_ex_tax );
+            $coupon_details[] = array(
+                'Nombre del cupón' => $coupon->get_code(),
+                'Precio' => $amount 
+                
+            );
+        }
+        
+        // Ahora, $coupon_details es un array que contiene los detalles de todos los cupones aplicados
         $ValorTotalSinDescuento = $woocommerce->cart->get_cart_subtotal();
         $ValorTotal = $woocommerce->cart->get_cart_total();
         $DescuentoTotal = $woocommerce->cart->get_total_discount();
@@ -229,10 +232,10 @@ class SyEAjaxRequest
                 "html" => $buffer,
                 "counter" => count($woocommerce->cart->get_cart()),
                 "total" => $ValorTotal,
+                "coupon_details" => $coupon_details,
                 "discount" => $DescuentoTotal,
                 "quantity" => $itemsCount,
                 "subtotal" => $ValorTotalSinDescuento,
-                "coupon" => $coupon,
                 "discount_amount" => $total_discount
             )
         );

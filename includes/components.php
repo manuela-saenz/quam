@@ -50,11 +50,11 @@ function desplegableProductos($titulo, $tipoDeLista)
             if (is_string($coupon)) {
               $coupon = new WC_Coupon($coupon);
             }
-            echo '<div class="d-none">';
-            echo 'pre';
-            print_r($coupon);
-            echo 'pre';
-            echo '</div>';
+            // echo '<div class="d-none">';
+            // echo 'pre';
+            // print_r($coupon);
+            // echo 'pre';
+            // echo '</div>';
           ?>
 
             <div class="cart-discount d-flex justify-content-between coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
@@ -77,4 +77,15 @@ function desplegableProductos($titulo, $tipoDeLista)
     <?php } ?>
   </div>
 
+  <script>
+    var cartElement = document.querySelector(".offcanvas-body.ordenList.cart");
+    if (cartElement && cartElement.children.length == 0) {
+      var discountDiv = document.querySelector(".cart-discount");
+      console.log(discountDiv);
+      if (discountDiv) {
+        discountDiv.remove();
+      }
+    }
+  </script>
+  
 <?php } ?>

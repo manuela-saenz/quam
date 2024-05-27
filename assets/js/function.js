@@ -8,28 +8,12 @@ function getTotalValue(totalString) {
 }
 
 function discountValue(res) {
-  if (res.discount !== false) {
-    var discountDiv = $(
-      '<div class="cart-discount d-flex justify-content-between coupon-descuento-ctd">' +
-        '<p class="text-capitalize">descuento ctd.</p>' +
-        "<span>-" +
-        res.discount +
-        ' <a href="https://www.quam.com.co/carrito/?remove_coupon=descuento%20ctd." class="woocommerce-remove-coupon" data-coupon="descuento ctd.">[Eliminar]</a></span>' +
-        "</div>"
-    );
-
-    if ($(".coupon-descuento-ctd").length) {
-      $(".coupon-descuento-ctd").replaceWith(discountDiv);
-    } else {
-      discountDiv.insertAfter(
-        ".offcanvas-footer .d-flex.justify-content-between.mb-2:first"
-      );
-    }
-  } else {
-    var discountDiv = $(
-      ".cart-discount.d-flex.justify-content-between.coupon-descuento-ctd"
-    );
-    if (discountDiv.length) {
+   location.reload();
+  var cartElement = document.querySelector(".offcanvas-body.ordenList.cart");
+  if (cartElement && cartElement.children.length == 0) {
+    var discountDiv = document.querySelector(".cart-discount");
+    console.log(discountDiv);
+    if (discountDiv) {
       discountDiv.remove();
     }
   }
@@ -83,10 +67,10 @@ jQuery(document).ready(function ($) {
       type: "POST",
       url: ajaxUrl,
       data: data,
-      success: function (response) {
+      success: async function (response) {
         var res = JSON.parse(response);
-        console.log(res);
         if (res.status === "success") {
+          location.reload();
           if (botonCart) {
             var spanElement = document.getElementById("cartItem");
             if (!spanElement) {
@@ -105,9 +89,7 @@ jQuery(document).ready(function ($) {
           var subvalue = getTotalValue(subtotal);
           var value = getTotalValue(totalString);
 
-          // Actualizar descuento
-          discountValue(res);
-
+          // discountValue(res);
           $("#cartItem").text(res.counter);
           $("#subtotal").html("$" + subvalue);
           $("#total").html("$" + value);
@@ -164,7 +146,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
     type: "POST",
     url: ajaxUrl,
     data: data,
-    success: function (response) {
+    success: async function (response) {
       var res = JSON.parse(response);
       if (res.status === "success") {
         updateCartContents(res);
@@ -177,10 +159,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
             botonCart.removeChild(spanElement);
           }
         }
-
-        // Actualizar descuento
         discountValue(res);
-
         blockUI.remove();
         if (button) {
           button.html("Finalizar compra");
@@ -328,8 +307,10 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
           var totalString = res.total;
           var value = getTotalValue(totalString);
           // Actualizar descuento
-          discountValue(res);
+          location.reload();
+
           $("#total").html("$" + value);
+
           // $(".quam-btn").prop("disabled", false);
           // if (window.location.href.indexOf("bolsa-de-compras") > -1) {
           //   $(".cart-subtotal .woocommerce-Price-amount.amount").text(

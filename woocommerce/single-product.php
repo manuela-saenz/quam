@@ -75,36 +75,5 @@ if ($attachment_ids) {
   </div>
 </div>
 
-<script>
-  var category = '<?= $category ?>';
-  if (category == 'Hombre') {
-    var tds = document.querySelectorAll('.wdp_table td');
-    var precios = ['40.900', '36.900', '29.900'];
-    var index = 0;
-
-    for (var i = 0; i < tds.length; i++) {
-      if (tds[i].textContent == '0') {
-        // Cambiar el contenido del elemento <td>
-        tds[i].textContent = precios[index];
-        index++;
-      }
-    }
-  }
-
-  if (category == 'Henley') {
-    var tds = document.querySelectorAll('.wdp_table td');
-    var precios = ['37.900', '33.900', '27.900']; 
-    var index = 0;
-
-    for (var i = 0; i < tds.length; i++) {
-      if (tds[i].textContent == '0') {
-        // Cambiar el contenido del elemento <td>
-        tds[i].textContent = precios[index];
-        index++;
-      }
-    }
-  }
-
-</script>
 
 <?php get_footer() ?>
