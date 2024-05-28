@@ -191,6 +191,22 @@ class SyEAjaxRequest
         }
     }
 
+    function verifyCoupon($applied_coupons)
+    {
+        global $woocommerce;
+
+        $coupon_details = array();
+
+        foreach ($applied_coupons as $code) {
+            $coupon = new WC_Coupon($code);
+            $amount = $woocommerce->cart->get_coupon_discount_amount($coupon->get_code(), $woocommerce->cart->display_cart_ex_tax);
+            $coupon_details[] = array(
+                'title' => $coupon->get_code(),
+                'value' => $amount
+            );
+        }
+        return $coupon_details;
+    }
 
     function woocommerce_ajax_add_to_cart()
     {
@@ -202,19 +218,9 @@ class SyEAjaxRequest
 
         $itemsCount = $woocommerce->cart->get_cart_contents_count();
         $total_discount = 0;
-        $coupon_details = array();
-
         $applied_coupons = $woocommerce->cart->get_applied_coupons();
-        foreach ($applied_coupons as $code) {
-            $coupon = new WC_Coupon($code);
-            $amount = $woocommerce->cart->get_coupon_discount_amount( $coupon->get_code(), $woocommerce->cart->display_cart_ex_tax );
-            $coupon_details[] = array(
-                'Nombre del cupón' => $coupon->get_code(),
-                'Precio' => $amount 
-                
-            );
-        }
-        
+        $coupon_details = $this->verifyCoupon($applied_coupons);
+      
         // Ahora, $coupon_details es un array que contiene los detalles de todos los cupones aplicados
         $ValorTotalSinDescuento = $woocommerce->cart->get_cart_subtotal();
         $ValorTotal = $woocommerce->cart->get_cart_total();
@@ -293,12 +299,15 @@ class SyEAjaxRequest
 
         $buffer = preg_replace($search, $replace, $itemsCart);
         $shipping_total = $woocommerce->cart->get_cart_shipping_total();
+        $applied_coupons = $woocommerce->cart->get_applied_coupons();
+        $coupon_details = $this->verifyCoupon($applied_coupons);
         echo json_encode(
             array(
                 "item" => $cartItemKey,
                 "status" => "success",
                 "html" => $buffer,
                 'subtotal' => $ValorTotalSinDescuento,
+                "coupon_details" => $coupon_details,
                 'discount' => $DescuentoTotal,
                 "total" => $ValorTotal,
                 "shipping_total" => $shipping_total,
@@ -416,6 +425,7 @@ class SyEAjaxRequest
         $ValorTotal = $woocommerce->cart->get_cart_total();
         $DescuentoTotal = $woocommerce->cart->get_total_discount();
         $itemsCount = $woocommerce->cart->get_cart_contents_count();
+      
 
         ob_start();
         ItemsCart();
@@ -436,11 +446,15 @@ class SyEAjaxRequest
 
         $buffer = preg_replace($search, $replace, $itemsCart);
 
+        $applied_coupons = $woocommerce->cart->get_applied_coupons();
+        $coupon_details = $this->verifyCoupon($applied_coupons);
+
         echo json_encode(
             array(
                 "status" => "success",
                 "html" => $buffer,
                 // "ordenList" => $buffer,
+                "coupon_details" => $coupon_details,
                 "total" => $ValorTotal,
                 "counter" => count($woocommerce->cart->get_cart()),
                 "discount" => $DescuentoTotal,

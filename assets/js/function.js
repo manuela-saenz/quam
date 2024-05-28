@@ -8,11 +8,47 @@ function getTotalValue(totalString) {
 }
 
 function discountValue(res) {
-   location.reload();
+  var arrayDivs = res.coupon_details;
+  var subtotalDiv = document.querySelector(
+    ".offcanvas-footer .d-flex.justify-content-between.mb-2"
+  );
+
+  if (subtotalDiv) {
+    var desiredClasses = new Set(
+      arrayDivs.map((element) => "coupon-" + element.title.replace(/ /g, "-"))
+    );
+
+    arrayDivs.forEach((element) => {
+      var nameClass = "coupon-" + element.title.replace(/ /g, "-");
+      var existingDivs = document.querySelectorAll("." + nameClass);
+
+      var newDivContent = `
+        <p class="text-capitalize">${element.title}</p>
+        <span>-<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>&nbsp;${element.value}</span> </span>`;
+
+      if (existingDivs.length > 0) {
+        existingDivs.forEach((div) => (div.innerHTML = newDivContent));
+      } else {
+        var newDiv = document.createElement("div");
+        newDiv.className = `cart-discount d-flex justify-content-between ${nameClass}`;
+        newDiv.innerHTML = newDivContent;
+        subtotalDiv.insertAdjacentElement("afterend", newDiv);
+      }
+    });
+
+    var existingDiscountDivs = document.querySelectorAll(".cart-discount");
+    existingDiscountDivs.forEach((div) => {
+      var classes = div.className.split(" ");
+      var couponClass = classes.find((cls) => cls.startsWith("coupon-"));
+      if (couponClass && !desiredClasses.has(couponClass)) {
+        div.remove();
+      }
+    });
+  }
+
   var cartElement = document.querySelector(".offcanvas-body.ordenList.cart");
   if (cartElement && cartElement.children.length == 0) {
     var discountDiv = document.querySelector(".cart-discount");
-    console.log(discountDiv);
     if (discountDiv) {
       discountDiv.remove();
     }
@@ -69,8 +105,8 @@ jQuery(document).ready(function ($) {
       data: data,
       success: async function (response) {
         var res = JSON.parse(response);
+        console.log(res);
         if (res.status === "success") {
-          location.reload();
           if (botonCart) {
             var spanElement = document.getElementById("cartItem");
             if (!spanElement) {
@@ -89,7 +125,7 @@ jQuery(document).ready(function ($) {
           var subvalue = getTotalValue(subtotal);
           var value = getTotalValue(totalString);
 
-          // discountValue(res);
+          discountValue(res);
           $("#cartItem").text(res.counter);
           $("#subtotal").html("$" + subvalue);
           $("#total").html("$" + value);
@@ -148,6 +184,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
     data: data,
     success: async function (response) {
       var res = JSON.parse(response);
+      console.log(res);
       if (res.status === "success") {
         updateCartContents(res);
         if (tbodyElementCheckout.length) {
@@ -160,6 +197,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
           }
         }
         discountValue(res);
+
         blockUI.remove();
         if (button) {
           button.html("Finalizar compra");
@@ -306,29 +344,8 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
         if (res.status === "success") {
           var totalString = res.total;
           var value = getTotalValue(totalString);
-          // Actualizar descuento
-          location.reload();
-
+          discountValue(res);
           $("#total").html("$" + value);
-
-          // $(".quam-btn").prop("disabled", false);
-          // if (window.location.href.indexOf("bolsa-de-compras") > -1) {
-          //   $(".cart-subtotal .woocommerce-Price-amount.amount").text(
-          //     "$ " + value
-          //   );
-          //   var valueWithoutPoints = value.replace(/\./g, "");
-          //   // var amountWithoutPoints = amount.replace(/\./g, "");
-          //   var total = parseFloat(valueWithoutPoints);
-          //   var totalWithThousandSeparator = total.toLocaleString("de-DE", {
-          //     minimumFractionDigits: 0,
-          //     maximumFractionDigits: 0,
-          //   });
-
-          //   $(".order-total .woocommerce-Price-amount.amount").text(
-          //     "$ " + totalWithThousandSeparator
-          //   );
-          //   blockUI.remove();
-          // }
         } else {
           alert("Hubo un problema al actualizar la cantidad del producto.");
         }
