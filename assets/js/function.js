@@ -7,6 +7,7 @@ function getTotalValue(totalString) {
   return value;
 }
 
+// <!-- Agregando de manera dinámica los descuentos   -->
 function discountValue(res) {
   var arrayDivs = res.coupon_details;
   var subtotalDiv = document.querySelector(
@@ -19,8 +20,8 @@ function discountValue(res) {
     );
 
     arrayDivs.forEach((element) => {
-      var nameClass = "coupon-" + element.title.replace(/ /g, "-");
-      var existingDivs = document.querySelectorAll("." + nameClass);
+      var className = "coupon-" + element.title.replace(/ /g, "-");
+      var existingDivs = document.querySelectorAll("." + className);
 
       var newDivContent = `
         <p class="text-capitalize">${element.title}</p>
@@ -30,7 +31,7 @@ function discountValue(res) {
         existingDivs.forEach((div) => (div.innerHTML = newDivContent));
       } else {
         var newDiv = document.createElement("div");
-        newDiv.className = `cart-discount d-flex justify-content-between ${nameClass}`;
+        newDiv.className = `cart-discount d-flex justify-content-between ${className}`;
         newDiv.innerHTML = newDivContent;
         subtotalDiv.insertAdjacentElement("afterend", newDiv);
       }
@@ -105,7 +106,6 @@ jQuery(document).ready(function ($) {
       data: data,
       success: async function (response) {
         var res = JSON.parse(response);
-        console.log(res);
         if (res.status === "success") {
           if (botonCart) {
             var spanElement = document.getElementById("cartItem");
@@ -184,7 +184,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
     data: data,
     success: async function (response) {
       var res = JSON.parse(response);
-      console.log(res);
+
       if (res.status === "success") {
         updateCartContents(res);
         if (tbodyElementCheckout.length) {

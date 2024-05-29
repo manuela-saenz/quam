@@ -81,7 +81,6 @@ function desplegableProductos($titulo, $tipoDeLista)
     var cartElement = document.querySelector(".offcanvas-body.ordenList.cart");
     if (cartElement && cartElement.children.length == 0) {
       var discountDiv = document.querySelector(".cart-discount");
-      console.log(discountDiv);
       if (discountDiv) {
         discountDiv.remove();
       }
