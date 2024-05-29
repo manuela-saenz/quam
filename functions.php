@@ -59,7 +59,7 @@ function custom_override_checkout_fields($fields)
     unset($fields['billing']['billing_company']);
     // unset($fields['billing']['billing_id']);
     // unset($fields['billing']['billing_country']);
-    unset($fields['billing']['billing_city']);
+    // unset($fields['billing']['billing_city']);
 
     return $fields;
 }

@@ -46,14 +46,16 @@ defined('ABSPATH') || exit;
 					<div class="col-md-7 offsted-md-1 center-all">
 						<div class="bs-stepper-header" role="tablist">
 							<div class="step" data-target="#test-l-1">
-								<button type="button" class="step-trigger" role="tab" id="stepper1trigger1" aria-controls="test-l-1">
+								<button type="button" class="step-trigger" role="tab" id="stepper1trigger1"
+									aria-controls="test-l-1">
 									<span class="bs-stepper-circle">1</span>
 									<span class="bs-stepper-label">Datos de envío</span>
 								</button>
 							</div>
 							<div class="bs-stepper-line"></div>
 							<div class="step" data-target="#test-l-2">
-								<button type="button" class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-2">
+								<button type="button" class="step-trigger" role="tab" id="stepper1trigger2"
+									aria-controls="test-l-2">
 									<span class="bs-stepper-circle">2</span>
 									<span class="bs-stepper-label">Metodo de pago</span>
 								</button>
@@ -67,7 +69,8 @@ defined('ABSPATH') || exit;
 						<div class="col-lg-8 col-md-12">
 							<?php do_action('woocommerce_before_checkout_billing_form', $checkout); ?>
 							<div class="bs-stepper-content">
-								<div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
+								<div id="test-l-1" role="tabpanel" class="bs-stepper-pane"
+									aria-labelledby="stepper1trigger1">
 									<div class="form-group row">
 										<div class="col-lg-12">
 											<h3 class="mb-4">Llena los datos de envío</h3>
@@ -83,31 +86,36 @@ defined('ABSPATH') || exit;
 														<div class="col-md-6 fw-bold">
 															<?php woocommerce_form_field(array_keys($fields)[2], $fields['billing_id'], $checkout->get_value(array_keys($fields)[2])); ?>
 														</div>
+														<!-- ciudad -->
 														<div class="col-md-6 fw-bold">
-															<?php woocommerce_form_field(array_keys($fields)[9], $fields['billing_email'], $checkout->get_value(array_keys($fields)[9])); ?>
+															<?php woocommerce_form_field(array_keys($fields)[6], $fields['billing_city'], $checkout->get_value(array_keys($fields)[9])); ?>
+														</div>
+
+														<div class="col-md-6 fw-bold">
+															<?php woocommerce_form_field(array_keys($fields)[10], $fields['billing_email'], $checkout->get_value(array_keys($fields)[9])); ?>
 														</div>
 														<div class="col-md-6 fw-bold">
-															<?php woocommerce_form_field(array_keys($fields)[8], $fields['billing_phone'], $checkout->get_value(array_keys($fields)[8])); ?>
+															<?php woocommerce_form_field(array_keys($fields)[9], $fields['billing_phone'], $checkout->get_value(array_keys($fields)[8])); ?>
 
 														</div>
 														<div class="col-md-6 d-none">
 															<?php woocommerce_form_field(array_keys($fields)[3], $fields['billing_country'], $checkout->get_value(array_keys($fields)[3])); ?>
 														</div>
 														<div class="col-md-6">
-															<?php woocommerce_form_field(array_keys($fields)[6], $fields['billing_state'], $checkout->get_value(array_keys($fields)[6])); ?>
+															<?php woocommerce_form_field(array_keys($fields)[7], $fields['billing_state'], $checkout->get_value(array_keys($fields)[6])); ?>
 														</div>
-														<div class="col-md-6">
+														<!-- <div class="col-md-6">
 															<label for="" class="mt-2 ms-1"><b>Ciudad <span class="text-danger">*</span></b></label>
-															<?php woocommerce_form_field(array_keys($fields)[5], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[5])); ?>
-														</div>
+															<?php // woocommerce_form_field(array_keys($fields)[5], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[5])); ?>
+														</div> -->
 														<div class="col-md-6 fw-bold">
-															<?php woocommerce_form_field(array_keys($fields)[7], $fields['billing_postcode'], $checkout->get_value(array_keys($fields)[7])); ?>
+															<?php woocommerce_form_field(array_keys($fields)[8], $fields['billing_postcode'], $checkout->get_value(array_keys($fields)[7])); ?>
 														</div>
-														
+
 														<div class="col-md-12 fw-bold">
 															<?php woocommerce_form_field(array_keys($fields)[4], $fields['billing_address_1'], $checkout->get_value(array_keys($fields)[4])); ?>
 														</div>
-													
+
 													</div>
 													<div class="btn-step-next">
 														<button id="boton-id" type="button" class="quam-btn blue"
@@ -124,7 +132,8 @@ defined('ABSPATH') || exit;
 										<!-- <button class=" quam-btn blue next" onclick="stepper1.next()">Next</button> -->
 									</div>
 								</div>
-								<div id="test-l-2" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger2">
+								<div id="test-l-2" role="tabpanel" class="bs-stepper-pane"
+									aria-labelledby="stepper1trigger2">
 									<h3 class=" mb-4">Elige un metodo de pago</h3>
 									<div class="form_contact">
 										<?php woocommerce_checkout_payment(); ?>
@@ -229,14 +238,23 @@ defined('ABSPATH') || exit;
 		</div>
 	<?php endif; ?>
 
-<script>
-	
-	  window.onload = function() {
-            const ciudadInput = document.getElementById('billing_address_2');
-			
-            if (ciudadInput) {
-                ciudadInput.placeholder = "Ingresa tu ciudad (ej. Bogotá, Medellín, etc.)";
-            }
-        };
+	<script>
 
-</script>
+		window.onload = function () {
+			const poblacion = document.getElementById('billing_city_field');
+			const labels = document.getElementsByTagName('label');
+
+			// Itera a través de todos los labels
+			for (let i = 0; i < labels.length; i++) {
+				// Si el texto del label contiene "Población"
+				if (labels[i].textContent.includes('Población')) {
+					// Selecciona el elemento <abbr> dentro del label
+					const abbr = labels[i].querySelector('abbr');
+
+					// Cambia el texto del label a "Ciudad" manteniendo el abbr
+					labels[i].innerHTML = 'Ciudad&nbsp;' + abbr.outerHTML;
+				}
+			}
+		};
+
+	</script>
