@@ -176,6 +176,7 @@
         background: rgba(255, 255, 255);
         border-radius: 5px;
         padding: 50px;
+        box-shadow: 0 0 5px #ccc;
     }
     .contact-container .container-info{
         width: 80%;
@@ -206,6 +207,12 @@
     }
 }
 @media (max-width:450px) {
+    .contact-container .container-form{
+        width: 100%;
+    }
+    .contact-container .container-info{
+        width: 100%;     
+    }
     .contact-container .container-form div input{
         margin: 5px 0;
     }
