@@ -890,3 +890,27 @@
     font-size: 12px;
   }
 }
+
+@media (max-width:990px) {
+  .info-product{
+    width: 100%;
+    max-width: 100%;
+  }
+  .woocommerce #content div.product div.summary, .woocommerce div.product div.summary, .woocommerce-page #content div.product div.summary, .woocommerce-page div.product div.summary{
+    width: 100% !important;
+    .wdp_pricing_table{
+      width: 80%;
+      margin: 10px auto;
+    }
+  }
+}
+
+
+.table-single-product{
+  @media (max-width:990px) {
+    margin-bottom: 160px;
+    align-items: center;
+    padding: 0 !important;
+    text-align: center;
+  }
+}
