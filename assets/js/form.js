@@ -37,7 +37,7 @@ function sendForm() {
     var emailField = $("#txtEmail");
     var messageField = $("#txtMessage");
     var phoneField = $("#txtPhone");
-    var orderReference = $("#OrderReference");
+    var orderReference = $("#txtConsult");
 
     if ($submitButton.hasClass("disabled")) {
       return;
@@ -112,7 +112,7 @@ function sendForm() {
       email: emailField.val(),
       message: messageField.val(),
       phone: phoneField.val(),
-      order: orderReference.val(),
+      consult: orderReference.val(),
     };
 
     function handleResponse(status, message) {

@@ -349,6 +349,7 @@ $formattedDate = $formatter->format($fecha);
                                             <p style="color: black; font-size:14px; text-align:start;">Nombre: <span style="color: #0d6efd; font-size:14px;"><?php echo $txtName; ?></span></p>
                                             <p style="color: black; font-size:14px; text-align:start;">Telefono: <span style="color: #0d6efd; font-size:14px;"><?php echo $txtPhone; ?></span></p>
                                             <p style="color: black; font-size:14px; text-align:start;">Email: <span style="color: #0d6efd; font-size:14px;"><?php echo $txtEmail; ?></span></p>
+                                            <p style="color: black; font-size:14px; text-align:start;">Consulta: <span style="color: #0d6efd; font-size:14px;"><?php echo $txtConsult; ?></span></p>
                                             <p style="color: black; font-size:14px; text-align:start;">Mensaje: <span style="color: #0d6efd; font-size:14px;"><?php echo $txtMessage; ?></span></p>
                                             <p style="color: black; font-size:14px; text-align:start;">Hora del registro: <span style="color: #0d6efd; font-size:14px;"><?php echo $formattedDate; ?></span></p>
                                             <br><br>

@@ -17,17 +17,7 @@ get_header() ?>
                     <input type="text" name="txtName" id="txtName" placeholder="Nombre completo">
                     <input type="text" name="txtEmail" id="txtEmail" placeholder="Correo electrónico*">
                     <input type="text" name="txtPhone" id="txtPhone" placeholder="Teléfono*">
-                </div>
-                <div class="custom-select-wrapper">
-                    <select class="custom-select" name="" id="">
-                        <option value="">
-                            Motivo de consulta*
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M6 9l6 6l6 -6" />
-                            </svg>
-                        </option>
-                    </select>
+                    <input type="text" name="txtConsult" id="txtConsult" placeholder="Motivo de la consulta">
                 </div>
                 <textarea name="txtMessage" id="txtMessage" placeholder="Introduzca su mensaje aquí"></textarea>
                 <button class="quam-btn blue w-100 mt-2" id="btnSend">Enviar</button>
