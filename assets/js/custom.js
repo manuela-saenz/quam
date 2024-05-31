@@ -174,4 +174,21 @@ $('#boton-id').on("click" , function (){
   
   // }, 3000);
 });
-// filtro
+
+
+
+// Rastreo de paquetes
+document.getElementById('track-package-link').addEventListener('click', function(event) {
+  event.preventDefault();
+  document.getElementById('track-package-form').style.display = 'block';
+});
+
+function trackPackage() {
+  var trackingCode = document.getElementById('tracking-code').value;
+  var trackingUrl = "https://tracking.melonn.com/" + trackingCode;
+  window.open(trackingUrl, '_blank');
+}
+
+function hideTracking() {
+  document.getElementById('track-package-form').style.display = 'none';
+}

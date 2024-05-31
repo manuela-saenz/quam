@@ -80,7 +80,7 @@
         <ul class="direction">
           <li class="mb-4"> <b> CONTACTO</b></li>
           <!-- <li> <a href="mailto:infoquam@contacto.com" target="_blank"> infoquam@contacto.com</a> </li> -->
-          <li class="pb-20"> <a href="tel:6013 886 004" target="_blank">6013 886 004</a> </li>
+          <li class="pb-20"> <a href="tel:6013 886 004" target="_blank"> +57 311 4482684 </a> </li>
           <!-- <li class="pb-20"> <a href="#"> Lunes a jueves: 9 a. m. a 7 p. m.</a></li> -->
         </ul>
         <!-- <div class="footer-icons">
