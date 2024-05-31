@@ -59,7 +59,7 @@ class SyEAjaxRequest
         $txtPhone = $_POST['phone'];
         $txtEmail = $_POST['email'];
         $txtMessage = $_POST['message'];
-        $txtOrder = $_POST['order'];
+        // $txtOrder = $_POST['order'];
 
         $headers[] = 'Content-Type: text/html; charset=UTF-8';
         $headers[] = 'From: Quam contacto';

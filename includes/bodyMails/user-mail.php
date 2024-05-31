@@ -22,10 +22,10 @@ $sitename = 'Panda';
 $primaryColor = '#d1333c';
 $termsLinks = '';
 $imageUrl = 'https://i.ibb.co/4JS7MyS/Panda-logo.png';
-$siteEmail = 'diana@pandascout.com';
-$siteAddress = 'https://www.pandascout.co/';
+$siteEmail = '';
+$siteAddress = '';
 // $sitePhone = '+57 300 4905814';
-$homeUrl = 'https://www.pandascout.co/';
+$homeUrl = '';
 
 ?>
 

@@ -17,7 +17,6 @@ get_header() ?>
                     <input type="text" name="txtName" id="txtName" placeholder="Nombre completo">
                     <input type="text" name="txtEmail" id="txtEmail" placeholder="Correo electrónico*">
                     <input type="text" name="txtPhone" id="txtPhone" placeholder="Teléfono*">
-                    <input type="text" name="OrderReference" id="OrderReference" placeholder="Número de pedido">
                 </div>
                 <div class="custom-select-wrapper">
                     <select class="custom-select" name="" id="">
@@ -30,7 +29,7 @@ get_header() ?>
                         </option>
                     </select>
                 </div>
-                <textarea name="txtMessage" id="txtMessage"></textarea>
+                <textarea name="txtMessage" id="txtMessage" placeholder="Introduzca su mensaje aquí"></textarea>
                 <button class="quam-btn blue w-100 mt-2" id="btnSend">Enviar</button>
             </form>
             <div class="alert alert-danger" role="alert" id="error_alert" style="display:none; color: #721c24; background-color: #f8d7daa1; border: 2px solid #f5c6cb; padding: 13px; margin-bottom: 10px;">
