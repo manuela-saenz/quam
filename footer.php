@@ -61,7 +61,7 @@
           <li> <a href=""> Política de privacidad</a></li>
           <li> <a href=""> Términos y condiciones</a> </li>
           <li> <a href=""> Prácticas comerciales responsables</a> </li>
-          <li><a href=""> Contacto</a></li>
+          <li><a href="<?= get_home_url(); ?>/contacto/"> Contacto</a></li>
         </ul>
 
       </div>
@@ -119,7 +119,7 @@
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/function.js?=v<?= randomCode() ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?=v<?= randomCode() ?>"> </script>
-
+<script src="<?php bloginfo('template_url') ?>/assets/js/form.js?=v<?= randomCode() ?>"> </script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var cartElement = document.querySelector('.offcanvas-body.ordenList.cart');

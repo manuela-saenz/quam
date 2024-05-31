@@ -1,13 +1,6 @@
 <?php
 require_once(get_template_directory() . '/functions.php');
-// require_once(get_template_directory() . '/includes/mail/PHPMailer.php');
-// require_once(get_template_directory() . '/includes/mail/SMTP.php');
-// require_once(get_template_directory() . '/includes/mail/Exception.php');
-// $autoloadPath = get_template_directory() . '/vendor/autoload.php';
 
-// use PHPMailer\PHPMailer\DeliriosPHPMailer;
-// use PHPMailer\PHPMailer\DeliriosSMTP;
-// use PHPMailer\PHPMailer\DeliriosException;
 // use Dompdf\Dompdf;
 
 
@@ -28,6 +21,7 @@ class SyEAjaxRequest
     {
 
         $actions = array(
+            "send_mail_contact",
             "woocommerce_ajax_add_to_cart",
             "woocommerce_ajax_add_to_cart_remplace_qty",
             "woocommerce_ajax_add_to_cart_single",
@@ -59,6 +53,45 @@ class SyEAjaxRequest
         }
     }
 
+    function send_mail_contact()
+    {
+        $txtName = $_POST['name'];
+        $txtPhone = $_POST['phone'];
+        $txtEmail = $_POST['email'];
+        $txtMessage = $_POST['message'];
+        $txtOrder = $_POST['order'];
+
+        $headers[] = 'Content-Type: text/html; charset=UTF-8';
+        $headers[] = 'From: Quam contacto';
+
+        ob_start();
+        include get_template_directory() . '/includes/bodyMails/contact-form-client.php';
+        $body = ob_get_clean();
+
+        $mail1 = wp_mail($txtEmail, "Lo que nos cuentas es importante para nosotros", $body, $headers);
+
+        $receptorEmail = 'legiestsas@gmail.com';
+        ob_start();
+        include get_template_directory() . '/includes/bodyMails/admin-mail-restor.php';
+        $bodyReceptor = ob_get_clean();
+
+        $mail2 = wp_mail($receptorEmail, "Alguien quiere contactarse con Quam", $bodyReceptor, $headers);
+
+        if ($mail1 && $mail2) {
+            http_response_code(200);
+            echo json_encode(array(
+                'status' => '200',
+                'message' => 'Mensajes enviados correctamente'
+            ));
+        } else {
+            http_response_code(500);
+            echo json_encode(array(
+                'status' => '500',
+                'message' => 'Error al enviar los mensajes'
+            ));
+        }
+        exit;
+    }
     function process_payAddi()
     {
 
@@ -220,7 +253,7 @@ class SyEAjaxRequest
         $total_discount = 0;
         $applied_coupons = $woocommerce->cart->get_applied_coupons();
         $coupon_details = $this->verifyCoupon($applied_coupons);
-      
+
         // Ahora, $coupon_details es un array que contiene los detalles de todos los cupones aplicados
         $ValorTotalSinDescuento = $woocommerce->cart->get_cart_subtotal();
         $ValorTotal = $woocommerce->cart->get_cart_total();
@@ -425,7 +458,7 @@ class SyEAjaxRequest
         $ValorTotal = $woocommerce->cart->get_cart_total();
         $DescuentoTotal = $woocommerce->cart->get_total_discount();
         $itemsCount = $woocommerce->cart->get_cart_contents_count();
-      
+
 
         ob_start();
         ItemsCart();

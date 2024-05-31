@@ -41,7 +41,7 @@
 
   <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css?=v<?= randomCode() ?>" />
   <script>
-    var ajaxUrl = "<?= admin_url("admin-ajax.php ") ?>";
+    var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
   </script>
   <?php
   wp_meta();
