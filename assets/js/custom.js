@@ -180,7 +180,7 @@ $('#boton-id').on("click" , function (){
 // Rastreo de paquetes
 document.getElementById('track-package-link').addEventListener('click', function(event) {
   event.preventDefault();
-  document.getElementById('track-package-form').style.display = 'block';
+  document.getElementById('track-package-form').style.display = 'flex';
 });
 
 function trackPackage() {
@@ -192,3 +192,5 @@ function trackPackage() {
 function hideTracking() {
   document.getElementById('track-package-form').style.display = 'none';
 }
+
+// borrar texto tabla
