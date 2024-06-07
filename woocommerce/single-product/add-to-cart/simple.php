@@ -75,4 +75,16 @@ if ($product->is_in_stock()) : ?>
 		}
 
 	}, 500)
+
+	document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            var outOfStock = document.querySelector('.stock.out-of-stock');
+            if (outOfStock) {
+                var submitButton = document.querySelector('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                }
+            }
+        }, 1000)
+    });
 </script>
