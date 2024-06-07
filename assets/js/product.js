@@ -87,3 +87,30 @@ $(document).ready(function () {
   window.addEventListener('resize', handleResize);
     
 });
+
+
+// compartir productos
+// facebook
+document.getElementById('shareBtnFacebook').addEventListener('click', function() {
+    console.log('clic');
+    const currentUrl = window.location.href;
+    const encodedUrl = encodeURIComponent(currentUrl);
+    
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+    console.log(facebookShareUrl);
+    window.open(facebookShareUrl, '_blank');
+  });
+//   whatsapp
+document.getElementById('shareBtnWhatsapp').addEventListener('click', function() {
+    // Obtener la URL actual de la página
+    const currentUrl = window.location.href;
+
+    // Codificar la URL
+    const encodedUrl = encodeURIComponent(currentUrl);
+
+    // Crear el enlace para compartir en WhatsApp
+    const whatsappShareUrl = `https://web.whatsapp.com/send?text=Mira%20este%20art%C3%ADculo%20que%20he%20encontrado:%20${encodedUrl}`;
+
+    // Abrir la ventana de compartir en WhatsApp
+    window.open(whatsappShareUrl, '_blank');
+});

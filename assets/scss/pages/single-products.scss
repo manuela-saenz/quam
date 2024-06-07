@@ -914,3 +914,30 @@
     text-align: center;
   }
 }
+
+.share-icons i{
+  cursor: pointer;
+}
+// configuraciones de la tabla
+.info-product .wdp_bulk_table_content {
+  .wdp_pricing_table_caption{
+    font-weight: 800;
+    color: #000 !important;
+  }
+  .wdp_pricing_table{
+    margin: 10px 0;
+  }
+  table thead td{
+    color: #000 !important;
+    font-weight: 600;
+  }
+  table .woocommerce-Price-amount {
+    color: #000 !important;
+  }
+  table tbody td{
+    color: #000 !important;
+  }
+}
+.wdp_pricing_table_footer{
+  display: none !important;
+}

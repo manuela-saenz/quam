@@ -60,8 +60,7 @@
           <li class="mb-4"> <b> LEGAL</b></li>
           <li> <a href=""> Política de privacidad</a></li>
           <li> <a href=""> Términos y condiciones</a> </li>
-          <li> <a href=""> Prácticas comerciales responsables</a> </li>
-          <li><a href="<?= get_home_url(); ?>/contacto/"> Contacto</a></li>
+          <li> <a href=""> Prácticas comerciales responsables</a> </li>        
         </ul>
 
       </div>
@@ -79,6 +78,7 @@
       <div class="col-md-4 col-lg-3">
         <ul class="direction">
           <li class="mb-4"> <b> CONTACTO</b></li>
+          <li><a href="<?= get_home_url(); ?>/contacto/"> Contacto</a></li>
           <!-- <li> <a href="mailto:infoquam@contacto.com" target="_blank"> infoquam@contacto.com</a> </li> -->
           <li class="pb-20"> <a href="tel:6013 886 004" target="_blank"> +57 311 4482684 </a> </li>
           <!-- <li class="pb-20"> <a href="#"> Lunes a jueves: 9 a. m. a 7 p. m.</a></li> -->

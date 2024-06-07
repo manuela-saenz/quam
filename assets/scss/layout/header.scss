@@ -607,3 +607,29 @@ header {
   transform: scale(1.1) rotate(10deg);
   box-shadow: 0 8px 15px rgba(255, 255, 255, 0.2);
 }
+
+// cont-header
+.rastreo-button{
+  cursor: pointer;
+  display: flex;
+}
+#track-package-form{
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 21px;
+  input{
+    margin-left: 5px;
+    outline: none;
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 8px;
+  }
+  button{
+    margin-left: 5px;
+    display: flex;
+    padding: 3px;
+    align-items: center;
+  }
+}

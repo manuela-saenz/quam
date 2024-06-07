@@ -27,12 +27,11 @@ if (!defined('ABSPATH')) {
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
 ?>
 
-<div class="share center-vertical">
-	<p class="m-0"> <b>Compartir producto: </b> </p>
+<div class="share center-vertical d-flex align-items-center">
+	<span> <b>Compartir producto: </b> </span>
 
-	<div>
-		<i class="icon-facebook"></i>
-		<i class="icon-x"></i>
-		<i class="icon-whatsapp1"></i>
+	<div class="share-icons">
+		<i id="shareBtnFacebook" class="icon-facebook"></i>
+		<i id="shareBtnWhatsapp" class="icon-whatsapp1"></i>
 	</div>
 </div>
