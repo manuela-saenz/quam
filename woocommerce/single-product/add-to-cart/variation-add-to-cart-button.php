@@ -46,7 +46,13 @@ $sessionFav = $_SESSION["prodsfavs"]
             if (mutation.type === 'attributes' && mutation.attributeName === 'data-product-id') {
                 var sessionFavLocal = JSON.parse(localStorage.getItem('sessionFav')) || [];
                 var productId = targetNode.getAttribute('data-product-id');
-                console.log(productId)
+                var outOfStock = document.querySelector('.stock.out-of-stock');
+                if (!outOfStock) {
+                    var submitButton = document.querySelector('button[type="submit"]');
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                    }
+                }
                 if (sessionFavLocal.includes(Number(productId))) {
                     $(".add-fav").addClass("active-fav");
                 } else {

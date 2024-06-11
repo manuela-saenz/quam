@@ -120,7 +120,8 @@
                     data-id="<?= $cat->slug ?>">
                     <?= $cat->name ?>
                   </a>
-                <?php endforeach; ?>                
+                <?php endforeach; ?>           
+                <a href="<?= get_permalink(1694) ?>" title="Contáctanos" class="<?= is_page(1694) ? 'active' : '' ?>">Contacto</a>     
               </div>
 
               <div class="position-relative search">
