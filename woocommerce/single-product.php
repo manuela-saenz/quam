@@ -31,6 +31,7 @@ if ($attachment_ids) {
   actualizada correctamente.</div>
 <div id="showAlertDeleteFav" class="alert alert-danger add-to-list-fav-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Se eliminó el producto de tus
   favoritos</div>
+<div id="showAlertItemOut" class="alert alert-danger add-to-list-fav-message d-none" style="position: fixed;z-index: 9999;top: 110px;left: 50%;transform: translateX(-50%);">El producto seleccionado se encuentra agotado</div>
 <section id="Singleimgprincipal" class="pt-0">
   <div class="py-2 px-2 border-top border-bottom">
     <div class="container">
@@ -75,5 +76,18 @@ if ($attachment_ids) {
   </div>
 </div>
 
-
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(event) {
+      var swatch = event.target.closest('.cfvsw-swatches-disabled');
+      if (swatch) {
+        var alertElement = document.getElementById('showAlertItemOut');
+        alertElement.classList.remove('d-none');
+        setTimeout(function() {
+          alertElement.classList.add('d-none');
+        }, 3000);
+      }
+    });
+  });
+</script>
 <?php get_footer() ?>
