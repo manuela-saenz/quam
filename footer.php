@@ -58,9 +58,9 @@
       <div class="col-md-4 col-lg-3" style="z-index:2;">
         <ul>
           <li class="mb-4"> <b> LEGAL</b></li>
-          <li> <a href=""> Política de privacidad</a></li>
-          <li> <a href=""> Términos y condiciones</a> </li>
-          <li> <a href=""> Prácticas comerciales responsables</a> </li>        
+          <li> <a href="<?= get_home_url(); ?>/politicas/" target="_blank"> Política de privacidad</a></li>
+          <li> <a href="<?= get_home_url(); ?>/politicas/" target="_blank"> Términos y condiciones</a> </li>
+          <!-- <li> <a href=""> Prácticas comerciales responsables</a> </li>         -->
         </ul>
 
       </div>
