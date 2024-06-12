@@ -27,12 +27,10 @@
   <title>Políticas de Privacidad - QUAM</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-
     * {
 
       font-family: 'poppins', sans-serif;
@@ -56,7 +54,6 @@
     h1 {
 
       color: #314998
-
     }
 
 
@@ -82,7 +79,6 @@
       }
 
     }
-
   </style>
 
 </head>
@@ -1914,23 +1910,15 @@
         los derechos de acceso, consulta, rectificación, actualización, supresión y
 
         revocatoria a que se refiere la normatividad vigente sobre protección de datos
-
         personales. <br><br>
 
         En el evento en que usted considere que <strong>QUAM</strong>, dio un uso
-
         contrario al autorizado y a las leyes aplicables, podrá contactarnos a través de una
-
-        comunicación motivada dirigida a <strong>QUAM</strong>, nuestro domicilio
-
-        social está ubicado en la Carrera 47a # 95-56. Of: 502 King David Castellana,
-
-        nuestro teléfono +57 321 2156729 o a la cuenta de Correo electrónico
-
-        info@myqorg.com
-
+        comunicación motivada dirigida a <strong>QUAM</strong>, dio un uso contrario al autorizado
+        y a las leyes aplicables, podrá contactarnos a través de una comunicación
+        motivada dirigida a QUAM a nuestro teléfono +57 311 4482684 o a la cuenta de
+        Correo electrónico legiestsas@gmail.com.
       </p>
-
     </div>
 
   </div>
