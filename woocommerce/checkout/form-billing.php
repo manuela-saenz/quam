@@ -162,34 +162,6 @@ defined('ABSPATH') || exit;
 
 								<div id="test-l-4" role="tabpanel" class="bs-stepper-pane form-group"
 									aria-labelledby="stepper1trigger4">
-
-									<div id="test-l-5" role="tabpanel" class="bs-stepper-pane"
-										aria-labelledby="stepper1trigger5">
-										<div class="form-group row center-all">
-											<div class="col-md-6 position-relative center-all text-center flex-column">
-												<div class="circle">
-													<i class="icon-check"></i>
-												</div>
-												<h3 class="mb-4">¡Gracias por su compra!</h3>
-												<div>
-													<p>Fecha de solicitud de compra: 03/01/2024</p>
-													<p>Tu pedido se encuentra en proceso de validación, en breve
-														recibirás un correo con el detalle de tu compra.</p>
-													<b>Pedido: VUY-0229</b>
-												</div>
-												<div class="btn-step-next mt-4">
-													<button type="button" class="quam-btn blue next"
-														onclick="stepper1.next()">Seguir comprando</button>
-												</div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-end">
-											<button type="button" class="quam-btn blue me-4 previous"
-												onclick="stepper1.previous()"><i class="icon-arrow-left me-2"></i>Volver
-												al pago</button>
-											<!-- <button type="button" class="quam-btn blue" onclick="stepper1.next()">Next</button> -->
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>

@@ -20,10 +20,7 @@
                 <b class="title"> Suscríbete a nuestro boletín </b> <br>
                 <!-- ...y recibe un cupón de <b>$20.000 </b> para tu primera compra. -->
               </div>
-              <!-- <div class="redes d-flex">
-                <div class="ms-2"> <i class="icon-facebook"></i>Facebook </div>
-                <div class="ms-2"> <i class="icon-instagram"></i>Instagram </div>
-              </div> -->
+
             </div>
             <div class="col-md-4">
               <div class="input-group position-relative">
@@ -60,33 +57,18 @@
           <li class="mb-4"> <b> LEGAL</b></li>
           <li> <a href="<?= get_home_url(); ?>/politicas/" target="_blank"> Política de privacidad</a></li>
           <li> <a href="<?= get_home_url(); ?>/politicas/" target="_blank"> Términos y condiciones</a> </li>
-          <!-- <li> <a href=""> Prácticas comerciales responsables</a> </li>         -->
         </ul>
 
       </div>
 
-      <!-- <div class="col-md-4 col-lg-3">
-        <ul>
-          <li class="mb-4"> <b> SERVICIO AL CLIENTE</b></li>
-          <li> <a href=""> Preguntas frecuentes</a></li>
-          <li> <a href=""> Envíos </a> </li>
-          <li> <a href=""> Devoluciones / Cambios</a> </li>
-          <li><a href=""> Tarjetas de regalo</a></li>
-        </ul>
-      </div> -->
 
       <div class="col-md-4 col-lg-3">
         <ul class="direction">
           <li class="mb-4"> <b> CONTACTO</b></li>
           <li><a href="<?= get_home_url(); ?>/contacto/"> Contacto</a></li>
-          <!-- <li> <a href="mailto:infoquam@contacto.com" target="_blank"> infoquam@contacto.com</a> </li> -->
           <li class="pb-20"> <a href="tel:6013 886 004" target="_blank"> +57 311 4482684 </a> </li>
-          <!-- <li class="pb-20"> <a href="#"> Lunes a jueves: 9 a. m. a 7 p. m.</a></li> -->
         </ul>
-        <!-- <div class="footer-icons">
-          <a href="" class="" target="_blank"><i class="icon-facebook"></i></a>
-          <a href="" target="_blank"><i class="icon-instagram mx-2 ms-2"></i></a>
-        </div> -->
+
       </div>
     </div>
   </div>
@@ -102,13 +84,14 @@
     </div>
   </div>
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <?php wp_footer(); ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script>$ = jQuery</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
 </script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <?php if (is_page(78)) { ?>
   <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
   <script src="<?php bloginfo('template_url') ?>/assets/js/stepper.js"> </script>
@@ -119,15 +102,16 @@
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/function.js?=v<?= randomCode() ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?=v<?= randomCode() ?>"> </script>
+<?php if (is_page(1694)) { ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/form.js?=v<?= randomCode() ?>"> </script>
+<?php } ?>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
     var cartElement = document.querySelector('.offcanvas-body.ordenList.cart');
     if (cartElement && cartElement.children.length > 0) {
       cartElement.classList.remove('empty');
     }
   });
-
 </script>
 <?php if (is_product_category()) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/cat.js?=v<?= randomCode() ?>"> </script>
