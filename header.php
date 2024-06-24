@@ -7,9 +7,9 @@
   <title>
     <?php
     if (is_front_page()) {
-      bloginfo('description');
-      echo ' - ';
       bloginfo('name');
+      echo ' - ';
+      bloginfo('description');
     } elseif (function_exists('is_tag') && is_tag()) {
       single_tag_title("Archivo de &quot;");
     } elseif (is_archive()) {
