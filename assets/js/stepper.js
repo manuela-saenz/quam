@@ -1,3 +1,33 @@
+// <!-- validar los campos identificacion -->
+function verificarCamposLlenos() {
+  var todosLlenos = true;
+
+  inputForms.forEach(function (inputForm) {
+    if (inputForm.value.trim() === "") {
+      todosLlenos = false;
+    }
+  });
+  return todosLlenos;
+}
+
+function actualizarEstadoBoton() {
+  var botonEnviar = document.getElementById("boton-id");
+  botonEnviar.disabled = !verificarCamposLlenos();
+}
+
+var inputForms = document.querySelectorAll(".input-form-name input");
+inputForms.forEach(function (inputForm) {
+  inputForm.addEventListener("input", function () {
+    actualizarEstadoBoton();
+  });
+  inputForm.setAttribute("required", "true");
+  inputForm.classList.add("clase-input-p");
+});
+
+actualizarEstadoBoton();
+
+
+
 // <--------- Paso a paso bolsa de compra ---------->
 
 var stepper1
@@ -8,7 +38,7 @@ var stepperForm
 
 document.addEventListener('DOMContentLoaded', function () {
 stepper1 = new Stepper(document.querySelector('#stepper1'))
-stepper2 = new Stepper(document.querySelector('#stepper2'), {
+stepper2 = new Stepper($('#stepper2'), {
   linear: false
 })
 stepper3 = new Stepper(document.querySelector('#stepper3'), {
