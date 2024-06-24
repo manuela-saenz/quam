@@ -70,6 +70,22 @@ function desplegableProductos($titulo, $tipoDeLista)
         <a href="<?= get_permalink(wc_get_page_id('checkout')) ?>" class="quam-btn blue w-100">Finalizar compra</a>
       </div>
     <?php } elseif ($tipoDeLista == 'mini-favoritos') { ?>
+      <div id="showAlertDeleteFavT" class="alert alert-warning add-to-list-fav-message d-flex d-none" style="position: relative; top: 5px; width: auto;">
+      <span style="width: 50%; text-align: right; padding-right: 10px; font-weight: bold;">Eliminando favorito</span>
+        <span class="loading-icon" style="width: 100%; display: inline-block; margin-left: 0px; width: 20px; height: 20px; border: 4px solid #001639; border-top: 4px solid #fff; border-radius: 50%; animation: spin 1s linear infinite;"></span>
+      </div>
+
+      <style>
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      </style>
       <div class="offcanvas-body ordenListFav fav">
         <?php get_template_part("templates/components/mini", "favs") ?>
       </div>
@@ -86,5 +102,5 @@ function desplegableProductos($titulo, $tipoDeLista)
       }
     }
   </script>
-  
+
 <?php } ?>

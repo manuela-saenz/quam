@@ -429,6 +429,10 @@ function deleteFavorite(prodid) {
   var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
   var variationId = $(".variation_id").val();
   var productId = $(".product_id").val();
+
+  var alertElement = $("#showAlertDeleteFavT");
+  alertElement.removeClass("d-none").show();
+  
   $.ajax({
     url: ajaxUrl,
     method: "POST",
@@ -441,7 +445,7 @@ function deleteFavorite(prodid) {
         sessionFav = sessionFav.filter((item) => item !== Number(prodid));
         localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
       }
-
+  
       if (res.counter === 0) {
         var spanElement = document.getElementById("favoritesCounter");
         if (spanElement) {
@@ -454,6 +458,7 @@ function deleteFavorite(prodid) {
           button.removeClass("active-fav");
         }
       }
+      alertElement.hide().addClass("d-none");
       $("#favoritesCounter").text(res.counter);
       $(".offcanvas-body.ordenListFav.fav").html(res.html);
     },
