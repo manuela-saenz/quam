@@ -11,8 +11,10 @@ body {
     overflow: hidden;
     height: 100vh;
   }
+
   &.customize-support,
   &.admin-bar {
+
     // --header-height: 150px;
     // @media (max-width: 1200px) {
     //   --header-height: 58px;
@@ -20,19 +22,23 @@ body {
     header {
       top: 32px;
     }
+
     .banner {
       .swiper-slide {
         height: calc(100vh - 150px);
       }
     }
+
     .shopping-bag-offcanvas {
       top: 32px;
       height: calc(100vh - 32px);
     }
+
     main {
       margin-top: var(--header-height);
     }
   }
+
   @media (max-width: 1200px) {
     --header-height: 45px;
   }
@@ -72,4 +78,8 @@ ul {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+ins {
+  text-decoration: none;
 }

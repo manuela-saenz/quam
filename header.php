@@ -32,14 +32,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
   <?php } ?>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="icon" href="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" type="image/svg+xml">
-
   <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css?=v<?= randomCode() ?>" />
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
@@ -53,8 +49,7 @@
 <body <?php body_class() ?>>
   <header>
     <div class="header-contact">
-      <div
-        class="container d-flex align-items-center justify-content-lg-between justify-content-center position-relative">
+      <div class="container d-flex align-items-center justify-content-lg-between justify-content-center position-relative">
         <div class="contact d-flex">
           <a href="tel:573114482684" target="_blank"><i class="icon-phone1"></i><span> +57 311 4482684 </span></a>
           <!-- <a href="mailto:" target="_blank"><i class="icon-email"></i><span>info@quamservice.com</span> </a> -->
@@ -63,14 +58,9 @@
           </div>
           <div id="track-package-form" class="relative" style="display:none;">
             <div class="contenedor-rastreo-header" style="position:relative;">
-              <input id="tracking-code" style="border: 1px solid #ccc; border-radius: 4px; width: 220px;"
-                placeholder="Código de rastreo Melonn" value="" name="s">
-              <div
-                style="position: absolute; top: 3px; right: 5px; background: #ccc; border: none; cursor: pointer; border-radius:5px;"
-                onclick="hideTracking()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+              <input id="tracking-code" style="border: 1px solid #ccc; border-radius: 4px; width: 220px;" placeholder="Código de rastreo Melonn" value="" name="s">
+              <div style="position: absolute; top: 3px; right: 5px; background: #ccc; border: none; cursor: pointer; border-radius:5px;" onclick="hideTracking()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M18 6l-12 12" />
                   <path d="M6 6l12 12" />
@@ -96,8 +86,7 @@
           <div class="nav_links align-items-center justify-content-between">
             <h1 class="mb-0">
               <a href="<?= get_home_url() ?>" class="logo img-fit">
-                <img src="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" alt="Logo Quam"
-                  title="Logo Quam" />
+                <img src="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" alt="Logo Quam" title="Logo Quam" />
               </a>
             </h1>
 
@@ -114,14 +103,13 @@
                     'orderby' => 'term_order',
                   )
                 );
-                foreach ($categories as $cat):
-                  ?>
-                  <a href="<?= get_term_link($cat) ?>" class="<?= is_page($cat->name) ? 'active' : '' ?>"
-                    data-id="<?= $cat->slug ?>">
+                foreach ($categories as $cat) :
+                ?>
+                  <a href="<?= get_term_link($cat) ?>" class="<?= is_page($cat->name) ? 'active' : '' ?>" data-id="<?= $cat->slug ?>">
                     <?= $cat->name ?>
                   </a>
-                <?php endforeach; ?>           
-                <a href="<?= get_permalink(1694) ?>" title="Contáctanos" class="<?= is_page(1694) ? 'active' : '' ?>">Contacto</a>     
+                <?php endforeach; ?>
+                <a href="<?= get_permalink(1694) ?>" title="Contáctanos" class="<?= is_page(1694) ? 'active' : '' ?>">Contacto</a>
               </div>
 
               <div class="position-relative search">
@@ -131,21 +119,17 @@
             </div>
             <div class="center-vertical">
               <div class="header-actions d-flex ms-4 gap-sm-3">
-                <button id="bottonFav" class="position-relative btn center-all p-0 " data-bs-toggle="offcanvas"
-                  data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i>
+                <button id="bottonFav" class="position-relative btn center-all p-0 " data-bs-toggle="offcanvas" data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i>
                   <?php if (!empty($_SESSION["prodsfavs"])) { ?>
-                    <span id="favoritesCounter"
-                      class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count($_SESSION["prodsfavs"]) ?>
+                    <span id="favoritesCounter" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count($_SESSION["prodsfavs"]) ?>
                     </span>
                   <?php } ?>
                 </button>
 
-                <button id="bottonCart" class="position-relative btn center-all p-0" type="button"
-                  data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
+                <button id="bottonCart" class="position-relative btn center-all p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
                   <i class="icon-shopping-bag"></i>
                   <?php if (count(WC()->cart->get_cart()) > 0) { ?>
-                    <span id="cartItem"
-                      class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count(WC()->cart->get_cart()) ?></span>
+                    <span id="cartItem" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count(WC()->cart->get_cart()) ?></span>
                   <?php } ?>
                 </button>
                 </span></button>
@@ -170,8 +154,7 @@
   <?php desplegableProductos("Mis favoritos", "mini-favoritos") ?>
 
   <main>
-    <a href="https://web.whatsapp.com/send?phone=3114482684&amp;text=Hola estoy interesado en sus productos y quiero más información."
-      class="btn-whatsapp position-fixed" target="_blank">
+    <a href="https://web.whatsapp.com/send?phone=3114482684&amp;text=Hola estoy interesado en sus productos y quiero más información." class="btn-whatsapp position-fixed" target="_blank">
       <img src="<?php bloginfo('template_url') ?>/media/images/social-whatsapp.png" alt="">
     </a>
   </main>
