@@ -8,7 +8,6 @@ $banners  = (new WP_Query(array(
 )))->posts;
 
 ?>
-
 <section id="banner">
   <div class="container-fluid ">
     <div class="row">
@@ -27,7 +26,7 @@ $banners  = (new WP_Query(array(
                     </div>
                     <div class="col-md-4">
                       <div class="img-contain">
-                        <img src="<?= get_the_post_thumbnail_url($banner->ID)  ?>" title="<?= $banner->post_title ?>" alt="<?= $banner->post_title ?>">
+                        <img src="<?= get_the_post_thumbnail_url($banner->ID) ?>" title="<?= $banner->post_title ?>" alt="<?= $banner->post_title ?>" loading="lazy">
                       </div>
                     </div>
                   </div>
@@ -59,7 +58,7 @@ $banners  = (new WP_Query(array(
         <div class="col-md-4 p-0 position-relative">
           <div class="card-categories d-flex position-relative overflow-hidden">
             <a href="<?= get_term_link($cat->term_id) ?>" class="img-fit w-100 h-100">
-              <img src="<?= $thumbUrl ?>" title="<?= $cat->name ?>" alt="<?= $cat->name ?>">
+              <img src="<?= $thumbUrl ?>" title="<?= $cat->name ?>" alt="<?= $cat->name ?>" loading="lazy">
             </a>
             <a href="<?= get_term_link($cat->term_id) ?>" class="info-categories center-all flex-column position-absolute">
               <h5><?= $cat->name ?></h5>
@@ -125,7 +124,7 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
       <div class="col-md-8 p-0 position-relative">
         <a href="" class="position-relative d-flex">
           <div class="img-fit backgroundImg w-100">
-            <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="">
+            <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="" loading="lazy">
           </div>
           <div class="info_summer text-black">
             <p class="mb-0"><?= $primera_coleccion["subtitulo"]; ?></p>
@@ -136,7 +135,7 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
       <div class="col-md-4 p-0">
         <a href="" class="position-relative d-flex">
           <div class="img-fit w-100">
-            <img src="<?= $segunda_coleccion["fondo_de_imagen"]["url"]; ?>" alt="">
+            <img src="<?= $segunda_coleccion["fondo_de_imagen"]["url"]; ?>" alt="" loading="lazy">
           </div>
           <div class="info_summer">
             <p class="mb-0"><?= $segunda_coleccion["subtitulo"]; ?></p>

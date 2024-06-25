@@ -18,7 +18,11 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+$catalog_orderby_options['popularity'] = "Ordenar por los más antiguos";
+$catalog_orderby_options['date'] = "Ordenar por los más recientes";
+$catalog_orderby_options['price'] = "Ordenar por precio: de menor a mayor";
+$catalog_orderby_options['price-desc'] = "Ordenar por precio: de mayor a menor";
+unset($catalog_orderby_options['rating']);
 ?>
 <form class="woocommerce-ordering" method="get">
 	<select name="orderby" class="orderby" aria-label="<?php esc_attr_e( 'Shop order', 'woocommerce' ); ?>">
