@@ -40,6 +40,18 @@
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
   </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-14Y5R2N56V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-14Y5R2N56V');
+  </script>
   <?php
   wp_meta();
   wp_head(); ?>
