@@ -20,13 +20,9 @@
                 <b class="title"> Suscríbete a nuestro boletín </b> <br>
                 <!-- ...y recibe un cupón de <b>$20.000 </b> para tu primera compra. -->
               </div>
-
             </div>
             <div class="col-md-4">
-              <div class="input-group position-relative">
-                <input type="text" class="form-control border border-white" placeholder="Escribe tu correo electrónico" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                <button class="quam-btn white" type="button" id="button-addon1">Suscribirme</button>
-              </div>
+              <?php echo do_shortcode('[newsletter_form]'); ?>
             </div>
           </div>
         </div>
@@ -87,7 +83,9 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <?php wp_footer(); ?>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-<script>$ = jQuery</script>
+<script>
+  $ = jQuery
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
 </script>
@@ -103,7 +101,7 @@
 <script src="<?php bloginfo('template_url') ?>/assets/js/function.js?=v<?= randomCode() ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?=v<?= randomCode() ?>"> </script>
 <?php if (is_page(1694)) { ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/form.js?=v<?= randomCode() ?>"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/form.js?=v<?= randomCode() ?>"> </script>
 <?php } ?>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
