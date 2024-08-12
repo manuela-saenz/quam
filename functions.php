@@ -279,38 +279,27 @@ function get_all_product_categories_attributes_and_prices()
     add_action('wp_ajax_load_products', 'load_products');
     add_action('wp_ajax_nopriv_load_products', 'load_products');
 
-    function load_products()
-    {
-        $paged = $_POST['paged'];
-        $category = $_POST['category'];
-
-        $args1 = array(
+    function load_products() {
+        $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+        $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+    
+        $args = array(
             'post_type' => 'product',
             'paged' => $paged,
             'product_cat' => $category,
+            'posts_per_page' => 5, // Limitar el número de productos por página
+            'no_found_rows' => true, // Optimización para no calcular el total de filas
         );
-
-        $args2 = array(
-            'post_type' => 'product_variation',
-            'paged' => $paged,
-            'post_parent__in' => get_posts(array(
-                'post_type' => 'product',
-                'fields' => 'ids',
-                'product_cat' => $category,
-            )),
-        );
-
-        $posts1 = new WP_Query($args1);
-        $posts2 = new WP_Query($args2);
-
-        $combined_posts = array_merge($posts1->posts, $posts2->posts);
-
-        foreach ($combined_posts as $post) {
-            setup_postdata($post);
-            wc_get_template_part('content', 'product');
+    
+        $query = new WP_Query($args);
+    
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                wc_get_template_part('content', 'product');
+            }
         }
-
+    
         wp_reset_postdata();
-
         die();
     }

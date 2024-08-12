@@ -1,17 +1,17 @@
-// const images = document.querySelectorAll("img[data-src]");
+const images = document.querySelectorAll("img[data-src]");
 
-// const observer = new IntersectionObserver((entries) => {
-//   entries.forEach((entry) => {
-//     if (entry.isIntersecting) {
-//       const img = entry.target;
-//       img.src = img.getAttribute("data-src");
-//       observer.unobserve(img);
-//     }
-//   });
-// });
-// images.forEach((img) => {
-//   observer.observe(img);
-// });
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.getAttribute("data-src");
+      observer.unobserve(img);
+    }
+  });
+});
+images.forEach((img) => {
+  observer.observe(img);
+});
 
 // <!-- ENCABEZADO --> //
 $(window).on("scroll load resize", function () {
@@ -136,61 +136,58 @@ $(".woocommerce-ordering-price button").on("click", function () {
 // $(window).on('load', function() {
 // jQuery(document).ready(function ($) {
 
-$('#boton-id').on("click" , function (){
-  console.log($(".container_payment_method label").length,"log");
+$("#boton-id").on("click", function () {
+  console.log($(".container_payment_method label").length, "log");
   // setTimeout(function() {
-   
 
-    // console.log(payULatamLabel);
-    setTimeout(function() { 
-      
-      var labels = $(".container_payment_method label");
-      // var payULatamLabel = labels.filter(function() {
-      //   return $(this).text().trim() === "PayU Latam";
-      // });
-      // payULatamLabel.trigger("click");
-      $('#payment_method_payulatam').prop('checked',true)
-      var button = $(".woocommerce-checkout-payment button:submit"); 
-      button.text("Paga con PayU");
-      labels.on("click", function (e) {
-        console.log("click",e);
-        var labelText = $(this).text().trim();
-      
-        if (labelText === "PayU Latam") {
-          button.attr("id", "PayU_Latam");
-          button.text("Paga con PayU");
-        }
-        if (labelText === "Paga a cuotas") {
-          button.attr("id", "Paga_addi");
-          button.text("Paga con Addi");
-        }
-        if (labelText === "Pago contra entrega") {
-          button.attr("id", "Pago_contra_entrega");
-          button.text("Pago contra entrega");
-        }
-      });
-    }, 200);
+  // console.log(payULatamLabel);
+  setTimeout(function () {
+    var labels = $(".container_payment_method label");
+    // var payULatamLabel = labels.filter(function() {
+    //   return $(this).text().trim() === "PayU Latam";
+    // });
+    // payULatamLabel.trigger("click");
+    $("#payment_method_payulatam").prop("checked", true);
+    var button = $(".woocommerce-checkout-payment button:submit");
+    button.text("Paga con PayU");
+    labels.on("click", function (e) {
+      console.log("click", e);
+      var labelText = $(this).text().trim();
 
-  
+      if (labelText === "PayU Latam") {
+        button.attr("id", "PayU_Latam");
+        button.text("Paga con PayU");
+      }
+      if (labelText === "Paga a cuotas") {
+        button.attr("id", "Paga_addi");
+        button.text("Paga con Addi");
+      }
+      if (labelText === "Pago contra entrega") {
+        button.attr("id", "Pago_contra_entrega");
+        button.text("Pago contra entrega");
+      }
+    });
+  }, 200);
+
   // }, 3000);
 });
 
-
-
 // Rastreo de paquetes
-document.getElementById('track-package-link').addEventListener('click', function(event) {
-  event.preventDefault();
-  document.getElementById('track-package-form').style.display = 'flex';
-});
+document
+  .getElementById("track-package-link")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    document.getElementById("track-package-form").style.display = "flex";
+  });
 
 function trackPackage() {
-  var trackingCode = document.getElementById('tracking-code').value;
+  var trackingCode = document.getElementById("tracking-code").value;
   var trackingUrl = "https://tracking.melonn.com/" + trackingCode;
-  window.open(trackingUrl, '_blank');
+  window.open(trackingUrl, "_blank");
 }
 
 function hideTracking() {
-  document.getElementById('track-package-form').style.display = 'none';
+  document.getElementById("track-package-form").style.display = "none";
 }
 
 // borrar texto tabla

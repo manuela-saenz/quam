@@ -314,19 +314,37 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
 
             var color = '<?= empty($filter_color) ? null : $filter_color ?>';
             var talla = '<?= empty($filter_talla) ? null : $filter_talla ?>';
-            console.log(color, talla);
-            $(window).scroll(function() {
-                var $gallery = $('.row.galleryP');
-                var galleryMidPoint = $gallery.offset().top + ($gallery.outerHeight() / 3);
-                if ($(window).scrollTop() + $(window).height() > galleryMidPoint) {
 
-                    if (!color && !talla) {
-                        // Ejecconsole.log(color, talla);
-                        loadMoreProducts();
+            $(document).ready(function() {
+                var loadMoreExecuted = false; // Booleano para controlar la ejecución
+                var lastScrollTop = 0; // Variable para rastrear la dirección del scroll
+
+                $(window).scroll(function() {
+                    var $gallery = $('.row.galleryP');
+                    var galleryMidPoint = $gallery.offset().top + ($gallery.outerHeight() / 4);
+
+                    // Obtener la posición actual del scroll
+                    var currentScrollTop = $(window).scrollTop();
+
+                    // Verificar si el usuario está desplazándose hacia abajo
+                    if (currentScrollTop > lastScrollTop) {
+                        if (currentScrollTop + $(window).height() > galleryMidPoint) {
+                            if (!color && !talla && !loadMoreExecuted) {
+                                loadMoreProducts();
+                            }
+                        }
                     }
-                  
-                }
+
+                    // Verifica si el usuario llegó al final de la página
+                    if (currentScrollTop + $(window).height() >= $(document).height()) {
+                        loadMoreExecuted = true; // Marcar como ejecutado
+                    }
+
+                    // Actualizar la posición anterior del scroll
+                    lastScrollTop = currentScrollTop;
+                });
             });
+
             var isLoading = false;
 
             function loadMoreProducts() {
@@ -342,12 +360,17 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                         },
                         success: function(data) {
                             var $newProducts = $(data);
+                            var $gallery = $('.row.galleryP');
+                            var existingProductIds = $gallery.children().map(function() {
+                                return $(this).data('id');
+                            }).get();
+
                             var dataInserted = false;
 
                             $newProducts.each(function() {
                                 var newProductId = $(this).data('id');
-                                if ($('.row.galleryP [data-id="' + newProductId + '"]').length === 0) {
-                                    $('.row.galleryP').append(this);
+                                if (existingProductIds.indexOf(newProductId) === -1) {
+                                    $gallery.append(this);
                                     dataInserted = true;
                                 }
                             });
@@ -356,6 +379,22 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                                 console.log('Llegaste al final de la página');
                             }
                             page++;
+
+                            const images = document.querySelectorAll("img[data-src]");
+
+                            const observer = new IntersectionObserver((entries) => {
+                                entries.forEach((entry) => {
+                                    if (entry.isIntersecting) {
+                                        const img = entry.target;
+                                        img.src = img.getAttribute("data-src");
+                                        observer.unobserve(img);
+                                    }
+                                });
+                            });
+                            images.forEach((img) => {
+                                observer.observe(img);
+                            });
+                            
                         },
                         complete: function() {
                             isLoading = false;
