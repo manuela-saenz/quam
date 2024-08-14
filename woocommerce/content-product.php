@@ -75,7 +75,9 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             $shown_colors[] = $color;
             $variation_id = $variation_obj->get_id();
             $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_id), 'medium'); // Tamaño optimizado
-            $variation_image_url = wp_get_attachment_url(get_post_thumbnail_id($variation_id));
+            $size = 'medium'; // Puedes cambiar esto por 'thumbnail', 'medium', 'large', o un tamaño personalizado
+            $image_array = wp_get_attachment_image_src(get_post_thumbnail_id($variation_id), $size);
+            $optimized_image_url = $image_array[0];
             $variation_title = removerTalla($variation_obj->get_name());
             $variation_permalink = get_permalink($variation_id);
             $variation_price = $variation_obj->get_price_html() . " COP";
@@ -84,7 +86,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                 <a href="<?= $variation_permalink ?>" class="CardProducts w-100">
                     <div class="img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                         <!-- <?= $variation_image ?> -->
-                        <img data-src="<?= $variation_image_url ?> " />
+                        <img data-src="<?=  $optimized_image_url ?> " />
                     </div>
                     <div class="info-highlights">
                         <h5 title="<?= $variation_title ?>"><?= $variation_title ?></h5>

@@ -19,6 +19,7 @@ $filter_color = isset($_GET['filter_color']) ? $_GET['filter_color'] : null;
 $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
 ?>
 
+
 <section id="bannerCategory" class=" position-relative overflow-hidden p-0">
     <div class="container">
         <div class="row">
@@ -346,10 +347,68 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
             });
 
             var isLoading = false;
+            let insertCount = 0;
 
             function loadMoreProducts() {
+                var style = document.createElement('style');
+                style.type = 'text/css';
+
+                // Agregar el contenido CSS al elemento <style>
+                style.innerHTML = `
+                    .img-contain-loading {
+                        position: relative;
+                        overflow: hidden;
+                        animation: loading-move 1.5s infinite ease-in-out;
+                    }
+                            
+                    /* Animación de movimiento */
+                    @keyframes loading-move {
+                        0%,
+                        100% {
+                            transform: translateX(0);
+                        }
+                        50% {
+                            transform: translateX(10px);
+                        }
+                    }
+                `;
+
+                // Insertar el elemento <style> en el <head> del documento
+                document.head.appendChild(style);
+                if (insertCount < 10) {
+                    $('.galleryP.pt-3').append(`
+                        <div class="col-lg-3 col-sm-6 col-6 product type-product post-146 status-publish first outofstock has-post-thumbnail shipping-taxable purchasable product-type-variation loading" data-id="toastCardLoad">
+                
+                            <a href="" class="CardProducts w-100">
+                                <div class="img-contain img-contain-loading" title="Camiseta Hombre Polo QUAM" data-src="https://www.quam.com.co/wp-content/uploads/2024/04/QA03052023-22_1-3.jpg">
+                                    <img src="https://codigofuente.io/wp-content/uploads/2018/09/progress.gif" width="150" height="150">
+                                </div>
+                                <div class="info-highlights">
+                                    <h5 title="Camiseta Hombre Polo QUAM">Camiseta Hombre Polo QUAM</h5>
+                                    <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
+                                        <p class="mb-0 d-flex gap-2">
+                                            <del aria-hidden="true">
+                                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>&nbsp;68.900</bdi></span>
+                                            </del> 
+                                            <ins aria-hidden="true">
+                                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>&nbsp;40.900</bdi></span>
+                                            </ins>
+                                            COP
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    `);
+                    insertCount++;
+                }
+
                 if (!isLoading) {
                     isLoading = true;
+
+
+
+
                     $.ajax({
                         url: ajaxUrl,
                         type: "POST",
@@ -359,6 +418,7 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                             'category': '<?= $currentCat->slug ?>'
                         },
                         success: function(data) {
+                            $('[data-id="toastCardLoad"]').remove();
                             var $newProducts = $(data);
                             var $gallery = $('.row.galleryP');
                             var existingProductIds = $gallery.children().map(function() {
@@ -378,7 +438,9 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                             if (!dataInserted) {
                                 console.log('Llegaste al final de la página');
                             }
-                            page++;
+
+
+                         
 
                             const images = document.querySelectorAll("img[data-src]");
 
@@ -391,13 +453,16 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                                     }
                                 });
                             });
+
                             images.forEach((img) => {
                                 observer.observe(img);
                             });
-                            
+
                         },
                         complete: function() {
                             isLoading = false;
+                            insertCount = 0;
+                            page++;
                         }
                     });
                 }

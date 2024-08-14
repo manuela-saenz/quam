@@ -94,14 +94,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
   <script src="<?php bloginfo('template_url') ?>/assets/js/stepper.js"> </script>
 <?php } ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?=v<?= randomCode() ?>"> </script>
+<script src="<?php bloginfo('template_url') ?>/assets/js/custom.js"> </script>
 <?php if (is_product()) { ?>
-  <script src="<?php bloginfo('template_url') ?>/assets/js/product.js?=v<?= randomCode() ?>"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/product.js"> </script>
 <?php } ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/function.js?=v<?= randomCode() ?>"> </script>
-<script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?=v<?= randomCode() ?>"> </script>
+<script src="<?php bloginfo('template_url') ?>/assets/js/function.js"> </script>
+<script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js"> </script>
 <?php if (is_page(1694)) { ?>
-  <script src="<?php bloginfo('template_url') ?>/assets/js/form.js?=v<?= randomCode() ?>"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/form.js"> </script>
 <?php } ?>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -112,7 +112,7 @@
   });
 </script>
 <?php if (is_product_category()) { ?>
-  <script src="<?php bloginfo('template_url') ?>/assets/js/cat.js?=v<?= randomCode() ?>"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/cat.js"> </script>
 <?php } ?>
 </body>
 

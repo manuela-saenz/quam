@@ -179,17 +179,17 @@ function get_products_by_category_name($category_name)
     }
 }
 
-function randomCode()
-{
-    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $codigo = '';
+// function randomCode()
+// {
+//     $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+//     $codigo = '';
 
-    for ($i = 0; $i < 6; $i++) {
-        $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
-    }
+//     for ($i = 0; $i < 6; $i++) {
+//         $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
+//     }
 
-    return $codigo;
-}
+//     return $codigo;
+// }
 
 
 function get_all_product_categories_attributes_and_prices()
@@ -279,27 +279,36 @@ function get_all_product_categories_attributes_and_prices()
     add_action('wp_ajax_load_products', 'load_products');
     add_action('wp_ajax_nopriv_load_products', 'load_products');
 
-    function load_products() {
+    function load_products()
+    {
         $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
         $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
-    
+        
         $args = array(
-            'post_type' => 'product',
+            'post_type' => array('product', 'product_variation'), // Incluir productos y variaciones
             'paged' => $paged,
             'product_cat' => $category,
-            'posts_per_page' => 5, // Limitar el número de productos por página
-            'no_found_rows' => true, // Optimización para no calcular el total de filas
+            'posts_per_page' => 8, // Limitar el número de productos por página
+            // 'no_found_rows' => true, // Comentado para calcular el total de filas
         );
-    
+        
         $query = new WP_Query($args);
-    
+        
+        $total_products = $query->found_posts; // Obtener el total de productos y variaciones
+        
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
                 wc_get_template_part('content', 'product');
             }
         }
-    
+        
         wp_reset_postdata();
+        
+        // Puedes devolver el total de productos como parte de la respuesta
+        echo json_encode(array(
+            'total_products' => $total_products,
+        ));
+        
         die();
     }

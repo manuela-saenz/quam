@@ -79,3 +79,12 @@ if (post_password_required()) {
 </div>
 
 <?php do_action('woocommerce_after_single_product'); ?>
+
+
+<!-- <script>
+	document.addEventListener('DOMContentLoaded', ()=> {
+		setTimeout(() => {
+			console.log('Hello World');
+		}, 5000);
+	})
+</script> -->
