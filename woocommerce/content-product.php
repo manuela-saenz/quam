@@ -74,8 +74,8 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
         if (!in_array($color, $shown_colors)) {
             $shown_colors[] = $color;
             $variation_id = $variation_obj->get_id();
-            $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_id), 'medium'); // Tamaño optimizado
-            $size = 'medium'; // Puedes cambiar esto por 'thumbnail', 'medium', 'large', o un tamaño personalizado
+            $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_id), 'full'); // Tamaño optimizado
+            $size = 'full'; // Puedes cambiar esto por 'thumbnail', 'medium', 'large', o un tamaño personalizado
             $image_array = wp_get_attachment_image_src(get_post_thumbnail_id($variation_id), $size);
             $optimized_image_url = $image_array[0];
             $variation_title = removerTalla($variation_obj->get_name());

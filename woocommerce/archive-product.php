@@ -312,6 +312,8 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             var page = 1;
+            
+            console.log(arrayData);
 
             var color = '<?= empty($filter_color) ? null : $filter_color ?>';
             var talla = '<?= empty($filter_talla) ? null : $filter_talla ?>';
@@ -331,7 +333,7 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                     if (currentScrollTop > lastScrollTop) {
                         if (currentScrollTop + $(window).height() > galleryMidPoint) {
                             if (!color && !talla && !loadMoreExecuted) {
-                                loadMoreProducts();
+                                loadMoreProducts(arrayData);
                             }
                         }
                     }
@@ -348,66 +350,64 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
 
             var isLoading = false;
             let insertCount = 0;
+            var arrayData = [];
 
             function loadMoreProducts() {
-                var style = document.createElement('style');
-                style.type = 'text/css';
+                if (!document.getElementById('loadMoreProductsStyle')) {
+                    var style = document.createElement('style');
+                    style.type = 'text/css';
+                    style.id = 'loadMoreProductsStyle';
 
-                // Agregar el contenido CSS al elemento <style>
-                style.innerHTML = `
-                    .img-contain-loading {
-                        position: relative;
-                        overflow: hidden;
-                        animation: loading-move 1.5s infinite ease-in-out;
-                    }
-                            
-                    /* Animación de movimiento */
-                    @keyframes loading-move {
-                        0%,
-                        100% {
-                            transform: translateX(0);
-                        }
-                        50% {
-                            transform: translateX(10px);
-                        }
-                    }
-                `;
+                    style.innerHTML = `
+                            .img-contain-loading {
+                                position: relative;
+                                overflow: hidden;
+                                animation: loading-move 1.5s infinite ease-in-out;
+                            }
 
-                // Insertar el elemento <style> en el <head> del documento
-                document.head.appendChild(style);
-                if (insertCount < 10) {
-                    $('.galleryP.pt-3').append(`
-                        <div class="col-lg-3 col-sm-6 col-6 product type-product post-146 status-publish first outofstock has-post-thumbnail shipping-taxable purchasable product-type-variation loading" data-id="toastCardLoad">
-                
-                            <a href="" class="CardProducts w-100">
-                                <div class="img-contain img-contain-loading" title="Camiseta Hombre Polo QUAM" data-src="https://www.quam.com.co/wp-content/uploads/2024/04/QA03052023-22_1-3.jpg">
-                                    <img src="https://codigofuente.io/wp-content/uploads/2018/09/progress.gif" width="150" height="150">
-                                </div>
-                                <div class="info-highlights">
-                                    <h5 title="Camiseta Hombre Polo QUAM">Camiseta Hombre Polo QUAM</h5>
-                                    <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
-                                        <p class="mb-0 d-flex gap-2">
-                                            <del aria-hidden="true">
-                                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>&nbsp;68.900</bdi></span>
-                                            </del> 
-                                            <ins aria-hidden="true">
-                                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>&nbsp;40.900</bdi></span>
-                                            </ins>
-                                            COP
-                                        </p>
+                            /* Animación de movimiento */
+                            @keyframes loading-move {
+                                0%,
+                                100% {
+                                    transform: translateX(0);
+                                }
+                                50% {
+                                    transform: translateX(10px);
+                                }
+                            }
+                        `;       
+                    document.head.appendChild(style);
+                }
+                if (insertCount < 5 && arrayData.length > 0) {
+                    let placeholders = '';
+                    for (let i = 0; i < (5 - insertCount); i++) {
+                        placeholders += `
+                            <div class="col-lg-3 col-sm-6 col-6 product type-product post-146 status-publish first outofstock has-post-thumbnail shipping-taxable purchasable product-type-variation loading" data-id="toastCardLoad">
+                                <div class="CardProducts w-100 placeholder-glow">
+                                    <div class="img-contain placeholder w-100"></div>
+                                    <div class="info-highlights opacity-25">
+                                        <h5 class="col-12 placeholder md-2"></h5>
+                                        <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
+                                            <p class="mb-0 d-flex gap-2 placeholder col-6"></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                    `);
-                    insertCount++;
+                            </div>`;
+                        insertCount++;
+                    }
+                    $('.galleryP.pt-3').append(placeholders);
                 }
 
                 if (!isLoading) {
                     isLoading = true;
+                    var dataInserted = false;
 
-
-
+                    var $gallery = $('.row.galleryP');
+                    var existingProductIdsSet = new Set(
+                        $gallery.children().map(function() {
+                            return $(this).data('id');
+                        }).get()
+                    );
 
                     $.ajax({
                         url: ajaxUrl,
@@ -419,31 +419,39 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                         },
                         success: function(data) {
                             $('[data-id="toastCardLoad"]').remove();
-                            var $newProducts = $(data);
-                            var $gallery = $('.row.galleryP');
-                            var existingProductIds = $gallery.children().map(function() {
-                                return $(this).data('id');
-                            }).get();
-
-                            var dataInserted = false;
-
-                            $newProducts.each(function() {
-                                var newProductId = $(this).data('id');
-                                if (existingProductIds.indexOf(newProductId) === -1) {
-                                    $gallery.append(this);
+                            let newProductsHtml = '';
+                            data.forEach(item => {
+                                if (!existingProductIdsSet.has(item.id)) {
+                                    newProductsHtml += `
+                                    <div class="col-lg-3 col-sm-6 col-6 product type-product post-146 status-publish first outofstock has-post-thumbnail shipping-taxable purchasable product-type-variation loading" data-id="${item.id}">
+                                        <a href="${item.permalink}" class="CardProducts w-100">
+                                            <div class="img-contain" title="${item.name}" data="${item.image}">
+                                                <img data-src="${item.image}" width="150" height="150" alt="${item.name}">
+                                            </div>
+                                            <div class="info-highlights">
+                                                <h5 title="${item.name}">${item.name}</h5>
+                                                <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
+                                                    <p class="mb-0 d-flex gap-2">
+                                                        <del aria-hidden="true">
+                                                            <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>&nbsp;${item.price}</bdi></span>
+                                                        </del> 
+                                                        <ins aria-hidden="true">
+                                                            <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>&nbsp;${item.price}</bdi></span>
+                                                        </ins>
+                                                        COP
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>`;
                                     dataInserted = true;
                                 }
                             });
-
-                            if (!dataInserted) {
-                                console.log('Llegaste al final de la página');
-                            }
-
-
-                         
-
+                            $gallery.append(newProductsHtml);
+                            arrayData = data;
+                        },
+                        complete: function() {
                             const images = document.querySelectorAll("img[data-src]");
-
                             const observer = new IntersectionObserver((entries) => {
                                 entries.forEach((entry) => {
                                     if (entry.isIntersecting) {
@@ -458,8 +466,6 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                                 observer.observe(img);
                             });
 
-                        },
-                        complete: function() {
                             isLoading = false;
                             insertCount = 0;
                             page++;

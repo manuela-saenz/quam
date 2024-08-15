@@ -278,37 +278,42 @@ function get_all_product_categories_attributes_and_prices()
 
     add_action('wp_ajax_load_products', 'load_products');
     add_action('wp_ajax_nopriv_load_products', 'load_products');
-
-    function load_products()
-    {
+    function load_products() {
         $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
         $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
         
         $args = array(
-            'post_type' => array('product', 'product_variation'), // Incluir productos y variaciones
+            'post_type' => array('product', 'product_variation'),
             'paged' => $paged,
             'product_cat' => $category,
-            'posts_per_page' => 8, // Limitar el número de productos por página
-            // 'no_found_rows' => true, // Comentado para calcular el total de filas
+            'posts_per_page' => 5,
         );
         
         $query = new WP_Query($args);
         
-        $total_products = $query->found_posts; // Obtener el total de productos y variaciones
+        $products = array(); // Array para almacenar los productos
         
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
-                wc_get_template_part('content', 'product');
+                
+                // Obtener datos del producto
+                $product = wc_get_product(get_the_ID());
+                
+                $products[] = array(
+                    'id' => $product->get_id(),
+                    'name' => $product->get_name(),
+                    'price' => $product->get_price(),
+                    'image' => wp_get_attachment_image_src(get_post_thumbnail_id($product->get_id()), 'full')[0],
+                    'permalink' => get_permalink($product->get_id()),
+                );
             }
         }
         
         wp_reset_postdata();
         
-        // Puedes devolver el total de productos como parte de la respuesta
-        echo json_encode(array(
-            'total_products' => $total_products,
-        ));
+        // Enviar respuesta en JSON
+        wp_send_json($products);
         
         die();
     }

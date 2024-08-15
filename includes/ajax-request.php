@@ -29,6 +29,7 @@ class SyEAjaxRequest
             "woocommerce_remove_cart_item_qty",
             "woocommerce_ajax_favorites",
             "add_product_to_favorites",
+            "delete_favorite_product"
         );
 
 

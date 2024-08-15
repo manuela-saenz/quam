@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if ($related_products) : 
+if ($related_products) :
 	// echo '<pre>';
 	// print_r($related_products);
 	// echo '</pre>';
@@ -38,7 +38,7 @@ if ($related_products) :
 				<h6 class="section-subtitle  mb-4 text-center">También te podría interesar</h6>
 			<?php endif; ?>
 
-			<div class="related-swiper swiper overflow-visible">
+			<div id="related-swiper" class="related-swiper swiper overflow-visible">
 				<div class="swiper-wrapper">
 					<?php foreach ($related_products as $related_product) : ?>
 
@@ -49,8 +49,8 @@ if ($related_products) :
 						?>
 						<div class="swiper-slide">
 							<a href="<?= get_permalink($related_product->get_id()) ?>" class="CardProducts">
-								<div class="img-contain" title="<?php ?>">
-									<?= $related_product->get_image('medium', 'alt=' . get_the_title())   ?>
+								<div class="img-contain">
+									<img data-slide-src="<?= wp_get_attachment_image_url($related_product->get_image_id(), 'medium'); ?>" alt="<?= get_the_title() ?>" />
 								</div>
 								<div class="info-highlights">
 									<h5 title="<?= get_the_title() ?>"><?= get_the_title() ?></h5>
@@ -79,5 +79,6 @@ if ($related_products) :
 	</section>
 <?php
 endif;
+
 
 wp_reset_postdata();
