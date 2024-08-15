@@ -353,31 +353,6 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
             var arrayData = [];
 
             function loadMoreProducts() {
-                if (!document.getElementById('loadMoreProductsStyle')) {
-                    var style = document.createElement('style');
-                    style.type = 'text/css';
-                    style.id = 'loadMoreProductsStyle';
-
-                    style.innerHTML = `
-                            .img-contain-loading {
-                                position: relative;
-                                overflow: hidden;
-                                animation: loading-move 1.5s infinite ease-in-out;
-                            }
-
-                            /* Animación de movimiento */
-                            @keyframes loading-move {
-                                0%,
-                                100% {
-                                    transform: translateX(0);
-                                }
-                                50% {
-                                    transform: translateX(10px);
-                                }
-                            }
-                        `;       
-                    document.head.appendChild(style);
-                }
                 if (insertCount < 5 && arrayData.length > 0) {
                     let placeholders = '';
                     for (let i = 0; i < (5 - insertCount); i++) {
