@@ -48,14 +48,14 @@ $banners  = (new WP_Query(array(
         "taxonomy" => "product_cat",
         "parent" => 0,
         'exclude'    => array(26, 15),
-        "hide_empty" => false,
+        // "hide_empty" => false,
       ));
       foreach ($categories as $cat) :
         $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
         $thumbUrl = wp_get_attachment_image_url($thumbnail_id, "large");
       ?>
 
-        <div class="col-md-4 p-0 position-relative">
+        <div class="col p-0 position-relative">
           <div class="card-categories d-flex position-relative overflow-hidden">
             <a href="<?= get_term_link($cat->term_id) ?>" class="img-fit w-100 h-100">
               <img src="<?= $thumbUrl ?>" title="<?= $cat->name ?>" alt="<?= $cat->name ?>" loading="lazy">

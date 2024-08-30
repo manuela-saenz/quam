@@ -109,7 +109,7 @@
                 <?php $categories = get_terms(
                   array(
                     "taxonomy" => "product_cat",
-                    "hide_empty" => false,
+                    // "hide_empty" => false,
                     "parent" => 0,
                     'exclude' => array(26, 15),
                     'orderby' => 'term_order',

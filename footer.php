@@ -1,4 +1,4 @@
-<section id="shipping" class="<?= is_singular('product') ? "footer-product-none" : "" ?> pb-0">
+<!-- <section id="shipping" class="<?= is_singular('product') ? "footer-product-none" : "" ?> pb-0">
   <div class="container position-relative">
     <div class="row center-all">
       <div class="col-md-12 col-xxl-10">
@@ -19,7 +19,7 @@
               <div>
                 <b class="title"> Suscríbete a nuestro boletín </b> <br>
                 <!-- ...y recibe un cupón de <b>$20.000 </b> para tu primera compra. -->
-              </div>
+              <!-- </div>
             </div>
             <div class="col-md-4">
               <?php echo do_shortcode('[newsletter_form]'); ?>
@@ -28,9 +28,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-</section>
+<!-- </section> -->
 
 </main>
 

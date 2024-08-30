@@ -46,9 +46,10 @@ if ($color) {
     $product_title = get_the_title();
     $product_permalink = get_permalink($product_id);
     $product_price_html = $product->get_price_html() . " COP";
+    $product_status = $product->get_stock_status();
 ?>
     <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>">
-        <a href="<?= $product_permalink ?>" class="CardProducts w-100">
+        <a href="<?= $product_permalink ?>" class="CardProducts w-100"  data-stock = "<?= $product_status; ?>">
             <div class="img-contain bb" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                 <?= $image ?>
             </div>
@@ -81,12 +82,14 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             $variation_title = removerTalla($variation_obj->get_name());
             $variation_permalink = get_permalink($variation_id);
             $variation_price = $variation_obj->get_price_html() . " COP";
+            $variation_status = $variation_obj->get_stock_status();
+            
 ?>
             <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?> data-id="<?= $variation_id; ?>">
-                <a href="<?= $variation_permalink ?>" class="CardProducts w-100">
+                <a href="<?= $variation_permalink ?>" class="CardProducts w-100" data-stock = "<?= $variation_status; ?>">
                     <div class="img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                         <!-- <?= $variation_image ?> -->
-                        <img data-src="<?=  $optimized_image_url ?> " />
+                        <img data-src="<?= $optimized_image_url ?> " />
                     </div>
                     <div class="info-highlights">
                         <h5 title="<?= $variation_title ?>"><?= $variation_title ?></h5>
