@@ -49,8 +49,8 @@ if ($color) {
     $product_status = $product->get_stock_status();
 ?>
     <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>">
-        <a href="<?= $product_permalink ?>" class="CardProducts w-100"  data-stock = "<?= $product_status; ?>">
-            <div class="img-contain bb" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
+        <a href="<?= $product_permalink ?>" class="CardProducts w-100 <?= $product_status ?>"  data-stock="<?= $product_status; ?>">
+            <div class="img-contain bb center-all" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                 <?= $image ?>
             </div>
             <div class="info-highlights">
@@ -86,9 +86,8 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             
 ?>
             <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?> data-id="<?= $variation_id; ?>">
-                <a href="<?= $variation_permalink ?>" class="CardProducts w-100" data-stock = "<?= $variation_status; ?>">
-                    <div class="img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
-                        <!-- <?= $variation_image ?> -->
+                <a href="<?= $variation_permalink ?>" class="CardProducts w-100 <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
+                    <div class="img-contain center-all" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                         <img data-src="<?= $optimized_image_url ?> " />
                     </div>
                     <div class="info-highlights">

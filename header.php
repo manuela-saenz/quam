@@ -65,28 +65,16 @@
         <div class="contact d-flex">
           <a href="tel:573114482684" target="_blank"><i class="icon-phone1"></i><span> +57 311 4482684 </span></a>
           <!-- <a href="mailto:" target="_blank"><i class="icon-email"></i><span>info@quamservice.com</span> </a> -->
-          <div id="track-package-link" class="d-flex align-items-center rastreo-button"><i class="icon-delivery"></i>
+          <button id="track-package-link" class="d-flex text-white align-items-center rastreo-button" data-bs-toggle="modal" data-bs-target="#trackModal"><i class="icon-delivery"></i>
             <p class="mb-0" style="font-family:Raleway,sans-serif">Rastrear paquete</p>
-          </div>
-          <div id="track-package-form" class="relative" style="display:none;">
-            <div class="contenedor-rastreo-header" style="position:relative;">
-              <input id="tracking-code" style="border: 1px solid #ccc; border-radius: 4px; width: 220px;" placeholder="Código de rastreo Melonn" value="" name="s">
-              <div style="position: absolute; top: 3px; right: 5px; background: #ccc; border: none; cursor: pointer; border-radius:5px;" onclick="hideTracking()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M18 6l-12 12" />
-                  <path d="M6 6l12 12" />
-                </svg>
-              </div>
-            </div>
-            <button class="mb-0 btn btn-light btn-sm" onclick="trackPackage()"><i class="icon-delivery"></i>
-              Rastrear</button>
-          </div>
+          </button>
+
         </div>
+
 
         <div class="d-lg-flex d-none">
           <div class="img-fit">
-            <img src="<?php bloginfo('template_url') ?>/media/images/credit-card.png" alt="">
+            <img src="<?php bloginfo('template_url') ?>/media/images/payment_methods.svg" alt="">
           </div>
         </div>
       </div>
@@ -161,6 +149,34 @@
 
     </div>
   </header>
+
+  <div class="modal fade" id="trackModal" tabindex="-1" aria-labelledby="trackModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 fw-semibold" id="trackModalLabel">Rastrear paquete</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M18 6l-12 12" />
+              <path d="M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="track-package-form" class="relative d-flex flex-column">
+            <div class="contenedor-rastreo-header" style="position:relative;">
+              <label for="tracking-code" class=" fw-semibold">Código de rastreo</label>
+              <input id="tracking-code" class="lh-1 mb-4 px-3 py-3 w-100" style="border: 1px solid #ccc; border-radius: 4px;" placeholder="Ingresa tu código" value="" class="w-100" name="s">
+            </div>
+            <button class="mb-0 quam-btn blue" onclick="trackPackage()">
+              Rastrear paquete</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <?php desplegableProductos("Bolsa de la compra", "mini-carrito") ?>
   <?php desplegableProductos("Mis favoritos", "mini-favoritos") ?>

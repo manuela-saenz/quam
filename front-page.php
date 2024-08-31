@@ -108,8 +108,8 @@ $banners  = (new WP_Query(array(
             <?php endforeach ?>
           </div>
         </div>
+        </div>
       </div>
-    </div>
   </div>
 </section>
 
@@ -118,7 +118,7 @@ $colecciones = get_field('colecciones');
 $primera_coleccion = $colecciones['primera_coleccion'];
 $segunda_coleccion = $colecciones['segunda_coleccion'];
 ?>
-<section id="summer_collection" class="">
+<section id="summer_collection" class="pb-0">
   <div class="container-fluid p-0">
     <div class="row m-0">
       <div class="col-md-8 p-0 position-relative">

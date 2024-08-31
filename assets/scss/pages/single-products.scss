@@ -275,6 +275,7 @@
                 border-radius: 6px !important;
                 &.cfvsw-selected-swatch {
                   padding: 4px;
+                  border: 1px solid #222;
                 }
               }
             }
@@ -302,6 +303,9 @@
         height: auto;
         padding: 10px;
       }
+    }
+    del bdi{
+      opacity: 0.6;
     }
   }
   @media (max-width:991px){

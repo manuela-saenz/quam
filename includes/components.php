@@ -6,8 +6,9 @@ function productCard($product)
   // echo "<pre>";
   // print_r($product->id);
   // echo "</pre>";
+  $product_status = $wcProd->get_stock_status();
 ?>
-  <a href="<?= get_permalink($product->ID) ?>" class="CardProducts">
+  <a href="<?= get_permalink($product->ID) ?>" class="CardProducts <?= $product_status ?>">
     <div class="img-contain" title="<?= get_the_title($product) ?>">
       <?= $wcProd->get_image('medium', 'alt=' . get_the_title())   ?>
     </div>

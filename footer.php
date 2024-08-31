@@ -18,7 +18,7 @@
             <div class="col-md-6">
               <div>
                 <b class="title"> Suscríbete a nuestro boletín </b> <br>
-                <!-- ...y recibe un cupón de <b>$20.000 </b> para tu primera compra. -->
+               ...y recibe un cupón de <b>$20.000 </b> para tu primera compra. -->
               <!-- </div>
             </div>
             <div class="col-md-4">

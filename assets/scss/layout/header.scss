@@ -50,7 +50,7 @@ header {
     }
 
     .img-fit {
-      filter: grayscale(1);
+      // filter: grayscale(1);
       width: 100%;
       height: 20px;
     }
@@ -614,22 +614,7 @@ header {
   display: flex;
 }
 #track-package-form{
-  overflow: visible;
   display: flex;
   align-items: center;
   position: relative;
-  height: 21px;
-  input{
-    margin-left: 5px;
-    outline: none;
-    border-radius: 5px;
-    padding: 3px;
-    padding-left: 8px;
-  }
-  button{
-    margin-left: 5px;
-    display: flex;
-    padding: 3px;
-    align-items: center;
-  }
 }

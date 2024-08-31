@@ -44,11 +44,11 @@ if ($related_products) :
 
 						<?php
 						$post_object = get_post($related_product->get_id());
-
+						$product_status = $related_product->get_stock_status();
 
 						?>
 						<div class="swiper-slide">
-							<a href="<?= get_permalink($related_product->get_id()) ?>" class="CardProducts">
+							<a href="<?= get_permalink($related_product->get_id()) ?>" class="CardProducts <?= $product_status ?>">
 								<div class="img-contain">
 									<img data-slide-src="<?= wp_get_attachment_image_url($related_product->get_image_id(), 'medium'); ?>" alt="<?= get_the_title() ?>" />
 								</div>
