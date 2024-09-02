@@ -19,7 +19,7 @@
               <div>
                 <b class="title"> Suscríbete a nuestro boletín </b> <br>
                ...y recibe un cupón de <b>$20.000 </b> para tu primera compra. -->
-              <!-- </div>
+<!-- </div>
             </div>
             <div class="col-md-4">
               <?php echo do_shortcode('[newsletter_form]'); ?>
@@ -71,10 +71,11 @@
 
   <div class="col-md-12">
     <div class="copy">
-      <div class="container">
+      <div class="container d-flex justify-content-between">
         <span>© Todos los derechos reservados 2024. QUAM</span>
+        <span><a href="https://intuitionstudio.co/" target="_blank">Creado por Intuition Bussines © 2024</a></span>
         <div class="img-fit logo">
-          <img src="<?php bloginfo('template_url') ?>/media/images/Logo-white.svg" alt="">
+          <img src="https://www.quam.com.co/wp-content/themes/quam/media/images/Logo-white.svg" alt="">
         </div>
       </div>
     </div>

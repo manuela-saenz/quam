@@ -192,6 +192,12 @@ function get_products_by_category_name($category_name)
 // }
 
 
+function custom_woocommerce_products_per_page($products_per_page)
+{
+    return 5; // Establece el número de productos por página
+}
+add_filter('loop_shop_per_page', 'custom_woocommerce_products_per_page', 5);
+
 function get_all_product_categories_attributes_and_prices()
 {
     // Obtener todas las categorías de productos
@@ -278,28 +284,29 @@ function get_all_product_categories_attributes_and_prices()
 
     add_action('wp_ajax_load_products', 'load_products');
     add_action('wp_ajax_nopriv_load_products', 'load_products');
-    function load_products() {
+    function load_products()
+    {
         $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
         $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
-        
+
         $args = array(
             'post_type' => array('product', 'product_variation'),
             'paged' => $paged,
             'product_cat' => $category,
             'posts_per_page' => 5,
         );
-        
+
         $query = new WP_Query($args);
-        
+
         $products = array(); // Array para almacenar los productos
-        
+
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
-                
+
                 // Obtener datos del producto
                 $product = wc_get_product(get_the_ID());
-                
+
                 $products[] = array(
                     'id' => $product->get_id(),
                     'name' => $product->get_name(),
@@ -309,11 +316,11 @@ function get_all_product_categories_attributes_and_prices()
                 );
             }
         }
-        
+
         wp_reset_postdata();
-        
+
         // Enviar respuesta en JSON
         wp_send_json($products);
-        
+
         die();
     }

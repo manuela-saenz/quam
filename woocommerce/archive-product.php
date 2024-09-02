@@ -272,6 +272,7 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                 <div class="center-all border-top border-bottom mt-3 py-2"><?= woocommerce_result_count() ?></div>
             </div>
         </div>
+
         <?php
         if (woocommerce_product_loop()) {
 
@@ -297,7 +298,7 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
              *
              * @hooked woocommerce_pagination - 10
              */
-            // do_action('woocommerce_after_shop_loop');
+            do_action('woocommerce_after_shop_loop');
         } else {
             /**
              * Hook: woocommerce_no_products_found.
@@ -308,12 +309,16 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
         }
         ?>
 
+        <!-- <nav aria-label="Page navigation example d-none" >
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </nav> -->
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             var page = 1;
-            
-            console.log(arrayData);
 
             var color = '<?= empty($filter_color) ? null : $filter_color ?>';
             var talla = '<?= empty($filter_talla) ? null : $filter_talla ?>';
@@ -448,7 +453,7 @@ $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
                     });
                 }
             }
-        </script>
+        </script> -->
 
     </div>
 
