@@ -73,8 +73,8 @@
 
 
         <div class="d-lg-flex d-none">
-          <div class="img-fit">
-            <img src="<?php bloginfo('template_url') ?>/media/images/payment_methods.svg" alt="">
+          <div class="img-contain">
+            <img src="<?php bloginfo('template_url') ?>/media/images/payment_methods.svg" alt="payment-methods">
           </div>
         </div>
       </div>

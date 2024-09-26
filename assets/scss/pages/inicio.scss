@@ -41,6 +41,9 @@
     }
 
     .info-banner {
+        @media(max-width:1400px) {
+         padding-left: 40px;
+        }
         @media(max-width:600px) {
             text-align: center;
             @include center-all;
@@ -170,7 +173,7 @@
             height: 100%;
         }
 
-        @media(min-width:1450px) {
+        @media(min-width:1200px) {
             height: 100%;
         }
 
@@ -293,6 +296,15 @@
         margin-bottom: 0;
         font-weight: 700;
         line-height: 1.1;
+        @media (max-width:1400px){
+            font-size: 45px;
+        }
+        @media (max-width:1200px){
+            font-size: 40px;
+        }
+        @media (max-width:768px){
+            font-size: 35px;
+        }
     }
 
     a {

@@ -49,9 +49,12 @@ if ($color) {
     $product_status = $product->get_stock_status();
 ?>
     <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>">
-        <a href="<?= $product_permalink ?>" class="CardProducts w-100 <?= $product_status ?>"  data-stock="<?= $product_status; ?>">
+        <a href="<?= $product_permalink ?>" class="CardProducts w-100 <?= $product_status ?>" data-stock="<?= $product_status; ?>">
             <div class="img-contain bb center-all" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                 <?= $image ?>
+                <pre class="d-none">
+                    <?php print_r($product) ?>
+                </pre>
             </div>
             <div class="info-highlights">
                 <h5 title="<?= $product_title ?>"><?= $product_title ?></h5>
@@ -83,12 +86,14 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             $variation_permalink = get_permalink($variation_id);
             $variation_price = $variation_obj->get_price_html() . " COP";
             $variation_status = $variation_obj->get_stock_status();
-            
+
 ?>
             <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?> data-id="<?= $variation_id; ?>">
                 <a href="<?= $variation_permalink ?>" class="CardProducts w-100 <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
                     <div class="img-contain center-all" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
-                        <img data-src="<?= $optimized_image_url ?> " />
+                        <img data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" />
+                       
+                        <img class="position-absolute top-0 left-0" data-src="<?= $variation['variation_gallery_images'][1]['src'] ?>" alt="<?= $variation_title ?>">
                     </div>
                     <div class="info-highlights">
                         <h5 title="<?= $variation_title ?>"><?= $variation_title ?></h5>

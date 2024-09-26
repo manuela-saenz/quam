@@ -41,6 +41,25 @@ var homeSwiper = new Swiper(".generationSwiper", {
         },
       },
     },
+    1200: {
+      slidesPerView: 2.6,
+      spaceBetween: 24,
+      centeredSlides: false,
+      loop: false,
+      creativeEffect: {
+        progressMultiplier: 2,
+        limitProgress: 5,
+        prev: {
+          shadow: false,
+          translate: ["-55%", 0, 0],
+          opacity: 0,
+        },
+        next: {
+          shadow: false,
+          translate: ["53%", 0, 0],
+        },
+      },
+    },
     991: {
       slidesPerView: 2.2,
       spaceBetween: 24,
