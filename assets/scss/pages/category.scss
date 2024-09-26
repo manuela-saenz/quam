@@ -37,10 +37,11 @@
 .select-box {
   position: relative;
   display: inline-block;
+
   * {
     margin-bottom: 0 !important;
   }
-  
+
   select {
     max-width: 250px;
     padding: 10px;
@@ -49,12 +50,13 @@
     border-radius: 5px;
     outline: none;
     appearance: none;
+
     @media (max-width:450px) {
       max-width: 100%;
       width: 100%;
     }
   }
- 
+
   .arrow {
     position: absolute;
     top: 50%;
@@ -67,32 +69,38 @@
     border-top: 6px solid black;
     transition: transform 0.3s ease;
   }
-  select:focus + .arrow {
+
+  select:focus+.arrow {
     transform: translateY(-50%) rotate(180deg);
   }
 }
 
 .yith-wcan-filters {
   margin-bottom: 0 !important;
+
   .yith-wcan-filter {
     margin-bottom: 0 !important;
     min-width: 200px;
   }
+
   .yith-wcan-dropdown {
     padding: 10px 15px !important;
   }
+
   form {
     display: flex;
     gap: 10px;
   }
+
   h4 {
     display: none;
   }
 }
 
-.products{
+.products {
   margin: 0 10px 0 5px;
-  p{
+
+  p {
     font-weight: 600;
   }
 
@@ -101,6 +109,7 @@
 #infoProducts {
   position: relative;
   overflow: hidden;
+
   &.loading {
     &:before {
       content: "";
@@ -112,23 +121,28 @@
       height: 100%;
       z-index: 2;
     }
+
     .galleryP {
       .product {
         animation: load 1.5s infinite;
       }
+
       @keyframes load {
-        0%{
+        0% {
           opacity: 1;
         }
-        50%{
+
+        50% {
           opacity: 0.7;
         }
-        100%{
+
+        100% {
           opacity: 1;
         }
       }
     }
   }
+
   @media (max-width: 991px) {
     padding-bottom: 0;
   }
@@ -156,7 +170,9 @@
 
   .galleryP {
     row-gap: 20px;
+
     .product {
+
       &:nth-child(10n - 1),
       &:nth-child(10n) {
         width: 50%;
@@ -201,23 +217,36 @@
 }
 
 /* Pagination links */
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-  color: $dark_blue;
-  background: rgb(0 46 114 / 9%);
-  margin-right: 10px;
+.pagination {
+  .page-item {
+    a {
+      color: $dark_blue;
+      padding: 8px 16px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      color: $dark_blue;
+      background: rgb(0 46 114 / 9%);
+      margin-right: 10px;
+      display: flex;
+    }
+
+    &.active {
+      a{
+        background: $dark_blue;
+        color: #fff;
+        &.next, &.prev{
+          border: 1px solid $dark_blue;
+          background: transparent;
+          color: $dark_blue;
+          &:hover{
+            background: #eee;
+          }
+        }
+      }
+    }
+  }
 }
 
-/* Style the active/current link */
-.pagination a.active {
-  background-color: $dark_blue;
-  color: white;
-  color: white;
-}
 
 /* Add a grey background color on mouse-over */
 .pagination a:hover:not(.active) {
@@ -225,29 +254,33 @@
 }
 
 // estilos filtros
-#filterForm{
-  button{
+#filterForm {
+  button {
     border-radius: 5px;
   }
 }
-.filtro-activo-contenedor{
+
+.filtro-activo-contenedor {
   margin-top: 10px;
   border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   align-items: end;
   justify-content: end;
-  ul{
+
+  ul {
     margin: 0;
     padding: 0;
-    li{
+
+    li {
       padding: 5px;
       background: #eeeeee;
       margin: 5px;
       border-radius: 5px;
     }
   }
-  button{
+
+  button {
     background: rgb(194, 194, 194);
     margin-left: 5px;
     color: white;
@@ -255,45 +288,53 @@
     padding: 5px 10px;
   }
 }
-.input-box{
+
+.input-box {
   border: 1px solid #e2e2e2;
   border-radius: 5px;
   height: 48px;
   overflow: hidden;
   width: 135px;
-  
-  input{    
+
+  input {
     padding: 15px;
     border: none;
     outline: none;
     height: 50px;
   }
-  select{
+
+  select {
     height: 100%;
     border: none;
     cursor: pointer;
   }
+
   input:-webkit-autofill,
   input:-webkit-autofill:focus {
-      box-shadow: 0 0 0 1000px white inset !important; /* Para navegadores basados en WebKit como Chrome y Safari */
-      -webkit-text-fill-color: inherit !important; /* Para asegurar que el texto sea visible */
+    box-shadow: 0 0 0 1000px white inset !important;
+    /* Para navegadores basados en WebKit como Chrome y Safari */
+    -webkit-text-fill-color: inherit !important;
+    /* Para asegurar que el texto sea visible */
   }
 }
-.cont-select-box{
+
+.cont-select-box {
   display: flex;
   flex-direction: column;
   margin: 0 5px 0 10px;
-  label{
+
+  label {
     font-weight: 800;
   }
-  .select-box{
-    &:has(select){
-      &::before{
+
+  .select-box {
+    &:has(select) {
+      &::before {
         content: "";
-        position: absolute; 
+        position: absolute;
         top: 50%;
         right: 10px;
-        transform: translateY(-50%); 
+        transform: translateY(-50%);
         width: 0;
         height: 0;
         border-left: 6px solid transparent;
@@ -304,13 +345,15 @@
     }
   }
 }
-.span-price-sign{
+
+.span-price-sign {
   height: 50px;
   display: flex;
   align-items: center;
   font-weight: bold;
 }
-.cont-flecha{
+
+.cont-flecha {
   background: rgb(255, 255, 255);
   height: 22px;
   top: 14px;
@@ -318,33 +361,37 @@
   position: absolute;
   right: 0px;
   z-index: 1;
-  .arrow{
+
+  .arrow {
     right: 5px;
   }
 }
-.btn-filter-responsive{
+
+.btn-filter-responsive {
   display: none;
 }
 
 // elementos filtros-responsivos
-.close-filtros{
- display: none;
+.close-filtros {
+  display: none;
 }
 
 
 @media (max-width:1200px) {
-  .btn-filter-responsive{
+  .btn-filter-responsive {
     display: flex;
     align-items: end;
     justify-content: end;
-    .select-box{
+
+    .select-box {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 45px;
     }
-  } 
-  .cont-form-responsive{
+  }
+
+  .cont-form-responsive {
     position: fixed;
     width: 300px;
     height: 100vh;
@@ -359,25 +406,29 @@
     align-items: start;
     transition: all .3s;
     justify-content: start;
-    
-    .cont-flecha{
+
+    .cont-flecha {
       background: transparent;
     }
-    #filterForm{
+
+    #filterForm {
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: start;
       width: 80%;
       margin: 10px auto;
-      > div{
+
+      >div {
         width: 100%;
       }
     }
-    .span-price-sign{
+
+    .span-price-sign {
       display: none;
     }
-    .close-filtros{
+
+    .close-filtros {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -385,59 +436,71 @@
       margin: 2px auto;
       padding: 13px;
       border-bottom: 1px solid #ccc;
-      h2{
+
+      h2 {
         font-size: 16px;
         margin: 0;
         font-weight: 600;
       }
-      svg{
+
+      svg {
         color: rgb(107, 107, 107);
         width: 35px;
         height: 35px;
       }
     }
-    .titulo-menu-filtro{
+
+    .titulo-menu-filtro {
       margin-top: 50px;
     }
-    .select-box{
+
+    .select-box {
       margin: 0px 0 10px 0;
     }
-    .select-box select{
+
+    .select-box select {
       width: 100%;
       background: white;
     }
-    input{
+
+    input {
       width: 100%;
       margin-bottom: 0px;
     }
-    .cont-select-box{
+
+    .cont-select-box {
       width: 100%;
       margin: 0;
-      .input-box{
+
+      .input-box {
         max-width: 100%;
         min-width: 100%;
       }
     }
-    #filterForm button{
+
+    #filterForm button {
       width: 100%;
       margin: 0;
     }
-    .filtro-activo-contenedor{
+
+    .filtro-activo-contenedor {
       width: 100%;
       margin-bottom: 50px;
     }
   }
 }
+
 @media (max-width: 991px) {
-  .cont-form-responsive{
+  .cont-form-responsive {
     top: 70px;
     padding-top: 5px;
-    .cont-form-responsive #filterForm{
+
+    .cont-form-responsive #filterForm {
       margin: 10px auto 40px;
     }
   }
 }
 
-.toggle{
+.toggle {
   right: 0;
 }

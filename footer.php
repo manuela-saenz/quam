@@ -73,7 +73,7 @@
     <div class="copy">
       <div class="container d-flex justify-content-between">
         <span>© Todos los derechos reservados 2024. QUAM</span>
-        <span><a href="https://intuitionstudio.co/" target="_blank">Creado por Intuition Bussines © 2024</a></span>
+        <span><a href="https://intuitionstudio.co/" target="_blank">Desarrollado por <span class="text-decoration-underline">Intuition Bussines</span></a></span>
         <div class="img-fit logo">
           <img src="https://www.quam.com.co/wp-content/themes/quam/media/images/Logo-white.svg" alt="">
         </div>
