@@ -106,7 +106,8 @@ defined('ABSPATH') || exit;
 														</div>
 														<!-- <div class="col-md-6">
 															<label for="" class="mt-2 ms-1"><b>Ciudad <span class="text-danger">*</span></b></label>
-															<?php // woocommerce_form_field(array_keys($fields)[5], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[5])); ?>
+															<?php // woocommerce_form_field(array_keys($fields)[5], $fields['billing_addres_2'], $checkout->get_value(array_keys($fields)[5])); 
+															?>
 														</div> -->
 														<div class="col-md-6 fw-bold">
 															<?php woocommerce_form_field(array_keys($fields)[8], $fields['billing_postcode'], $checkout->get_value(array_keys($fields)[7])); ?>
@@ -169,10 +170,36 @@ defined('ABSPATH') || exit;
 						<div class="col-lg-4 col-md-12 ps-md-4">
 							<div class="code">
 								<div class="position-relative">
-									<!-- <div class="position-relative">
-										<input type="text" id="codigo_descuento" name="codigo_descuento" placeholder="Código de descuento" required>
-										<input type="submit" class="quam-btn blue codigo" value="Aplicar">
-									</div> -->
+									<?php
+									/**
+									 * Checkout coupon form
+									 *
+									 * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-coupon.php.
+									 *
+									 * HOWEVER, on occasion WooCommerce will need to update template files and you
+									 * (the theme developer) will need to copy the new files to your theme to
+									 * maintain compatibility. We try to do this as little as possible, but it does
+									 * happen. When this occurs the version of the template file will be bumped and
+									 * the readme will list any important changes.
+									 *
+									 * @see https://woo.com/document/template-structure/
+									 * @package WooCommerce\Templates
+									 * @version 7.0.1
+									 */
+
+									defined('ABSPATH') || exit;
+
+									if (! wc_coupons_enabled()) { // @codingStandardsIgnoreLine.
+										return;
+									}
+
+									?>
+									<div class="woocommerce-form-coupon-toggle">
+										<?php wc_print_notice(apply_filters('woocommerce_checkout_coupon_message', esc_html__('¿Tienes un cupón?', 'woocommerce') . ' <a href="#" class="showcoupon"><strong>' . esc_html__('Haz clic aquí para ingresar tu código', 'woocommerce') . '</strong></a>'), 'notice'); ?>
+									</div>
+
+
+
 									<?php woocommerce_order_review() ?>
 
 								</div>
@@ -211,8 +238,7 @@ defined('ABSPATH') || exit;
 	<?php endif; ?>
 
 	<script>
-
-		window.onload = function () {
+		window.onload = function() {
 			const poblacion = document.getElementById('billing_city_field');
 			const labels = document.getElementsByTagName('label');
 
@@ -228,5 +254,4 @@ defined('ABSPATH') || exit;
 				}
 			}
 		};
-
 	</script>

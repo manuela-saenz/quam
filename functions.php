@@ -324,3 +324,20 @@ function get_all_product_categories_attributes_and_prices()
 
         die();
     }
+
+
+    add_action('template_redirect', 'apply_custom_coupon_code');
+
+    function apply_custom_coupon_code()
+    {
+        if (isset($_POST['codigo_descuento']) && !empty($_POST['codigo_descuento'])) {
+            $coupon_code = sanitize_text_field($_POST['codigo_descuento']);
+            $applied = WC()->cart->apply_coupon($coupon_code);
+
+            if ($applied) {
+                wc_print_notices();
+            } else {
+                wc_add_notice(__('El cupón no es válido.', 'woocommerce'), 'error');
+            }
+        }
+    }
