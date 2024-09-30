@@ -14,23 +14,36 @@ $banners  = (new WP_Query(array(
       <div class="col-md-12 p-0">
         <div class="swiper banner">
           <div class="swiper-wrapper">
-            <?php foreach ($banners as $banner) : ?>
-              <div class="swiper-slide">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-6 col-xxl-6 offset-xxl-1 " style="z-index: 3;">
-                      <div class="info-banner">
-                        <h1 class="section-title"><?= $banner->post_title ?></h1>
-                        <a href="<?= $banner->btn_url ?>" class="quam-btn red">Ver ofertas</a>
+            <?php foreach ($banners as $banner) :
+              $variableImage = get_field('imagen_adaptable', $banner);
+            ?>
+              <div class="swiper-slide overflow-hidden <?= $variableImage ? 'p-0 variable-slide' : '' ?>">
+                <?php if ($variableImage) { ?>
+                  <a href="<?= $banner->btn_url ?>" class="img-contain variable position-relative start-0 top-0 w-100" style="transform: none;">
+                    <picture class="w-100">
+                      <source media="(min-width: 1024px)" srcset="<?= $variableImage['imagen_pc']['url'] ?>" />
+                      <source media="(min-width: 578px)" srcset="<?= $variableImage['imagen_tablet']['url'] ?>" />
+                      <source media="(max-width: 578px)" srcset="<?= $variableImage['imagen_celular']['url'] ?>" />
+                      <img src="<?= $variableImage['imagen_pc']['url'] ?>" alt="<?= $banner->post_title ?>" />
+                    </picture>
+                  </a>
+                <?php } else { ?>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-6 col-xxl-6 offset-xxl-1 " style="z-index: 3;">
+                        <div class="info-banner">
+                          <h1 class="section-title"><?= $banner->post_title ?></h1>
+                          <a href="<?= $banner->btn_url ?>" class="quam-btn red">Ver ofertas</a>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="img-contain">
-                        <img src="<?= get_the_post_thumbnail_url($banner->ID) ?>" title="<?= $banner->post_title ?>" alt="<?= $banner->post_title ?>" loading="lazy">
+                      <div class="col-md-4">
+                        <div class="img-contain">
+                          <img src="<?= get_the_post_thumbnail_url($banner->ID) ?>" title="<?= $banner->post_title ?>" alt="<?= $banner->post_title ?>" loading="lazy">
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                <?php } ?>
               </div>
             <?php endforeach; ?>
           </div>

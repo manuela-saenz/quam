@@ -41,7 +41,7 @@
     }
 
     .info-banner {
-        @media(max-width:1400px) {
+        @media(max-width:1400px) and (min-width:768px) {
          padding-left: 40px;
         }
         @media(max-width:600px) {
@@ -165,12 +165,20 @@
         // height: fit-content;
         // width: 680px;
         display: flex;
-        aspect-ratio: 1.2 / 1;
+        &:not(.variable){
+            aspect-ratio: 1.2 / 1;
+        }
 
         @media(max-width:1200px) {
             left: 50%;
             transform: translateX(-50%) translateY(-50%);
             height: 100%;
+        }
+        @media(max-width:768px) {
+            left: 50%;
+            transform: translateX(-50%);
+            height: 90%;
+            top: initial;
         }
 
         @media(min-width:1200px) {
@@ -182,8 +190,17 @@
 
     .swiper-slide {
         position: relative;
-        height: calc(100vh - var(--header-height));
-        padding: 5vw 0;
+        &:not(.variable-slide){
+             height: calc(100vh - var(--header-height));
+             padding: 5vw 0;
+             @media (max-width: 768px) {
+                height: calc(85vh - var(--header-height));
+            }
+            @media (max-width: 578px) {
+                height: auto;
+                aspect-ratio: 1 / 1.228;
+            }
+        }
         display: flex;
         align-items: center;
 
@@ -286,10 +303,11 @@
     bottom: 33px;
     z-index: 2;
     background: $gray;
-    padding: 20px 60px;
+    padding: 20px 35px;
     left: 50%;
     transform: translateX(-50%);
-
+    max-width: 280px;
+    width: 100%;
     h5 {
         color: $white;
         font-size: 50px;
@@ -299,7 +317,7 @@
         @media (max-width:1400px){
             font-size: 45px;
         }
-        @media (max-width:1200px){
+        @media (max-width:1200px) and (min-width:768px){
             font-size: 40px;
         }
         @media (max-width:768px){

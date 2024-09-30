@@ -4,7 +4,8 @@ var swiper = new Swiper(".banner", {
     nextEl: ".swiperBanner-button-next",
     prevEl: ".swiperBanner-button-prev",
   },
-  // loop: true,
+  autoHeight:true,
+  loop: true,
   // parallax: true,
   // autoplay: {
   //     delay: 3000,
