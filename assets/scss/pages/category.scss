@@ -9,24 +9,30 @@
     height: 150px;
   }
 
-  &:before {
-    content: "";
-    position: absolute;
-    background-image: url(media/images/Logo-transparent.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 222px;
-    width: 930px;
-    bottom: -82px;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0.5;
+  &:not(.campaign) {
+    &:before {
+      content: "";
+      position: absolute;
+      background-image: url(media/images/Logo-transparent.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 222px;
+      width: 930px;
+      bottom: -82px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.5;
 
-    @media (max-width: 991px) {
-      height: 103px;
-      width: 456px;
-      bottom: -17px;
+      @media (max-width: 991px) {
+        height: 103px;
+        width: 456px;
+        bottom: -17px;
+      }
     }
+  }
+  
+  &.campaign{
+    height: 300px;
   }
 
   .section-subtitle {
@@ -231,14 +237,17 @@
     }
 
     &.active {
-      a{
+      a {
         background: $dark_blue;
         color: #fff;
-        &.next, &.prev{
+
+        &.next,
+        &.prev {
           border: 1px solid $dark_blue;
           background: transparent;
           color: $dark_blue;
-          &:hover{
+
+          &:hover {
             background: #eee;
           }
         }
