@@ -31,21 +31,15 @@ header {
         }
       }
 
-      span {
-        @media (max-width: 990px) {
-          display: none;
-        }
-      }
-
-      p {
-        @media (max-width: 580px) {
-          display: none;
-        }
-      }
+     
 
       i {
         margin-right: 7px;
         font-size: 17px;
+      }
+      @media (max-width: 768px){
+        width: 100%;
+        justify-content: space-between;
       }
     }
 
@@ -55,9 +49,9 @@ header {
       max-width: 234px;
       height: 20px;
     }
-    @media (max-width: 991px) {
-      display: none;
-    }
+    // @media (max-width: 991px) {
+    //   display: none;
+    // }
   }
 
   .info-contact {
@@ -491,12 +485,12 @@ header {
       transition: all 0.3s;
       position: relative;
     }
-    @media (min-width: 991px) {
+    // @media (min-width: 991px) {
       .header-contact,
       .info-contact {
         top: -50px;
       }
-    }
+    // }
 
     .info-contact {
       &.infoshow-menu {
