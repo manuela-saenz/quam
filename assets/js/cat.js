@@ -185,6 +185,10 @@ window.addEventListener("load", function () {
 var formContainer = document.querySelector(".cont-form-responsive");
 var cerrarFiltros = document.querySelectorAll(".cerrar-filtros");
 
+$('.order-products').on('click', function(){
+    $('.orderby').trigger('click')
+})
+
 cerrarFiltros.forEach(function (btn) {
     btn.addEventListener("click", function () {
         formContainer.classList.toggle("toggle");

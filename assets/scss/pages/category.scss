@@ -30,8 +30,8 @@
       }
     }
   }
-  
-  &.campaign{
+
+  &.campaign {
     height: 300px;
   }
 
@@ -81,6 +81,14 @@
   }
 }
 
+.filtering-responsive-btns {
+  background: rgba($dark_blue, 0.1);
+
+  &:active {
+    background: rgba($dark_blue, 0.2);
+  }
+}
+
 .yith-wcan-filters {
   margin-bottom: 0 !important;
 
@@ -104,7 +112,19 @@
 }
 
 .products {
-  margin: 0 10px 0 5px;
+
+  // margin: 0 10px 0 5px;
+  @media (max-width:768px) {
+    .select-box {
+      margin-top: -50px;
+      height: 48px;
+      opacity: 0;
+      select {
+        padding: 0;
+        border: none;
+      }
+    }
+  }
 
   p {
     font-weight: 600;

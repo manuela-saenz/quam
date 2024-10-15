@@ -23,7 +23,7 @@ $featuredImage = get_field('imagen_destacada', $currentCat);
 
 
 <section id="bannerCategory" class=" position-relative overflow-hidden p-0 <?= $campana ? 'img-fit campaign' : '' ?>">
-   
+
     <?php if (!$campana) { ?>
         <div class="container">
             <div class="row">
@@ -44,11 +44,25 @@ $featuredImage = get_field('imagen_destacada', $currentCat);
 </section>
 
 <section id="infoProducts" class="pt-4">
-    <div class="container">
+    <div class="container ">
         <?php if (!isset($_GET['s'])): ?>
-            <div class="row">
-                <div class="col-md-12 d-flex justify-content-between select_men align-items-end">
-                    <div class="select d-flex gap-2">
+            <div class="row px-3 px-sm-0">
+                <div class="col-md-12 d-flex justify-content-between select_men fw-semibold align-items-end gap-3 d-sm-none">
+                    <div class="input-box filtering-responsive-btns cerrar-filtros center-all gap-2 w-100">
+                        Filtros <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-caret-down">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 9c.852 0 1.297 .986 .783 1.623l-.076 .084l-6 6a1 1 0 0 1 -1.32 .083l-.094 -.083l-6 -6l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057v-.118l.005 -.058l.009 -.06l.01 -.052l.032 -.108l.027 -.067l.07 -.132l.065 -.09l.073 -.081l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01l.057 -.004l12.059 -.002z" />
+                        </svg>
+                    </div>
+                    <div class="input-box filtering-responsive-btns order-products center-all gap-2 w-100">
+                        Ordenar <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-caret-down">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 9c.852 0 1.297 .986 .783 1.623l-.076 .084l-6 6a1 1 0 0 1 -1.32 .083l-.094 -.083l-6 -6l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057v-.118l.005 -.058l.009 -.06l.01 -.052l.032 -.108l.027 -.067l.07 -.132l.065 -.09l.073 -.081l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01l.057 -.004l12.059 -.002z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-md-12 d-flex justify-content-between select_men align-items-end gap-3">
+                    <div class="select d-flex gap-2 w-100">
                         <?php
                         $cate = get_queried_object();
                         $cateSlug = $cate->slug;
@@ -183,13 +197,7 @@ $featuredImage = get_field('imagen_destacada', $currentCat);
                         ?>
 
                         <!-- form filter -->
-                        <div class="btn-filter-responsive">
-                            <div class="cont-select-box">
-                                <div class="select-box input-box cerrar-filtros">
-                                    <label>Filtro</label>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="cont-form-responsive bg-white">
                             <div class="close-filtros">
                                 <h2>Filtro:</h2>
@@ -268,11 +276,11 @@ $featuredImage = get_field('imagen_destacada', $currentCat);
                         </div>
                     </div>
 
-                    <div class="products text-center text-lg-end d-flex flex-wrap align-items-center flex-column ">
+                    <div class="products text-center text-lg-end d-flex flex-wrap align-items-md-end align-items-center flex-column w-100">
 
-                        <div class="select-box">
+                        <div class="select-box w-0 h-0 h-md-auto">
                             <?php woocommerce_catalog_ordering(); ?>
-                            <div class="arrow"></div>
+                            <div class="arrow d-none d-sm-flex"></div>
                         </div>
                     </div>
                 </div>

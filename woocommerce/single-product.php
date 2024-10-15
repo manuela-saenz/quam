@@ -38,7 +38,7 @@ if ($attachment_ids) {
       <?php woocommerce_breadcrumb() ?>
     </div>
   </div>
-  <div class="container">
+  <div class="container single-product-content">
     <?php woocommerce_content(); ?>
   </div>
 </section>
@@ -62,9 +62,23 @@ if ($attachment_ids) {
           </button>
         </div>
         <button id="btn-single-mobile" class="quam-btn red d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
+        <div class=" center-vertical justify-content-center my-2 opacity-50 fw-medium gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-up">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M7 11l5 -5l5 5" />
+            <path d="M7 17l5 -5l5 5" />
+          </svg>
+          Más información
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-up">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M7 11l5 -5l5 5" />
+            <path d="M7 17l5 -5l5 5" />
+          </svg>
+        </div>
+
       </div>
-      <div class="d-md-none">
-        <p> <?= $product->get_short_description() ?></p>
+      <div class="d-md-none container">
+         <?= $product->get_short_description() ?>
       </div>
       <section class="characteristics">
         <div class="container">
