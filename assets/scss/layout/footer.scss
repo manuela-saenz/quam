@@ -101,3 +101,10 @@ footer {
         display: none;
     }
 }
+
+.info-item{
+    border: 1px solid $dark_blue;
+    .icon-circle{
+        background: rgba($dark_blue, 0.2);
+    }
+}

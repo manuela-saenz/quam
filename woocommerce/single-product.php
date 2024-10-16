@@ -32,7 +32,7 @@ if ($attachment_ids) {
 <div id="showAlertDeleteFav" class="alert alert-danger add-to-list-fav-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Se eliminó el producto de tus
   favoritos</div>
 <div id="showAlertItemOut" class="alert alert-danger add-to-list-fav-message d-none" style="position: fixed;z-index: 9999;top: 110px;left: 50%;transform: translateX(-50%);">El producto seleccionado se encuentra agotado</div>
-<section id="Singleimgprincipal" class="pt-0">
+<section id="Singleimgprincipal" class="py-0">
   <div class="py-2 px-2 border-top border-bottom">
     <div class="container">
       <?php woocommerce_breadcrumb() ?>
@@ -78,7 +78,7 @@ if ($attachment_ids) {
 
       </div>
       <div class="d-md-none container">
-         <?= $product->get_short_description() ?>
+        <?= $product->get_short_description() ?>
       </div>
       <section class="characteristics">
         <div class="container">
@@ -86,6 +86,9 @@ if ($attachment_ids) {
         </div>
       </section>
       <?php woocommerce_output_related_products() ?>
+      <section class=" d-md-none">
+        <?php itemsFooter() ?>
+      </section>
     </div>
   </div>
 </div>

@@ -10,12 +10,14 @@ header {
 
   .header-contact {
     background: $dark_blue;
+    border-bottom: 1px solid #fff;
     color: $white;
     font-size: 14px;
     padding: 14px 0;
     transition: all 0.3s;
     top: 0;
     position: relative;
+    z-index: 4;
 
     .contact {
       a {
@@ -321,7 +323,7 @@ header {
           }
           @media (max-width: 500px) {
             width: 100%;
-            padding-top: 100px;
+            padding-top: 135px;
             top: 0;
             border-radius: 0;
             height: 100vh;
@@ -480,6 +482,7 @@ header {
   }
 
   &.sticky-header {
+    height: 70px;
     .header-contact,
     .info-contact {
       transition: all 0.3s;
@@ -496,6 +499,12 @@ header {
       &.infoshow-menu {
         margin-top: 0px;
         transition: all 0.3s;
+      }
+    }
+    @media (max-width: 768px) {
+      
+     .mobile-menu {
+          padding-top: 80px !important;
       }
     }
   }
@@ -596,7 +605,7 @@ header {
 }
 .small{
   transition: .2s;
-  bottom: 165px;
+  bottom: 190px;
 }
 .btn-whatsapp:hover {
   transform: scale(1.1) rotate(10deg);

@@ -93,7 +93,7 @@ $(document).ready(function () {
     // Obtener el nuevo valor de window.innerHeight
     var contentHeight = window.innerHeight - document.querySelector('header').offsetHeight - 150;
     if (window.innerWidth < 991) {
-      document.getElementById('Singleimgprincipal').style.height = contentHeight + 'px';
+      // document.getElementById('Singleimgprincipal').style.height = contentHeight + 'px';
     } else {
       document.getElementById('Singleimgprincipal').style.height = 'unset';
     }
