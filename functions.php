@@ -341,3 +341,104 @@ function get_all_product_categories_attributes_and_prices()
             }
         }
     }
+
+    add_filter('cron_schedules', 'custom_cron_interval');
+
+    function custom_cron_interval($schedules)
+    {
+        $schedules['every_five_minutes'] = array(
+            'interval' => 3, // 300 segundos = 5 minutos
+            'display'  => __('Cada 3 Minutos')
+        );
+        return $schedules;
+    }
+
+
+    add_action('wp', 'schedule_my_custom_cron_job');
+
+    function schedule_my_custom_cron_job()
+    {
+        if (!wp_next_scheduled('my_custom_cron_job')) {
+            wp_schedule_event(time(), 'every_five_minutes', 'my_custom_cron_job');
+        }
+    }
+
+    add_action('my_custom_cron_job', 'execute_my_function');
+
+    function execute_my_function()
+    {
+        // Cargar las clases necesarias de WooCommerce
+        if (!class_exists('WooCommerce')) {
+            error_log('WooCommerce no está instalado o activado.');
+            return;
+        }
+
+        // Obtener los pedidos pendientes de WooCommerce
+        $args = array(
+            'status' => 'pending', // Estado pendiente
+            'payment_method' => 'payulatam', // ID del método de pago PayU (debes confirmar el ID correcto)
+            'limit' => -1 // Sin límite para obtener todos los pedidos
+        );
+
+        $orders = wc_get_orders($args);
+
+        if (empty($orders)) {
+            error_log('No se encontraron pedidos pendientes con PayU.');
+            return;
+        }
+
+        foreach ($orders as $order) {
+            $order_id = $order->get_id();
+    
+            // Preparar la solicitud a la API de PayU
+            $url = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
+            $body = array(
+                'test' => false,
+                'language' => 'en',
+                'command' => 'ORDER_DETAIL_BY_REFERENCE_CODE',
+                'merchant' => array(
+                    'apiLogin' => 'gbUeoK36Z6a55H8', // Reemplaza con tu API Login
+                    'apiKey' => '3Fe1XI463W6gVi6Wdo93zBi1Px' // Tu API Key
+                ),
+                'details' => array(
+                    'referenceCode' => strval($order_id) // Usar el ID del pedido como referencia
+                )
+            );
+    
+            $args = array(
+                'body' => json_encode($body),
+                'headers' => array(
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json'
+                ),
+                'method' => 'POST'
+            );
+    
+            // Hacer la solicitud
+            $response = wp_remote_post($url, $args);
+    
+            if (is_wp_error($response)) {
+                error_log('Error en la solicitud a PayU: ' . $response->get_error_message());
+                continue;
+            }
+    
+            $response_body = wp_remote_retrieve_body($response);
+            $data = json_decode($response_body, true);
+    
+            if ($data) {
+                error_log('Respuesta de PayU para el pedido ' . $order_id . ': ' . print_r($data, true));
+            } else {
+                error_log('Error al procesar la respuesta de PayU para el pedido ' . $order_id);
+            }
+
+            if (isset($data['result']['payload'][0]['transactions'][0]['transactionResponse']['state'])) {
+                $transaction_state = $data['result']['payload'][0]['transactions'][0]['transactionResponse']['state'];
+        
+                if ($transaction_state === 'APPROVED') {
+                    // Cambia el estado del pedido a 'processing'
+                    $order->update_status('processing', __('Payment approved by PayU.', 'your-text-domain'));
+                    error_log('El estado del pedido ' . $order_id . ' ha sido cambiado a procesando.');
+                }
+            }
+        }
+    }
