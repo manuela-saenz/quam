@@ -1,7 +1,26 @@
+.rtwpvg-product {
+  .onsale {
+    background-color: $red !important;
+    padding: 10px 16px !important;
+    top: 16px !important;
+    left: 150px !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
+    min-height: initial !important;
+    border-radius: 14px !important;
+
+    @media (max-width:768px) {
+      left: 15px !important;
+    }
+  }
+}
+
 #Singleimgprincipal {
   @media (max-width: 768px) {
     padding-bottom: 130px;
   }
+
+
 
   .container {
     @media (max-width: 991px) {
@@ -252,22 +271,8 @@
 }
 
 .single-product-content {
-  span.onsale {
-    background-color: $red !important;
-    padding: 10px 16px !important;
-    top: 16px !important;
-    left: 150px !important;
-    font-size: 15px !important;
-    line-height: 1 !important;
-    min-height: initial !important;
-    border-radius: 14px !important;
-
+  .entry-summary {
     @media (max-width:768px) {
-      left: 15px !important;
-    }
-  }
-  .entry-summary{
-    @media (max-width:768px){
       display: none;
     }
   }
@@ -694,7 +699,8 @@
         }
       }
     }
-    #tab-title-reviews{
+
+    #tab-title-reviews {
       display: none;
     }
   }
@@ -908,6 +914,27 @@
 }
 
 .sm-floating-box {
+  @media (max-width:991px) {
+    &.swipe-animation {
+      animation: swipe 0.8s ease infinite;
+
+      @keyframes swipe {
+        0% {
+          height: 150px;
+        }
+
+        50% {
+          height: 165px;
+        }
+
+        100% {
+          height: 150px;
+        }
+      }
+    }
+  }
+
+
   .section-subtitle {
     margin-bottom: 0px;
     font-weight: 800;
@@ -916,6 +943,11 @@
       font-size: 20px;
       margin-bottom: 10px;
     }
+  }
+
+  &.expanded {
+    animation: none !important;
+
   }
 
   @media (max-width: 991px) {
@@ -963,7 +995,7 @@
 
 @media (max-width:450px) {
   .sm-floating-box {
-    height: 168px;
+    height: 150px;
   }
 }
 
@@ -1009,6 +1041,14 @@
     align-items: center;
     padding: 0 !important;
     text-align: center;
+  }
+
+  @media (max-width:990px) {
+    margin-bottom: 0px;
+
+    .woocommerce-product-details__short-description {
+      display: none;
+    }
   }
 }
 

@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) {
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
 ?>
 
-<div class="share center-vertical d-flex align-items-center">
+<div class="share center-vertical align-items-center d-none d-md-flex">
 	<span> <b>Compartir producto: </b> </span>
 
 	<div class="share-icons">

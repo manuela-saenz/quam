@@ -22,7 +22,7 @@
 <!-- </div>
             </div>
             <div class="col-md-4">
-              <?php echo do_shortcode('[newsletter_form]'); ?>
+            <?php echo do_shortcode('[newsletter_form]'); ?>
             </div>
           </div>
         </div>

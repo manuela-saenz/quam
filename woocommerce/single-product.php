@@ -32,21 +32,21 @@ if ($attachment_ids) {
 <div id="showAlertDeleteFav" class="alert alert-danger add-to-list-fav-message d-none" style="position: fixed;z-index: 60;top: 110px;left: 50%;transform: translateX(-50%);">Se eliminó el producto de tus
   favoritos</div>
 <div id="showAlertItemOut" class="alert alert-danger add-to-list-fav-message d-none" style="position: fixed;z-index: 9999;top: 110px;left: 50%;transform: translateX(-50%);">El producto seleccionado se encuentra agotado</div>
-<section id="Singleimgprincipal" class="py-0">
+<section id="Singleimgprincipal" class="pt-0">
   <div class="py-2 px-2 border-top border-bottom">
     <div class="container">
       <?php woocommerce_breadcrumb() ?>
     </div>
   </div>
-  <div class="container single-product-content">
+  <div class="container">
     <?php woocommerce_content(); ?>
   </div>
 </section>
 
-<div class="sm-floating-box ">
+<div class="sm-floating-box swipe-animation">
   <div id="box-draggable2">
     <div class="bg-white mobile-container">
-      <div class="main-box d-lg-none p-4">
+      <div class="main-box d-lg-none p-3 py-4">
         <div class="d-flex justify-content-between mb-2">
           <div class="">
             <h1 class="section-subtitle mb-1"><?= $post->post_title ?></h1>
@@ -62,7 +62,7 @@ if ($attachment_ids) {
           </button>
         </div>
         <button id="btn-single-mobile" class="quam-btn red d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
-        <div class=" center-vertical justify-content-center my-2 opacity-50 fw-medium gap-3">
+        <!-- <div class=" center-vertical justify-content-center mt-2 opacity-50 fw-medium gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-up">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M7 11l5 -5l5 5" />
@@ -74,11 +74,10 @@ if ($attachment_ids) {
             <path d="M7 11l5 -5l5 5" />
             <path d="M7 17l5 -5l5 5" />
           </svg>
-        </div>
-
+        </div> -->
       </div>
       <div class="d-md-none container">
-        <?= $product->get_short_description() ?>
+        <p> <?= $product->get_short_description() ?></p>
       </div>
       <section class="characteristics">
         <div class="container">
