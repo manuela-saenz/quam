@@ -286,3 +286,23 @@ document.getElementById('shareBtnWhatsapp').addEventListener('click', function (
 
 
 })();
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  var element0 = document.querySelector(".sm-floating-box.swipe-animation");
+  if (element0) {
+    setTimeout(function () {
+      element0.classList.remove("swipe-animation");
+    }, 500); 
+  }
+
+  setInterval(function () {
+    var element = document.querySelector(".sm-floating-box");
+    if (element) {
+      element.classList.add("swipe-animation");
+      setTimeout(function () {
+        element.classList.remove("swipe-animation");
+      }, 1500);
+    }
+  }, 15000); 
+});
