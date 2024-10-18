@@ -82,7 +82,8 @@
 }
 
 .filtering-responsive-btns {
-  background: rgba($dark_blue, 0.1);
+  background: rgba($dark_blue, 0.65);
+  color: #fff;
 
   &:active {
     background: rgba($dark_blue, 0.2);

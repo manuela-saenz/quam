@@ -61,7 +61,7 @@ if ($attachment_ids) {
             </svg>
           </button>
         </div>
-        <button id="btn-single-mobile" class="quam-btn red d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar a la bolsa</button>
+        <button id="btn-single-mobile" class="quam-btn red d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar al carrito</button>
         <!-- <div class=" center-vertical justify-content-center mt-2 opacity-50 fw-medium gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-up">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
