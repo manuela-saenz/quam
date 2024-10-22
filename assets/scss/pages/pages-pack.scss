@@ -3,4 +3,29 @@
 @import "single-products";
 @import "offers";
 @import "shopping-bag";
-@import "about-us.scss"
+@import "about-us.scss";
+@import 'cambios-devoluciones';
+
+.section-title-common-content, .section-subtitle-common-content{
+    font-weight: bold;
+    color: $dark_blue;
+}
+
+.section-title-common-content{
+    font-size: 22px;
+    border-bottom: 2px solid $red;
+    text-transform: uppercase;
+    display: flex;
+    line-height: 1;
+    span{
+        background: $red;
+        padding:7px 5px;
+        border-radius: 5px;
+        display: block;
+        margin-right: 6px;
+    }
+}
+
+.section-subtitle-common-content{
+    font-size: 18px;
+}
