@@ -54,6 +54,9 @@ footer {
         }
         ul{
             padding-left: 16px;
+            a{
+                pointer-events: none;
+            }
         }
     }
 
