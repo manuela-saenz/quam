@@ -1,5 +1,10 @@
 .ppce {
+  .title{
+    color: $dark_blue;
+  }
   .line-red {
+    color: $dark_blue;
+    font-weight: 900;
     position: relative;
 
     &::before {
@@ -12,10 +17,39 @@
     }
   }
 
-  ul{
-    list-style: lower-alpha;
-    li{
+  ul {
+    list-style: none;
+    /* Eliminar el marcador por defecto */
+    counter-reset: list-counter;
+
+    li::marker {
+      color: white;
+      background-color: red;
+    }
+
+    li {
       margin-bottom: 20px;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    li::before {
+      counter-increment: list-counter;
+      /* Incrementar el contador para cada <li> */
+      content: counter(list-counter, lower-alpha);
+      /* Mostrar letras a, b, c, ... */
+      position: absolute;
+      left: -30px;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      background-color: red;
+      color: #fff;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
     }
   }
 }
