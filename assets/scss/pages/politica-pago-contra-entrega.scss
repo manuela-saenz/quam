@@ -1,0 +1,21 @@
+.ppce {
+  .line-red {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      border-bottom: 4px solid red;
+      width: 43%;
+      bottom: -8px;
+
+    }
+  }
+
+  ul{
+    list-style: lower-alpha;
+    li{
+      margin-bottom: 20px;
+    }
+  }
+}
