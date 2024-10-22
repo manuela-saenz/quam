@@ -1,0 +1,19 @@
+.eyt {
+  color: #747474;
+  .title , h4 {
+    color: $dark_blue;
+  }
+
+  h4 {
+    font-weight: 900;
+  }
+
+  .img-fit {
+    min-height: 720px;
+    height: 720px;
+    @media(max-width:768px){
+      height: 350px;
+    }
+  }
+
+}
