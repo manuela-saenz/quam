@@ -6,7 +6,7 @@
 
 get_header() ?>
 
-<section>
+<section class="pb-0">
     <div class="container">
         <h1 class="text-center section-subtitle mb-0"><?php the_title() ?></h1>
     </div>
@@ -43,8 +43,8 @@ get_header() ?>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2 class="faq-title">PREGUNTAS FRECUENTES DE LA POLÍTICA DE CAMBIOS</h2>
-                <?php for ($i = 0; $i < 5; $i++): ?>
+                <h2 class="faq-title mb-4">PREGUNTAS FRECUENTES DE LA POLÍTICA DE CAMBIOS</h2>
+                <?php for ($i = 0; $i < 4; $i++): ?>
                     <div>
                         <h4 class="section-subtitle-common-content">¿La política de cambios, así como sus condiciones son una obligación legal de
                             Quam?</h4>
