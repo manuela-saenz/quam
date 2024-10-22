@@ -11,22 +11,26 @@
     }
   }
 
-  h6{
+  h6 {
     color: $dark_blue;
     font-weight: 800;
     font-size: 20px;
   }
+
+  .bg-red {
+
+    top: -9px;
+    left: 0;
+    z-index: 5;
+  }
 }
 
-.bg-red {
-  font-size: 25px;
-  font-weight: 800;
-  background: #ff3747;
-  border-radius: 14px;
-  padding: 0 44px;
-  top: -9px;
-  left: 0;
-  z-index: 5;
+.red{
+      font-size: 25px;
+    font-weight: 800;
+    background: #ff3747;
+    border-radius: 14px;
+    padding: 0 44px;
 }
 
 .list-alphabet {

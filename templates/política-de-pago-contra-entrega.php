@@ -107,14 +107,29 @@ get_header()
       </div>
 
       <div class="col-md-6 ">
-        <div class="bg-red">
-          <img src="" alt="">
-          <div class=""> PREGUNTAS FRECUENTES </div>
+        <div class="position-relative mb-5">
+
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 682.667 682.667" style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+            <g>
+              <defs>
+                <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                  <path d="M0 512h512V0H0Z" fill="#ffffff" opacity="1" data-original="#000000" class=""></path>
+                </clipPath>
+              </defs>
+              <g clip-path="url(#a)" transform="matrix(1.33333 0 0 -1.33333 0 682.667)">
+                <path d="M0 0c13.696-69.014 74.573-121.043 147.61-121.043 30.199 0 58.315 8.901 81.882 24.213l61.383-16.978-16.978 61.383C289.209-28.858 298.11-.742 298.11 29.457c0 73.037-52.029 133.914-121.043 147.61" style="stroke-width:30;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(198.89 136.043)" fill="none" stroke="#ffffff" stroke-width="30" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1"></path>
+                <path d="M0 0c-99.687 0-180.5-80.813-180.5-180.5 0-35.738 10.389-69.049 28.307-97.081l-21.072-76.184 76.184 21.072C-69.048-350.612-35.738-361 0-361c99.687 0 180.5 80.813 180.5 180.5S99.687 0 0 0Z" style="stroke-width:30;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(195.5 497)" fill="none" stroke="#ffffff" stroke-width="30" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1"></path>
+                <path d="M210.5 211h-30v30h30z" style="fill-opacity:1;fill-rule:nonzero;stroke:none" fill="#ffffff" data-original="#000000" class="" opacity="1"></path>
+                <path d="M0 0c0 24.853 20.147 45 45 45S90 24.853 90 0c0-13.15-5.643-24.981-14.637-33.208L45-61v-30" style="stroke-width:30;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" transform="translate(150.5 362)" fill="none" stroke="#ffffff" stroke-width="30" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="none" stroke-opacity="" data-original="#000000" opacity="1"></path>
+              </g>
+            </g>
+          </svg>
+          <div class="text-white text-bold red"> PREGUNTAS FRECUENTES </div>
         </div>
 
         <div>
           <ul>
-            <li>
+            <li class="mb-4">
               <h6>¿El transportador puede esperar a que yo abra el paquete para ver si lo que me
                 están entregando es lo que había pedido y hacer mi pago con tranquilidad?</h6>
               <div>El transportador no está autorizado para esperar la revisión de tu pedido. En caso de presentarse alguna
@@ -122,7 +137,23 @@ get_header()
                 gestionaremos tu caso. Ten presente que debes hacer el pago de tu pedido antes de recibirlo, y
                 posteriormente, realizar la reclamación a través de nuestros canales de atención.</div>
             </li>
-            <li>
+            <li class="mb-4">
+              <h6>¿Si al momento de recibir mi pedido, decido devolverlo porque no quedé
+                conforme, se la puedo entregar al transportador?</h6>
+              <div>No debes entregarlo al transportador. En caso de presentarse alguna novedad en tu pedido, por favor
+                repórtala a la nuestros canales de Servicio al cliente. Ten presente que debes hacer el pago de tu
+                pedido antes de recibirlo, y posteriormente, realizar la reclamación a través de nuestros canales de
+                atención.
+              </div>
+            </li>
+            <li class="mb-4">
+              <h6>¿Puedo pagar con dinero de mayor denominación para que el transportador
+                me devuelva el valor sobrante?</h6>
+              <div>Ten presente que la transportadora solo está autorizada para recibir el valor exacto de tu compra.
+                Recuerda que puedes hacer uso del código QR como medio de pago.
+              </div>
+            </li>
+            <li class="mb-4">
               <h6>¿El transportador puede esperar a que yo abra el paquete para ver si lo que me
                 están entregando es lo que había pedido y hacer mi pago con tranquilidad?</h6>
               <div>El transportador no está autorizado para esperar la revisión de tu pedido. En caso de presentarse alguna
@@ -130,31 +161,54 @@ get_header()
                 gestionaremos tu caso. Ten presente que debes hacer el pago de tu pedido antes de recibirlo, y
                 posteriormente, realizar la reclamación a través de nuestros canales de atención.</div>
             </li>
-            <li>
-              <h6>¿El transportador puede esperar a que yo abra el paquete para ver si lo que me
-                están entregando es lo que había pedido y hacer mi pago con tranquilidad?</h6>
-              <div>El transportador no está autorizado para esperar la revisión de tu pedido. En caso de presentarse alguna
-                novedad en el mismo, por favor repórtala a nuestros canales de Servicio al cliente donde
-                gestionaremos tu caso. Ten presente que debes hacer el pago de tu pedido antes de recibirlo, y
-                posteriormente, realizar la reclamación a través de nuestros canales de atención.</div>
+            <li class="mb-4">
+              <h6>¿El pedido lo puede recibir una persona diferente a la que realizó el pedido?</h6>
+              <div>Sí. Ten presente que solo entregaremos el pedido a un mayor de edad, quien realizará el pago y
+                diligenciará la guía con su nombre, número de cédula y número de teléfono de contacto.</div>
             </li>
-            <li>
-              <h6>¿El transportador puede esperar a que yo abra el paquete para ver si lo que me
-                están entregando es lo que había pedido y hacer mi pago con tranquilidad?</h6>
-              <div>El transportador no está autorizado para esperar la revisión de tu pedido. En caso de presentarse alguna
-                novedad en el mismo, por favor repórtala a nuestros canales de Servicio al cliente donde
-                gestionaremos tu caso. Ten presente que debes hacer el pago de tu pedido antes de recibirlo, y
-                posteriormente, realizar la reclamación a través de nuestros canales de atención.</div>
+            <li class="mb-4">
+              <h6>¿En caso de que olvide tener el dinero a la mano, cuando llega el
+                transportador, me puede dejar la prenda y pasar más tarde por el dinero? (en
+                caso de que yo no tenga efectivo).</h6>
+              <div>El transportador no está autorizado para entregar la prenda sin recibir el dinero del pedido. </div>
             </li>
           </ul>
         </div>
 
       </div>
       <div class="col-md-6 aboutItem">
-        <p>In marketing a product is an object or system made available for consumer use it is anything that can be offered to a market to the desire or need of a \retailing, products are often referred to as merchandise, and in manufacturing, products are bought as materials and then sold as finished goods. A service regarded to as a type of product. Commodities are usually raw materials metals and agricultural products, but a commodity can also be anything wide the open market. In project management, the formal definition of the project deliverables
-          <br> <br>
-          In marketing a product is an object or system made available for consumer use it is anything that can be offered to a market to the desire or need of a \retailing, products are often referred to as merchandise, and in manufacturing, products are bought as materials and then sold as finished goods. A service regarded to as a type of product. Commodities are usually raw materials metals and agricultural products, but a commodity can also be anything wide the open market. In project management, the formal definition of the project deliverables
-        </p>
+        <ul>
+          <li class="mb-4">
+            <h6>¿Qué pasa en caso de que llegue el transportador y no haya
+              quien reciba la prenda?</h6>
+            <div>Haremos máximo 3 intentos de entrega de tu pedido dentro de las 2 semanas siguientes a la
+              confirmación el despacho. Si luego de estos intentos, no se realiza la entrega de la prenda y no se recibe
+              su pago, retornaremos el producto a nuestro centro de distribución para lo cual deberás realizar
+              nuevamente el pedido.
+              Ten en cuenta que:
+              1. En caso de que no cuentes con el dinero al momento de la entrega del pedido y ya se hayan
+              cumplido las 2 semanas desde la confirmación del despacho, retornaremos el producto a nuestro
+              centro de distribución para lo cual deberás realizar nuevamente el pedido. Ten presente que un
+              nuevo pedido está sujeto a disponibilidad de inventario al momento de tu compra.
+              2. En caso de que no cuentes con el dinero al momento de la entrega del pedido y no se hayan
+              cumplido las 2 semanas desde la confirmación del despacho, comunícate con nuestros canales de
+              Servicio al cliente para reprogramar tu entrega. Esto no asegura que la entrega pueda
+              reprogramarse. De no ser posible una nueva entrega, te estaremos informando para que realices un
+              nuevo pedido, sujeto a disponibilidad de iInventario al momento de tu compra.
+              3. Para el caso en el que el cliente solicite reclamar la prenda en una sede de Coordinadora, contará
+              con 5 días hábiles para reclamarla, contados desde que la prenda esté disponible en la sede.
+              Pasados los 5 días, retornaremos el producto a nuestro centro de distribución para lo cual deberás
+              realizar nuevamente el pedido. Ten presente que un nuevo pedido está sujeto a disponibilidad de
+              inventario al momento de tu compra.
+              Rastrea tu despacho ingresando el número de guía, en http://www.coordinadora.com.</div>
+          </li>
+          <li class="mb-4">
+            <h6>¿Cómo tramito una solicitud de cambio o garantía de mi producto?</h6>
+            <div>Reporta tu caso a nuestras líneas de Servicio al cliente donde gestionaremos tu novedad.
+            </div>
+          </li>
+
+        </ul>
       </div>
 
     </div>
