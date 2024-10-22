@@ -40,34 +40,61 @@
 <footer class="<?= is_singular('product') ? "footer-product-none" : "" ?>">
   <div class="container">
     <div class="row position-relative justify-content-evenly">
-
       <div class="col-md-12 col-lg-3">
-        <ul>
-          <li class="mb-4"> <b>Categorias</b></li>
-          <li><a href="<?= get_home_url(); ?>">Inicio</a></li>
-          <li><a href="<?= get_home_url(); ?>/categoria-producto/hombre/">Hombre</a></li>
-          <li><a href="<?= get_home_url(); ?>/categoria-producto/mujer/">Mujer</a></li>
-          <li><a href="<?= get_home_url(); ?>/categoria-producto/nino/">Niño</a></li>
-        </ul>
+        <div class="img-contain logo mb-4">
+          <img src="https://www.quam.com.co/wp-content/themes/quam/media/images/Logo-white.svg" alt="">
+        </div>
+        <p class="mb-1">Síguenos en redes</p>
+        <div class="d-flex gap-3">
+          <a href="https://www.facebook.com/quamcolombia/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/quam.co/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
+              <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+              <path d="M16.5 7.5l0 .01" />
+            </svg>
+          </a>
+
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-3">
+        <b class="mb-3 d-block">EXPLORAR</b>
+        <?php
+        wp_nav_menu(
+          array(
+            'theme_location' => 'footer-categorias'
+          )
+        );
+        ?>
       </div>
 
       <div class="col-md-4 col-lg-3" style="z-index:2;">
-        <ul>
-          <li class="mb-4"> <b> LEGAL</b></li>
-          <li> <a href="<?= get_home_url(); ?>/politicas/" target="_blank"> Política de privacidad</a></li>
-          <li> <a href="<?= get_home_url(); ?>/politicas/" target="_blank"> Términos y condiciones</a> </li>
-        </ul>
-
+        <b class="mb-3 d-block"> Información</b>
+        <?php
+        wp_nav_menu(
+          array(
+            'theme_location' => 'footer-informacion'
+          )
+        );
+        ?>
       </div>
 
 
       <div class="col-md-4 col-lg-3">
-        <ul class="direction">
-          <li class="mb-4"> <b> CONTACTO</b></li>
-          <li><a href="<?= get_home_url(); ?>/contacto/"> Contacto</a></li>
-          <li class="pb-20"> <a href="tel:6013 886 004" target="_blank"> +57 311 4482684 </a> </li>
-        </ul>
-
+        <b class="mb-3 d-block">CONTACTO</b>
+        <?php
+        wp_nav_menu(
+          array(
+            'theme_location' => 'footer-contacto'
+          )
+        );
+        ?>
       </div>
     </div>
   </div>
@@ -77,9 +104,7 @@
       <div class="container d-flex justify-content-between">
         <span>© Todos los derechos reservados 2024. QUAM</span>
         <span><a href="https://intuitionstudio.co/" target="_blank">Desarrollado por <span class="text-decoration-underline">Intuition Bussines</span></a></span>
-        <div class="img-fit logo">
-          <img src="https://www.quam.com.co/wp-content/themes/quam/media/images/Logo-white.svg" alt="">
-        </div>
+
       </div>
     </div>
   </div>

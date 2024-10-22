@@ -37,6 +37,16 @@ add_action('woocommerce_single_product_summary', 'woocommerce_template_single_sh
 
 add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');
 
+function register_menus()
+{
+    register_nav_menus(array(
+        'footer-categorias'   => 'Footer Categorias',
+        'footer-informacion' => 'Footer Información',
+        'footer-contacto' => 'Footer Contacto',
+    ));
+}
+add_action( 'init', 'register_menus' );
+
 // funcion search
 function arphabet_widgets_init()
 {
@@ -389,7 +399,7 @@ function get_all_product_categories_attributes_and_prices()
 
         foreach ($orders as $order) {
             $order_id = $order->get_id();
-    
+
             // Preparar la solicitud a la API de PayU
             $url = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
             $body = array(
@@ -404,7 +414,7 @@ function get_all_product_categories_attributes_and_prices()
                     'referenceCode' => strval($order_id) // Usar el ID del pedido como referencia
                 )
             );
-    
+
             $args = array(
                 'body' => json_encode($body),
                 'headers' => array(
@@ -413,18 +423,18 @@ function get_all_product_categories_attributes_and_prices()
                 ),
                 'method' => 'POST'
             );
-    
+
             // Hacer la solicitud
             $response = wp_remote_post($url, $args);
-    
+
             if (is_wp_error($response)) {
                 error_log('Error en la solicitud a PayU: ' . $response->get_error_message());
                 continue;
             }
-    
+
             $response_body = wp_remote_retrieve_body($response);
             $data = json_decode($response_body, true);
-    
+
             if ($data) {
                 error_log('Respuesta de PayU para el pedido ' . $order_id . ': ' . print_r($data, true));
             } else {
@@ -433,7 +443,7 @@ function get_all_product_categories_attributes_and_prices()
 
             if (isset($data['result']['payload'][0]['transactions'][0]['transactionResponse']['state'])) {
                 $transaction_state = $data['result']['payload'][0]['transactions'][0]['transactionResponse']['state'];
-        
+
                 if ($transaction_state === 'APPROVED') {
                     // Cambia el estado del pedido a 'processing'
                     $order->update_status('processing', __('Payment approved by PayU.', 'your-text-domain'));

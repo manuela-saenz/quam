@@ -46,25 +46,30 @@ footer {
             }
         }
     }
+    .menu{
+        .menu-item-has-children{
+            > ul{
+                margin-top: 10px;
+            }
+        }
+        ul{
+            padding-left: 16px;
+        }
+    }
 
     ul {
         list-style: none;
         padding: 0;
-
-        li {
-            padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        a{
             color: #DDDDDD;
-
-            &:last-child {
-                @media(max-width: 991px) {
-                    padding-bottom: 20px;
-                }
-            }
-
-            b {
-                font-size: 20px;
+            &:hover{
+                color: #fff;
             }
         }
+
     }
 
 
@@ -83,7 +88,7 @@ footer {
     }
 
     .logo {
-        height: 28px;
+        height: 45px;
         width: fit-content;
 
         @media(max-width:991px) {
