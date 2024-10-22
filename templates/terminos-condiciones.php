@@ -14,7 +14,7 @@ get_header() ?>
 <section class="pb-0">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="text-white terms-box">
                     <h5 class="fw-bolder">Bienvenido al sitio quam.com.co</h5>
                     <p class="mb-0">QUAM provee este sitio para ofrecer
@@ -50,7 +50,7 @@ get_header() ?>
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 d-none d-md-block">
                 <div class="img-fit mb-4">
                     <img src="https://img.freepik.com/foto-gratis/hombre-joven-relajado-que-sostiene-tableta_1262-18592.jpg?t=st=1729632625~exp=1729636225~hmac=82f271d989158a3e68af98f56cb5a25d04b6d0f68d2beef9cd04a00ec8ec299a&w=1060" alt="">
                 </div>

@@ -1,0 +1,27 @@
+.payment-step-box{
+    .rounded-circle{
+        border: 1px solid $dark_blue;
+        margin-bottom: 28px;
+        position: relative;
+        &::after{
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-right: 1px solid $dark_blue;
+            height: 28px;
+        }
+    }
+    .content{
+        border: 1px solid $dark_blue;
+        .step-title{
+            background: $dark_blue;
+            text-align: center;
+            font-weight: bolder;
+        }
+        p{
+            margin-bottom: 0;
+        }
+    }
+}
