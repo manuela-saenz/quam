@@ -26,14 +26,63 @@ get_header() ?>
                 </div>
             </div>
             <div class="col-md-6">
-                <?php for ($i = 0; $i < 8; $i++): ?>
-                    <div class=" d-flex align-items-center change-rules mb-3">
-                        <div class="img-contain me-2">
-                            <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
-                        </div>
-                        <p>No haber sido usada la prenda.</p>
+                <?php // for ($i = 0; $i < 8; $i++): 
+                ?>
+                <div class=" d-flex align-items-center change-rules mb-3">
+                    <div class="img-contain me-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                     </div>
-                <?php endfor; ?>
+                    <p>No haber sido usada la prenda.</p>
+                </div>
+                <div class=" d-flex align-items-center change-rules mb-3">
+                    <div class="img-contain me-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
+                    </div>
+                    <p>La prenda debe conservar todas sus etiquetas originales. Sugerimos que se pruebe las prendas
+                        antes de retirarla.</p>
+                </div>
+                <div class=" d-flex align-items-center change-rules mb-3">
+                    <div class="img-contain me-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
+                    </div>
+                    <p>La prenda no puede encontrarse sucia o presentar rastros de uso de desodorantes o maquillaje
+                        con químicos que decoloren o deterioren las telas.</p>
+                </div>
+                <div class=" d-flex align-items-center change-rules mb-3">
+                    <div class="img-contain me-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
+                    </div>
+                    <p>No tener rastros de uso de químicos o blanqueador</p>
+                </div>
+                <div class=" d-flex align-items-center change-rules mb-3">
+                    <div class="img-contain me-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
+                    </div>
+                    <p>No presentar desteñido.</p>
+                </div>
+                <div class=" d-flex align-items-center change-rules mb-3">
+                    <div class="img-contain me-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
+                    </div>
+                    <p>La prenda no puede estar alterada o modificada por el consumidor. La horma de la prenda debe
+                        encontrarse perfecta en las mismas condiciones en las que fue adquirida.</p>
+                </div>
+                <div class=" d-flex align-items-center change-rules mb-3">
+                    <div class="img-contain me-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
+                    </div>
+                    <p>La prenda no puede estar alterada o modificada por el consumidor. La horma de la prenda debe
+                        encontrarse perfecta en las mismas condiciones en las que fue adquirida.</p>
+                </div>
+                <div class=" d-flex align-items-center change-rules mb-3">
+                    <div class="img-contain me-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
+                    </div>
+                    <p>Debe presentar el certificado de regalo, número de pedido o indicar el número de cédula del
+                        comprador.</p>
+                </div>
+                <?php // endfor; 
+                ?>
             </div>
         </div>
     </div>
