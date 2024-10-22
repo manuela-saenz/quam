@@ -1,55 +1,81 @@
 .ppce {
-  .title{
+  .title {
     color: $dark_blue;
   }
-  .line-red {
-    color: $dark_blue;
-    font-weight: 900;
-    position: relative;
 
-    &::before {
-      content: "";
-      position: absolute;
-      border-bottom: 4px solid red;
-      width: 43%;
-      bottom: -8px;
-
-    }
-  }
-
-  ul {
-    list-style: none;
-    /* Eliminar el marcador por defecto */
-    counter-reset: list-counter;
-
-    li::marker {
-      color: white;
-      background-color: red;
-    }
-
-    li {
-      margin-bottom: 20px;
-      position: relative;
-      padding-left: 15px;
-    }
+  .list-white {
+    list-style: inside;
 
     li::before {
-      counter-increment: list-counter;
-      /* Incrementar el contador para cada <li> */
-      content: counter(list-counter, lower-alpha);
-      /* Mostrar letras a, b, c, ... */
-      position: absolute;
-      left: -30px;
-      top: 0;
-      width: 24px;
-      height: 24px;
-      background-color: red;
-      color: #fff;
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
+      display: none;
     }
+  }
+
+  h6{
+    color: $dark_blue;
+    font-weight: 800;
+    font-size: 20px;
+  }
+}
+
+.bg-red {
+  font-size: 25px;
+  font-weight: 800;
+  background: #ff3747;
+  border-radius: 14px;
+  padding: 0 44px;
+  top: -9px;
+  left: 0;
+  z-index: 5;
+}
+
+.list-alphabet {
+  list-style: none;
+  /* Eliminar el marcador por defecto */
+  counter-reset: list-counter;
+
+  li::marker {
+    color: white;
+    background-color: #ff3747;
+  }
+
+  li {
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 15px;
+  }
+
+  li::before {
+    counter-increment: list-counter;
+    /* Incrementar el contador para cada <li> */
+    content: counter(list-counter, lower-alpha);
+    /* Mostrar letras a, b, c, ... */
+    position: absolute;
+    left: -30px;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background-color: #ff3747;
+    color: #fff;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+}
+
+.line-red {
+  color: $dark_blue;
+  font-weight: 900;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    border-bottom: 4px solid #ff3747;
+    width: 43%;
+    bottom: -8px;
+
   }
 }
