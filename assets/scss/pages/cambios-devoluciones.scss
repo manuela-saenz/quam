@@ -1,0 +1,11 @@
+.change-rules{
+    .img-contain{
+        width: 28px;
+        aspect-ratio: 1;
+    }
+    p{
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+}
