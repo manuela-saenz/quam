@@ -27,7 +27,7 @@ get_header() ?>
             </div>
             <div class="col-md-6">
                 <?php for ($i = 0; $i < 8; $i++): ?>
-                    <div class=" d-flex align-items-center change-rules mb-2">
+                    <div class=" d-flex align-items-center change-rules mb-3">
                         <div class="img-contain me-2">
                             <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                         </div>
@@ -43,7 +43,7 @@ get_header() ?>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2>PREGUNTAS FRECUENTES DE LA POLÍTICA DE CAMBIOS</h2>
+                <h2 class="faq-title">PREGUNTAS FRECUENTES DE LA POLÍTICA DE CAMBIOS</h2>
                 <?php for ($i = 0; $i < 5; $i++): ?>
                     <div>
                         <h4 class="section-subtitle-common-content">¿La política de cambios, así como sus condiciones son una obligación legal de
