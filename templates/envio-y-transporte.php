@@ -73,8 +73,8 @@ get_header()
       </div>
 
       <div class="col-md-5 mb-5 mt-md-5">
-        <div class="img-fit">
-          <img src="" alt="">
+        <div class="img-">
+          <img src="https://www.quam.com.co/wp-content/uploads/2024/10/terminos-6.jpg" alt="">
         </div>
       </div>
 

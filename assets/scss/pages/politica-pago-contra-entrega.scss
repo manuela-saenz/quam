@@ -25,11 +25,7 @@
     z-index: 5;
   }
 
-  .svg-pqr {
-    background-color: $dark_blue;
-    padding: 10px;
-    border-radius: 10px;
-  }
+  
 
   .padding-top-desktop {
     padding-top: 130px;
@@ -42,12 +38,21 @@
   }
 }
 
-.red {
+.svg-pqr {
+  background-color: $dark_blue;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.red-text {
   font-size: 25px;
   font-weight: 800;
   background: #ff3747;
   border-radius: 14px;
-  padding: 0 44px;
+  padding: 0 26px;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .list-alphabet {

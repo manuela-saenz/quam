@@ -8,7 +8,7 @@ get_header() ?>
 
 <section class="pb-0">
     <div class="container">
-        <h1 class="text-center section-subtitle mb-0"><?php the_title() ?></h1>
+        <h1 class="text-center section-subtitle mb-0 color-blue"><?php the_title() ?></h1>
     </div>
 </section>
 <section class="pb-0">
@@ -52,13 +52,13 @@ get_header() ?>
         <div class="row">
             <div class="col-md-4 d-none d-md-block">
                 <div class="img-fit mb-4">
-                    <img src="https://img.freepik.com/foto-gratis/hombre-joven-relajado-que-sostiene-tableta_1262-18592.jpg?t=st=1729632625~exp=1729636225~hmac=82f271d989158a3e68af98f56cb5a25d04b6d0f68d2beef9cd04a00ec8ec299a&w=1060" alt="">
+                    <img src="https://www.quam.com.co/wp-content/uploads/2024/10/terminos-3.jpg" alt="">
                 </div>
                 <div class="img-fit mb-4">
-                    <img src="https://img.freepik.com/foto-gratis/hombre-joven-relajado-que-sostiene-tableta_1262-18592.jpg?t=st=1729632625~exp=1729636225~hmac=82f271d989158a3e68af98f56cb5a25d04b6d0f68d2beef9cd04a00ec8ec299a&w=1060" alt="">
+                    <img src="https://www.quam.com.co/wp-content/uploads/2024/10/terminos-2.jpg" alt="">
                 </div>
                 <div class="img-fit mb-4">
-                    <img src="https://img.freepik.com/foto-gratis/hombre-joven-relajado-que-sostiene-tableta_1262-18592.jpg?t=st=1729632625~exp=1729636225~hmac=82f271d989158a3e68af98f56cb5a25d04b6d0f68d2beef9cd04a00ec8ec299a&w=1060" alt="">
+                    <img src="https://www.quam.com.co/wp-content/uploads/2024/10/terminos-4.jpg" alt="">
                 </div>
             </div>
             <div class="col-md-8">

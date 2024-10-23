@@ -8,17 +8,17 @@ get_header() ?>
 
 <section class="pb-0">
     <div class="container">
-        <h1 class="text-center section-subtitle mb-3"><?php the_title() ?></h1>
+        <h1 class="text-center section-subtitle mb-3 color-blue"><?php the_title() ?></h1>
         <p class="text-center mb-0">www.quam.com.co acepta las siguientes Formas de Pago electrónicas por medio de nuestro proveedor de servicios certificado,</p>
     </div>
 </section>
 <section>
     <div class="container">
-        <div class="row">
+        <div class="row gy-4">
             <div class="col-md-3">
                 <div class="payment-step-box d-flex flex-column align-items-center h-100">
-                    <div class="rounded-circle p-1 overflow-hidden center-all w-fit img-contain">
-                        <img src="https://www.quam.com.co/wp-content/uploads/2024/10/tarjetas-credito.jpg" alt="">
+                    <div class="payment-circle rounded-circle p-1 center-all w-fit img-contain">
+                        <img src="https://www.quam.com.co/wp-content/uploads/2024/10/tarjetas-credito.jpg" class="rounded-circle overflow-hidden" alt="Tarjetas de crédito">
                     </div>
                     <div class="w-100 content rounded-4 overflow-hidden h-100">
                         <div class="text-white step-title p-2">
@@ -31,15 +31,17 @@ get_header() ?>
                                 tipográficos de digitación en el sitio de
                                 nuestro proveedor del sistema de pagos
                                 electrónicos autorizado Payu.</p>
-
+                            <div class="mx-auto mt-3 center-all">
+                                <img src="https://www.quam.com.co/wp-content/uploads/2024/10/group-payment-1.jpg" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="payment-step-box d-flex flex-column align-items-center h-100">
-                    <div class="rounded-circle p-1 overflow-hidden center-all w-fit img-contain">
-                        <img src="https://www.quam.com.co/wp-content/uploads/2024/10/cupones-descuento.jpg" alt="">
+                    <div class="payment-circle rounded-circle p-1 center-all w-fit img-contain">
+                        <img src="https://www.quam.com.co/wp-content/uploads/2024/10/cupones-descuento.jpg" class="rounded-circle overflow-hidden" alt="Cupones de descuento">
                     </div>
                     <div class="w-100 content rounded-4 overflow-hidden h-100">
                         <div class="text-white step-title p-2">
@@ -63,8 +65,8 @@ get_header() ?>
             </div>
             <div class="col-md-3">
                 <div class="payment-step-box d-flex flex-column align-items-center h-100">
-                    <div class="rounded-circle p-1 overflow-hidden center-all w-fit img-contain">
-                       <img src="https://www.quam.com.co/wp-content/uploads/2024/10/pago-contra-entrega.jpg" alt="">
+                    <div class="payment-circle rounded-circle p-1 center-all w-fit img-contain">
+                        <img src="https://www.quam.com.co/wp-content/uploads/2024/10/pago-contra-entrega.jpg" class="rounded-circle overflow-hidden" alt="Pago contra entrega">
                     </div>
                     <div class="w-100 content rounded-4 overflow-hidden h-100">
                         <div class="text-white step-title p-2">
@@ -82,8 +84,8 @@ get_header() ?>
             </div>
             <div class="col-md-3">
                 <div class="payment-step-box d-flex flex-column align-items-center h-100">
-                    <div class="rounded-circle p-1 overflow-hidden center-all w-fit img-contain">
-                        <img src="https://www.quam.com.co/wp-content/uploads/2024/10/addi.jpg" alt="">
+                    <div class="payment-circle rounded-circle p-1 center-all w-fit img-contain">
+                        <img src="https://www.quam.com.co/wp-content/uploads/2024/10/addi.jpg" class="rounded-circle overflow-hidden" alt="Paga a cuotas con Addi">
                     </div>
                     <div class="w-100 content rounded-4 overflow-hidden h-100">
                         <div class="text-white step-title p-2">

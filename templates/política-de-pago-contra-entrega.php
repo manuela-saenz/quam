@@ -82,7 +82,7 @@ get_header()
 
         <div class="position-relative  d-flex flex-column flex-md-row align-items-center p-4 p-md-3 mt-5"
           style="background-color: #00518e; border-radius:10px; min-height:240px;">
-          <div class="text-white position-absolute text-bold bg-red red">IMPORTANTE</div>
+          <div class="text-white position-absolute text-bold bg-red red-text">IMPORTANTE</div>
           <div class="mb-3 mb-md-0">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="200"
               height="130" x="0" y="0" viewBox="0 0 480 480" style="enable-background:new 0 0 512 512"
@@ -146,7 +146,7 @@ get_header()
               </g>
             </svg>
           </div>
-          <div class="text-white text-bold red position-relative text-center" style="min-height: 50px; left:-15px;"> PREGUNTAS FRECUENTES </div>
+          <div class="text-white text-bold red-text position-relative" style="min-height: 50px; left:-15px;"> PREGUNTAS FRECUENTES </div>
         </div>
 
         <div>

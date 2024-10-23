@@ -28,7 +28,7 @@ function itemsFooter()
     <div class="container">
       <div class="row gap-3 gap-md-0">
         <div class="col-md-3">
-          <div class=" info-item d-flex flex-column center-all bg-light rounded-3 fw-medium p-4">
+          <a href="https://www.quam.com.co/metodos-de-pago/" class=" info-item d-flex flex-column center-all bg-light rounded-3 fw-medium p-4">
             <div class="icon-circle mb-3 p-2 rounded-pill">
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-mastercard">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -38,10 +38,10 @@ function itemsFooter()
               </svg>
             </div>
             <p class="mb-0">Múltiples medios de pago</p>
-          </div>
+          </a>
         </div>
         <div class="col-md-3">
-          <div class=" info-item d-flex flex-column center-all bg-light rounded-3 fw-medium p-4">
+          <a href="https://www.quam.com.co/cambios-y-devoluciones/" class=" info-item d-flex flex-column center-all bg-light rounded-3 fw-medium p-4">
             <div class="icon-circle mb-3 p-2 rounded-pill">
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-exchange">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -52,10 +52,10 @@ function itemsFooter()
               </svg>
             </div>
             <p class="mb-0">Cambios y devoluciones</p>
-          </div>
+          </a>
         </div>
         <div class="col-md-3">
-          <div class=" info-item d-flex flex-column center-all bg-light rounded-3 fw-medium p-4">
+          <div role="button" class=" info-item d-flex flex-column center-all bg-light rounded-3 fw-medium p-4" data-bs-toggle="modal" data-bs-target="#trackModal">
             <div class="icon-circle mb-3 p-2 rounded-pill">
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-package">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -70,7 +70,7 @@ function itemsFooter()
           </div>
         </div>
         <div class="col-md-3">
-          <div class=" info-item d-flex flex-column center-all bg-light rounded-3 fw-medium p-4">
+          <a href="https://www.quam.com.co/contacto/" class=" info-item d-flex flex-column center-all bg-light rounded-3 fw-medium p-4">
             <div class="icon-circle mb-3 p-2 rounded-pill">
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-heart-handshake">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -81,7 +81,7 @@ function itemsFooter()
               </svg>
             </div>
             <p class="mb-0">¿Necesitas ayuda?</p>
-          </div>
+          </a>
         </div>
 
 

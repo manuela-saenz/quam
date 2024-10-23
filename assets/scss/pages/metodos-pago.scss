@@ -1,9 +1,11 @@
 .payment-step-box{
-    .rounded-circle{
+    .payment-circle{
         border: 1px solid $dark_blue;
-        margin-bottom: 28px;
+        margin-bottom: 25px;
         position: relative;
-        width: 65px;
+        width: 90px;
+        height: 90px;
+        min-height: 90px;
         &::after{
             content: "";
             position: absolute;
