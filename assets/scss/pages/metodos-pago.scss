@@ -3,6 +3,7 @@
         border: 1px solid $dark_blue;
         margin-bottom: 28px;
         position: relative;
+        width: 65px;
         &::after{
             content: "";
             position: absolute;

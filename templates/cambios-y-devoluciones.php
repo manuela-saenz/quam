@@ -12,15 +12,15 @@ get_header() ?>
     </div>
 </section>
 
-<section>
+<section class="pb-0">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mb-3">
                 <h3 class="section-title-common-content"><span>01</span>Políticas de Cambio</h3>
                 <p>Nuestro objetivo es asegurarnos que te encuentres satisfecho(a) con la compra que realizaste. Si por cualquier motivo (diferente a la garantía) no quedas conforme con el producto adquirido, puedes cambiarlo en
                     un plazo de 30 días calendario, contados desde la fecha en que adquiriste tu producto. Para ejercer el derecho al cambio, los productos deberán cumplir con los siguientes requisitos:</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 d-none d-md-block">
                 <div class="img-contain">
                     <img src="https://images.unsplash.com/photo-1601935033900-059813f9abfc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                 </div>
@@ -29,53 +29,53 @@ get_header() ?>
                 <?php // for ($i = 0; $i < 8; $i++): 
                 ?>
                 <div class=" d-flex align-items-center change-rules mb-3">
-                    <div class="img-contain me-2">
+                    <div class="img-contain me-3">
                         <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                     </div>
                     <p>No haber sido usada la prenda.</p>
                 </div>
                 <div class=" d-flex align-items-center change-rules mb-3">
-                    <div class="img-contain me-2">
+                    <div class="img-contain me-3">
                         <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                     </div>
                     <p>La prenda debe conservar todas sus etiquetas originales. Sugerimos que se pruebe las prendas
                         antes de retirarla.</p>
                 </div>
                 <div class=" d-flex align-items-center change-rules mb-3">
-                    <div class="img-contain me-2">
+                    <div class="img-contain me-3">
                         <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                     </div>
                     <p>La prenda no puede encontrarse sucia o presentar rastros de uso de desodorantes o maquillaje
                         con químicos que decoloren o deterioren las telas.</p>
                 </div>
                 <div class=" d-flex align-items-center change-rules mb-3">
-                    <div class="img-contain me-2">
+                    <div class="img-contain me-3">
                         <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                     </div>
                     <p>No tener rastros de uso de químicos o blanqueador</p>
                 </div>
                 <div class=" d-flex align-items-center change-rules mb-3">
-                    <div class="img-contain me-2">
+                    <div class="img-contain me-3">
                         <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                     </div>
                     <p>No presentar desteñido.</p>
                 </div>
                 <div class=" d-flex align-items-center change-rules mb-3">
-                    <div class="img-contain me-2">
+                    <div class="img-contain me-3">
                         <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                     </div>
                     <p>La prenda no puede estar alterada o modificada por el consumidor. La horma de la prenda debe
                         encontrarse perfecta en las mismas condiciones en las que fue adquirida.</p>
                 </div>
                 <div class=" d-flex align-items-center change-rules mb-3">
-                    <div class="img-contain me-2">
+                    <div class="img-contain me-3">
                         <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                     </div>
                     <p>La prenda no puede estar alterada o modificada por el consumidor. La horma de la prenda debe
                         encontrarse perfecta en las mismas condiciones en las que fue adquirida.</p>
                 </div>
                 <div class=" d-flex align-items-center change-rules mb-3">
-                    <div class="img-contain me-2">
+                    <div class="img-contain me-3">
                         <img src="https://cdn-icons-png.flaticon.com/512/11205/11205893.png" alt="">
                     </div>
                     <p>Debe presentar el certificado de regalo, número de pedido o indicar el número de cédula del
@@ -104,7 +104,7 @@ get_header() ?>
                     </div>
                 <?php endfor; ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 d-none d-md-block">
                 <div class="img-contain">
                     <img src="https://images.unsplash.com/photo-1601935033900-059813f9abfc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                 </div>
