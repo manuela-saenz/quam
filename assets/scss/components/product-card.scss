@@ -1,9 +1,13 @@
 .CardProducts {
+  img{
+    left: 0;
+  }
   .info-highlights {
     display: flex;
     flex-direction: column;
 
-    h5 {
+    h5,
+    h2 {
       margin-bottom: 0px;
       color: #262524;
       font-weight: 700;
@@ -55,6 +59,7 @@
     img {
       mix-blend-mode: multiply;
       transition: all 0.3s;
+      left: 0;
 
       &:not([src]) {
         font-size: 0;
@@ -64,7 +69,16 @@
 
       &:nth-child(2) {
         opacity: 0;
+        left: 0;
       }
+    }
+
+    &:has(.img-contain img:nth-child(2)) {
+      .img-contain img:nth-child(2) {
+        opacity: 0;
+        left: 0;
+      }
+
     }
 
     // @media (max-width:578px){
@@ -106,12 +120,111 @@
 
             &:nth-child(2) {
               opacity: 1;
+              left: 0;
             }
           }
         }
       }
     }
 
+  }
+
+  .oferta .onsale {
+    top: 12px !important;
+    left: 12px !important;
+  }
+
+  .cfvsw_variations_form {
+    position: absolute;
+    bottom: calc(100% + 25px);
+    left: 50%;
+    transform: translateX(-50%);
+
+    .label {
+      display: none;
+    }
+
+    tbody {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+
+      tr {
+        margin-bottom: 0;
+        padding: 0;
+
+        &:has([swatches-attr="attribute_pa_color"]) {
+          order: 1;
+        }
+
+        order: 2;
+      }
+    }
+
+
+
+    .cfvsw-swatches-container {
+      margin: 0 auto;
+
+      .cfvsw-tooltip {
+        span{
+          color: #fff;
+        }
+      }
+
+      .cfvsw-swatches-option {
+        width: 24px;
+        height: 24px;
+        min-height: 24px !important;
+        min-width: 24px !important;
+
+        .cfvsw-swatch-inner {
+          width: calc(100% - 0px);
+          height: calc(100% - 0px);
+        }
+
+        &.cfvsw-selected-swatch {
+          .cfvsw-swatch-inner {
+            width: calc(75% - 2px);
+            height: calc(75% - 2px);
+          }
+
+        }
+      }
+
+    }
+
+    [swatches-attr="attribute_pa_talla"] {
+      .cfvsw-swatches-option {
+        &.cfvsw-selected-swatch {
+          background: $dark_blue;
+          color: #fff;
+          border-color: #ccc !important;
+        }
+      }
+    }
+
+  }
+
+  .add-to-cart-container {
+    a {
+      pointer-events: none;
+
+      &.cfvsw_variation_found {
+        pointer-events: initial;
+      }
+    }
+
+    .added_to_cart {
+      display: none;
+    }
+
+
+  }
+
+  .add_to_cart_button {
+    text-align: center;
+    width: 100%;
   }
 
 }

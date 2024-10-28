@@ -62,6 +62,7 @@ if ($color) {
                     <p class="mb-0 d-flex gap-2"><?= $product_price_html ?></p>
                 </div>
             </div>
+
         </a>
     </div>
 <?php endif; ?>
@@ -89,16 +90,33 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
 
 ?>
             <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?> data-id="<?= $variation_id; ?>">
+                <a href="<?= esc_url($link) ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link rounded-[10px] overflow-hidden mb-3 relative d-none">
+                    <?php
+                    /**
+                     * Hook: woocommerce_before_shop_loop_item_title.
+                     *
+                     * @hooked woocommerce_show_product_loop_sale_flash - 10
+                     * @hooked woocommerce_template_loop_product_thumbnail - 10
+                     */
+                    woocommerce_show_product_loop_sale_flash();
+                    woocommerce_template_loop_product_thumbnail();
+                    // do_action('woocommerce_before_shop_loop_item_title');
+                    ?>
+                </a>
                 <a href="<?= $variation_permalink ?>" class="CardProducts w-100 <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
-                    <div class="img-contain center-all" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
-                        <img data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" />
-                       
+
+                    <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
+                        <img data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class=" attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
+
                         <img class="position-absolute top-0 left-0" data-src="<?= $variation['variation_gallery_images'][1]['src'] ?>" alt="<?= $variation_title ?>">
                     </div>
                     <div class="info-highlights">
                         <h5 title="<?= $variation_title ?>"><?= $variation_title ?></h5>
                         <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
                             <p class="mb-0 d-flex gap-2"><?= $variation_price ?></p>
+                        </div>
+                        <div class="d-none">
+                            <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
                         </div>
                     </div>
                 </a>

@@ -85,7 +85,7 @@ function initQuantity() {
   });
 }
 
-$(".cfvsw-swatches-option, .btn-step-next button").on("click", function () {
+$(".entry-summary .cfvsw-swatches-option, .btn-step-next button").on("click", function () {
   $(window).scrollTop(0);
 });
 
@@ -106,6 +106,9 @@ function initQuantitySingle() {
 }
 
 initQuantity();
+
+
+
 
 // -------- quitar productos del  carrito-----------
 

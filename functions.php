@@ -63,6 +63,16 @@ function arphabet_widgets_init()
 add_action('widgets_init', 'arphabet_widgets_init');
 
 
+function variations_visibility_all_pages( $requires_shop_settings ) {
+    if ( is_page() || is_single() ) {
+        $requires_shop_settings = true;
+    }
+    
+    return $requires_shop_settings;
+  }
+  add_filter( 'cfvsw_requires_shop_settings', 'variations_visibility_all_pages' );
+
+
 function custom_override_checkout_fields($fields)
 {
     // Elimina el campo "Empresa" del formulario de facturación

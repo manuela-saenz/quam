@@ -87,3 +87,7 @@ ins {
 .color-blue{
   color: $dark_blue;
 }
+
+.cfvsw-swatches-option.cfvsw-selected-swatch{
+  pointer-events: none;
+}
