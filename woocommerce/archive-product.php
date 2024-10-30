@@ -304,8 +304,9 @@ $featuredImage = get_field('imagen_destacada', $currentCat);
                      */
                     do_action('woocommerce_shop_loop');
 
-                     wc_get_template_part('content', 'product'); ?>
-                        <?php //wc_get_template_part('content', 'producto'); ?>
+                    wc_get_template_part('content', 'product'); ?>
+                    <?php //wc_get_template_part('content', 'producto'); 
+                    ?>
         <?php
                 }
             }

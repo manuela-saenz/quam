@@ -23,6 +23,7 @@ class SyEAjaxRequest
         $actions = array(
             "send_mail_contact",
             "woocommerce_ajax_add_to_cart",
+            "woocommerce_ajax_add_to_cart_category",
             "woocommerce_ajax_add_to_cart_remplace_qty",
             "woocommerce_ajax_add_to_cart_single",
             "woocommerce_remove_cart_item",
@@ -104,6 +105,46 @@ class SyEAjaxRequest
         $prodID = $_POST["product_id"];
         $quantity = $_POST["quantity"];
         $result = $woocommerce->cart->add_to_cart($prodID, $quantity);
+
+        $itemsCount = $woocommerce->cart->get_cart_contents_count();
+        $total_discount = 0;
+        $applied_coupons = $woocommerce->cart->get_applied_coupons();
+        $coupon_details = $this->verifyCoupon($applied_coupons);
+
+        // Ahora, $coupon_details es un array que contiene los detalles de todos los cupones aplicados
+        $ValorTotalSinDescuento = $woocommerce->cart->get_cart_subtotal();
+        $ValorTotal = $woocommerce->cart->get_cart_total();
+        $DescuentoTotal = $woocommerce->cart->get_total_discount();
+
+        ob_start();
+        ItemsCart();
+        $itemsCart = ob_get_clean();
+        $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $itemsCart);
+
+        echo json_encode(
+            array(
+                "item" => $result,
+                "status" => "success",
+                "html" => $buffer,
+                "counter" => count($woocommerce->cart->get_cart()),
+                "total" => $ValorTotal,
+                "coupon_details" => $coupon_details,
+                "discount" => $DescuentoTotal,
+                "quantity" => $itemsCount,
+                "subtotal" => $ValorTotalSinDescuento,
+                "discount_amount" => $total_discount
+            )
+        );
+        wp_die();
+    }
+
+    function woocommerce_ajax_add_to_cart_category()
+    {
+        global $woocommerce;
+
+        $prodID = $_POST["product_id"];
+        $quantity = $_POST["quantity"];
+        $result = $woocommerce->cart->add_to_cart($prodID, $quantity - 1);
 
         $itemsCount = $woocommerce->cart->get_cart_contents_count();
         $total_discount = 0;

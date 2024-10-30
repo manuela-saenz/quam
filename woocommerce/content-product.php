@@ -48,34 +48,62 @@ if ($color) {
     $product_price_html = $product->get_price_html() . " COP";
     $product_status = $product->get_stock_status();
 ?>
-    <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>">
-        <a href="<?= $product_permalink ?>" class="CardProducts w-100 <?= $product_status ?>" data-stock="<?= $product_status; ?>">
+    <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>" data-color="<?= $color; ?>">
+        <div href="<?= $product_permalink ?>" class="CardProducts w-100 <?= $product_status ?>" data-stock="<?= $product_status; ?>">
             <div class="img-contain bb center-all" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                 <?= $image ?>
                 <pre class="d-none">
                     <?php print_r($product) ?>
                 </pre>
             </div>
-            <div class="info-highlights">
+            <!-- <div class="info-highlights">
                 <h5 title="<?= $product_title ?>"><?= $product_title ?></h5>
                 <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
                     <p class="mb-0 d-flex gap-2"><?= $product_price_html ?></p>
                 </div>
+            </div> -->
+            <div class="info-highlights position-relative">
+                <?php
+
+                /**
+                 * Hook: woocommerce_shop_loop_item_title.
+                 *
+                 * @hooked woocommerce_template_loop_product_title - 10
+                 */
+                do_action('woocommerce_shop_loop_item_title');
+
+                /**
+                 * Hook: woocommerce_after_shop_loop_item_title.
+                 *
+                 * @hooked woocommerce_template_loop_rating - 5
+                 * @hooked woocommerce_template_loop_price - 10
+                 */
+                do_action('woocommerce_after_shop_loop_item_title');
+
+                /**
+                 * Hook: woocommerce_after_shop_loop_item.
+                 *
+                 * @hooked woocommerce_template_loop_product_link_close - 5
+                 * @hooked woocommerce_template_loop_add_to_cart - 10
+                 */
+                do_action('woocommerce_after_shop_loop_item');
+                ?>
             </div>
 
-        </a>
-    </div>
+        </div>
+    </li>
+
 <?php endif; ?>
 
 <?php
 if ($product->is_type('variable') && $filter_color === null && $filter_talla === null):
     $available_variations = $product->get_available_variations();
     $shown_colors = array();
+    $product_id = $product->get_id();
 
     foreach ($available_variations as $variation) {
         $variation_obj = wc_get_product($variation['variation_id']);
         $color = $variation['attributes']['attribute_pa_color'];
-
         if (!in_array($color, $shown_colors)) {
             $shown_colors[] = $color;
             $variation_id = $variation_obj->get_id();
@@ -88,39 +116,58 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             $variation_price = $variation_obj->get_price_html() . " COP";
             $variation_status = $variation_obj->get_stock_status();
 
+
 ?>
-            <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?> data-id="<?= $variation_id; ?>">
+            <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?> data-id="<?= $variation_id; ?>" data-id-pub="<?= $product_id; ?>" data-color="<?= $color; ?>">
                 <a href="<?= esc_url($link) ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link rounded-[10px] overflow-hidden mb-3 relative d-none">
                     <?php
+                    woocommerce_show_product_loop_sale_flash();
                     /**
                      * Hook: woocommerce_before_shop_loop_item_title.
                      *
                      * @hooked woocommerce_show_product_loop_sale_flash - 10
                      * @hooked woocommerce_template_loop_product_thumbnail - 10
                      */
-                    woocommerce_show_product_loop_sale_flash();
                     woocommerce_template_loop_product_thumbnail();
                     // do_action('woocommerce_before_shop_loop_item_title');
                     ?>
                 </a>
-                <a href="<?= $variation_permalink ?>" class="CardProducts w-100 <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
-
+                <div href="<?= $variation_permalink ?>" class="CardProducts w-100 <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
                     <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                         <img data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class=" attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
 
-                        <img class="position-absolute top-0 left-0" data-src="<?= $variation['variation_gallery_images'][1]['src'] ?>" alt="<?= $variation_title ?>">
+                        <!-- <img class="position-absolute top-0 left-0" data-src="<?= $variation['variation_gallery_images'][1]['src'] ?>" alt="<?= $variation_title ?>"> -->
                     </div>
-                    <div class="info-highlights">
-                        <h5 title="<?= $variation_title ?>"><?= $variation_title ?></h5>
-                        <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
-                            <p class="mb-0 d-flex gap-2"><?= $variation_price ?></p>
-                        </div>
-                        <div class="d-none">
-                            <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
-                        </div>
+                    <div class="info-highlights position-relative">
+                        <?php
+
+                        /**
+                         * Hook: woocommerce_shop_loop_item_title.
+                         *
+                         * @hooked woocommerce_template_loop_product_title - 10
+                         */
+                        do_action('woocommerce_shop_loop_item_title');
+
+                        /**
+                         * Hook: woocommerce_after_shop_loop_item_title.
+                         *
+                         * @hooked woocommerce_template_loop_rating - 5
+                         * @hooked woocommerce_template_loop_price - 10
+                         */
+                        do_action('woocommerce_after_shop_loop_item_title');
+
+                        /**
+                         * Hook: woocommerce_after_shop_loop_item.
+                         *
+                         * @hooked woocommerce_template_loop_product_link_close - 5
+                         * @hooked woocommerce_template_loop_add_to_cart - 10
+                         */
+                        do_action('woocommerce_after_shop_loop_item');
+                        ?>
                     </div>
-                </a>
-            </div>
+                </div>
+            </li>
+
 <?php
         }
     }

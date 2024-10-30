@@ -17,7 +17,6 @@
  */
 
 defined('ABSPATH') || exit;
-
 global $product;
 
 // Ensure visibility.
@@ -25,10 +24,9 @@ if (empty($product) || ! $product->is_visible()) {
     return;
 }
 ?>
+
 <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?>>
     <div class="CardProducts w-100">
-
-
         <?php
         /**
          * Hook: woocommerce_before_shop_loop_item.
@@ -48,7 +46,7 @@ if (empty($product) || ! $product->is_visible()) {
                  * @hooked woocommerce_show_product_loop_sale_flash - 10
                  * @hooked woocommerce_template_loop_product_thumbnail - 10
                  */
-                woocommerce_template_loop_product_thumbnail() ?>
+                echo $product->get_image('full');?>
             </a>
         </div>
         <div class="info-highlights position-relative">

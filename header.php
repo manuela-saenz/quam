@@ -129,7 +129,7 @@
                 <button id="bottonCart" class="position-relative btn center-all p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
                   <i class="icon-shopping-bag"></i>
                   <?php if (count(WC()->cart->get_cart()) > 0) { ?>
-                    <span id="cartItem" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count(WC()->cart->get_cart()) ?></span>
+                    <span id="cartItem" class="cart-section-quantity rounded-pill position-absolute center-all text-white d-none"><?= count(WC()->cart->get_cart()) ?></span>
                   <?php } ?>
                 </button>
                 </span></button>
@@ -188,29 +188,29 @@
       <img src="<?php bloginfo('template_url') ?>/media/images/social-whatsapp.png" alt="">
     </a>
 
-  <script>
-    const btn = document.querySelector('.btn-whatsapp');
-    // Función para verificar la URL
-    function checkURL() {
-      const url = window.location.href;
-      return url.includes('/producto/');
-    }
-
-    // Función para verificar el ancho de la ventana
-    function checkWidth() {
-      return window.innerWidth <= 991;
-    }
-
-    // Función para aplicar estilos al botón según las condiciones
-    function applyStyles() {
-      if (checkURL() && checkWidth()) {
-        btn.classList.add('small');
-      } else {
-        btn.classList.remove('small');
+    <script>
+      const btn = document.querySelector('.btn-whatsapp');
+      // Función para verificar la URL
+      function checkURL() {
+        const url = window.location.href;
+        return url.includes('/producto/');
       }
-    }
 
-    // Aplicar estilos al cargar y al redimensionar la ventana
-    applyStyles();
-    window.addEventListener('resize', applyStyles);
-  </script>
+      // Función para verificar el ancho de la ventana
+      function checkWidth() {
+        return window.innerWidth <= 991;
+      }
+
+      // Función para aplicar estilos al botón según las condiciones
+      function applyStyles() {
+        if (checkURL() && checkWidth()) {
+          btn.classList.add('small');
+        } else {
+          btn.classList.remove('small');
+        }
+      }
+
+      // Aplicar estilos al cargar y al redimensionar la ventana
+      applyStyles();
+      window.addEventListener('resize', applyStyles);
+    </script>

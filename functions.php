@@ -45,7 +45,7 @@ function register_menus()
         'footer-contacto' => 'Footer Contacto',
     ));
 }
-add_action( 'init', 'register_menus' );
+add_action('init', 'register_menus');
 
 // funcion search
 function arphabet_widgets_init()
@@ -63,14 +63,15 @@ function arphabet_widgets_init()
 add_action('widgets_init', 'arphabet_widgets_init');
 
 
-function variations_visibility_all_pages( $requires_shop_settings ) {
-    if ( is_page() || is_single() ) {
+function variations_visibility_all_pages($requires_shop_settings)
+{
+    if (is_page() || is_single()) {
         $requires_shop_settings = true;
     }
-    
+
     return $requires_shop_settings;
-  }
-  add_filter( 'cfvsw_requires_shop_settings', 'variations_visibility_all_pages' );
+}
+add_filter('cfvsw_requires_shop_settings', 'variations_visibility_all_pages');
 
 
 function custom_override_checkout_fields($fields)
@@ -460,5 +461,81 @@ function get_all_product_categories_attributes_and_prices()
                     error_log('El estado del pedido ' . $order_id . ' ha sido cambiado a procesando.');
                 }
             }
+        }
+    }
+
+    add_action('wp_ajax_get_product_image', 'get_product_image');
+    add_action('wp_ajax_nopriv_get_product_image', 'get_product_image');
+
+    function get_product_image()
+    {
+        // Verificar los parámetros recibidos
+        if (isset($_POST['product_id']) && isset($_POST['data_slug'])) {
+            $product_id = intval($_POST['product_id']);
+            $data_slug = sanitize_text_field($_POST['data_slug']);
+
+            // Obtener el producto
+            $product = wc_get_product($product_id);
+
+            if ($product && $product->is_type('variable')) {
+                // Obtener las variaciones del producto
+                $variations = $product->get_available_variations();
+
+                foreach ($variations as $variation) {
+                    $variation_id = $variation['variation_id'];
+                    $attributes = $variation['attributes'];
+
+                    // Verificar si el atributo coincide con el data_slug
+                    if (isset($attributes['attribute_pa_color']) && $attributes['attribute_pa_color'] === $data_slug) {
+                        // Obtener la URL de la imagen de la variación
+                        $image_id = get_post_thumbnail_id($variation_id);
+                        $image_url = wp_get_attachment_url($image_id);
+
+                        // Devolver la URL de la imagen en formato JSON
+                        wp_send_json_success(array('image_url' => $image_url));
+                    }
+                }
+            }
+        }
+
+        // Si no se encuentra la imagen, devolver un error
+        wp_send_json_error(array('message' => 'Imagen no encontrada'));
+    }
+
+
+    add_action('wp_ajax_update_cart_count', 'update_cart_count');
+    add_action('wp_ajax_nopriv_update_cart_count', 'update_cart_count');
+
+    function update_cart_count()
+    {
+        global $woocommerce;
+
+        if (WC()->cart) {
+            $count = WC()->cart->get_cart_contents_count();
+            ob_start();
+            ItemsCart();
+            $itemsCart = ob_get_clean();
+            $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $itemsCart);
+            $itemsCount = $woocommerce->cart->get_cart_contents_count();
+            $total_discount = 0;
+            $applied_coupons = $woocommerce->cart->get_applied_coupons();
+            // $coupon_details = $this->verifyCoupon($applied_coupons);
+
+            // Ahora, $coupon_details es un array que contiene los detalles de todos los cupones aplicados
+            $ValorTotalSinDescuento = $woocommerce->cart->get_cart_subtotal();
+            $ValorTotal = $woocommerce->cart->get_cart_total();
+            $DescuentoTotal = $woocommerce->cart->get_total_discount();
+
+            wp_send_json_success(array(
+                'count' => $count,
+                'itemsCart' => $buffer,
+                "discount" => $DescuentoTotal,
+                "quantity" => $itemsCount,
+                "subtotal" => $ValorTotalSinDescuento,
+                "discount_amount" => $total_discount,
+                "total" => $ValorTotal,
+            ));
+        } else {
+            wp_send_json_error(array('message' => 'Carrito no disponible'));
         }
     }

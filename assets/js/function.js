@@ -56,6 +56,22 @@ function discountValue(res) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  var buttons = document.querySelectorAll(".add_to_cart_button");
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+      var variationId = button.getAttribute("data-variation_id");
+      var productId = button.getAttribute("data-product_id");
+      var id = variationId ? variationId : productId;
+      setTimeout(function () {
+        addProductToCartCustom(id, 1);
+      }, 2000);
+    });
+  });
+});
+
 // <!-- Lógica de añadir articulo al carrito   -->
 var botonCart = document.getElementById("bottonCart");
 
@@ -70,79 +86,159 @@ jQuery(document).ready(function ($) {
         ? $("[name='add-to-cart']")[0].value
         : productId;
     clearEmptyCart();
-
-    var htmlContent =
-      '<div class="mini-cart-product-card align-items-start d-flex bg-white" style="flex-direction: row;">' +
-      '<div class="img-contain overflow-hidden rounded-1">' +
-      '<img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b9526wp8z3xa5zpbmlfq1qdlzfalio7x1i098u3z18vx&ep=v1_gifs_search&rid=200w.gif&ct=g" alt="<?php echo esc_attr($title); ?>">' +
-      "</div>" +
-      '<div class="card" aria-hidden="true" style="flex-grow: 1;">' +
-      '<div class="card-body">' +
-      '<h5 class="card-title placeholder-glow">' +
-      '<span class="placeholder col-6"></span>' +
-      "</h5>" +
-      '<p class="card-text placeholder-glow">' +
-      '<span class="placeholder col-7"></span>' +
-      '<span class="placeholder col-4"></span>' +
-      '<span class="placeholder col-6"></span>' +
-      '<span class="placeholder col-4"></span>' +
-      "</p>" +
-      "</div>" +
-      "</div>" +
-      "</div>";
-
-    $(".offcanvas-body.ordenList.cart").append(htmlContent);
-
     var quantity = form.find("input.input-text.qty.text").val();
-    var data = {
-      action: "woocommerce_ajax_add_to_cart",
-      product_id: productId,
-      quantity: quantity,
-    };
-
-    $.ajax({
-      type: "POST",
-      url: ajaxUrl,
-      data: data,
-      success: async function (response) {
-        var res = JSON.parse(response);
-        if (res.status === "success") {
-          if (botonCart) {
-            var spanElement = document.getElementById("cartItem");
-            if (!spanElement) {
-              spanElement = document.createElement("span");
-              spanElement.id = "cartItem";
-              spanElement.className =
-                "cart-section-quantity rounded-pill position-absolute center-all text-white";
-              spanElement.textContent = "";
-              botonCart.appendChild(spanElement);
-            }
-          }
-          $(".offcanvas-body.ordenList.cart").empty();
-          $(".offcanvas-body.ordenList.cart").html(res.html);
-          var subtotal = res.subtotal;
-          var totalString = res.total;
-          var subvalue = getTotalValue(subtotal);
-          var value = getTotalValue(totalString);
-
-          discountValue(res);
-          $("#cartItem").text(res.counter);
-          $("#subtotal").html("$" + subvalue);
-          $("#total").html("$" + value);
-
-          $(".alert.alert-success.add-to-cart-message.d-none").show();
-
-          var alertElement = $("#showAlertAddCart");
-          alertElement.removeClass("d-none").show();
-
-          setTimeout(function () {
-            alertElement.hide().addClass("d-none");
-          }, 2000);
-        }
-      },
-    });
+    addProductToCart(productId, quantity);
   });
 });
+
+function addProductToCart(productId, quantity) {
+  var htmlContent =
+    '<div class="mini-cart-product-card align-items-start d-flex bg-white" style="flex-direction: row;">' +
+    '<div class="img-contain overflow-hidden rounded-1">' +
+    '<img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b9526wp8z3xa5zpbmlfq1qdlzfalio7x1i098u3z18vx&ep=v1_gifs_search&rid=200w.gif&ct=g" alt="<?php echo esc_attr($title); ?>">' +
+    "</div>" +
+    '<div class="card" aria-hidden="true" style="flex-grow: 1;">' +
+    '<div class="card-body">' +
+    '<h5 class="card-title placeholder-glow">' +
+    '<span class="placeholder col-6"></span>' +
+    "</h5>" +
+    '<p class="card-text placeholder-glow">' +
+    '<span class="placeholder col-7"></span>' +
+    '<span class="placeholder col-4"></span>' +
+    '<span class="placeholder col-6"></span>' +
+    '<span class="placeholder col-4"></span>' +
+    "</p>" +
+    "</div>" +
+    "</div>" +
+    "</div>";
+
+  $(".offcanvas-body.ordenList.cart").append(htmlContent);
+
+  var data = {
+    action: "woocommerce_ajax_add_to_cart",
+    product_id: productId,
+    quantity: quantity,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: ajaxUrl,
+    data: data,
+    success: async function (response) {
+      var res = JSON.parse(response);
+      if (res.status === "success") {
+        if (botonCart) {
+          var spanElement = document.getElementById("cartItem");
+
+          if (!spanElement) {
+            spanElement = document.createElement("span");
+            spanElement.id = "cartItem";
+            spanElement.className =
+              "cart-section-quantity rounded-pill position-absolute center-all text-white";
+            spanElement.textContent = "";
+            botonCart.appendChild(spanElement);
+          } else {
+            spanElement.classList.remove("d-none");
+          }
+        }
+        $(".offcanvas-body.ordenList.cart").empty();
+        $(".offcanvas-body.ordenList.cart").html(res.html);
+        var subtotal = res.subtotal;
+        var totalString = res.total;
+        var subvalue = getTotalValue(subtotal);
+        var value = getTotalValue(totalString);
+
+        discountValue(res);
+        $("#cartItem").text(res.counter);
+        $("#subtotal").html("$" + subvalue);
+        $("#total").html("$" + value);
+
+        $(".alert.alert-success.add-to-cart-message.d-none").show();
+
+        var alertElement = $("#showAlertAddCart");
+        alertElement.removeClass("d-none").show();
+
+        setTimeout(function () {
+          alertElement.hide().addClass("d-none");
+        }, 2000);
+      }
+    },
+  });
+}
+
+function addProductToCartCustom(productId, quantity) {
+  var htmlContent =
+    '<div class="mini-cart-product-card align-items-start d-flex bg-white" style="flex-direction: row;">' +
+    '<div class="img-contain overflow-hidden rounded-1">' +
+    '<img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b9526wp8z3xa5zpbmlfq1qdlzfalio7x1i098u3z18vx&ep=v1_gifs_search&rid=200w.gif&ct=g" alt="<?php echo esc_attr($title); ?>">' +
+    "</div>" +
+    '<div class="card" aria-hidden="true" style="flex-grow: 1;">' +
+    '<div class="card-body">' +
+    '<h5 class="card-title placeholder-glow">' +
+    '<span class="placeholder col-6"></span>' +
+    "</h5>" +
+    '<p class="card-text placeholder-glow">' +
+    '<span class="placeholder col-7"></span>' +
+    '<span class="placeholder col-4"></span>' +
+    '<span class="placeholder col-6"></span>' +
+    '<span class="placeholder col-4"></span>' +
+    "</p>" +
+    "</div>" +
+    "</div>" +
+    "</div>";
+
+  $(".offcanvas-body.ordenList.cart").append(htmlContent);
+
+  var data = {
+    action: "woocommerce_ajax_add_to_cart_category",
+    product_id: productId,
+    quantity: quantity,
+  };
+
+  $.ajax({
+    type: "POST",
+    url: ajaxUrl,
+    data: data,
+    success: async function (response) {
+      var res = JSON.parse(response);
+      if (res.status === "success") {
+        if (botonCart) {
+          var spanElement = document.getElementById("cartItem");
+          if (!spanElement) {
+            spanElement = document.createElement("span");
+            spanElement.id = "cartItem";
+            spanElement.className =
+              "cart-section-quantity rounded-pill position-absolute center-all text-white";
+            spanElement.textContent = "";
+            botonCart.appendChild(spanElement);
+          } else {
+            spanElement.classList.remove("d-none");
+          }
+        }
+        $(".offcanvas-body.ordenList.cart").empty();
+        $(".offcanvas-body.ordenList.cart").html(res.html);
+        var subtotal = res.subtotal;
+        var totalString = res.total;
+        var subvalue = getTotalValue(subtotal);
+        var value = getTotalValue(totalString);
+
+        discountValue(res);
+        $("#cartItem").text(res.counter);
+        $("#subtotal").html("$" + subvalue);
+        $("#total").html("$" + value);
+
+        $(".alert.alert-success.add-to-cart-message.d-none").show();
+
+        var alertElement = $("#showAlertAddCart");
+        alertElement.removeClass("d-none").show();
+
+        setTimeout(function () {
+          alertElement.hide().addClass("d-none");
+        }, 2000);
+      }
+    },
+  });
+}
 
 // <!-- Actualizando carrito   -->
 function updateCartContents(succes) {
@@ -432,7 +528,7 @@ function deleteFavorite(prodid) {
 
   var alertElement = $("#showAlertDeleteFavT");
   alertElement.removeClass("d-none").show();
-  
+
   $.ajax({
     url: ajaxUrl,
     method: "POST",
@@ -445,7 +541,7 @@ function deleteFavorite(prodid) {
         sessionFav = sessionFav.filter((item) => item !== Number(prodid));
         localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
       }
-  
+
       if (res.counter === 0) {
         var spanElement = document.getElementById("favoritesCounter");
         if (spanElement) {
@@ -493,9 +589,182 @@ setInterval(function () {
 initFavoritesPanelDelete();
 initAddToFavoriteButton();
 
-
-
 function clearEmptyCart() {
   var cartElement = document.querySelector(".offcanvas-body.ordenList.cart");
   cartElement.classList.remove("empty");
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  function modifyImageLi(liElement, urlToReplace) {
+    var listImageCat = liElement.querySelectorAll(
+      "img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail"
+    );
+    listImageCat.forEach(function (img) {
+      var src = img.getAttribute("src");
+      if (src) {
+        img.setAttribute("src", urlToReplace);
+      }
+    });
+  }
+
+  var swatchOptions = document.querySelectorAll(".cfvsw-swatches-option");
+  swatchOptions.forEach(function (option) {
+    option.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      // Verificar si el clic es automático
+      if (option.dataset.autoClick === "true") {
+        delete option.dataset.autoClick; // Eliminar la marca de clic automático
+        return; // Salir de la función sin ejecutar el código jQuery AJAX
+      }
+
+      var dataSlug = option.getAttribute("data-slug");
+      var liElement = option.closest("li");
+
+      if (liElement) {
+        var dataId = liElement.getAttribute("data-id-pub");
+        jQuery.ajax({
+          url: ajaxUrl,
+          type: "POST",
+          data: {
+            action: "get_product_image",
+            product_id: dataId,
+            data_slug: dataSlug,
+          },
+          success: function (response) {
+            if (response.success) {
+              var imageUrl = response.data.image_url;
+              modifyImageLi(liElement, imageUrl);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.log("Error en la solicitud AJAX:", error);
+          },
+        });
+      }
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    // Función para obtener el valor de un parámetro de la URL
+    function getParameterByName(name) {
+      var url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    // Obtener el valor de filter_color de la URL si existe
+    var filterColor = getParameterByName("filter_color");
+    var listItems = document.querySelectorAll("li[data-color]");
+
+    listItems.forEach(function (liElement) {
+      var dataColor = filterColor || liElement.getAttribute("data-color");
+      var swatchOptions = liElement.querySelectorAll(".cfvsw-swatches-option");
+
+      swatchOptions.forEach(function (option) {
+        var dataSlug = option.getAttribute("data-slug");
+
+        // Comparar data-color con data-slug y agregar la clase si coinciden
+        if (dataColor === dataSlug) {
+          option.dataset.autoClick = "true"; // Marcar el clic como automático
+          option.click();
+          option.classList.add("cfvsw-selected-swatch");
+        } else {
+          option.classList.remove("cfvsw-selected-swatch");
+        }
+      });
+    });
+  }, 1000);
+});
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Función para modificar el atributo 'src' de las imágenes
+//   function modificarImagenes() {
+//     var listImageCat = document.querySelectorAll(
+//       "img.attachment-full.size-full"
+//     );
+
+//     // Iterar sobre cada imagen y modificar el atributo 'src'
+//     listImageCat.forEach(function (img) {
+//       var src = img.getAttribute("src");
+//       if (src) {
+//         // Reemplazar '-300x300' con una cadena vacía
+//         var newSrc = src.replace("-300x300", "");
+//         img.setAttribute("src", newSrc);
+//       }
+//     });
+//   }
+
+//   // Modificar las imágenes al cargar la página
+//   setTimeout(function () {
+//     modificarImagenes();
+//   }, 1000);
+
+//   // Agregar evento de clic a los elementos con la clase 'cfvsw-swatches-container cfvsw-shop-container'
+//   var swatchContainers = document.querySelectorAll(
+//     ".cfvsw-swatches-container, .cfvsw-shop-container"
+//   );
+//   swatchContainers.forEach(function (container) {
+//     container.addEventListener("click", function () {
+//       // Modificar las imágenes al hacer clic
+//       setTimeout(() => {
+//         modificarImagenes();
+//       }, 100);
+//     });
+//   });
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Función para actualizar el conteo de artículos en el carrito y mostrar los artículos
+  function updateCartCount() {
+    jQuery.ajax({
+      url: ajaxUrl, // URL de la acción AJAX de WordPress
+      type: "POST",
+      data: {
+        action: "update_cart_count",
+      },
+      success: function (response) {
+        if (response.success) {
+          var cartItem = document.getElementById("cartItem");
+          if (!cartItem) {
+            // Crear el elemento 'cartItem' si no existe
+            cartItem = document.createElement("span");
+            cartItem.id = "cartItem";
+            cartItem.className =
+              "cart-section-quantity rounded-pill position-absolute center-all text-white d-none";
+            document.getElementById("bottonCart").appendChild(cartItem);
+          } else {
+            if (response.data.count > 0) {
+              cartItem.classList.remove("d-none");
+              cartItem.innerText = response.data.count;
+            }
+          }
+          $(".ordenList").html(response.data.itemsCart);
+          var totalString = response.data.total;
+          var value = getTotalValue(totalString);
+          if (window.location.href.indexOf("bolsa-de-compras") > -1) {
+            $(".woocommerce-Price-amount.amount").text("$ " + value);
+          }
+
+          $("#subtotal, #total").html("$" + value);
+        } else {
+          console.log("Error:", response.data.message);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.log("Error en la solicitud AJAX:", error);
+      },
+    });
+  }
+
+  // Llamar a la función para actualizar el conteo de artículos en el carrito
+  setTimeout(function () {
+    updateCartCount();
+  }, 1000);
+});
