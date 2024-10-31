@@ -1,4 +1,136 @@
-// <!-- Parseando los valores que llegan de Woocomerce desde etiquetas   -->
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Seleccionar todas las opciones de talla
+//   var swatchOptions = document.querySelectorAll(".cfvsw-swatches-option.cfvsw-label-option");
+
+//   swatchOptions.forEach(function (option) {
+//     option.addEventListener("click", function () {
+//       // Obtener el <li> más cercano
+//       var liElement = option.closest("li");
+//       if (liElement) {
+//         // Obtener el data-id-pub del <li>
+//         var dataIdPub = liElement.getAttribute("data-id-pub");
+
+//         // Obtener el elemento con la clase cfvsw-selected-swatch dentro del <li> para el color
+//         var selectedColorOption = liElement.querySelector(".cfvsw-swatches-option.cfvsw-selected-swatch");
+//         var selectedColorSlug = selectedColorOption ? selectedColorOption.getAttribute("data-slug") : null;
+
+//         // Obtener el data-slug de la talla seleccionada
+//         var selectedTallaSlug = option.getAttribute("data-slug");
+
+//         // Mostrar los valores en la consola (o hacer algo con ellos)
+//         console.log("data-id-pub:", dataIdPub);
+//         console.log("selected color data-slug:", selectedColorSlug);
+//         console.log("selected talla data-slug:", selectedTallaSlug);
+
+//         // Obtener el botón "Añadir al carrito"
+//         var addToCartButton = liElement.querySelector(".add-to-cart-container a");
+//         if (addToCartButton) {
+//           // Agregar la clase cfvsw_variation_found
+//           addToCartButton.removeAttribute("href");
+//           addToCartButton.classList.add("cfvsw_variation_found");
+
+//           // Cambiar el texto a "Añadir al carrito"
+//           addToCartButton.textContent = "Añadir al carrito";
+
+//           // Agregar data-variation_id y data-selected_variant
+//           var variationId = liElement.getAttribute("data-id"); // Suponiendo que la ID de la variación está en data-id
+//           addToCartButton.setAttribute("data-variation_id", variationId);
+
+//           var selectedVariant = {
+//             attribute_pa_color: selectedColorSlug,
+//             attribute_pa_talla: selectedTallaSlug
+//           };
+//           addToCartButton.setAttribute("data-selected_variant", JSON.stringify(selectedVariant));
+
+//           // Prevenir la redirección al hacer clic en el botón
+//           addToCartButton.addEventListener("click", function(event) {
+//             event.preventDefault();
+//           });
+//         }
+//       }
+//     });
+//   });
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    const favorites = JSON.parse(localStorage.getItem("sessionFav")) || [];
+    if (favorites.length === 0) return;
+
+    $.ajax({
+      url: "/wp-admin/admin-ajax.php",
+      type: "POST",
+      data: {
+        action: "update_favs",
+        favs: JSON.stringify(favorites),
+      },
+      success: function (response) {
+        response = JSON.parse(response);
+        if (response.html) {
+          // Actualizar el contenido del carrito de favoritos
+          $(".offcanvas-body.ordenListFav.fav").html(response.html);
+        }
+        if (response.count !== undefined) {
+          // Actualizar el conteo de favoritos
+          $("#favoritesCounter").text(response.count).removeClass("d-none");
+        }
+      },
+      error: function (error) {
+        console.error("Error al sincronizar favoritos:", error);
+      },
+    });
+  }, 800);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Función para actualizar el conteo de artículos en el carrito y mostrar los artículos
+  function updateCartCount() {
+    jQuery.ajax({
+      url: ajaxUrl, // URL de la acción AJAX de WordPress
+      type: "POST",
+      data: {
+        action: "update_cart_count",
+      },
+      success: function (response) {
+        if (response.success) {
+          var cartItem = document.getElementById("cartItem");
+          if (!cartItem) {
+            // Crear el elemento 'cartItem' si no existe
+            cartItem = document.createElement("span");
+            cartItem.id = "cartItem";
+            cartItem.className =
+              "cart-section-quantity rounded-pill position-absolute center-all text-white d-none";
+            document.getElementById("bottonCart").appendChild(cartItem);
+          } else {
+            if (response.data.count > 0) {
+              cartItem.classList.remove("d-none");
+              cartItem.innerText = response.data.count;
+            }
+          }
+          $(".ordenList").html(response.data.itemsCart);
+          var totalString = response.data.total;
+          var value = getTotalValue(totalString);
+          if (window.location.href.indexOf("bolsa-de-compras") > -1) {
+            $(".woocommerce-Price-amount.amount").text("$ " + value);
+          }
+
+          $("#subtotal, #total").html("$" + value);
+        } else {
+          console.log("Error:", response.data.message);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.log("Error en la solicitud AJAX:", error);
+      },
+    });
+  }
+
+  // Llamar a la función para actualizar el conteo de artículos en el carrito
+  setTimeout(function () {
+    updateCartCount();
+  }, 1000);
+});
+
 function getTotalValue(totalString) {
   var match = totalString.match(
     /<span class="woocommerce-Price-currencySymbol">[^<]*<\/span>&nbsp;((\d{1,3}(\.\d{3})*(\,\d+)?)|(\d+))/
@@ -160,7 +292,7 @@ function addProductToCart(productId, quantity) {
 
         setTimeout(function () {
           alertElement.hide().addClass("d-none");
-        }, 2000);
+        }, 500);
       }
     },
   });
@@ -202,19 +334,9 @@ function addProductToCartCustom(productId, quantity) {
     success: async function (response) {
       var res = JSON.parse(response);
       if (res.status === "success") {
-        if (botonCart) {
-          var spanElement = document.getElementById("cartItem");
-          if (!spanElement) {
-            spanElement = document.createElement("span");
-            spanElement.id = "cartItem";
-            spanElement.className =
-              "cart-section-quantity rounded-pill position-absolute center-all text-white";
-            spanElement.textContent = "";
-            botonCart.appendChild(spanElement);
-          } else {
-            spanElement.classList.remove("d-none");
-          }
-        }
+        var spanElement = document.getElementById("cartItem");
+        spanElement.classList.remove("d-none");
+
         $(".offcanvas-body.ordenList.cart").empty();
         $(".offcanvas-body.ordenList.cart").html(res.html);
         var subtotal = res.subtotal;
@@ -507,7 +629,7 @@ function initAddToFavoriteButton() {
           botonFav.appendChild(spanElement);
         }
 
-        $("#favoritesCounter").text(res.counter);
+        $("#favoritesCounter").text(res.counter).removeClass("d-none");
         $(".offcanvas-body.ordenListFav.fav").html(res.html);
         var alertElement = $("#showAlertAddFav");
         alertElement.removeClass("d-none").show();
@@ -555,7 +677,7 @@ function deleteFavorite(prodid) {
         }
       }
       alertElement.hide().addClass("d-none");
-      $("#favoritesCounter").text(res.counter);
+      $("#favoritesCounter").text(res.counter).removeClass("d-none");
       $(".offcanvas-body.ordenListFav.fav").html(res.html);
     },
   });
@@ -601,6 +723,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     listImageCat.forEach(function (img) {
       var src = img.getAttribute("src");
+      console.log("src", src);
       if (src) {
         img.setAttribute("src", urlToReplace);
       }
@@ -721,50 +844,58 @@ document.addEventListener("DOMContentLoaded", function () {
 // });
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Función para actualizar el conteo de artículos en el carrito y mostrar los artículos
-  function updateCartCount() {
-    jQuery.ajax({
-      url: ajaxUrl, // URL de la acción AJAX de WordPress
-      type: "POST",
-      data: {
-        action: "update_cart_count",
-      },
-      success: function (response) {
-        if (response.success) {
-          var cartItem = document.getElementById("cartItem");
-          if (!cartItem) {
-            // Crear el elemento 'cartItem' si no existe
-            cartItem = document.createElement("span");
-            cartItem.id = "cartItem";
-            cartItem.className =
-              "cart-section-quantity rounded-pill position-absolute center-all text-white d-none";
-            document.getElementById("bottonCart").appendChild(cartItem);
-          } else {
-            if (response.data.count > 0) {
-              cartItem.classList.remove("d-none");
-              cartItem.innerText = response.data.count;
-            }
-          }
-          $(".ordenList").html(response.data.itemsCart);
-          var totalString = response.data.total;
-          var value = getTotalValue(totalString);
-          if (window.location.href.indexOf("bolsa-de-compras") > -1) {
-            $(".woocommerce-Price-amount.amount").text("$ " + value);
-          }
-
-          $("#subtotal, #total").html("$" + value);
-        } else {
-          console.log("Error:", response.data.message);
-        }
-      },
-      error: function (xhr, status, error) {
-        console.log("Error en la solicitud AJAX:", error);
-      },
+  var images = document.querySelectorAll(
+    ".attachment-woocommerce_thumbnail.size-woocommerce_thumbnail"
+  );
+  images.forEach(function (img) {
+    img.addEventListener("click", function () {
+      var href = img.getAttribute("data-href");
+      if (href) {
+        window.location.href = href;
+      }
     });
-  }
-
-  // Llamar a la función para actualizar el conteo de artículos en el carrito
-  setTimeout(function () {
-    updateCartCount();
-  }, 1000);
+  });
 });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Seleccionar todos los elementos <li> con la clase especificada
+//   var listItems = document.querySelectorAll("li.col-lg-3.col-sm-6.col-6.product.type-product");
+
+//   // Agrupar los elementos <li> por data-id-pub
+//   var groupedItems = {};
+//   listItems.forEach(function (liElement) {
+//     var dataIdPub = liElement.getAttribute("data-id-pub");
+//     if (!groupedItems[dataIdPub]) {
+//       groupedItems[dataIdPub] = [];
+//     }
+//     groupedItems[dataIdPub].push(liElement);
+//   });
+
+//   // Iterar sobre cada grupo de elementos <li>
+//   Object.keys(groupedItems).forEach(function (dataIdPub) {
+//     var items = groupedItems[dataIdPub];
+
+//     // Crear un mapa de colores a URLs de imágenes
+//     var colorToImageUrl = {};
+//     items.forEach(function (liElement) {
+//       var dataColor = liElement.getAttribute("data-color");
+//       var imgElement = liElement.querySelector("img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail");
+//       var imgUrl = imgElement ? imgElement.getAttribute("data-src") : "";
+//       colorToImageUrl[dataColor] = imgUrl;
+//     });
+
+//     // Asignar la URL de la imagen correspondiente a cada opción dentro de cfvsw-swatches-container cfvsw-shop-container
+//     items.forEach(function (liElement) {
+//       var swatchesContainer = liElement.querySelector(".cfvsw-swatches-container.cfvsw-shop-container");
+//       if (swatchesContainer) {
+//         var swatchOptions = swatchesContainer.querySelectorAll(".cfvsw-swatches-option");
+//         swatchOptions.forEach(function (option) {
+//           var dataSlug = option.getAttribute("data-slug");
+//           if (colorToImageUrl[dataSlug]) {
+//             option.setAttribute("data-img-url", colorToImageUrl[dataSlug]);
+//           }
+//         });
+//       }
+//     });
+//   });
+// });

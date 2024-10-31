@@ -34,6 +34,7 @@ if ($color) {
     });
     $available_variations = array_values($available_variations);
     $variation = new WC_Product_Variation($available_variations[0]['variation_id']);
+    $variation_id = $available_variations[0]['variation_id'];
     $image = $variation->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title(), 'data-src' => get_the_post_thumbnail_url()));
 } else {
     $image = $product->get_image('medium', array('loading' => 'lazy', 'alt' => get_the_title(), 'data-src' => get_the_post_thumbnail_url()));
@@ -48,50 +49,19 @@ if ($color) {
     $product_price_html = $product->get_price_html() . " COP";
     $product_status = $product->get_stock_status();
 ?>
-    <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>" data-color="<?= $color; ?>">
-        <div href="<?= $product_permalink ?>" class="CardProducts w-100 <?= $product_status ?>" data-stock="<?= $product_status; ?>">
-            <div class="img-contain bb center-all" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
+    <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>">
+        <a href="<?= $product_permalink ?>" class="CardProducts w-100"  data-stock = "<?= $product_status; ?>">
+            <div class="img-contain bb" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                 <?= $image ?>
-                <pre class="d-none">
-                    <?php print_r($product) ?>
-                </pre>
             </div>
-            <!-- <div class="info-highlights">
+            <div class="info-highlights">
                 <h5 title="<?= $product_title ?>"><?= $product_title ?></h5>
                 <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
                     <p class="mb-0 d-flex gap-2"><?= $product_price_html ?></p>
                 </div>
-            </div> -->
-            <div class="info-highlights position-relative">
-                <?php
-
-                /**
-                 * Hook: woocommerce_shop_loop_item_title.
-                 *
-                 * @hooked woocommerce_template_loop_product_title - 10
-                 */
-                do_action('woocommerce_shop_loop_item_title');
-
-                /**
-                 * Hook: woocommerce_after_shop_loop_item_title.
-                 *
-                 * @hooked woocommerce_template_loop_rating - 5
-                 * @hooked woocommerce_template_loop_price - 10
-                 */
-                do_action('woocommerce_after_shop_loop_item_title');
-
-                /**
-                 * Hook: woocommerce_after_shop_loop_item.
-                 *
-                 * @hooked woocommerce_template_loop_product_link_close - 5
-                 * @hooked woocommerce_template_loop_add_to_cart - 10
-                 */
-                do_action('woocommerce_after_shop_loop_item');
-                ?>
             </div>
-
-        </div>
-    </li>
+        </a>
+    </div>
 
 <?php endif; ?>
 
@@ -100,6 +70,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
     $available_variations = $product->get_available_variations();
     $shown_colors = array();
     $product_id = $product->get_id();
+    $color_variations = array();
 
     foreach ($available_variations as $variation) {
         $variation_obj = wc_get_product($variation['variation_id']);
@@ -113,6 +84,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             $optimized_image_url = $image_array[0];
             $variation_title = removerTalla($variation_obj->get_name());
             $variation_permalink = get_permalink($variation_id);
+            $variation_permalink = preg_replace('/&attribute_pa_talla=[^&]*/', '', $variation_permalink);
             $variation_price = $variation_obj->get_price_html() . " COP";
             $variation_status = $variation_obj->get_stock_status();
 
@@ -134,7 +106,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                 </a>
                 <div href="<?= $variation_permalink ?>" class="CardProducts w-100 <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
                     <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
-                        <img data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class=" attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
+                        <img data-href="<?= $variation_permalink ?>" data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class=" attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
 
                         <!-- <img class="position-absolute top-0 left-0" data-src="<?= $variation['variation_gallery_images'][1]['src'] ?>" alt="<?= $variation_title ?>"> -->
                     </div>

@@ -61,6 +61,6 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
   </div>
 
 <?php else : ?>
-  <div class="no-favs-products text-center center-all text-center p-4 h-100">
+  <div class="text-center center-all text-center p-4 h-100">
   </div>
 <?php endif; ?>

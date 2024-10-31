@@ -37,6 +37,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="icon" href="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" type="image/svg+xml">
   <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css" />
+  <style>
+    .CardProducts .cfvsw_variations_form {
+      width: 100% !important;
+    }
+  </style>
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
   </script>
@@ -121,7 +126,7 @@
               <div class="header-actions d-flex ms-4 gap-sm-3">
                 <button id="bottonFav" class="position-relative btn center-all p-0 " data-bs-toggle="offcanvas" data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i>
                   <?php if (!empty($_SESSION["prodsfavs"])) { ?>
-                    <span id="favoritesCounter" class="cart-section-quantity rounded-pill position-absolute center-all text-white"><?= count($_SESSION["prodsfavs"]) ?>
+                    <span id="favoritesCounter" class="cart-section-quantity rounded-pill position-absolute center-all text-white d-none"><?= count($_SESSION["prodsfavs"]) ?>
                     </span>
                   <?php } ?>
                 </button>

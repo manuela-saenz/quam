@@ -539,3 +539,26 @@ function get_all_product_categories_attributes_and_prices()
             wp_send_json_error(array('message' => 'Carrito no disponible'));
         }
     }
+
+    add_action('wp_ajax_update_favs', 'update_favs');
+    add_action('wp_ajax_nopriv_update_favs', 'update_favs');
+
+    function update_favs()
+    {
+        if (isset($_POST['favs'])) {
+            $favs = json_decode(stripslashes($_POST['favs']));
+            $_SESSION["prodsfavs"] = $favs;
+            $count_favs = count($favs);
+
+            ob_start();
+            get_template_part("templates/components/mini", "favs");
+            $html = ob_get_clean();
+            echo json_encode(
+                array(
+                    "html" => $html,
+                    "count" => $count_favs,
+                )
+            );
+        }
+        wp_die();
+    }
