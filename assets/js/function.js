@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error al sincronizar favoritos:", error);
       },
     });
-  }, 1200);
+  }, 1300);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
