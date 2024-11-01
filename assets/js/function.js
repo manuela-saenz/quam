@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error al sincronizar favoritos:", error);
       },
     });
-  }, 800);
+  }, 1200);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -94,18 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
       success: function (response) {
         if (response.success) {
           var cartItem = document.getElementById("cartItem");
-          if (!cartItem) {
-            // Crear el elemento 'cartItem' si no existe
-            cartItem = document.createElement("span");
-            cartItem.id = "cartItem";
-            cartItem.className =
-              "cart-section-quantity rounded-pill position-absolute center-all text-white d-none";
-            document.getElementById("bottonCart").appendChild(cartItem);
-          } else {
-            if (response.data.count > 0) {
-              cartItem.classList.remove("d-none");
-              cartItem.innerText = response.data.count;
-            }
+          cartItem.classList.remove("d-none");
+          if (response.data.count > 0) {
+            cartItem.innerText = response.data.count;
           }
           $(".ordenList").html(response.data.itemsCart);
           var totalString = response.data.total;
@@ -128,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Llamar a la función para actualizar el conteo de artículos en el carrito
   setTimeout(function () {
     updateCartCount();
-  }, 1000);
+  }, 1400);
 });
 
 function getTotalValue(totalString) {
