@@ -50,7 +50,7 @@ if ($color) {
     $product_status = $product->get_stock_status();
 ?>
     <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>">
-        <a href="<?= $product_permalink ?>" class="CardProducts w-100"  data-stock = "<?= $product_status; ?>">
+        <a href="<?= $product_permalink ?>" class="CardProducts w-100" data-stock="<?= $product_status; ?>">
             <div class="img-contain bb" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                 <?= $image ?>
             </div>
@@ -104,12 +104,12 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                     // do_action('woocommerce_before_shop_loop_item_title');
                     ?>
                 </a>
-                <div href="<?= $variation_permalink ?>" class="CardProducts w-100 <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
-                    <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
+                <div class="CardProducts w-100 <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
+                    <a href="<?= $variation_permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                         <img data-href="<?= $variation_permalink ?>" data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class=" attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
 
                         <!-- <img class="position-absolute top-0 left-0" data-src="<?= $variation['variation_gallery_images'][1]['src'] ?>" alt="<?= $variation_title ?>"> -->
-                    </div>
+                    </a>
                     <div class="info-highlights position-relative">
                         <?php
 
@@ -126,8 +126,12 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                          * @hooked woocommerce_template_loop_rating - 5
                          * @hooked woocommerce_template_loop_price - 10
                          */
-                        do_action('woocommerce_after_shop_loop_item_title');
+                        ?>
+                        <a href="<?= $variation_permalink ?>">
+                            <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
+                        </a>
 
+                        <?php
                         /**
                          * Hook: woocommerce_after_shop_loop_item.
                          *

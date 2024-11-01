@@ -48,29 +48,7 @@ if ($related_products) :
 						$wc_product = wc_get_product($related_product->get_id())
 						?>
 						<div class="swiper-slide">
-							<a href="<?= get_permalink($related_product->get_id()) ?>" class="CardProducts <?= $product_status ?>">
-								<div class="img-contain">
-									<img data-slide-src="<?= wp_get_attachment_image_url($related_product->get_image_id(), 'medium'); ?>" alt="<?= get_the_title() ?>" />
-
-									<?php if ($related_product && $related_product->is_type('variable')) {
-										$available_variations = $related_product->get_available_variations();
-									?>
-										<pre class="d-none">
-											<?php
-											// $variation = new WC_Product_Variation($wc_product->get_id());
-											// print_r($variation)
-											?>
-										</pre>
-
-									<?php } ?>
-								</div>
-								<div class="info-highlights">
-									<h5 title="<?= get_the_title() ?>"><?= get_the_title() ?></h5>
-									<div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
-										<p class=" mb-0 d-flex gap-2"><?= $related_product->get_price_html() .  "COP" ?> </p>
-									</div>
-								</div>
-							</a>
+							<?php productCard($related_product) ?>
 						</div>
 					<?php endforeach; ?>
 				</div>

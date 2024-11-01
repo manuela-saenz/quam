@@ -88,6 +88,7 @@ ins {
   color: $dark_blue;
 }
 
-.cfvsw-swatches-option.cfvsw-selected-swatch{
+.cfvsw-swatches-option.cfvsw-selected-swatch, .cfvsw-swatches-option.cfvsw-swatches-disabled{
   pointer-events: none;
+  border-width: 1px !important;
 }

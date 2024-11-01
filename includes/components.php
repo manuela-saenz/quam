@@ -7,15 +7,20 @@ function productCard($product)
   // print_r($product->id);
   // echo "</pre>";
   $product_status = $wcProd->get_stock_status();
+  if(is_front_page()){
+   $title = get_the_title($product);
+  } else {
+    $title = get_the_title();
+  }
 ?>
   <a href="<?= get_permalink($product->ID) ?>" class="CardProducts <?= $product_status ?>">
-    <div class="img-contain" title="<?= get_the_title($product) ?>">
-      <?= $wcProd->get_image('medium', 'alt=' . get_the_title())   ?>
+    <div class="img-contain" title="<?= $title ?>">
+      <?= $wcProd->get_image('medium', 'alt=' . $title)   ?>
     </div>
     <div class="info-highlights">
-      <h5 title="<?= get_the_title() ?>"><?= get_the_title($product) ?></h5>
-      <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
-        <p class=" mb-0 d-flex gap-2"><?= $wcProd->get_price_html() .  "COP" ?> </p>
+      <h5 title="<?=  $title ?>"><?= $title ?></h5>
+      <div class="d-flex align-items-lg-center align-items-start justify-content-center flex-column flex-sm-row">
+        <div class=" mb-0 d-flex gap-2 price"><?= $wcProd->get_price_html() ?> </div>
       </div>
     </div>
   </a>
