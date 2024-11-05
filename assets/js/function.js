@@ -94,9 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
       success: function (response) {
         if (response.success) {
           var cartItem = document.getElementById("cartItem");
-          cartItem.classList.remove("d-none");
           if (response.data.count > 0) {
             cartItem.innerText = response.data.count;
+            cartItem.classList.remove("d-none");
           }
           $(".ordenList").html(response.data.itemsCart);
           var totalString = response.data.total;
