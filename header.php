@@ -125,17 +125,12 @@
             <div class="center-vertical">
               <div class="header-actions d-flex ms-4 gap-sm-3">
                 <button id="bottonFav" class=" position-relative btn center-all p-0 " data-bs-toggle="offcanvas" data-bs-target="#mini-favoritos" aria-controls="mini-favoritos"><i class="icon-heart"></i>
-                  <?php if (!empty($_SESSION["prodsfavs"])) { ?>
-                    <span id="favoritesCounter" class="d-none cart-section-quantity rounded-pill position-absolute center-all text-white d-none"><?= count($_SESSION["prodsfavs"]) ?>
-                    </span>
-                  <?php } ?>
+                    <span id="favoritesCounter" class="d-none cart-section-quantity rounded-pill position-absolute center-all text-white">0</span>
                 </button>
 
                 <button id="bottonCart" class=" position-relative btn center-all p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
                   <i class="icon-shopping-bag"></i>
-                  <?php if (count(WC()->cart->get_cart()) > 0) { ?>
-                    <span id="cartItem" class="d-none cart-section-quantity rounded-pill position-absolute center-all text-white d-none"><?= count(WC()->cart->get_cart()) ?></span>
-                  <?php } ?>
+                    <span id="cartItem" class="d-none cart-section-quantity rounded-pill position-absolute center-all text-white">0</span>
                 </button>
                 </span></button>
                 <!-- <button type="button" class="position-relative btn center-all p-0 d-none d-sm-flex"><i class="icon-user"></i></button> -->
