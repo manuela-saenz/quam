@@ -85,12 +85,28 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             $variation_title = removerTalla($variation_obj->get_name());
             $variation_permalink = get_permalink($variation_id);
             $variation_permalink = preg_replace('/&attribute_pa_talla=[^&]*/', '', $variation_permalink);
-            $variation_price = $variation_obj->get_price_html() . " COP";
-            $variation_status = $variation_obj->get_stock_status();
+            $variation_price = $variation_obj->get_price_html();
 
+            // Obtener el precio formateado con HTML
+            $variation_price_html = $variation_obj->get_price_html();
+
+            // Extraer el precio de venta (segundo precio)
+            preg_match('/<ins[^>]*><span[^>]*><bdi><span[^>]*>([^<]*)<\/span>&nbsp;([^<]*)<\/bdi><\/span><\/ins>/', $variation_price_html, $matches);
+            $sale_price = isset($matches[2]) ? $matches[2] : '';
+
+            // Quitar el punto y convertirlo en número
+            $sale_price_number = str_replace('.', '', $sale_price);
+            $sale_price_number = floatval($sale_price_number);
+
+            $variation_status = $variation_obj->get_stock_status();
+            $regular_price = $variation_obj->get_regular_price();
+            $discount = 0;
+            if ($sale_price_number && $regular_price && $regular_price > $sale_price_number) {
+                $discount = round((($regular_price - $sale_price_number) / $regular_price) * 100);
+            }
 
 ?>
-            <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?> data-id="<?= $variation_id; ?>" data-id-pub="<?= $product_id; ?>" data-color="<?= $color; ?>">
+            <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?>data-discount="<?= $discount; ?>" data-id="<?= $variation_id; ?>" data-id-pub="<?= $product_id; ?>" data-color="<?= $color; ?>">
                 <a href="<?= esc_url($link) ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link rounded-[10px] overflow-hidden mb-3 relative d-none">
                     <?php
                     woocommerce_show_product_loop_sale_flash();

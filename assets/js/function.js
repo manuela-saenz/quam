@@ -725,7 +725,6 @@ document.addEventListener("DOMContentLoaded", function () {
   swatchOptions.forEach(function (option) {
     option.addEventListener("click", function (event) {
       event.preventDefault();
-
       // Verificar si el clic es automático
       if (option.dataset.autoClick === "true") {
         delete option.dataset.autoClick; // Eliminar la marca de clic automático
@@ -737,23 +736,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (liElement) {
         var dataId = liElement.getAttribute("data-id-pub");
-        jQuery.ajax({
-          url: ajaxUrl,
-          type: "POST",
-          data: {
-            action: "get_product_image",
-            product_id: dataId,
-            data_slug: dataSlug,
-          },
-          success: function (response) {
-            if (response.success) {
-              var imageUrl = response.data.image_url;
-              modifyImageLi(liElement, imageUrl);
-            }
-          },
-          error: function (xhr, status, error) {
-            console.log("Error en la solicitud AJAX:", error);
-          },
+        var variationsForm = liElement.querySelector(
+          ".cfvsw_variations_form.variations_form.cfvsw_shop_align_left.variation-function-added"
+        );
+        var productVariations = variationsForm
+          ? variationsForm.getAttribute("data-product_variations")
+          : null;
+        var jsonProducVariations = JSON.parse(productVariations);
+        console.log(jsonProducVariations);
+
+        var imageUrl = null;
+        jsonProducVariations.forEach(function (variation) {
+          var attributes = variation.attributes;
+          if (
+            attributes.attribute_pa_color === dataSlug) {
+            imageUrl = variation.image.url;
+            modifyImageLi(liElement, imageUrl);
+            return;
+          }
         });
       }
     });
