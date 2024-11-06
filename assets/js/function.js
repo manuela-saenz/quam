@@ -714,7 +714,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     listImageCat.forEach(function (img) {
       var src = img.getAttribute("src");
-      console.log("src", src);
+      // console.log("src", src);
       if (src) {
         img.setAttribute("src", urlToReplace);
       }
@@ -751,7 +751,7 @@ document.addEventListener("DOMContentLoaded", function () {
           ? variationsForm.getAttribute("data-product_variations")
           : null;
         var jsonProducVariations = JSON.parse(productVariations);
-        console.log(jsonProducVariations);
+        // console.log(jsonProducVariations);
 
         var imageUrl = null;
         jsonProducVariations.forEach(function (variation) {
