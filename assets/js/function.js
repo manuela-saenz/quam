@@ -739,6 +739,14 @@ document.addEventListener("DOMContentLoaded", function () {
         var variationsForm = liElement.querySelector(
           ".cfvsw_variations_form.variations_form.cfvsw_shop_align_left.variation-function-added"
         );
+        // Quitar la clase d-none del elemento con la clase cfvsw-swatches-container cfvsw-shop-container y el atributo swatches-attr="attribute_pa_talla"
+        var sizeContainer = liElement.querySelector(
+          '.cfvsw-swatches-container.cfvsw-shop-container[swatches-attr="attribute_pa_talla"]'
+        );
+        if (sizeContainer) {
+          sizeContainer.classList.remove("d-none");
+        }
+
         var productVariations = variationsForm
           ? variationsForm.getAttribute("data-product_variations")
           : null;
@@ -748,8 +756,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var imageUrl = null;
         jsonProducVariations.forEach(function (variation) {
           var attributes = variation.attributes;
-          if (
-            attributes.attribute_pa_color === dataSlug) {
+          if (attributes.attribute_pa_color === dataSlug) {
             imageUrl = variation.image.url;
             modifyImageLi(liElement, imageUrl);
             return;
@@ -780,15 +787,23 @@ document.addEventListener("DOMContentLoaded", function () {
     listItems.forEach(function (liElement) {
       var dataColor = filterColor || liElement.getAttribute("data-color");
       var swatchOptions = liElement.querySelectorAll(".cfvsw-swatches-option");
+      var sizeOptions = liElement.querySelectorAll(
+        '.cfvsw-swatches-container.cfvsw-shop-container[swatches-attr="attribute_pa_talla"]'
+      );
+
+      // Agregar la clase d-none a los elementos con la clase cfvsw-shop-container
+      sizeOptions.forEach(function (sizeOption) {
+        sizeOption.classList.add("d-none");
+      });
 
       swatchOptions.forEach(function (option) {
         var dataSlug = option.getAttribute("data-slug");
 
         // Comparar data-color con data-slug y agregar la clase si coinciden
         if (dataColor === dataSlug) {
-          option.dataset.autoClick = "true"; // Marcar el clic como automático
-          option.click();
-          option.classList.add("cfvsw-selected-swatch");
+          // option.dataset.autoClick = "true"; // Marcar el clic como automático
+          // option.click();
+          // option.classList.add("cfvsw-selected-swatch");
         } else {
           option.classList.remove("cfvsw-selected-swatch");
         }
