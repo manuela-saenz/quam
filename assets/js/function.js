@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error al sincronizar favoritos:", error);
       },
     });
-  }, 1300);
+  }, 200);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Llamar a la función para actualizar el conteo de artículos en el carrito
   setTimeout(function () {
     updateCartCount();
-  }, 1400);
+  }, 200);
 });
 
 function getTotalValue(totalString) {
