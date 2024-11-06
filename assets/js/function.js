@@ -53,33 +53,31 @@
 // });
 
 document.addEventListener("DOMContentLoaded", function () {
-  setTimeout(function () {
-    const favorites = JSON.parse(localStorage.getItem("sessionFav")) || [];
-    if (favorites.length === 0) return;
+  const favorites = JSON.parse(localStorage.getItem("sessionFav")) || [];
+  if (favorites.length === 0) return;
 
-    $.ajax({
-      url: "/wp-admin/admin-ajax.php",
-      type: "POST",
-      data: {
-        action: "update_favs",
-        favs: JSON.stringify(favorites),
-      },
-      success: function (response) {
-        response = JSON.parse(response);
-        if (response.html) {
-          // Actualizar el contenido del carrito de favoritos
-          $(".offcanvas-body.ordenListFav.fav").html(response.html);
-        }
-        if (response.count !== undefined) {
-          // Actualizar el conteo de favoritos
-          $("#favoritesCounter").text(response.count).removeClass("d-none");
-        }
-      },
-      error: function (error) {
-        console.error("Error al sincronizar favoritos:", error);
-      },
-    });
-  }, 200);
+  $.ajax({
+    url: "/wp-admin/admin-ajax.php",
+    type: "POST",
+    data: {
+      action: "update_favs",
+      favs: JSON.stringify(favorites),
+    },
+    success: function (response) {
+      response = JSON.parse(response);
+      if (response.html) {
+        // Actualizar el contenido del carrito de favoritos
+        $(".offcanvas-body.ordenListFav.fav").html(response.html);
+      }
+      if (response.count !== undefined) {
+        // Actualizar el conteo de favoritos
+        $("#favoritesCounter").text(response.count).removeClass("d-none");
+      }
+    },
+    error: function (error) {
+      console.error("Error al sincronizar favoritos:", error);
+    },
+  });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -117,9 +115,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Llamar a la función para actualizar el conteo de artículos en el carrito
-  setTimeout(function () {
-    updateCartCount();
-  }, 200);
+
+  updateCartCount();
 });
 
 function getTotalValue(totalString) {
