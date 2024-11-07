@@ -160,7 +160,37 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
     </div>
   </div>
 </section>
+<?php
+// $new = array(
+//     'post_type'      => 'product',  // Tipo de post
+//     'posts_per_page' => 8,          // Número de productos a mostrar
+//     'orderby'        => 'date',     // Ordenados por fecha de publicación
+//     'order'          => 'DESC'      // De más reciente a más antiguo
+// );
+// $newLoop = new WP_Query($new);
+// if ($newLoop->have_posts()) {
+//     woocommerce_product_loop_start();
 
+//     while ($newLoop->have_posts()) {
+//         $newLoop->the_post();
+
+//         /**
+//          * Hook: woocommerce_shop_loop.
+//          * Permite agregar acciones al loop del archivo de productos.
+//          */
+//         do_action('woocommerce_shop_loop');
+
+//         // Muestra la plantilla del producto (similar a como lo hace en archive-product.php)
+//         wc_get_template_part('content', 'producto');
+//     }
+
+//     // Cerrar el contenedor del loop
+//     woocommerce_product_loop_end();
+// } else {
+//     echo __('No hay productos disponibles.', 'woocommerce');
+// }
+
+?>
 
 <?php
 $ofertas = get_field('ofertas');

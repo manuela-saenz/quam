@@ -189,14 +189,14 @@
 
   // }
 
-  .container {
-    @media (max-width: 768px) {
-      padding: 0;
-    }
-  }
+  // .container {
+  //   @media (max-width: 768px) {
+  //     padding: 0;
+  //   }
+  // }
 
   .galleryP {
-    row-gap: 20px;
+    row-gap: 40px;
 
     .product {
 
@@ -225,6 +225,9 @@
           padding-left: 10px;
         }
       }
+    }
+    @media (max-width:768px){
+      row-gap: 25px;
     }
   }
 

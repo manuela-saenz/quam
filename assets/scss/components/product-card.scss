@@ -4,31 +4,38 @@
   }
 
   .info-highlights {
-    display: flex;
-    flex-direction: column;
+    .product-info {
+      grid-template-areas:
+        "uno uno"
+        "dos tres";
+
+      @media (max-width:991px) {
+        grid-template-areas:
+          "uno "
+          "dos "
+          "tres ";
+      }
+    }
 
     h5,
     h2 {
       margin-bottom: 0px;
       color: #262524;
       font-weight: 700;
-      font-size: 17px;
       text-transform: uppercase;
-      text-align: center;
 
-      @media (max-width:578px) {
-        font-size: 15px;
+      @media (max-width:991px) {
+        text-align: center;
       }
     }
 
     .price {
       margin-bottom: 0;
       color: $gray;
-      font-size: 17px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
 
       &::after {
         content: "";
@@ -48,6 +55,16 @@
         font-weight: 700;
       }
 
+    }
+
+    .price,
+    h5,
+    h2 {
+      font-size: 17px;
+
+      @media (min-width:768px) and (max-width:1400px) {
+        font-size: 15px;
+      }
     }
 
     .regular-price {
@@ -70,6 +87,10 @@
 
     del bdi {
       opacity: 0.6;
+    }
+
+    @media (min-width:768px) {
+      padding: 0 8px;
     }
   }
 
@@ -154,16 +175,20 @@
 
   }
 
-  .oferta .onsale {
+  .oferta .onsale,
+  .discount {
     top: 12px !important;
     left: 12px !important;
+    background: $red;
+    z-index: 2;
   }
 
   .cfvsw_variations_form {
-    position: absolute;
+    // position: absolute;
     bottom: calc(100% + 25px);
     left: 50%;
-    transform: translateX(-50%);
+    // transform: translateX(-50%);
+    grid-area: uno;
 
     .label {
       display: none;
@@ -203,7 +228,7 @@
         min-height: 24px !important;
         min-width: 24px !important;
         border-radius: 50% !important;
-        border: 2px solid #fff;
+        border-width: 2px;
         line-height: 1;
 
         .cfvsw-swatch-inner {
@@ -235,16 +260,84 @@
   }
 
   .add-to-cart-container {
+
     a {
+      position: relative;
       pointer-events: none;
       border-radius: 8px !important;
       filter: grayscale(1);
       opacity: 0.6;
+      background: #ccc;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 12px 14px;
+      line-height: 1;
+      font-weight: 600;
+      color: transparent !important;
+      @media (max-width:991px){
+        font-size: 15px;
+        white-space: nowrap;
+      }
+      &:before {
+        content: "Añadir al carrito";
+        position: absolute;
+        color: initial;
+        width: 100%;
+        left: 0;
+      }
+
+      &:hover {
+        color: #FF3747 !important;
+      }
+
+      @keyframes showhide_out_two {
+        0% {
+          content: "Añadido al carrito";
+        }
+
+        75% {
+          content: "Añadido al carrito";
+        }
+
+        100% {
+          content: 'Añadir al carrito';
+        }
+      }
+      @keyframes pulse {
+        0%{
+          opacity: 1;
+        }
+        50%{
+          opacity: 0.5;
+        }
+        100%{
+          opacity: 1;
+        }
+      }
 
       &.cfvsw_variation_found {
         pointer-events: initial;
         filter: none;
         opacity: 1;
+        background: $red;
+
+        &::before {
+          color: #fff;
+        }
+
+        &.loading {
+          animation:pulse infinite 1s;
+          &::before {
+            content: "Añadiendo al carrito";
+          }
+        }
+
+        &.added {
+          &:before {
+            animation: showhide_out_two 1s;
+          }
+        }
       }
     }
 
@@ -262,11 +355,11 @@
 
 }
 
-@media (max-width: 770px) {
-  .info-highlights {
-    padding: 5px 10px 5px 15px;
-  }
-}
+// @media (max-width: 770px) {
+//   .info-highlights {
+//     padding: 5px 10px 5px 15px;
+//   }
+// }
 
 @keyframes blink {
   0% {

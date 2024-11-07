@@ -106,46 +106,38 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             }
 
 ?>
-            <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?>data-discount="<?= $discount; ?>" data-id="<?= $variation_id; ?>" data-id-pub="<?= $product_id; ?>" data-color="<?= $color; ?>">
-                <a href="<?= esc_url($link) ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link rounded-[10px] overflow-hidden mb-3 relative d-none">
-                    <?php
-                    woocommerce_show_product_loop_sale_flash();
-                    /**
-                     * Hook: woocommerce_before_shop_loop_item_title.
-                     *
-                     * @hooked woocommerce_show_product_loop_sale_flash - 10
-                     * @hooked woocommerce_template_loop_product_thumbnail - 10
-                     */
-                    woocommerce_template_loop_product_thumbnail();
-                    // do_action('woocommerce_before_shop_loop_item_title');
-                    ?>
-                </a>
-                <div class="CardProducts w-100 <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
+            <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $variation_obj); ?> data-id="<?= $variation_id; ?>" data-id-pub="<?= $product_id; ?>" data-color="<?= $color; ?>">
+                <div class="CardProducts w-100 position-relative <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
+                    <div class="discount position-absolute px-2 py-1 rounded-3 text-white lh-1">
+                        <?= '-' . $discount . '%'; ?>
+                    </div>
                     <a href="<?= $variation_permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                         <img data-href="<?= $variation_permalink ?>" data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class=" attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
 
                         <!-- <img class="position-absolute top-0 left-0" data-src="<?= $variation['variation_gallery_images'][1]['src'] ?>" alt="<?= $variation_title ?>"> -->
                     </a>
                     <div class="info-highlights position-relative">
-                        <?php
+                        <div class="d-grid product-info justify-content-center justify-content-md-between w-100">
+                            <?php
 
-                        /**
-                         * Hook: woocommerce_shop_loop_item_title.
-                         *
-                         * @hooked woocommerce_template_loop_product_title - 10
-                         */
-                        do_action('woocommerce_shop_loop_item_title');
+                            /**
+                             * Hook: woocommerce_shop_loop_item_title.
+                             *
+                             * @hooked woocommerce_template_loop_product_title - 10
+                             */
+                            do_action('woocommerce_shop_loop_item_title');
 
-                        /**
-                         * Hook: woocommerce_after_shop_loop_item_title.
-                         *
-                         * @hooked woocommerce_template_loop_rating - 5
-                         * @hooked woocommerce_template_loop_price - 10
-                         */
-                        ?>
-                        <a href="<?= $variation_permalink ?>">
+                            /**
+                             * Hook: woocommerce_after_shop_loop_item_title.
+                             *
+                             * @hooked woocommerce_template_loop_rating - 5
+                             * @hooked woocommerce_template_loop_price - 10
+                             */
+                            ?>
+
                             <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
-                        </a>
+
+                        </div>
 
                         <?php
                         /**
