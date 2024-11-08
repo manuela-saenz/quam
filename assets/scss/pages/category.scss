@@ -200,10 +200,10 @@
 
     .product {
 
-      &:nth-child(10n - 1),
-      &:nth-child(10n) {
-        width: 50%;
-      }
+      // &:nth-child(10n - 1),
+      // &:nth-child(10n) {
+      //   width: 50%;
+      // }
 
       @media (max-width: 768px) {
 
