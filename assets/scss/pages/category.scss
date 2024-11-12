@@ -120,6 +120,7 @@
       margin-top: -50px;
       height: 48px;
       opacity: 0;
+
       select {
         padding: 0;
         border: none;
@@ -194,6 +195,11 @@
   //     padding: 0;
   //   }
   // }
+  .container {
+    @media (max-width:991px) {
+      padding: 0;
+    }
+  }
 
   .galleryP {
     row-gap: 40px;
@@ -209,10 +215,20 @@
 
         &:first-child {
           width: 100%;
+          .CardProducts{
+            .img-contain, .img-fit{
+              height: auto;
+            }
+          }
         }
 
         &:nth-child(9n - 1) {
           width: 100%;
+          .CardProducts{
+            .img-contain, .img-fit{
+              height: auto;
+            }
+          }
         }
 
         &:nth-child(2n),
@@ -226,7 +242,8 @@
         }
       }
     }
-    @media (max-width:768px){
+
+    @media (max-width:768px) {
       row-gap: 25px;
     }
   }
