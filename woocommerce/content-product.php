@@ -84,7 +84,6 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             $optimized_image_url = $image_array[0];
             $variation_title = removerTalla($variation_obj->get_name());
             $variation_permalink = get_permalink($variation_id);
-            $variation_permalink = preg_replace('/&attribute_pa_talla=[^&]*/', '', $variation_permalink);
             $variation_price = $variation_obj->get_price_html();
 
             // Obtener el precio formateado con HTML
@@ -116,6 +115,12 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
 
                         <!-- <img class="position-absolute top-0 left-0" data-src="<?= $variation['variation_gallery_images'][1]['src'] ?>" alt="<?= $variation_title ?>"> -->
                     </a>
+                    <button class="button-heart d-none d-lg-flex add-fav" id="add-sprod-favs" data-product-id="<?= $variation_id; ?>" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                        </svg>
+                    </button>
                     <div class="info-highlights position-relative">
                         <div class="d-grid product-info justify-content-center justify-content-md-between w-100">
                             <?php

@@ -73,6 +73,13 @@ document.addEventListener("DOMContentLoaded", function () {
         // Actualizar el conteo de favoritos
         $("#favoritesCounter").text(response.count).removeClass("d-none");
       }
+
+      for (var i = 0; i < favorites.length; i++) {
+        $(".add-fav[data-product-id='" + favorites[i] + "']").addClass(
+          "active-fav"
+        );
+      }
+
     },
     error: function (error) {
       console.error("Error al sincronizar favoritos:", error);
@@ -187,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var id = variationId ? variationId : productId;
       setTimeout(function () {
         addProductToCartCustom(id, 1);
-      }, 2000);
+      }, 500);
     });
   });
 });
@@ -261,6 +268,7 @@ function addProductToCart(productId, quantity) {
             spanElement.classList.remove("d-none");
           }
         }
+
         $(".offcanvas-body.ordenList.cart").empty();
         $(".offcanvas-body.ordenList.cart").html(res.html);
         var subtotal = res.subtotal;
@@ -269,7 +277,7 @@ function addProductToCart(productId, quantity) {
         var value = getTotalValue(totalString);
 
         discountValue(res);
-        $("#cartItem").text(res.counter);
+        $("#cartItem").text(res.quantity);
         $("#subtotal").html("$" + subvalue);
         $("#total").html("$" + value);
 
@@ -323,7 +331,9 @@ function addProductToCartCustom(productId, quantity) {
       var res = JSON.parse(response);
       if (res.status === "success") {
         var spanElement = document.getElementById("cartItem");
-        spanElement.classList.remove("d-none");
+        if (spanElement.classList.contains("d-none")) {
+          spanElement.classList.remove("d-none");
+        }
 
         $(".offcanvas-body.ordenList.cart").empty();
         $(".offcanvas-body.ordenList.cart").html(res.html);
@@ -333,7 +343,7 @@ function addProductToCartCustom(productId, quantity) {
         var value = getTotalValue(totalString);
 
         discountValue(res);
-        $("#cartItem").text(res.counter);
+        $("#cartItem").text(res.quantity);
         $("#subtotal").html("$" + subvalue);
         $("#total").html("$" + value);
 
@@ -399,7 +409,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
         if (res.counter === 0) {
           var spanElement = document.getElementById("cartItem");
           if (spanElement) {
-            botonCart.removeChild(spanElement);
+            spanElement.classList.add("d-none");
           }
         }
         discountValue(res);
@@ -575,8 +585,14 @@ function initAddToFavoriteButton() {
     var productId = $(".variation_id").val();
     productId =
       productId == undefined || productId == 0
-        ? $("[name='add-to-cart']")[0].value
+        ? $("[name='add-to-cart']")[0]
+          ? $("[name='add-to-cart']")[0].value
+          : undefined
         : productId;
+
+    if (productId == undefined || productId == 0) {
+      productId = $(this).data("product-id");
+    }
 
     var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
 
@@ -604,7 +620,13 @@ function initAddToFavoriteButton() {
           return;
         }
 
-        $(".add-fav").addClass("active-fav");
+        if ($(".add-fav").data("product-id") == productId) {
+          $(".add-fav[data-product-id='" + productId + "']").addClass(
+            "active-fav"
+          );
+        } else {
+          $(".add-fav").addClass("active-fav");
+        }
 
         var spanElement = document.getElementById("favoritesCounter");
 
@@ -809,42 +831,56 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Función para modificar el atributo 'src' de las imágenes
-//   function modificarImagenes() {
-//     var listImageCat = document.querySelectorAll(
-//       "img.attachment-full.size-full"
-//     );
+document.addEventListener("DOMContentLoaded", function () {
+  // Función para modificar el atributo 'src' de las imágenes
+  function modificarImagenes() {
+    var listImageCat = document.querySelectorAll(
+      "img.attachment-full.size-full, img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail"
+    );
 
-//     // Iterar sobre cada imagen y modificar el atributo 'src'
-//     listImageCat.forEach(function (img) {
-//       var src = img.getAttribute("src");
-//       if (src) {
-//         // Reemplazar '-300x300' con una cadena vacía
-//         var newSrc = src.replace("-300x300", "");
-//         img.setAttribute("src", newSrc);
-//       }
-//     });
-//   }
+    // Iterar sobre cada imagen y modificar el atributo 'src'
+    listImageCat.forEach(function (img) {
+      var src = img.getAttribute("src");
+      if (src) {
+        // Reemplazar '-300x300' con una cadena vacía
+        var newSrc = src.replace("-300x300", "");
+        img.setAttribute("src", newSrc);
+      }
+    });
+  }
 
-//   // Modificar las imágenes al cargar la página
-//   setTimeout(function () {
-//     modificarImagenes();
-//   }, 1000);
+  // Modificar las imágenes al cargar la página
+  // setTimeout(function () {
+  //   modificarImagenes();
+  // }, 1000);
 
-//   // Agregar evento de clic a los elementos con la clase 'cfvsw-swatches-container cfvsw-shop-container'
-//   var swatchContainers = document.querySelectorAll(
-//     ".cfvsw-swatches-container, .cfvsw-shop-container"
-//   );
-//   swatchContainers.forEach(function (container) {
-//     container.addEventListener("click", function () {
-//       // Modificar las imágenes al hacer clic
-//       setTimeout(() => {
-//         modificarImagenes();
-//       }, 100);
-//     });
-//   });
-// });
+  // Agregar evento de clic a los elementos con la clase 'cfvsw-swatches-container cfvsw-shop-container'
+  var swatchOptions = document.querySelectorAll(
+    ".cfvsw-swatches-option.cfvsw-label-option"
+  );
+
+  swatchOptions.forEach(function (option) {
+    option.addEventListener("click", function () {
+      // Modificar las imágenes al hacer clic
+      setTimeout(() => {
+        modificarImagenes();
+      }, 100);
+    });
+  });
+
+  var swatchContainers = document.querySelectorAll(
+    ".cfvsw-swatches-container, .cfvsw-shop-container"
+  );
+
+  swatchContainers.forEach(function (option) {
+    option.addEventListener("click", function () {
+      // Modificar las imágenes al hacer clic
+      setTimeout(() => {
+        modificarImagenes();
+      }, 100);
+    });
+  });
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   var images = document.querySelectorAll(
