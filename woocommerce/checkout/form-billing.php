@@ -181,5 +181,6 @@ defined('ABSPATH') || exit;
 				labels[i].innerHTML = 'Ciudad&nbsp;' + abbr.outerHTML;
 			}
 		}
+		
 	};
 </script>

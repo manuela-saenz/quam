@@ -31,13 +31,15 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
     foreach ($combined_posts as $prod) :
       $wcProd = wc_get_product($prod);
       $product_name = $wcProd->get_name();
+      $product_name_parts = explode(' - ', $product_name);
+      $product_name = $product_name_parts[0];
     ?>
       <div class="mini-cart-product-card d-flex align-items-start bg-white fav">
         <a href="<?= get_permalink($prod->ID) ?>" class="img-contain">
           <img src="<?php echo get_the_post_thumbnail_url($prod->ID) ?>" alt="">
         </a>
         <div>
-          <h5> <a href="<?= get_permalink($prod->ID) ?>"><?php echo ($wcProd->get_name()); ?> </a></h5>
+          <h5> <a href="<?= get_permalink($prod->ID) ?>"><?php echo ($product_name); ?> </a></h5>
           <div class="d-flex align-items-center priceFav mb-3">
             <p id="priceFav"><?= $wcProd->get_price_html() ?> COP</p>
           </div>

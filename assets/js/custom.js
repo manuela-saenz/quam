@@ -141,39 +141,29 @@ $(".woocommerce-ordering-price button").on("click", function () {
 // jQuery(document).ready(function ($) {
 
 $("#boton-id").on("click", function () {
-  console.log($(".container_payment_method label").length, "log");
-  // setTimeout(function() {
-
-  // console.log(payULatamLabel);
   setTimeout(function () {
     var labels = $(".container_payment_method label");
-    // var payULatamLabel = labels.filter(function() {
-    //   return $(this).text().trim() === "PayU Latam";
-    // });
-    // payULatamLabel.trigger("click");
     $("#payment_method_payulatam").prop("checked", true);
     var button = $(".woocommerce-checkout-payment button:submit");
-    button.text("Paga con PayU");
+    button.text("Realizar mi pedido con PayU");
     labels.on("click", function (e) {
-      console.log("click", e);
+
       var labelText = $(this).text().trim();
 
       if (labelText === "PayU Latam") {
         button.attr("id", "PayU_Latam");
-        button.text("Paga con PayU");
+        button.text("Realizar mi pedido con PayU");
       }
       if (labelText === "Paga a cuotas") {
         button.attr("id", "Paga_addi");
-        button.text("Paga con Addi");
+        button.text("Realizar mi pedido con Addi");
       }
       if (labelText === "Pago contra entrega") {
         button.attr("id", "Pago_contra_entrega");
-        button.text("Pago contra entrega");
+        button.text("Realizar mi pedido contra entrega");
       }
     });
   }, 200);
-
-  // }, 3000);
 });
 
 // Rastreo de paquetes

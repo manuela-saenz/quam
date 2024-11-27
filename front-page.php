@@ -90,7 +90,11 @@ $banners  = (new WP_Query(array(
     <div class="row ">
       <div class="col-xxl-3 col-md-12 col-md-4 position-relative z-2 center-vertical">
         <div>
-          <h3 class="section-subtitle mb-4">Última generación</h3>
+          <?php
+          $catalog_title = get_field('desc');
+          ?>
+
+          <h3 class="section-subtitle mb-4"><?php echo esc_html($catalog_title); ?></h3>
           <div class="d-xl-flex gap-2 d-none">
             <div class="arrow-prev-container">
               <button class="generation-arrows prev">

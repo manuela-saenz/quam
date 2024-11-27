@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
           "active-fav"
         );
       }
-
     },
     error: function (error) {
       console.error("Error al sincronizar favoritos:", error);
@@ -194,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var id = variationId ? variationId : productId;
       setTimeout(function () {
         addProductToCartCustom(id, 1);
-      }, 500);
+      }, 1300);
     });
   });
 });
@@ -295,28 +294,7 @@ function addProductToCart(productId, quantity) {
 }
 
 function addProductToCartCustom(productId, quantity) {
-  var htmlContent =
-    '<div class="mini-cart-product-card align-items-start d-flex bg-white" style="flex-direction: row;">' +
-    '<div class="img-contain overflow-hidden rounded-1">' +
-    '<img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b9526wp8z3xa5zpbmlfq1qdlzfalio7x1i098u3z18vx&ep=v1_gifs_search&rid=200w.gif&ct=g" alt="<?php echo esc_attr($title); ?>">' +
-    "</div>" +
-    '<div class="card" aria-hidden="true" style="flex-grow: 1;">' +
-    '<div class="card-body">' +
-    '<h5 class="card-title placeholder-glow">' +
-    '<span class="placeholder col-6"></span>' +
-    "</h5>" +
-    '<p class="card-text placeholder-glow">' +
-    '<span class="placeholder col-7"></span>' +
-    '<span class="placeholder col-4"></span>' +
-    '<span class="placeholder col-6"></span>' +
-    '<span class="placeholder col-4"></span>' +
-    "</p>" +
-    "</div>" +
-    "</div>" +
-    "</div>";
-
-  $(".offcanvas-body.ordenList.cart").append(htmlContent);
-
+ 
   var data = {
     action: "woocommerce_ajax_add_to_cart_category",
     product_id: productId,
@@ -329,32 +307,28 @@ function addProductToCartCustom(productId, quantity) {
     data: data,
     success: async function (response) {
       var res = JSON.parse(response);
+      console.log(res);
       if (res.status === "success") {
-        var spanElement = document.getElementById("cartItem");
-        if (spanElement.classList.contains("d-none")) {
-          spanElement.classList.remove("d-none");
-        }
-
-        $(".offcanvas-body.ordenList.cart").empty();
-        $(".offcanvas-body.ordenList.cart").html(res.html);
-        var subtotal = res.subtotal;
-        var totalString = res.total;
-        var subvalue = getTotalValue(subtotal);
-        var value = getTotalValue(totalString);
-
-        discountValue(res);
-        $("#cartItem").text(res.quantity);
-        $("#subtotal").html("$" + subvalue);
-        $("#total").html("$" + value);
-
-        $(".alert.alert-success.add-to-cart-message.d-none").show();
-
-        var alertElement = $("#showAlertAddCart");
-        alertElement.removeClass("d-none").show();
-
         setTimeout(function () {
-          alertElement.hide().addClass("d-none");
-        }, 2000);
+          var spanElement = document.getElementById("cartItem");
+          if (spanElement.classList.contains("d-none")) {
+            spanElement.classList.remove("d-none");
+          }
+  
+          $(".offcanvas-body.ordenList.cart").empty();
+          $(".offcanvas-body.ordenList.cart").html(res.html);
+          var subtotal = res.subtotal;
+          var totalString = res.total;
+          var subvalue = getTotalValue(subtotal);
+          var value = getTotalValue(totalString);
+  
+          discountValue(res);
+          $("#cartItem").text(res.quantity);
+          $("#subtotal").html("$" + subvalue);
+          $("#total").html("$" + value);
+        }, 200);
+
+      
       }
     },
   });
@@ -620,11 +594,14 @@ function initAddToFavoriteButton() {
           return;
         }
 
-        if ($(".add-fav").data("product-id") == productId) {
+        // Verifica si existe el elemento con el data-product-id especificado
+        if ($(".add-fav[data-product-id='" + productId + "']").length > 0) {
+          // Si existe, agrega la clase al elemento específico
           $(".add-fav[data-product-id='" + productId + "']").addClass(
             "active-fav"
           );
         } else {
+          // Si no existe, agrega la clase a todos los elementos con la clase add-fav
           $(".add-fav").addClass("active-fav");
         }
 
@@ -686,6 +663,14 @@ function deleteFavorite(prodid) {
           button.removeClass("active-fav");
         }
       }
+
+      if ($(".add-fav[data-product-id='" + prodid + "']").length > 0) {
+        // Si existe, agrega la clase al elemento específico
+        $(".add-fav[data-product-id='" + prodid + "']").removeClass(
+          "active-fav"
+        );
+      }
+
       alertElement.hide().addClass("d-none");
       $("#favoritesCounter").text(res.counter).removeClass("d-none");
       $(".offcanvas-body.ordenListFav.fav").html(res.html);
@@ -701,8 +686,16 @@ function initFavoritesPanelDelete() {
 }
 
 function deleteFavoriteSameContext(prodid) {
+  if ($(".add-fav[data-product-id='" + prodid + "']").length > 0) {
+    // Si existe, agrega la clase al elemento específico
+    $(".add-fav[data-product-id='" + prodid + "']").removeClass(
+      "active-fav"
+    );
+  } else {
   $(".add-fav").removeClass("active-fav");
+  }
   deleteFavorite(prodid);
+
 }
 
 var previousValue = $(".variation_id").val();
@@ -741,6 +734,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   var swatchOptions = document.querySelectorAll(".cfvsw-swatches-option");
+  var colorSelect = null;
+  var tallaSelect = null;
   swatchOptions.forEach(function (option) {
     option.addEventListener("click", function (event) {
       event.preventDefault();
@@ -752,11 +747,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       var dataSlug = option.getAttribute("data-slug");
       var liElement = option.closest("li");
-
       if (liElement) {
         var dataId = liElement.getAttribute("data-id-pub");
         var variationsForm = liElement.querySelector(
           ".cfvsw_variations_form.variations_form.cfvsw_shop_align_left.variation-function-added"
+        );
+        var isTallaOption = option.closest(
+          '.cfvsw-swatches-container.cfvsw-shop-container[swatches-attr="attribute_pa_talla"]'
         );
         // Quitar la clase d-none del elemento con la clase cfvsw-swatches-container cfvsw-shop-container y el atributo swatches-attr="attribute_pa_talla"
         var sizeContainer = liElement.querySelector(
@@ -766,20 +763,48 @@ document.addEventListener("DOMContentLoaded", function () {
           sizeContainer.classList.remove("d-none");
         }
 
+        if (isTallaOption) {
+          tallaSelect = option.getAttribute("data-slug");
+        } else {
+          colorSelect = dataSlug;
+        }
+
         var productVariations = variationsForm
           ? variationsForm.getAttribute("data-product_variations")
           : null;
         var jsonProducVariations = JSON.parse(productVariations);
-        // console.log(jsonProducVariations);
-
+    
         var imageUrl = null;
+
         jsonProducVariations.forEach(function (variation) {
           var attributes = variation.attributes;
+          const variationId = variation.variation_id;
+
           if (attributes.attribute_pa_color === dataSlug) {
             imageUrl = variation.image.url;
             modifyImageLi(liElement, imageUrl);
-            return;
           }
+          // console.log(colorSelect)
+          // console.log(tallaSelect)
+
+          // if (
+          //   attributes.attribute_pa_talla === tallaSelect &&
+          //   attributes.attribute_pa_color === colorSelect
+          // ) {
+          //   console.log(tallaSelect, colorSelect);
+          //   console.log("x2");
+          //   var sessionFav =
+          //     JSON.parse(localStorage.getItem("sessionFav")) || [];
+          //   var favButton = liElement.querySelector(".button-heart");
+          //   favButton.setAttribute("data-product-id", variationId);
+
+          //   if (sessionFav.includes(variationId)) {
+          //     favButton.classList.add("active-fav");
+          //   } else {
+          //     favButton.classList.remove("active-fav");
+          //   }
+          //   return;
+          // }
         });
       }
     });
@@ -817,7 +842,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       swatchOptions.forEach(function (option) {
         var dataSlug = option.getAttribute("data-slug");
-
         // Comparar data-color con data-slug y agregar la clase si coinciden
         if (dataColor === dataSlug) {
           // option.dataset.autoClick = "true"; // Marcar el clic como automático
@@ -848,13 +872,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
-  // Modificar las imágenes al cargar la página
-  // setTimeout(function () {
-  //   modificarImagenes();
-  // }, 1000);
-
-  // Agregar evento de clic a los elementos con la clase 'cfvsw-swatches-container cfvsw-shop-container'
   var swatchOptions = document.querySelectorAll(
     ".cfvsw-swatches-option.cfvsw-label-option"
   );
