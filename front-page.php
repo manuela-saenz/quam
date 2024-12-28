@@ -139,24 +139,24 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
   <div class="container-fluid p-0">
     <div class="row m-0">
       <div class="col-md-8 p-0 position-relative">
-        <a href="" class="position-relative d-flex">
+        <a href="<?= $primera_coleccion["link"]; ?>" class="position-relative d-flex">
           <div class="img-fit backgroundImg w-100">
             <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="" loading="lazy">
           </div>
-          <div class="info_summer text-black">
+          <div class="info_summer position-absolute w-100">
             <p class="mb-0"><?= $primera_coleccion["subtitulo"]; ?></p>
-            <h5 class="title"><?= $primera_coleccion["titulo"]; ?></h5>
+            <h5 class="title mb-0"><?= $primera_coleccion["titulo"]; ?></h5>
           </div>
         </a>
       </div>
       <div class="col-md-4 p-0">
-        <a href="" class="position-relative d-flex">
+        <a href="<?= $segunda_coleccion["link"]; ?>" class="position-relative d-flex">
           <div class="img-fit w-100">
             <img src="<?= $segunda_coleccion["fondo_de_imagen"]["url"]; ?>" alt="" loading="lazy">
           </div>
-          <div class="info_summer">
+          <div class="info_summer position-absolute w-100">
             <p class="mb-0"><?= $segunda_coleccion["subtitulo"]; ?></p>
-            <h5 class="title"><?= $segunda_coleccion["titulo"]; ?></h5>
+            <h5 class="title mb-0"><?= $segunda_coleccion["titulo"]; ?></h5>
           </div>
         </a>
       </div>

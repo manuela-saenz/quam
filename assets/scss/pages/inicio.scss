@@ -42,21 +42,25 @@
 
     .info-banner {
         @media(max-width:1400px) and (min-width:768px) {
-         padding-left: 40px;
+            padding-left: 40px;
         }
+
         @media(max-width:600px) {
             text-align: center;
             @include center-all;
             flex-direction: column;
         }
-        a{
+
+        a {
             @media (max-width:991px) {
                 margin-left: 55px;
             }
+
             @media (max-width:768px) {
                 margin-left: 0;
             }
         }
+
         span {
             font-size: 24px;
         }
@@ -165,7 +169,8 @@
         // height: fit-content;
         // width: 680px;
         display: flex;
-        &:not(.variable){
+
+        &:not(.variable) {
             aspect-ratio: 1.2 / 1;
         }
 
@@ -174,6 +179,7 @@
             transform: translateX(-50%) translateY(-50%);
             height: 100%;
         }
+
         @media(max-width:768px) {
             left: 50%;
             transform: translateX(-50%);
@@ -190,17 +196,21 @@
 
     .swiper-slide {
         position: relative;
-        &:not(.variable-slide){
-             height: calc(100vh - var(--header-height));
-             padding: 5vw 0;
-             @media (max-width: 768px) {
+
+        &:not(.variable-slide) {
+            height: calc(100vh - var(--header-height));
+            padding: 5vw 0;
+
+            @media (max-width: 768px) {
                 height: calc(85vh - var(--header-height));
             }
+
             @media (max-width: 578px) {
                 height: auto;
                 aspect-ratio: 1 / 1.228;
             }
         }
+
         display: flex;
         align-items: center;
 
@@ -281,19 +291,22 @@
 
 .card-categories {
     height: 70dvh;
-    a{
-        img{
+
+    a {
+        img {
             transition: all .3s ease;
             will-change: transform;
         }
     }
-    &:hover{
-        > a:first-child{
-            img{
+
+    &:hover {
+        >a:first-child {
+            img {
                 transform: scale(1.05);
             }
         }
     }
+
     @media(max-width:768px) {
         height: 55vh;
     }
@@ -308,19 +321,23 @@
     transform: translateX(-50%);
     max-width: 280px;
     width: 100%;
+
     h5 {
         color: $white;
         font-size: 50px;
         margin-bottom: 0;
         font-weight: 700;
         line-height: 1.1;
-        @media (max-width:1400px){
+
+        @media (max-width:1400px) {
             font-size: 45px;
         }
-        @media (max-width:1200px) and (min-width:768px){
+
+        @media (max-width:1200px) and (min-width:768px) {
             font-size: 40px;
         }
-        @media (max-width:768px){
+
+        @media (max-width:768px) {
             font-size: 35px;
         }
     }
@@ -340,8 +357,8 @@
         // }
     }
 
-    .swiper-slide{
-        &:not(.swiper-slide-visible){
+    .swiper-slide {
+        &:not(.swiper-slide-visible) {
             z-index: -1;
         }
     }
@@ -456,9 +473,22 @@
     }
 
     .info_summer {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
+        bottom: 0px;
+        left: 0px;
+        padding: 25px;
+
+        &:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 30px);
+            background: rgb(38, 39, 65);
+            background: linear-gradient(180deg, rgba(38, 39, 65, 0) 0%, rgba(38, 39, 65, 0.95) 100%);
+            mix-blend-mode: multiply;
+           
+        }
     }
 
     .backgroundImg {
@@ -476,25 +506,25 @@
             }
         }
 
-        &::before {
-            content: "";
-            position: absolute;
-            background-image: url(media/images/arrow-red.png);
-            background-repeat: no-repeat;
-            background-size: contain;
-            height: 383px;
-            width: 100%;
-            top: 44%;
-            transform: translateY(-56%);
+        // &::before {
+        //     content: "";
+        //     position: absolute;
+        //     background-image: url(media/images/arrow-red.png);
+        //     background-repeat: no-repeat;
+        //     background-size: contain;
+        //     height: 383px;
+        //     width: 100%;
+        //     top: 44%;
+        //     transform: translateY(-56%);
 
-            @media(max-width:768px) {
-                height: 200px;
-            }
+        //     @media(max-width:768px) {
+        //         height: 200px;
+        //     }
 
-            @media(max-width:450px) {
-                height: 143px;
-            }
-        }
+        //     @media(max-width:450px) {
+        //         height: 143px;
+        //     }
+        // }
     }
 
     a {
