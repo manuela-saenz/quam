@@ -113,9 +113,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                     </div>
                     <div class="position-relative">
                         <a href="<?= $variation_permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
-                            <img data-href="<?= $variation_permalink ?>" data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class=" attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
-
-                            <!-- <img class="position-absolute top-0 left-0" data-src="<?= $variation['variation_gallery_images'][1]['src'] ?>" alt="<?= $variation_title ?>"> -->
+                            <img src="<?= $optimized_image_url ?>" data-href="<?= $variation_permalink ?>" data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class=" attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
                         </a>
                         <button class="button-heart  d-flex add-fav position-absolute" id="add-sprod-favs" data-product-id="<?= $variation_id; ?>" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -144,7 +142,6 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                             ?>
 
                             <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
-
                         </div>
 
                         <?php

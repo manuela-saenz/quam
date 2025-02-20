@@ -190,9 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       var variationId = button.getAttribute("data-variation_id");
       var productId = button.getAttribute("data-product_id");
+      button.classList.add("loading");
       var id = variationId ? variationId : productId;
       setTimeout(function () {
-        addProductToCartCustom(id, 1);
+        addProductToCartCustom(id, 1, buttons);
       }, 1500);
     });
   });
@@ -293,7 +294,7 @@ function addProductToCart(productId, quantity) {
   });
 }
 
-function addProductToCartCustom(productId, quantity) {
+function addProductToCartCustom(productId, quantity, buttons) {
  
   var data = {
     action: "woocommerce_ajax_add_to_cart_category",
@@ -320,6 +321,12 @@ function addProductToCartCustom(productId, quantity) {
           var value = getTotalValue(totalString);
   
           discountValue(res);
+        
+          buttons.forEach(function (button) {
+            button.classList.remove("loading");
+            button.classList.remove("cfvsw_variation_found");
+          });
+
           $("#cartItem").text(res.quantity);
           $("#subtotal").html("$" + subvalue);
           $("#total").html("$" + value);

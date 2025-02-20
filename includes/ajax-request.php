@@ -144,6 +144,7 @@ class SyEAjaxRequest
 
         $prodID = $_POST["product_id"];
         $quantity = $_POST["quantity"];
+        $result = $woocommerce->cart->add_to_cart($prodID, $quantity);
 
         $itemsCount = $woocommerce->cart->get_cart_contents_count();
         $total_discount = 0;
@@ -162,6 +163,7 @@ class SyEAjaxRequest
 
         echo json_encode(
             array(
+                "item" => $result,
                 "status" => "success",
                 "html" => $buffer,
                 "counter" => count($woocommerce->cart->get_cart()),

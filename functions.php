@@ -80,6 +80,40 @@ function lw_loop_shop_per_page( $products ) {
  return $products;
 }
 
+add_action('wp_ajax_load_more_products', 'load_more_products');
+add_action('wp_ajax_nopriv_load_more_products', 'load_more_products');
+
+function load_more_products() {
+    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+    $per_page = 12; // Número de productos a cargar por solicitud
+    $offset = ($paged - 1) * $per_page;
+
+    $args = array(
+        'post_type'      => 'product',
+        'posts_per_page' => $per_page,
+        'offset'         => $offset,
+        'tax_query'      => array(
+            array(
+                'taxonomy' => 'product_cat', // Taxonomía de WooCommerce para categorías de productos
+                'field'    => 'slug', // Puedes usar 'slug' o 'id'
+                'terms'    => 'hombre', // Slug de la categoría que deseas filtrar
+            ),
+        ),
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) :
+        while ($query->have_posts()) :
+            $query->the_post();
+            wc_get_template_part('content', 'product');
+        endwhile;
+    endif;
+
+    wp_reset_postdata();
+    die();
+}
+
 function custom_override_checkout_fields($fields)
 {
     // Elimina el campo "Empresa" del formulario de facturación
