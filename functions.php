@@ -73,6 +73,12 @@ function variations_visibility_all_pages($requires_shop_settings)
 }
 add_filter('cfvsw_requires_shop_settings', 'variations_visibility_all_pages');
 
+add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
+
+function lw_loop_shop_per_page( $products ) {
+ $products = 12;
+ return $products;
+}
 
 function custom_override_checkout_fields($fields)
 {
@@ -505,7 +511,19 @@ function get_all_product_categories_attributes_and_prices()
 
     add_action('wp_ajax_update_cart_count', 'update_cart_count');
     add_action('wp_ajax_nopriv_update_cart_count', 'update_cart_count');
-
+    add_action('wp_ajax_my_custom_action', 'my_custom_function');
+    add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_function');
+    
+    function my_custom_function() {
+        // Declara la instancia aquí
+        $woocommerce = WC();
+    
+        $cart_items = $woocommerce->cart->get_cart();
+        echo json_encode($cart_items);
+    
+        wp_die();
+    }
+    
     function update_cart_count()
     {
         global $woocommerce;

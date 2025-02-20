@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           $("#subtotal, #total").html("$" + value);
         } else {
-          console.log("Error:", response.data.message);
+          console.log("Error:", response);
         }
       },
       error: function (xhr, status, error) {
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var id = variationId ? variationId : productId;
       setTimeout(function () {
         addProductToCartCustom(id, 1);
-      }, 1300);
+      }, 1500);
     });
   });
 });
@@ -307,14 +307,11 @@ function addProductToCartCustom(productId, quantity) {
     data: data,
     success: async function (response) {
       var res = JSON.parse(response);
-      console.log(res);
       if (res.status === "success") {
-        setTimeout(function () {
           var spanElement = document.getElementById("cartItem");
           if (spanElement.classList.contains("d-none")) {
             spanElement.classList.remove("d-none");
           }
-  
           $(".offcanvas-body.ordenList.cart").empty();
           $(".offcanvas-body.ordenList.cart").html(res.html);
           var subtotal = res.subtotal;
@@ -326,9 +323,6 @@ function addProductToCartCustom(productId, quantity) {
           $("#cartItem").text(res.quantity);
           $("#subtotal").html("$" + subvalue);
           $("#total").html("$" + value);
-        }, 200);
-
-      
       }
     },
   });

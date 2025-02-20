@@ -68,15 +68,16 @@ if ($color) {
 <?php
 if ($product->is_type('variable') && $filter_color === null && $filter_talla === null):
     $available_variations = $product->get_available_variations();
-    $shown_colors = array();
+    $shown_products = array();
     $product_id = $product->get_id();
     $color_variations = array();
 
     foreach ($available_variations as $variation) {
         $variation_obj = wc_get_product($variation['variation_id']);
-        $color = $variation['attributes']['attribute_pa_color'];
-        if (!in_array($color, $shown_colors)) {
-            $shown_colors[] = $color;
+        $product_id = $variation_obj->get_parent_id();
+        if (!in_array($product_id, $shown_products)) {
+            $shown_products[] = $product_id;
+            $color = $variation['attributes']['attribute_pa_color'];
             $variation_id = $variation_obj->get_id();
             $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_id), 'full'); // Tamaño optimizado
             $size = 'full'; // Puedes cambiar esto por 'thumbnail', 'medium', 'large', o un tamaño personalizado
