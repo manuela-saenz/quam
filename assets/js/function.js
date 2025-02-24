@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           $("#subtotal, #total").html("$" + value);
         } else {
-          console.log("Error:", response.data.message);
+          console.log("Error:", response);
         }
       },
       error: function (xhr, status, error) {
@@ -190,10 +190,11 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       var variationId = button.getAttribute("data-variation_id");
       var productId = button.getAttribute("data-product_id");
+      button.classList.add("loading");
       var id = variationId ? variationId : productId;
       setTimeout(function () {
-        addProductToCartCustom(id, 1);
-      }, 1300);
+        addProductToCartCustom(id, 1, buttons);
+      }, 1500);
     });
   });
 });
@@ -293,7 +294,7 @@ function addProductToCart(productId, quantity) {
   });
 }
 
-function addProductToCartCustom(productId, quantity) {
+function addProductToCartCustom(productId, quantity, buttons) {
  
   var data = {
     action: "woocommerce_ajax_add_to_cart_category",
@@ -307,14 +308,11 @@ function addProductToCartCustom(productId, quantity) {
     data: data,
     success: async function (response) {
       var res = JSON.parse(response);
-      console.log(res);
       if (res.status === "success") {
-        setTimeout(function () {
           var spanElement = document.getElementById("cartItem");
           if (spanElement.classList.contains("d-none")) {
             spanElement.classList.remove("d-none");
           }
-  
           $(".offcanvas-body.ordenList.cart").empty();
           $(".offcanvas-body.ordenList.cart").html(res.html);
           var subtotal = res.subtotal;
@@ -323,12 +321,15 @@ function addProductToCartCustom(productId, quantity) {
           var value = getTotalValue(totalString);
   
           discountValue(res);
+        
+          buttons.forEach(function (button) {
+            button.classList.remove("loading");
+            button.classList.remove("cfvsw_variation_found");
+          });
+
           $("#cartItem").text(res.quantity);
           $("#subtotal").html("$" + subvalue);
           $("#total").html("$" + value);
-        }, 200);
-
-      
       }
     },
   });

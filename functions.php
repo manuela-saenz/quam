@@ -73,6 +73,46 @@ function variations_visibility_all_pages($requires_shop_settings)
 }
 add_filter('cfvsw_requires_shop_settings', 'variations_visibility_all_pages');
 
+add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
+
+function lw_loop_shop_per_page( $products ) {
+ $products = 12;
+ return $products;
+}
+
+add_action('wp_ajax_load_more_products', 'load_more_products');
+add_action('wp_ajax_nopriv_load_more_products', 'load_more_products');
+
+function load_more_products() {
+    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+    $per_page = 12; // Número de productos a cargar por solicitud
+    $offset = ($paged - 1) * $per_page;
+
+    $args = array(
+        'post_type'      => 'product',
+        'posts_per_page' => $per_page,
+        'offset'         => $offset,
+        'tax_query'      => array(
+            array(
+                'taxonomy' => 'product_cat', // Taxonomía de WooCommerce para categorías de productos
+                'field'    => 'slug', // Puedes usar 'slug' o 'id'
+                'terms'    => 'hombre', // Slug de la categoría que deseas filtrar
+            ),
+        ),
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) :
+        while ($query->have_posts()) :
+            $query->the_post();
+            wc_get_template_part('content', 'product');
+        endwhile;
+    endif;
+
+    wp_reset_postdata();
+    die();
+}
 
 function custom_override_checkout_fields($fields)
 {
@@ -505,7 +545,19 @@ function get_all_product_categories_attributes_and_prices()
 
     add_action('wp_ajax_update_cart_count', 'update_cart_count');
     add_action('wp_ajax_nopriv_update_cart_count', 'update_cart_count');
-
+    add_action('wp_ajax_my_custom_action', 'my_custom_function');
+    add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_function');
+    
+    function my_custom_function() {
+        // Declara la instancia aquí
+        $woocommerce = WC();
+    
+        $cart_items = $woocommerce->cart->get_cart();
+        echo json_encode($cart_items);
+    
+        wp_die();
+    }
+    
     function update_cart_count()
     {
         global $woocommerce;

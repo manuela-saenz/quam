@@ -185,3 +185,43 @@ function hideTracking() {
 }
 
 // borrar texto tabla
+
+// jQuery(function ($) {
+//   let paged = 2; // Comienza desde la segunda página
+//   let loading = false;
+
+//   function loadMoreProducts() {
+//     console.log("loadMoreProducts");
+//       if (loading) return;
+//       loading = true;
+//       console.log("loading");
+
+//       $.ajax({
+//           type: "POST",
+//           url: ajaxUrl,
+//           data: {
+//               action: "load_more_products",
+//               paged: paged
+//           },
+//           beforeSend: function () {
+//               $("#product-list").append('<div class="loading">Cargando más productos...</div>');
+//           },
+//           success: function (response) {
+//               $(".loading").remove();
+//               if ($.trim(response) !== '') {
+//                   $("#product-list").append(response);
+//                   paged++;
+//                   loading = false;
+//               } else {
+//                   $(window).off("scroll"); // Detiene la carga si ya no hay más productos
+//               }
+//           }
+//       });
+//   }
+
+//   $(window).on("scroll", function () {
+//       if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+//           loadMoreProducts();
+//       }
+//   });
+// });

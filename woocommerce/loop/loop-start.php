@@ -19,4 +19,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="row galleryP pt-3">
+<div id="product-list" class="row galleryP pt-3">
