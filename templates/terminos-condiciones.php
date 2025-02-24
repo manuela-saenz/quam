@@ -36,10 +36,30 @@ get_header() ?>
                 <div class="ps-2">
                     <h3 class="section-title-common-content"><span>01</span>RESTRICCIONES DE USO</h3>
                     <div>
-                        <p><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis repellat dignissimos magnam similique aperiam ipsum cum assumenda? A totam vitae ut aut iure laudantium id amet modi. Aliquam, quisquam est.</span><span>Quos et consectetur dolorum in odit neque doloremque provident repellendus, consequuntur placeat impedit facilis ad minima dignissimos libero iure odio enim corporis error harum sunt optio incidunt. Beatae, aliquid tenetur?</span></p>
-                        <p><span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium unde molestiae temporibus perspiciatis, earum veniam eos deserunt labore, et veritatis non quisquam? Minima eveniet accusamus itaque voluptatem iusto qui soluta!</span><span>Perspiciatis, illum. Perspiciatis, id sint. Iure, hic ut? Nulla soluta saepe, amet rerum sed, laborum numquam repellat provident temporibus eos corrupti incidunt ipsum necessitatibus et facilis tempore nisi ducimus! Voluptatibus.</span></p>
-                        <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat explicabo repudiandae aliquam, voluptas molestiae eos accusamus hic ducimus alias quibusdam facilis ipsum nesciunt nihil odio? Deleniti quae officiis expedita quos.</span><span>Numquam suscipit dolor veritatis sequi corporis similique mollitia quos, odio expedita facilis laudantium excepturi omnis quo temporibus eius laborum quas est obcaecati hic optio impedit? Blanditiis voluptatibus ipsam praesentium sed.</span></p>
-                        <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde accusantium iste officia dolorem eaque iure incidunt repudiandae, adipisci quidem, modi perferendis aliquid omnis tempore molestias est deleniti tempora praesentium expedita.</span><span>Similique labore qui molestiae eveniet delectus laboriosam incidunt fugit vel necessitatibus autem iure libero praesentium error quas sapiente, doloribus ut distinctio ad laborum obcaecati accusantium repellat? Dolores doloremque laudantium autem?</span></p>
+                        <p>Todo el contenido que ves y oyes en el sitio quam.com.co incluyendo, por ejemplo, las imágenes, diseño del sitio, ilustraciones, gráficos son
+                            propiedad intelectual de QUAM. El contenido del sitio quam.com.co tiene como propósito el uso personal, no comercial de los usuarios de
+                            este sitio. Podrás descargar, imprimir o guardar porciones seleccionadas del contenido que te proveemos, pero con las siguientes
+                            condiciones:</p>
+                        <p>• Que el uso sea personal, sin ningún propósito comercial<br>
+                            • No copiar ni reproducir el contenido en ningún medio<br>
+                            • No alterar o modificar en ninguna manera cualquier marca registrada.</p>
+                        <p>QUAM es una marca registrada. Ningún derecho, título o interés en cualquier contenido o material te es transferido por el resultado de las
+                            actividades anteriormente mencionadas. QUAM tiene completa propiedad intelectual de cualquier contenido que descargues, reproduzcas,
+                            imprimas, redistribuyas o guardes de este sitio.</p>
+                        <p>Todos los contenidos del sitio web quam.com.co son de propiedad exclusiva y mundial de QUAM incluyendo, sin limitación, reproducciones
+                            de los artículos, diseño gráfico, logos, imágenes, textos, ilustraciones, fotografías, marcas y otros signos distintivos, en cualquiera de los
+                            lenguajes de programación utilizados o utilizables, así como todo el software de funcionamiento y desarrollo del sitio web. La reproducción,
+                            distribución, comunicación al público, puesta a disposición del público, transformación, cesión y cualquier otro acto o modalidad de
+                            explotación, en cualquier formato Online u Offline que no haya sido expresamente autorizado por el titular de los derechos de explotación,
+                            quedan expresamente prohibidos.</p>
+                        <p>QUAM no concede ninguna licencia o autorización de uso de ninguna clase sobre sus derechos de propiedad intelectual e industrial o sobre
+                            cualquier otra propiedad o derecho relacionado con la página web, y los servicios y productos ofrecidos.</p>
+                        <p>En el caso de datos o contenidos facilitados por el usuario al sitio web quam.com.co, el usuario concede a QUAM el derecho no exclusivo,
+                            exento de derechos de autor y/o propiedad intelectual, de forma perpetua, irrevocable y totalmente transferible a terceros, a utilizar,
+                            reproducir, modificar, adaptar, publicar, traducir, crear servicios derivados, distribuir y exhibir dichas reseñas y comentarios en todo el mundo
+                            y en cualquier medio de comunicación.</p>
+                        <p>Todas las marcas y denominaciones de servicios que aparecen en el sitio web quam.com.co son marcas registradas y de propiedad de
+                            QUAM.</p>
                     </div>
                 </div>
             </div>
