@@ -241,6 +241,17 @@
           padding-left: 10px;
         }
       }
+      @media (max-width: 578px){
+        &:nth-child(2n),
+        &:nth-child(4n) {
+          padding-right: 8px;
+        }
+
+        &:nth-child(3n),
+        &:nth-child(5n) {
+          padding-left: 8px;
+        }
+      }
     }
 
     @media (max-width:768px) {

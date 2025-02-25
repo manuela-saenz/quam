@@ -104,8 +104,16 @@
     border-radius: 5px;
     // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     // background: #f2f2f2;
-    @media (max-width:768px){
+    @media (max-width:768px) and (min-width:578px){
       height: 60vw;
+    }
+    @media (max-width:578px){
+      aspect-ratio: 1 / 1.5;
+      height: 80vw;
+      img{
+        object-position: bottom center;
+        object-fit: cover;
+      }
     }
     img {
       // mix-blend-mode: multiply;
@@ -162,7 +170,9 @@
     min-width: 38px;
     bottom: 10px;
     right: 10px;
-    background: #d4dae5;
+    background: #d4dae5b5;
+    border-radius: 50px;
+    border: none;
     &.active-fav{
       background: $red;
       color: #fff;
@@ -212,7 +222,7 @@
 
   .cfvsw_variations_form {
     grid-area: uno;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 
     .label {
       display: none;

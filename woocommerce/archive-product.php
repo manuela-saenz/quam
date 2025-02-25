@@ -33,6 +33,9 @@ $featuredImage = get_field('imagen_destacada', $currentCat);
                         <h1 class="woocommerce-products-header__title page-title <?= is_search() ? 'section-subtitle-2' : 'section-subtitle' ?>  mb-0">
                             <?php woocommerce_page_title(); ?>
                         </h1>
+                        <div>
+                            <?php category_description() ?>
+                        </div>
                     <?php endif; ?>
 
                 </div>

@@ -134,6 +134,10 @@ $banners  = (new WP_Query(array(
 $colecciones = get_field('colecciones');
 $primera_coleccion = $colecciones['primera_coleccion'];
 $segunda_coleccion = $colecciones['segunda_coleccion'];
+
+$primeraImagenVariable = $primera_coleccion['imagen_variable'];
+$segundaImagenVariable = $segunda_coleccion['imagen_variable'];
+
 ?>
 <section id="summer_collection" class="pb-0">
   <div class="container-fluid p-0">
@@ -141,7 +145,12 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
       <div class="col-md-6 col-lg-6 col-xl-8 p-0 position-relative">
         <a href="<?= $primera_coleccion["link"]; ?>" class="position-relative d-flex">
           <div class="img-fit backgroundImg w-100">
-            
+            <!-- <picture class="w-100" >
+              <source media="(min-width: 1200px)" srcset="<?= $primeraImagenVariable['pc_image'] ?>" />
+              <source media="(min-width: 578px)" srcset="<?= $primeraImagenVariable['imagen_tablet'] ?>" />
+              <source media="(max-width: 578px)" srcset="<?= $primeraImagenVariable['imagen_movil'] ?>" />
+              <img src="<?= $primeraImagenVariable['pc_image']?>" alt="<?= $primera_coleccion["titulo"]; ?>" />
+            </picture> -->
             <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="<?= $primera_coleccion["titulo"]; ?>" loading="lazy">
           </div>
           <div class="info_summer position-absolute w-100">
@@ -153,7 +162,13 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
       <div class="col-md-6 col-lg-6 col-xl-4 p-0">
         <a href="<?= $segunda_coleccion["link"]; ?>" class="position-relative d-flex">
           <div class="img-fit w-100">
-            <img src="<?= $segunda_coleccion["fondo_de_imagen"]["url"]; ?>" alt="" loading="lazy">
+            <!-- <picture class="w-100">
+              <source media="(min-width: 1200px)" srcset="<?= $segundaImagenVariable['pc_image']['url'] ?>" />
+              <source media="(min-width: 578px)" srcset="<?= $segundaImagenVariable['imagen_tablet']['url'] ?>" />
+              <source media="(max-width: 578px)" srcset="<?= $segundaImagenVariable['imagen_movil']['url'] ?>" />
+              <img src="<?= $segundaImagenVariable['pc_image']['url'] ?>" alt="<?= $segunda_coleccion["titulo"]; ?>" />
+            </picture> -->
+            <img src="<?= $segunda_coleccion["fondo_de_imagen"]["url"]; ?>" alt="<?= $segunda_coleccion["titulo"]; ?>" loading="lazy">
           </div>
           <div class="info_summer position-absolute w-100">
             <p class="mb-0"><?= $segunda_coleccion["subtitulo"]; ?></p>

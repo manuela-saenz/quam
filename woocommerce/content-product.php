@@ -112,15 +112,15 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                         <?= '-' . $discount . '%'; ?>
                     </div>
                     <div class="position-relative">
-                        <a href="<?= $variation_permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
+                        <a href="<?= $variation_permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-2 mb-md-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                             <img src="<?= $optimized_image_url ?>" data-href="<?= $variation_permalink ?>" data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class=" attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
                         </a>
                         <button class="button-heart  d-flex add-fav position-absolute" id="add-sprod-favs" data-product-id="<?= $variation_id; ?>" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
-                        </svg>
-                    </button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                            </svg>
+                        </button>
                     </div>
                     <div class="info-highlights position-relative">
                         <div class="d-grid product-info justify-content-center justify-content-md-between w-100">
