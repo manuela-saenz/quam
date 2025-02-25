@@ -956,3 +956,96 @@ document.addEventListener("DOMContentLoaded", function () {
 //     });
 //   });
 // });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const productElements = document.querySelectorAll('li[data-variants]');
+
+  productElements.forEach(productElement => {
+      const colorButtons = productElement.querySelectorAll('.color-circle');
+      const sizeButtonsContainer = productElement.querySelector('.size-selection');
+      const productImage = productElement.querySelector('.product-image');
+      let selectedColor = null;
+      let selectedSize = null;
+
+      colorButtons.forEach(button => {
+          button.addEventListener('click', function() {
+              // Remover la clase activa de otros botones
+              colorButtons.forEach(btn => btn.classList.remove('active-color'));
+              this.classList.add('active-color');
+
+              selectedColor = this.getAttribute('data-color');
+              selectedSize = null; // Resetear la talla seleccionada
+              updateSizeButtons(productElement);
+              updateProductImage(productElement); // Actualizar la imagen al seleccionar el color
+          });
+      });
+
+      function updateSizeButtons(productElement) {
+          const variants = JSON.parse(productElement.getAttribute('data-variants'));
+   
+          // Filtrar variantes por color seleccionado
+          const sizesForColor = variants
+              .filter(variant => variant.color === selectedColor)
+              .map(variant => variant.size);
+ 
+          const uniqueSizes = [...new Set(sizesForColor)]; // Obtener tallas únicas
+
+          // Limpiar el contenedor de tallas
+          sizeButtonsContainer.innerHTML = '';
+
+          if (uniqueSizes.length > 0) {
+              uniqueSizes.forEach(size => {
+                  const sizeButton = document.createElement('button');
+                  sizeButton.classList.add('size-circle');
+                  sizeButton.setAttribute('data-size', size);
+                  sizeButton.textContent = size;
+
+                  sizeButton.addEventListener('click', function() {
+                      document.querySelectorAll('.size-circle').forEach(btn => btn.classList.remove('active-size'));
+                      this.classList.add('active-size');
+
+                      selectedSize = this.getAttribute('data-size');
+                      updateSelectedVariation(productElement);
+                  });
+
+                  sizeButtonsContainer.appendChild(sizeButton);
+              });
+          }
+      }
+
+      function updateProductImage(productElement) {
+          if (selectedColor) {
+              const variants = JSON.parse(productElement.getAttribute('data-variants'));
+              const selectedVariant = variants.find(variant => variant.color === selectedColor);
+
+              if (selectedVariant) {
+                  productImage.src = selectedVariant.image_url;
+              }
+          }
+      }
+      
+      function updateSelectedVariation(productElement) {
+        if (selectedColor && selectedSize) {
+            const variants = JSON.parse(productElement.getAttribute('data-variants'));
+            const selectedVariant = variants.find(variant => variant.color === selectedColor && variant.size === selectedSize);
+    
+            if (selectedVariant) {
+                console.log('Selected Variation ID:', selectedVariant.id);
+    
+                // Buscar el botón "Add to Cart" dentro de productElement
+                const addToCartButton = productElement.querySelector('.add_to_cart_button');
+    
+                if (addToCartButton) {
+                    // Agregar la clase 'cfvsw_variation_found'
+                    addToCartButton.classList.add('cfvsw_variation_found');
+    
+                    // Actualizar el atributo data-variation_id con el ID de la variación seleccionada
+                    addToCartButton.setAttribute('data-variation_id', selectedVariant.id);
+                }
+            }
+        }
+    }
+    
+  });
+});
