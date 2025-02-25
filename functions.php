@@ -83,6 +83,7 @@ function lw_loop_shop_per_page( $products ) {
 add_action('wp_ajax_load_more_products', 'load_more_products');
 add_action('wp_ajax_nopriv_load_more_products', 'load_more_products');
 
+
 function load_more_products() {
     $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
     $per_page = 12; // Número de productos a cargar por solicitud
@@ -102,15 +103,14 @@ function load_more_products() {
     );
 
     $query = new WP_Query($args);
-
+    
     if ($query->have_posts()) :
         while ($query->have_posts()) :
             $query->the_post();
             wc_get_template_part('content', 'product');
         endwhile;
     endif;
-
-    wp_reset_postdata();
+    // wp_reset_postdata();
     die();
 }
 

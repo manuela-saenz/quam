@@ -186,42 +186,125 @@ function hideTracking() {
 
 // borrar texto tabla
 
-// jQuery(function ($) {
-//   let paged = 2; // Comienza desde la segunda página
-//   let loading = false;
+jQuery(function ($) {
+  let paged = 2; // Comienza desde la segunda página
+  let loading = false;
 
-//   function loadMoreProducts() {
-//     console.log("loadMoreProducts");
-//       if (loading) return;
-//       loading = true;
-//       console.log("loading");
+  function loadMoreProducts() {
+    console.log("loadMoreProducts");
+      if (loading) return;
+      loading = true;
+      console.log("loading");
 
-//       $.ajax({
-//           type: "POST",
-//           url: ajaxUrl,
-//           data: {
-//               action: "load_more_products",
-//               paged: paged
-//           },
-//           beforeSend: function () {
-//               $("#product-list").append('<div class="loading">Cargando más productos...</div>');
-//           },
-//           success: function (response) {
-//               $(".loading").remove();
-//               if ($.trim(response) !== '') {
-//                   $("#product-list").append(response);
-//                   paged++;
-//                   loading = false;
-//               } else {
-//                   $(window).off("scroll"); // Detiene la carga si ya no hay más productos
-//               }
-//           }
-//       });
-//   }
+      $.ajax({
+          type: "POST",
+          url: ajaxUrl,
+          data: {
+              action: "load_more_products",
+              paged: paged
+          },
+          beforeSend: function () {
+              $("#product-list").append('<div class="loading">Cargando más productos...</div>');
+          },
+          success: function (response) {
+              $(".loading").remove();
+              if ($.trim(response) !== '') {
+                  $("#product-list").append(response);
+                  paged++;
+                  $(document.body).trigger("wc_fragments_refreshed");
+                  $(document.body).trigger("wc_variation_form");
+                  loading = false;
 
-//   $(window).on("scroll", function () {
-//       if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-//           loadMoreProducts();
-//       }
-//   });
-// });
+                  const productElements = document.querySelectorAll('li[data-variants]');
+
+                  productElements.forEach(productElement => {
+                      const colorButtons = productElement.querySelectorAll('.color-circle');
+                      const sizeButtonsContainer = productElement.querySelector('.size-selection');
+                      const productImage = productElement.querySelector('.product-image');
+                      let selectedColor = null;
+                      let selectedSize = null;
+                
+                      colorButtons.forEach(button => {
+                          button.addEventListener('click', function() {
+                              // Remover la clase activa de otros botones
+                              colorButtons.forEach(btn => btn.classList.remove('active-color'));
+                              this.classList.add('active-color');
+                
+                              selectedColor = this.getAttribute('data-color');
+                              selectedSize = null; // Resetear la talla seleccionada
+                              updateSizeButtons(productElement);
+                              updateProductImage(productElement); // Actualizar la imagen al seleccionar el color
+                          });
+                      });
+                
+                      function updateSizeButtons(productElement) {
+                          const variants = JSON.parse(productElement.getAttribute('data-variants'));
+                          console.log(variants);
+                          // Filtrar variantes por color seleccionado
+                          const sizesForColor = variants
+                              .filter(variant => variant.color === selectedColor)
+                              .map(variant => variant.size);
+                          console.log(sizesForColor);
+                          const uniqueSizes = [...new Set(sizesForColor)]; // Obtener tallas únicas
+                
+                          // Limpiar el contenedor de tallas
+                          sizeButtonsContainer.innerHTML = '';
+                
+                          if (uniqueSizes.length > 0) {
+                              uniqueSizes.forEach(size => {
+                                  const sizeButton = document.createElement('button');
+                                  sizeButton.classList.add('size-circle');
+                                  sizeButton.setAttribute('data-size', size);
+                                  sizeButton.textContent = size;
+                
+                                  sizeButton.addEventListener('click', function() {
+                                      document.querySelectorAll('.size-circle').forEach(btn => btn.classList.remove('active-size'));
+                                      this.classList.add('active-size');
+                
+                                      selectedSize = this.getAttribute('data-size');
+                                      updateSelectedVariation(productElement);
+                                  });
+                
+                                  sizeButtonsContainer.appendChild(sizeButton);
+                              });
+                          }
+                      }
+                
+                      function updateProductImage(productElement) {
+                          if (selectedColor) {
+                              const variants = JSON.parse(productElement.getAttribute('data-variants'));
+                              const selectedVariant = variants.find(variant => variant.color === selectedColor);
+                
+                              if (selectedVariant) {
+                                  console.log('Selected Variation Image URL:', selectedVariant.image_url);
+                                  // Cambiar la imagen del producto
+                                  productImage.src = selectedVariant.image_url;
+                              }
+                          }
+                      }
+                
+                      function updateSelectedVariation(productElement) {
+                          if (selectedColor && selectedSize) {
+                              const variants = JSON.parse(productElement.getAttribute('data-variants'));
+                              const selectedVariant = variants.find(variant => variant.color === selectedColor && variant.size === selectedSize);
+                
+                              if (selectedVariant) {
+                                  console.log('Selected Variation ID:', selectedVariant.id);
+                                  // Aquí puedes realizar cualquier otra acción necesaria con el ID de la variación seleccionada
+                              }
+                          }
+                      }
+                  });
+              } else {
+                  $(window).off("scroll"); // Detiene la carga si ya no hay más productos
+              }
+          }
+      });
+  }
+
+  $(window).on("scroll", function () {
+      if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+          loadMoreProducts();
+      }
+  });
+});
