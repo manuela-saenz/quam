@@ -138,10 +138,11 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
 <section id="summer_collection" class="pb-0">
   <div class="container-fluid p-0">
     <div class="row m-0">
-      <div class="col-md-8 p-0 position-relative">
+      <div class="col-md-6 col-lg-6 col-xl-8 p-0 position-relative">
         <a href="<?= $primera_coleccion["link"]; ?>" class="position-relative d-flex">
           <div class="img-fit backgroundImg w-100">
-            <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="" loading="lazy">
+            
+            <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="<?= $primera_coleccion["titulo"]; ?>" loading="lazy">
           </div>
           <div class="info_summer position-absolute w-100">
             <p class="mb-0"><?= $primera_coleccion["subtitulo"]; ?></p>
@@ -149,7 +150,7 @@ $segunda_coleccion = $colecciones['segunda_coleccion'];
           </div>
         </a>
       </div>
-      <div class="col-md-4 p-0">
+      <div class="col-md-6 col-lg-6 col-xl-4 p-0">
         <a href="<?= $segunda_coleccion["link"]; ?>" class="position-relative d-flex">
           <div class="img-fit w-100">
             <img src="<?= $segunda_coleccion["fondo_de_imagen"]["url"]; ?>" alt="" loading="lazy">
