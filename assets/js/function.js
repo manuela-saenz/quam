@@ -866,42 +866,6 @@ document.addEventListener('DOMContentLoaded', function() {
               colorButtons.forEach(btn => btn.classList.remove('active-color'));
               this.classList.add('active-color');
 
-<<<<<<< HEAD
-=======
-//     // Asignar la URL de la imagen correspondiente a cada opción dentro de cfvsw-swatches-container cfvsw-shop-container
-//     items.forEach(function (liElement) {
-//       var swatchesContainer = liElement.querySelector(".cfvsw-swatches-container.cfvsw-shop-container");
-//       if (swatchesContainer) {
-//         var swatchOptions = swatchesContainer.querySelectorAll(".cfvsw-swatches-option");
-//         swatchOptions.forEach(function (option) {
-//           var dataSlug = option.getAttribute("data-slug");
-//           if (colorToImageUrl[dataSlug]) {
-//             option.setAttribute("data-img-url", colorToImageUrl[dataSlug]);
-//           }
-//         });
-//       }
-//     });
-//   });
-// });
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  const productElements = document.querySelectorAll('li[data-variants]');
-
-  productElements.forEach(productElement => {
-      const colorButtons = productElement.querySelectorAll('.color-circle');
-      const sizeButtonsContainer = productElement.querySelector('.size-selection');
-      const productImage = productElement.querySelector('.product-image');
-      let selectedColor = null;
-      let selectedSize = null;
-
-      colorButtons.forEach(button => {
-          button.addEventListener('click', function() {
-              // Remover la clase activa de otros botones
-              colorButtons.forEach(btn => btn.classList.remove('active-color'));
-              this.classList.add('active-color');
-
->>>>>>> cea4925c2b41b01a74a688fc0ab679071ccca6a0
               selectedColor = this.getAttribute('data-color');
               selectedSize = null; // Resetear la talla seleccionada
               updateSizeButtons(productElement);
@@ -910,7 +874,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       function updateSizeButtons(productElement) {
-<<<<<<< HEAD
         const variants = JSON.parse(productElement.getAttribute('data-variants'));
     
         // Filtrar variantes por color seleccionado y convertir tallas a mayúsculas
@@ -945,39 +908,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-=======
-          const variants = JSON.parse(productElement.getAttribute('data-variants'));
-   
-          // Filtrar variantes por color seleccionado
-          const sizesForColor = variants
-              .filter(variant => variant.color === selectedColor)
-              .map(variant => variant.size);
- 
-          const uniqueSizes = [...new Set(sizesForColor)]; // Obtener tallas únicas
-
-          // Limpiar el contenedor de tallas
-          sizeButtonsContainer.innerHTML = '';
-
-          if (uniqueSizes.length > 0) {
-              uniqueSizes.forEach(size => {
-                  const sizeButton = document.createElement('button');
-                  sizeButton.classList.add('size-circle');
-                  sizeButton.setAttribute('data-size', size);
-                  sizeButton.textContent = size;
-
-                  sizeButton.addEventListener('click', function() {
-                      document.querySelectorAll('.size-circle').forEach(btn => btn.classList.remove('active-size'));
-                      this.classList.add('active-size');
-
-                      selectedSize = this.getAttribute('data-size');
-                      updateSelectedVariation(productElement);
-                  });
-
-                  sizeButtonsContainer.appendChild(sizeButton);
-              });
-          }
-      }
->>>>>>> cea4925c2b41b01a74a688fc0ab679071ccca6a0
 
       function updateProductImage(productElement) {
           if (selectedColor) {
@@ -989,19 +919,11 @@ document.addEventListener('DOMContentLoaded', function() {
               }
           }
       }
-<<<<<<< HEAD
 
       function updateSelectedVariation(productElement) {
         if (selectedColor && selectedSize) {
             const variants = JSON.parse(productElement.getAttribute('data-variants'));
             const selectedVariant = variants.find(variant => variant.color === selectedColor && variant.size === selectedSize.toLowerCase());
-=======
-      
-      function updateSelectedVariation(productElement) {
-        if (selectedColor && selectedSize) {
-            const variants = JSON.parse(productElement.getAttribute('data-variants'));
-            const selectedVariant = variants.find(variant => variant.color === selectedColor && variant.size === selectedSize);
->>>>>>> cea4925c2b41b01a74a688fc0ab679071ccca6a0
     
             if (selectedVariant) {
                 console.log('Selected Variation ID:', selectedVariant.id);
