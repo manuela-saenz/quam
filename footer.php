@@ -123,11 +123,11 @@
   <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
   <script src="<?php bloginfo('template_url') ?>/assets/js/stepper.js"> </script>
 <?php } ?>
+<script src="<?php bloginfo('template_url') ?>/assets/js/function.js"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js"> </script>
 <?php if (is_product()) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/product.js"> </script>
 <?php } ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/function.js"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js"> </script>
 <?php if (is_page(1694)) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/form.js"> </script>
@@ -143,7 +143,13 @@
 <?php if (is_product_category()) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/cat.js"> </script>
 <?php } ?>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".cfvsw-shop-variations.variations.cfvsw-variation-disable-logic")
+      .forEach(table => table.classList.add("d-none"));
+  });
+</script>
 </body>
 
 </html>
-

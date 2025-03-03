@@ -1,56 +1,3 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Seleccionar todas las opciones de talla
-//   var swatchOptions = document.querySelectorAll(".cfvsw-swatches-option.cfvsw-label-option");
-
-//   swatchOptions.forEach(function (option) {
-//     option.addEventListener("click", function () {
-//       // Obtener el <li> más cercano
-//       var liElement = option.closest("li");
-//       if (liElement) {
-//         // Obtener el data-id-pub del <li>
-//         var dataIdPub = liElement.getAttribute("data-id-pub");
-
-//         // Obtener el elemento con la clase cfvsw-selected-swatch dentro del <li> para el color
-//         var selectedColorOption = liElement.querySelector(".cfvsw-swatches-option.cfvsw-selected-swatch");
-//         var selectedColorSlug = selectedColorOption ? selectedColorOption.getAttribute("data-slug") : null;
-
-//         // Obtener el data-slug de la talla seleccionada
-//         var selectedTallaSlug = option.getAttribute("data-slug");
-
-//         // Mostrar los valores en la consola (o hacer algo con ellos)
-//         console.log("data-id-pub:", dataIdPub);
-//         console.log("selected color data-slug:", selectedColorSlug);
-//         console.log("selected talla data-slug:", selectedTallaSlug);
-
-//         // Obtener el botón "Añadir al carrito"
-//         var addToCartButton = liElement.querySelector(".add-to-cart-container a");
-//         if (addToCartButton) {
-//           // Agregar la clase cfvsw_variation_found
-//           addToCartButton.removeAttribute("href");
-//           addToCartButton.classList.add("cfvsw_variation_found");
-
-//           // Cambiar el texto a "Añadir al carrito"
-//           addToCartButton.textContent = "Añadir al carrito";
-
-//           // Agregar data-variation_id y data-selected_variant
-//           var variationId = liElement.getAttribute("data-id"); // Suponiendo que la ID de la variación está en data-id
-//           addToCartButton.setAttribute("data-variation_id", variationId);
-
-//           var selectedVariant = {
-//             attribute_pa_color: selectedColorSlug,
-//             attribute_pa_talla: selectedTallaSlug
-//           };
-//           addToCartButton.setAttribute("data-selected_variant", JSON.stringify(selectedVariant));
-
-//           // Prevenir la redirección al hacer clic en el botón
-//           addToCartButton.addEventListener("click", function(event) {
-//             event.preventDefault();
-//           });
-//         }
-//       }
-//     });
-//   });
-// });
 
 document.addEventListener("DOMContentLoaded", function () {
   const favorites = JSON.parse(localStorage.getItem("sessionFav")) || [];
@@ -294,8 +241,12 @@ function addProductToCart(productId, quantity) {
   });
 }
 
+let isAddingToCart = false; // Bandera para evitar múltiples ejecuciones
+
 function addProductToCartCustom(productId, quantity, buttons) {
- 
+  if (isAddingToCart) return; // Evita ejecutar si ya está en proceso
+  isAddingToCart = true; // Activa la bandera
+
   var data = {
     action: "woocommerce_ajax_add_to_cart_category",
     product_id: productId,
@@ -309,31 +260,36 @@ function addProductToCartCustom(productId, quantity, buttons) {
     success: async function (response) {
       var res = JSON.parse(response);
       if (res.status === "success") {
-          var spanElement = document.getElementById("cartItem");
-          if (spanElement.classList.contains("d-none")) {
-            spanElement.classList.remove("d-none");
-          }
-          $(".offcanvas-body.ordenList.cart").empty();
-          $(".offcanvas-body.ordenList.cart").html(res.html);
-          var subtotal = res.subtotal;
-          var totalString = res.total;
-          var subvalue = getTotalValue(subtotal);
-          var value = getTotalValue(totalString);
-  
-          discountValue(res);
+        var spanElement = document.getElementById("cartItem");
+        if (spanElement.classList.contains("d-none")) {
+          spanElement.classList.remove("d-none");
+        }
+        $(".offcanvas-body.ordenList.cart").empty().html(res.html);
         
-          buttons.forEach(function (button) {
-            button.classList.remove("loading");
-            button.classList.remove("cfvsw_variation_found");
-          });
+        var subtotal = res.subtotal;
+        var totalString = res.total;
+        var subvalue = getTotalValue(subtotal);
+        var value = getTotalValue(totalString);
 
-          $("#cartItem").text(res.quantity);
-          $("#subtotal").html("$" + subvalue);
-          $("#total").html("$" + value);
+        discountValue(res);
+      
+        buttons.forEach(function (button) {
+          button.classList.remove("loading", "cfvsw_variation_found");
+        });
+
+        $("#cartItem").text(res.quantity);
+        $("#subtotal").html("$" + subvalue);
+        $("#total").html("$" + value);
       }
+
+      isAddingToCart = false; // Restablece la bandera después de completar la ejecución
+    },
+    error: function () {
+      isAddingToCart = false; // Asegura que la bandera se restablezca en caso de error
     },
   });
 }
+
 
 // <!-- Actualizando carrito   -->
 function updateCartContents(succes) {
@@ -785,27 +741,6 @@ document.addEventListener("DOMContentLoaded", function () {
             imageUrl = variation.image.url;
             modifyImageLi(liElement, imageUrl);
           }
-          // console.log(colorSelect)
-          // console.log(tallaSelect)
-
-          // if (
-          //   attributes.attribute_pa_talla === tallaSelect &&
-          //   attributes.attribute_pa_color === colorSelect
-          // ) {
-          //   console.log(tallaSelect, colorSelect);
-          //   console.log("x2");
-          //   var sessionFav =
-          //     JSON.parse(localStorage.getItem("sessionFav")) || [];
-          //   var favButton = liElement.querySelector(".button-heart");
-          //   favButton.setAttribute("data-product-id", variationId);
-
-          //   if (sessionFav.includes(variationId)) {
-          //     favButton.classList.add("active-fav");
-          //   } else {
-          //     favButton.classList.remove("active-fav");
-          //   }
-          //   return;
-          // }
         });
       }
     });
@@ -914,45 +849,98 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Seleccionar todos los elementos <li> con la clase especificada
-//   var listItems = document.querySelectorAll("li.col-lg-3.col-sm-6.col-6.product.type-product");
 
-//   // Agrupar los elementos <li> por data-id-pub
-//   var groupedItems = {};
-//   listItems.forEach(function (liElement) {
-//     var dataIdPub = liElement.getAttribute("data-id-pub");
-//     if (!groupedItems[dataIdPub]) {
-//       groupedItems[dataIdPub] = [];
-//     }
-//     groupedItems[dataIdPub].push(liElement);
-//   });
+document.addEventListener('DOMContentLoaded', function() {
+  const productElements = document.querySelectorAll('li[data-variants]');
 
-//   // Iterar sobre cada grupo de elementos <li>
-//   Object.keys(groupedItems).forEach(function (dataIdPub) {
-//     var items = groupedItems[dataIdPub];
+  productElements.forEach(productElement => {
+      const colorButtons = productElement.querySelectorAll('.color-circle');
+      const sizeButtonsContainer = productElement.querySelector('.size-selection');
+      const productImage = productElement.querySelector('.product-image');
+      let selectedColor = null;
+      let selectedSize = null;
 
-//     // Crear un mapa de colores a URLs de imágenes
-//     var colorToImageUrl = {};
-//     items.forEach(function (liElement) {
-//       var dataColor = liElement.getAttribute("data-color");
-//       var imgElement = liElement.querySelector("img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail");
-//       var imgUrl = imgElement ? imgElement.getAttribute("data-src") : "";
-//       colorToImageUrl[dataColor] = imgUrl;
-//     });
+      colorButtons.forEach(button => {
+          button.addEventListener('click', function() {
+              // Remover la clase activa de otros botones
+              colorButtons.forEach(btn => btn.classList.remove('active-color'));
+              this.classList.add('active-color');
 
-//     // Asignar la URL de la imagen correspondiente a cada opción dentro de cfvsw-swatches-container cfvsw-shop-container
-//     items.forEach(function (liElement) {
-//       var swatchesContainer = liElement.querySelector(".cfvsw-swatches-container.cfvsw-shop-container");
-//       if (swatchesContainer) {
-//         var swatchOptions = swatchesContainer.querySelectorAll(".cfvsw-swatches-option");
-//         swatchOptions.forEach(function (option) {
-//           var dataSlug = option.getAttribute("data-slug");
-//           if (colorToImageUrl[dataSlug]) {
-//             option.setAttribute("data-img-url", colorToImageUrl[dataSlug]);
-//           }
-//         });
-//       }
-//     });
-//   });
-// });
+              selectedColor = this.getAttribute('data-color');
+              selectedSize = null; // Resetear la talla seleccionada
+              updateSizeButtons(productElement);
+              updateProductImage(productElement); // Actualizar la imagen al seleccionar el color
+          });
+      });
+
+      function updateSizeButtons(productElement) {
+        const variants = JSON.parse(productElement.getAttribute('data-variants'));
+    
+        // Filtrar variantes por color seleccionado y convertir tallas a mayúsculas
+        let sizesForColor = variants
+            .filter(variant => variant.color === selectedColor)
+            .map(variant => variant.size.toUpperCase());
+    
+        // Orden específico S, M, L, XL
+        const sizeOrder = ["S", "M", "L", "XL"];
+        const uniqueSizes = [...new Set(sizesForColor)].sort((a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b));
+    
+        // Limpiar el contenedor de tallas
+        sizeButtonsContainer.innerHTML = '';
+    
+        if (uniqueSizes.length > 0) {
+            uniqueSizes.forEach(size => {
+                const sizeButton = document.createElement('button');
+                sizeButton.classList.add('size-circle');
+                sizeButton.setAttribute('data-size', size);
+                sizeButton.textContent = size; // Asegurar que se muestre en mayúsculas
+    
+                sizeButton.addEventListener('click', function() {
+                    document.querySelectorAll('.size-circle').forEach(btn => btn.classList.remove('active-size'));
+                    this.classList.add('active-size');
+    
+                    selectedSize = this.getAttribute('data-size');
+                    updateSelectedVariation(productElement);
+                });
+    
+                sizeButtonsContainer.appendChild(sizeButton);
+            });
+        }
+    }
+    
+
+      function updateProductImage(productElement) {
+          if (selectedColor) {
+              const variants = JSON.parse(productElement.getAttribute('data-variants'));
+              const selectedVariant = variants.find(variant => variant.color === selectedColor);
+
+              if (selectedVariant) {
+                  productImage.src = selectedVariant.image_url;
+              }
+          }
+      }
+
+      function updateSelectedVariation(productElement) {
+        if (selectedColor && selectedSize) {
+            const variants = JSON.parse(productElement.getAttribute('data-variants'));
+            const selectedVariant = variants.find(variant => variant.color === selectedColor && variant.size === selectedSize.toLowerCase());
+    
+            if (selectedVariant) {
+                console.log('Selected Variation ID:', selectedVariant.id);
+    
+                // Buscar el botón "Add to Cart" dentro de productElement
+                const addToCartButton = productElement.querySelector('.add_to_cart_button');
+    
+                if (addToCartButton) {
+                    // Agregar la clase 'cfvsw_variation_found'
+                    addToCartButton.classList.add('cfvsw_variation_found');
+    
+                    // Actualizar el atributo data-variation_id con el ID de la variación seleccionada
+                    addToCartButton.setAttribute('data-variation_id', selectedVariant.id);
+                }
+            }
+        }
+    }
+    
+  });
+});
