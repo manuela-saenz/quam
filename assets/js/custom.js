@@ -464,10 +464,11 @@ jQuery(function ($) {
       },
     });
   }
-
   $(window).on("scroll", function () {
-    if ($(window).scrollTop() >= $(document).height() / 2.5) {
-        loadMoreProducts();
+    if (window.location.search.indexOf('s=') === -1 && window.location.search.indexOf('post_type=product') === -1 && window.location.search.indexOf('filter_talla') === -1 && window.location.search.indexOf('filter_color') === -1) {
+        if ($(window).scrollTop() >= $(document).height() / 2.5) {
+            loadMoreProducts();
+        }
     }
 });
 

@@ -72,6 +72,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
     $product_id = $product->get_id();
     $all_variants = array();
 
+
     foreach ($available_variations as $variation) {
         $variation_obj = wc_get_product($variation['variation_id']);
         $product_id = $variation_obj->get_parent_id();
@@ -139,7 +140,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                     </svg>
                 </button>
             </div>
-            <div>
+            <div class="">
                 <div class="color-selection d-flex justify-content-center mt-2">
                     <?php
                     $unique_colors = array_unique(array_column($all_variants, 'color'));
