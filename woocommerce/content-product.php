@@ -123,6 +123,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
 
     <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>" data-variants="<?= $all_variants_json; ?>">
         <div class="CardProducts w-100 position-relative <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
+<<<<<<< HEAD
             <?php if ($discount > 0): ?>
                 <div class="discount position-absolute px-2 py-1 rounded-3 text-white lh-1">
                     <?= '-' . $discount . '%'; ?>
@@ -181,6 +182,43 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                     ?>
                     <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
                 </div>
+=======
+            <div class="discount position-absolute px-2 py-1 rounded-3 text-white lh-1">
+                <?= '-' . $discount . '%'; ?>
+            </div>
+            <div class="position-relative">
+                <a href="<?= $variation_permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
+                    <img src="<?= $optimized_image_url ?>" data-href="<?= $variation_permalink ?>" data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail product-image" />
+                </a>
+                <button class="button-heart  d-flex add-fav position-absolute" id="add-sprod-favs" data-product-id="<?= $variation_id; ?>" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="info-highlights position-relative">
+                <div class="d-grid product-info justify-content-center justify-content-md-between w-100">
+                    <?php
+
+                    /**
+                     * Hook: woocommerce_shop_loop_item_title.
+                     *
+                     * @hooked woocommerce_template_loop_product_title - 10
+                     */
+                    do_action('woocommerce_shop_loop_item_title');
+
+                    /**
+                     * Hook: woocommerce_after_shop_loop_item_title.
+                     *
+                     * @hooked woocommerce_template_loop_rating - 5
+                     * @hooked woocommerce_template_loop_price - 10
+                     */
+                    ?>
+
+                    <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
+                </div>
+>>>>>>> cea4925c2b41b01a74a688fc0ab679071ccca6a0
 
                 <?php
                 /**
@@ -192,11 +230,38 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                 do_action('woocommerce_after_shop_loop_item');
                 ?>
             </div>
+<<<<<<< HEAD
 
+=======
+            <div class="d-none">
+                <div class="color-selection d-flex justify-content-center mt-2">
+                    <?php
+                    $unique_colors = array_unique(array_column($all_variants, 'color'));
+                    foreach ($unique_colors as $color) :
+                        $color_hex = array_column(array_filter($all_variants, function ($variant) use ($color) {
+                            return $variant['color'] === $color;
+                        }), 'color_hex')[0];
+                    ?>
+                        <button class="color-circle" style="background-color: <?= $color_hex; ?>;" title="<?= $color; ?>" data-color="<?= $color; ?>"><?= $color; ?></button>
+                    <?php endforeach; ?>
+                </div>
+                <div class="size-selection d-flex justify-content-center mt-2">
+                    <?php
+                    $unique_sizes = array_unique(array_column($all_variants, 'size'));
+                    foreach ($unique_sizes as $size) :
+                    ?>
+                        <button class="size-circle" title="<?= $size; ?>" data-size="<?= $size; ?>"><?= $size; ?></button>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+>>>>>>> cea4925c2b41b01a74a688fc0ab679071ccca6a0
         </div>
     </li>
 
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> cea4925c2b41b01a74a688fc0ab679071ccca6a0
 endif;
 ?>
