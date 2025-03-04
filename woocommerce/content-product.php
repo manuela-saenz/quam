@@ -122,7 +122,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
     $all_variants_json = htmlspecialchars(json_encode($all_variants), ENT_QUOTES, 'UTF-8');
 ?>
 
-    <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>" data-variants="<?= $all_variants_json; ?>">
+    <li <?php wc_product_class(!is_front_page() && !is_singular('product') ? 'col-lg-3 col-sm-6 col-6' : '', $product); ?> data-id="<?= $product_id; ?>" data-variants="<?= $all_variants_json; ?>">
         <div class="CardProducts w-100 position-relative <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
             <?php if ($discount > 0): ?>
                 <div class="discount position-absolute px-2 py-1 rounded-3 text-white lh-1">

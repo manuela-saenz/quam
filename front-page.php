@@ -113,17 +113,38 @@ $banners  = (new WP_Query(array(
         <div class="swiper generationSwiper">
           <div class="swiper-wrapper">
             <?php
-            $products  = (new WP_Query(array(
-              'post_type' => 'product',
+            $products = new WP_Query(array(
+              'post_type'      => 'product',
               'posts_per_page' => 10,
-
-            )))->posts;
-            foreach ($products as $product) : ?>
-              <div class="swiper-slide">
-                <?php productCard($product) ?>
-              </div>
-            <?php endforeach ?>
+            ));
+            if ($products->have_posts()) :
+              while ($products->have_posts()) : $products->the_post(); ?>
+                <div class="swiper-slide">
+                  <?php wc_get_template_part('content', 'product'); ?>
+                </div>
+            <?php endwhile;
+              wp_reset_postdata();
+            endif ?>
           </div>
+          <div class="swiper-wrapper">
+					<?php if (!empty($related_products) && is_array($related_products)) :
+						global $post; // Definir la variable global para modificarla dentro del loop
+
+						foreach ($related_products as $product) :
+							$post = get_post($product->get_id()); // Obtener el objeto WP_Post del producto
+							setup_postdata($post); // Configurar el post actual
+					?>
+							<div class="swiper-slide">
+								<?php wc_get_template_part('content', 'product'); ?>
+							</div>
+					<?php
+
+
+						endforeach;
+
+						wp_reset_postdata(); // Restaurar el contexto global del post
+					endif; ?>
+				</div>
         </div>
       </div>
     </div>
@@ -145,13 +166,13 @@ $segundaImagenVariable = $segunda_coleccion['imagen_variable'];
       <div class="col-md-6 col-lg-6 col-xl-8 p-0 position-relative">
         <a href="<?= $primera_coleccion["link"]; ?>" class="position-relative d-flex">
           <div class="img-fit backgroundImg w-100">
-            <!-- <picture class="w-100" >
+            <picture class="w-100" >
               <source media="(min-width: 1200px)" srcset="<?= $primeraImagenVariable['pc_image'] ?>" />
               <source media="(min-width: 578px)" srcset="<?= $primeraImagenVariable['imagen_tablet'] ?>" />
               <source media="(max-width: 578px)" srcset="<?= $primeraImagenVariable['imagen_movil'] ?>" />
-              <img src="<?= $primeraImagenVariable['pc_image']?>" alt="<?= $primera_coleccion["titulo"]; ?>" />
-            </picture> -->
-            <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="<?= $primera_coleccion["titulo"]; ?>" loading="lazy">
+              <img src="<?= $primeraImagenVariable['pc_image'] ?>" alt="<?= $primera_coleccion["titulo"]; ?>" />
+            </picture>
+            <!-- <img src="<?= $primera_coleccion["fondo_de_imagen"]["url"]; ?>" alt="<?= $primera_coleccion["titulo"]; ?>" loading="lazy"> -->
           </div>
           <div class="info_summer position-absolute w-100">
             <p class="mb-0"><?= $primera_coleccion["subtitulo"]; ?></p>
@@ -162,13 +183,13 @@ $segundaImagenVariable = $segunda_coleccion['imagen_variable'];
       <div class="col-md-6 col-lg-6 col-xl-4 p-0">
         <a href="<?= $segunda_coleccion["link"]; ?>" class="position-relative d-flex">
           <div class="img-fit w-100">
-            <!-- <picture class="w-100">
+            <picture class="w-100">
               <source media="(min-width: 1200px)" srcset="<?= $segundaImagenVariable['pc_image']['url'] ?>" />
               <source media="(min-width: 578px)" srcset="<?= $segundaImagenVariable['imagen_tablet']['url'] ?>" />
               <source media="(max-width: 578px)" srcset="<?= $segundaImagenVariable['imagen_movil']['url'] ?>" />
               <img src="<?= $segundaImagenVariable['pc_image']['url'] ?>" alt="<?= $segunda_coleccion["titulo"]; ?>" />
-            </picture> -->
-            <img src="<?= $segunda_coleccion["fondo_de_imagen"]["url"]; ?>" alt="<?= $segunda_coleccion["titulo"]; ?>" loading="lazy">
+            </picture>
+            <!-- <img src="<?= $segunda_coleccion["fondo_de_imagen"]["url"]; ?>" alt="<?= $segunda_coleccion["titulo"]; ?>" loading="lazy"> -->
           </div>
           <div class="info_summer position-absolute w-100">
             <p class="mb-0"><?= $segunda_coleccion["subtitulo"]; ?></p>

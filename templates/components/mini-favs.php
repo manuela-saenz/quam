@@ -38,7 +38,7 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
         <a href="<?= get_permalink($prod->ID) ?>" class="img-contain">
           <img src="<?php echo get_the_post_thumbnail_url($prod->ID) ?>" alt="">
         </a>
-        <div>
+        <div class=" w-100">
           <h5> <a href="<?= get_permalink($prod->ID) ?>"><?php echo ($product_name); ?> </a></h5>
           <div class="d-flex align-items-center priceFav mb-3">
             <p id="priceFav"><?= $wcProd->get_price_html() ?> COP</p>
