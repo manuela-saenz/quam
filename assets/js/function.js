@@ -859,6 +859,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const colorButtons = productElement.querySelectorAll('.color-circle');
       const sizeButtonsContainer = productElement.querySelector('.size-selection');
       const productImage = productElement.querySelector('.product-image');
+      const buttonAddToCart = productElement.querySelector('.add_to_cart_button');
       let selectedColor = null;
       let selectedSize = null;
 
@@ -867,9 +868,10 @@ document.addEventListener('DOMContentLoaded', function() {
               // Remover la clase activa de otros botones
               colorButtons.forEach(btn => btn.classList.remove('active-color'));
               this.classList.add('active-color');
-
+              buttonAddToCart.classList.remove('cfvsw_variation_found');
               selectedColor = this.getAttribute('data-color');
               selectedSize = null; // Resetear la talla seleccionada
+
               updateSizeButtons(productElement);
               updateProductImage(productElement); // Actualizar la imagen al seleccionar el color
           });
