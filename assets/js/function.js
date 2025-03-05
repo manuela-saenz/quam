@@ -677,74 +677,76 @@ function clearEmptyCart() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  function modifyImageLi(liElement, urlToReplace) {
-    var listImageCat = liElement.querySelectorAll(
-      "img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail"
-    );
-    listImageCat.forEach(function (img) {
-      var src = img.getAttribute("src");
-      // console.log("src", src);
-      if (src) {
-        img.setAttribute("src", urlToReplace);
-      }
+  if (window.location.pathname.indexOf('/producto/') === -1) {
+    function modifyImageLi(liElement, urlToReplace) {
+      var listImageCat = liElement.querySelectorAll(
+        "img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail"
+      );
+      listImageCat.forEach(function (img) {
+        var src = img.getAttribute("src");
+        // console.log("src", src);
+        if (src) {
+          img.setAttribute("src", urlToReplace);
+        }
+      });
+    }
+
+    var swatchOptions = document.querySelectorAll(".cfvsw-swatches-option");
+    var colorSelect = null;
+    var tallaSelect = null;
+    swatchOptions.forEach(function (option) {
+      option.addEventListener("click", function (event) {
+        event.preventDefault();
+        // Verificar si el clic es automático
+        if (option.dataset.autoClick === "true") {
+          delete option.dataset.autoClick; // Eliminar la marca de clic automático
+          return; // Salir de la función sin ejecutar el código jQuery AJAX
+        }
+
+        var dataSlug = option.getAttribute("data-slug");
+        var liElement = option.closest("li");
+        if (liElement) {
+          var dataId = liElement.getAttribute("data-id-pub");
+          var variationsForm = liElement.querySelector(
+            ".cfvsw_variations_form.variations_form.cfvsw_shop_align_left.variation-function-added"
+          );
+          var isTallaOption = option.closest(
+            '.cfvsw-swatches-container.cfvsw-shop-container[swatches-attr="attribute_pa_talla"]'
+          );
+          // Quitar la clase d-none del elemento con la clase cfvsw-swatches-container cfvsw-shop-container y el atributo swatches-attr="attribute_pa_talla"
+          var sizeContainer = liElement.querySelector(
+            '.cfvsw-swatches-container.cfvsw-shop-container[swatches-attr="attribute_pa_talla"]'
+          );
+          if (sizeContainer) {
+            sizeContainer.classList.remove("d-none");
+          }
+
+          if (isTallaOption) {
+            tallaSelect = option.getAttribute("data-slug");
+          } else {
+            colorSelect = dataSlug;
+          }
+
+          var productVariations = variationsForm
+            ? variationsForm.getAttribute("data-product_variations")
+            : null;
+          var jsonProducVariations = JSON.parse(productVariations);
+      
+          var imageUrl = null;
+
+          jsonProducVariations.forEach(function (variation) {
+            var attributes = variation.attributes;
+            const variationId = variation.variation_id;
+
+            if (attributes.attribute_pa_color === dataSlug) {
+              imageUrl = variation.image.url;
+              modifyImageLi(liElement, imageUrl);
+            }
+          });
+        }
+      });
     });
   }
-
-  var swatchOptions = document.querySelectorAll(".cfvsw-swatches-option");
-  var colorSelect = null;
-  var tallaSelect = null;
-  swatchOptions.forEach(function (option) {
-    option.addEventListener("click", function (event) {
-      event.preventDefault();
-      // Verificar si el clic es automático
-      if (option.dataset.autoClick === "true") {
-        delete option.dataset.autoClick; // Eliminar la marca de clic automático
-        return; // Salir de la función sin ejecutar el código jQuery AJAX
-      }
-
-      var dataSlug = option.getAttribute("data-slug");
-      var liElement = option.closest("li");
-      if (liElement) {
-        var dataId = liElement.getAttribute("data-id-pub");
-        var variationsForm = liElement.querySelector(
-          ".cfvsw_variations_form.variations_form.cfvsw_shop_align_left.variation-function-added"
-        );
-        var isTallaOption = option.closest(
-          '.cfvsw-swatches-container.cfvsw-shop-container[swatches-attr="attribute_pa_talla"]'
-        );
-        // Quitar la clase d-none del elemento con la clase cfvsw-swatches-container cfvsw-shop-container y el atributo swatches-attr="attribute_pa_talla"
-        var sizeContainer = liElement.querySelector(
-          '.cfvsw-swatches-container.cfvsw-shop-container[swatches-attr="attribute_pa_talla"]'
-        );
-        if (sizeContainer) {
-          sizeContainer.classList.remove("d-none");
-        }
-
-        if (isTallaOption) {
-          tallaSelect = option.getAttribute("data-slug");
-        } else {
-          colorSelect = dataSlug;
-        }
-
-        var productVariations = variationsForm
-          ? variationsForm.getAttribute("data-product_variations")
-          : null;
-        var jsonProducVariations = JSON.parse(productVariations);
-    
-        var imageUrl = null;
-
-        jsonProducVariations.forEach(function (variation) {
-          var attributes = variation.attributes;
-          const variationId = variation.variation_id;
-
-          if (attributes.attribute_pa_color === dataSlug) {
-            imageUrl = variation.image.url;
-            modifyImageLi(liElement, imageUrl);
-          }
-        });
-      }
-    });
-  });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -791,49 +793,49 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Función para modificar el atributo 'src' de las imágenes
-  function modificarImagenes() {
-    var listImageCat = document.querySelectorAll(
-      "img.attachment-full.size-full, img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail"
-    );
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Función para modificar el atributo 'src' de las imágenes
+//   function modificarImagenes() {
+//     var listImageCat = document.querySelectorAll(
+//       "img.attachment-full.size-full, img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail"
+//     );
 
-    // Iterar sobre cada imagen y modificar el atributo 'src'
-    listImageCat.forEach(function (img) {
-      var src = img.getAttribute("src");
-      if (src) {
-        // Reemplazar '-300x300' con una cadena vacía
-        var newSrc = src.replace("-300x300", "");
-        img.setAttribute("src", newSrc);
-      }
-    });
-  }
-  var swatchOptions = document.querySelectorAll(
-    ".cfvsw-swatches-option.cfvsw-label-option"
-  );
+//     // Iterar sobre cada imagen y modificar el atributo 'src'
+//     listImageCat.forEach(function (img) {
+//       var src = img.getAttribute("src");
+//       if (src) {
+//         // Reemplazar '-300x300' con una cadena vacía
+//         var newSrc = src.replace("-300x300", "");
+//         img.setAttribute("src", newSrc);
+//       }
+//     });
+//   }
+//   var swatchOptions = document.querySelectorAll(
+//     ".cfvsw-swatches-option.cfvsw-label-option"
+//   );
 
-  swatchOptions.forEach(function (option) {
-    option.addEventListener("click", function () {
-      // Modificar las imágenes al hacer clic
-      setTimeout(() => {
-        modificarImagenes();
-      }, 100);
-    });
-  });
+//   swatchOptions.forEach(function (option) {
+//     option.addEventListener("click", function () {
+//       // Modificar las imágenes al hacer clic
+//       setTimeout(() => {
+//         modificarImagenes();
+//       }, 100);
+//     });
+//   });
 
-  var swatchContainers = document.querySelectorAll(
-    ".cfvsw-swatches-container, .cfvsw-shop-container"
-  );
+//   var swatchContainers = document.querySelectorAll(
+//     ".cfvsw-swatches-container, .cfvsw-shop-container"
+//   );
 
-  swatchContainers.forEach(function (option) {
-    option.addEventListener("click", function () {
-      // Modificar las imágenes al hacer clic
-      setTimeout(() => {
-        modificarImagenes();
-      }, 100);
-    });
-  });
-});
+//   swatchContainers.forEach(function (option) {
+//     option.addEventListener("click", function () {
+//       // Modificar las imágenes al hacer clic
+//       setTimeout(() => {
+//         modificarImagenes();
+//       }, 100);
+//     });
+//   });
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
   var images = document.querySelectorAll(
