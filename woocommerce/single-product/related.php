@@ -39,18 +39,24 @@ if ($related_products) :
 			<?php endif; ?>
 
 			<div id="related-swiper" class="related-swiper swiper overflow-visible">
-				<div class="swiper-wrapper">
-					<?php foreach ($related_products as $related_product) : ?>
+			<div class="swiper-wrapper">
+					<?php if (!empty($related_products) && is_array($related_products)) :
+						global $post; // Definir la variable global para modificarla dentro del loop
 
-						<?php
-						$post_object = get_post($related_product->get_id());
-						$product_status = $related_product->get_stock_status();
-						$wc_product = wc_get_product($related_product->get_id())
-						?>
-						<div class="swiper-slide">
-							<?php productCard($related_product) ?>
-						</div>
-					<?php endforeach; ?>
+						foreach ($related_products as $product) :
+							$post = get_post($product->get_id()); // Obtener el objeto WP_Post del producto
+							setup_postdata($post); // Configurar el post actual
+					?>
+							<div class="swiper-slide">
+								<?php wc_get_template_part('content', 'product'); ?>
+							</div>
+					<?php
+
+
+						endforeach;
+
+						wp_reset_postdata(); // Restaurar el contexto global del post
+					endif; ?>
 				</div>
 				<div class="arrow-prev-container d-none d-md-flex">
 					<button class="generation-arrows prev">
@@ -63,6 +69,9 @@ if ($related_products) :
 					</button>
 				</div>
 			</div>
+			<pre class="">
+
+			</pre>
 		</div>
 
 

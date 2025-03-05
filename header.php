@@ -37,45 +37,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="icon" href="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" type="image/svg+xml">
   <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css?=v2" />
-  <style>
-    .CardProducts .cfvsw_variations_form {
-      width: 100% !important;
-    }
 
-    .color-circle,
-    .size-circle {
-      width: 23px;
-      height: 23px;
-      border-radius: 50%;
-      margin-left: 10px;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      transition: all 0.3s ease;
-    }
-
-    .color-circle {
-      border: 2px solid #fff;
-      /* Un borde blanco para mayor visibilidad */
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-      /* Sombra ligera */
-    }
-
-    .color-circle:hover,
-    .size-circle:hover {
-      transform: scale(1.1);
-      /* Efecto de agrandamiento al pasar el mouse */
-    }
-
-    .size-circle {
-      background-color: #f8f9fa;
-      /* Color de fondo para los tamaños */
-      color: #333;
-    }
-  </style>
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
   </script>

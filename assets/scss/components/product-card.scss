@@ -170,7 +170,7 @@
     min-width: 38px;
     bottom: 10px;
     right: 10px;
-    background: #d4dae5b5;
+    // background: #d4dae5b5;
     border-radius: 50px;
     border: none;
     &.active-fav{
@@ -427,8 +427,50 @@
     text-align: center;
     width: 100%;
   }
+  .cfvsw_variations_form {
+    width: 100% !important;
+  }
 
+  .color-circle,
+  .size-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    will-change: transform;
+    &.active-size, &.active-color{
+      outline: 1px solid black;
+    }
+  }
+
+  .color-circle {
+    border: 2px solid #fff;
+    /* Un borde blanco para mayor visibilidad */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    /* Sombra ligera */
+  }
+
+  .color-circle:hover,
+  .size-circle:hover {
+    transform: scale(1.1);
+    /* Efecto de agrandamiento al pasar el mouse */
+  }
+
+  .size-circle {
+    background-color: #f8f9fa;
+    /* Color de fondo para los tamaños */
+    color: #333;
+  }
 }
+
+
 
 // @media (max-width: 770px) {
 //   .info-highlights {
