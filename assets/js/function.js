@@ -855,6 +855,33 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener('DOMContentLoaded', function() {
   const productElements = document.querySelectorAll('li[data-variants]');
 
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      // Verifica si el atributo de la imagen cambió
+      if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+        const image = mutation.target;
+        let imageUrl = image.src;
+  
+        // Si la URL contiene -300x300, quítalo
+        if (imageUrl.includes('-300x300')) {
+          imageUrl = imageUrl.replace('-300x300', '');
+          image.src = imageUrl; // Actualiza la URL de la imagen
+        }
+      }
+    });
+  });
+  
+  // Seleccionar la imagen a observar (en este caso, todas las imágenes en la página)
+  const imagesAll = document.querySelectorAll('img');
+  
+  // Configuración del observer
+  const config = { attributes: true };
+  
+  // Observar cada imagen
+  imagesAll.forEach(image => {
+    observer.observe(image, config);
+  });
+
   productElements.forEach(productElement => {
       const colorButtons = productElement.querySelectorAll('.color-circle');
       const sizeButtonsContainer = productElement.querySelector('.size-selection');
