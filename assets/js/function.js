@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   const favorites = JSON.parse(localStorage.getItem("sessionFav")) || [];
   if (favorites.length === 0) return;
@@ -265,14 +264,14 @@ function addProductToCartCustom(productId, quantity, buttons) {
           spanElement.classList.remove("d-none");
         }
         $(".offcanvas-body.ordenList.cart").empty().html(res.html);
-        
+
         var subtotal = res.subtotal;
         var totalString = res.total;
         var subvalue = getTotalValue(subtotal);
         var value = getTotalValue(totalString);
 
         discountValue(res);
-      
+
         buttons.forEach(function (button) {
           button.classList.remove("loading", "cfvsw_variation_found");
         });
@@ -289,7 +288,6 @@ function addProductToCartCustom(productId, quantity, buttons) {
     },
   });
 }
-
 
 // <!-- Actualizando carrito   -->
 function updateCartContents(succes) {
@@ -645,14 +643,11 @@ function initFavoritesPanelDelete() {
 function deleteFavoriteSameContext(prodid) {
   if ($(".add-fav[data-product-id='" + prodid + "']").length > 0) {
     // Si existe, agrega la clase al elemento específico
-    $(".add-fav[data-product-id='" + prodid + "']").removeClass(
-      "active-fav"
-    );
+    $(".add-fav[data-product-id='" + prodid + "']").removeClass("active-fav");
   } else {
-  $(".add-fav").removeClass("active-fav");
+    $(".add-fav").removeClass("active-fav");
   }
   deleteFavorite(prodid);
-
 }
 
 var previousValue = $(".variation_id").val();
@@ -677,7 +672,7 @@ function clearEmptyCart() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.location.pathname.indexOf('/producto/') === -1) {
+  if (window.location.pathname.indexOf("/producto/") === -1) {
     function modifyImageLi(liElement, urlToReplace) {
       var listImageCat = liElement.querySelectorAll(
         "img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail"
@@ -731,7 +726,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ? variationsForm.getAttribute("data-product_variations")
             : null;
           var jsonProducVariations = JSON.parse(productVariations);
-      
+
           var imageUrl = null;
 
           jsonProducVariations.forEach(function (variation) {
@@ -851,127 +846,148 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const productElements = document.querySelectorAll("li[data-variants]");
 
-document.addEventListener('DOMContentLoaded', function() {
-  const productElements = document.querySelectorAll('li[data-variants]');
-
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
       // Verifica si el atributo de la imagen cambió
-      if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+      if (mutation.type === "attributes" && mutation.attributeName === "src") {
         const image = mutation.target;
         let imageUrl = image.src;
-  
+
         // Si la URL contiene -300x300, quítalo
-        if (imageUrl.includes('-300x300')) {
-          imageUrl = imageUrl.replace('-300x300', '');
+        if (imageUrl.includes("-300x300")) {
+          imageUrl = imageUrl.replace("-300x300", "");
           image.src = imageUrl; // Actualiza la URL de la imagen
         }
       }
     });
   });
-  
+
   // Seleccionar la imagen a observar (en este caso, todas las imágenes en la página)
-  const imagesAll = document.querySelectorAll('img');
-  
+  const imagesAll = document.querySelectorAll("img");
+
   // Configuración del observer
   const config = { attributes: true };
-  
+
   // Observar cada imagen
-  imagesAll.forEach(image => {
+  imagesAll.forEach((image) => {
     observer.observe(image, config);
   });
 
-  productElements.forEach(productElement => {
-      const colorButtons = productElement.querySelectorAll('.color-circle');
-      const sizeButtonsContainer = productElement.querySelector('.size-selection');
-      const productImage = productElement.querySelector('.product-image');
-      const buttonAddToCart = productElement.querySelector('.add_to_cart_button');
-      let selectedColor = null;
-      let selectedSize = null;
+  productElements.forEach((productElement) => {
+    const colorButtons = productElement.querySelectorAll(".color-circle");
+    const sizeButtonsContainer =
+      productElement.querySelector(".size-selection");
+    const productImage = productElement.querySelector(".product-image");
+    const buttonAddToCart = productElement.querySelector(".add_to_cart_button");
+    let selectedColor = null;
+    let selectedSize = null;
 
-      colorButtons.forEach(button => {
-          button.addEventListener('click', function() {
-              // Remover la clase activa de otros botones
-              colorButtons.forEach(btn => btn.classList.remove('active-color'));
-              this.classList.add('active-color');
-              buttonAddToCart.classList.remove('cfvsw_variation_found');
-              selectedColor = this.getAttribute('data-color');
-              selectedSize = null; // Resetear la talla seleccionada
+    colorButtons.forEach((button) => {
+      setTimeout(() => {
+        buttonAddToCart.classList.remove("cfvsw_variation_found");
+      }, 500);
 
-              updateSizeButtons(productElement);
-              updateProductImage(productElement); // Actualizar la imagen al seleccionar el color
-          });
+      button.addEventListener("click", function () {
+        // Remover la clase activa de otros botones
+        colorButtons.forEach((btn) => btn.classList.remove("active-color"));
+        this.classList.add("active-color");
+        buttonAddToCart.classList.remove("cfvsw_variation_found");
+        selectedColor = this.getAttribute("data-color");
+        selectedSize = null; // Resetear la talla seleccionada
+
+        updateSizeButtons(productElement);
+        updateProductImage(productElement); // Actualizar la imagen al seleccionar el color
       });
+    });
 
-      function updateSizeButtons(productElement) {
-        const variants = JSON.parse(productElement.getAttribute('data-variants'));
-    
-        // Filtrar variantes por color seleccionado y convertir tallas a mayúsculas
-        let sizesForColor = variants
-            .filter(variant => variant.color === selectedColor)
-            .map(variant => variant.size.toUpperCase());
-    
-        // Orden específico S, M, L, XL
-        const sizeOrder = ["S", "M", "L", "XL"];
-        const uniqueSizes = [...new Set(sizesForColor)].sort((a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b));
-    
-        // Limpiar el contenedor de tallas
-        sizeButtonsContainer.innerHTML = '';
-    
-        if (uniqueSizes.length > 0) {
-            uniqueSizes.forEach(size => {
-                const sizeButton = document.createElement('button');
-                sizeButton.classList.add('size-circle');
-                sizeButton.setAttribute('data-size', size);
-                sizeButton.textContent = size; // Asegurar que se muestre en mayúsculas
-    
-                sizeButton.addEventListener('click', function() {
-                    document.querySelectorAll('.size-circle').forEach(btn => btn.classList.remove('active-size'));
-                    this.classList.add('active-size');
-    
-                    selectedSize = this.getAttribute('data-size');
-                    updateSelectedVariation(productElement);
-                });
-    
-                sizeButtonsContainer.appendChild(sizeButton);
-            });
-        }
-    }
-    
+    function updateSizeButtons(productElement) {
+      const variants = JSON.parse(productElement.getAttribute("data-variants"));
 
-      function updateProductImage(productElement) {
-          if (selectedColor) {
-              const variants = JSON.parse(productElement.getAttribute('data-variants'));
-              const selectedVariant = variants.find(variant => variant.color === selectedColor);
+      // Filtrar variantes por color seleccionado y convertir tallas a mayúsculas
+      let sizesForColor = variants
+        .filter((variant) => variant.color === selectedColor)
+        .map((variant) => variant.size.toUpperCase());
 
-              if (selectedVariant) {
-                  productImage.src = selectedVariant.image_url;
-              }
-          }
+      // Orden específico S, M, L, XL
+      const sizeOrder = ["S", "M", "L", "XL"];
+      const uniqueSizes = [...new Set(sizesForColor)].sort(
+        (a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b)
+      );
+
+      // Limpiar el contenedor de tallas
+      sizeButtonsContainer.innerHTML = "";
+
+      if (uniqueSizes.length > 0) {
+        uniqueSizes.forEach((size) => {
+          const sizeButton = document.createElement("button");
+          sizeButton.classList.add("size-circle");
+          sizeButton.setAttribute("data-size", size);
+          sizeButton.textContent = size; // Asegurar que se muestre en mayúsculas
+
+          sizeButton.addEventListener("click", function () {
+            document
+              .querySelectorAll(".size-circle")
+              .forEach((btn) => btn.classList.remove("active-size"));
+            this.classList.add("active-size");
+
+            selectedSize = this.getAttribute("data-size");
+            updateSelectedVariation(productElement);
+          });
+
+          sizeButtonsContainer.appendChild(sizeButton);
+        });
       }
-
-      function updateSelectedVariation(productElement) {
-        if (selectedColor && selectedSize) {
-            const variants = JSON.parse(productElement.getAttribute('data-variants'));
-            const selectedVariant = variants.find(variant => variant.color === selectedColor && variant.size === selectedSize.toLowerCase());
-    
-            if (selectedVariant) {
-                console.log('Selected Variation ID:', selectedVariant.id);
-    
-                // Buscar el botón "Add to Cart" dentro de productElement
-                const addToCartButton = productElement.querySelector('.add_to_cart_button');
-    
-                if (addToCartButton) {
-                    // Agregar la clase 'cfvsw_variation_found'
-                    addToCartButton.classList.add('cfvsw_variation_found');
-    
-                    // Actualizar el atributo data-variation_id con el ID de la variación seleccionada
-                    addToCartButton.setAttribute('data-variation_id', selectedVariant.id);
-                }
-            }
-        }
     }
-    
+
+    function updateProductImage(productElement) {
+      if (selectedColor) {
+        const variants = JSON.parse(
+          productElement.getAttribute("data-variants")
+        );
+        const selectedVariant = variants.find(
+          (variant) => variant.color === selectedColor
+        );
+
+        if (selectedVariant) {
+          productImage.src = selectedVariant.image_url;
+        }
+      }
+    }
+
+    function updateSelectedVariation(productElement) {
+      if (selectedColor && selectedSize) {
+        const variants = JSON.parse(
+          productElement.getAttribute("data-variants")
+        );
+        const selectedVariant = variants.find(
+          (variant) =>
+            variant.color === selectedColor &&
+            variant.size === selectedSize.toLowerCase()
+        );
+
+        if (selectedVariant) {
+          console.log("Selected Variation ID:", selectedVariant.id);
+
+          // Buscar el botón "Add to Cart" dentro de productElement
+          const addToCartButton = productElement.querySelector(
+            ".add_to_cart_button"
+          );
+
+          if (addToCartButton) {
+            // Agregar la clase 'cfvsw_variation_found'
+            addToCartButton.classList.add("cfvsw_variation_found");
+
+            // Actualizar el atributo data-variation_id con el ID de la variación seleccionada
+            addToCartButton.setAttribute(
+              "data-variation_id",
+              selectedVariant.id
+            );
+          }
+        }
+      }
+    }
   });
 });
