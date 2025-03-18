@@ -888,7 +888,7 @@ document.addEventListener("DOMContentLoaded", function () {
     colorButtons.forEach((button) => {
       setTimeout(() => {
         buttonAddToCart.classList.remove("cfvsw_variation_found");
-      }, 500);
+      }, 1000);
 
       button.addEventListener("click", function () {
         // Remover la clase activa de otros botones
