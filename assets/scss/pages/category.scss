@@ -9,7 +9,7 @@
     height: 150px;
   }
 
-  &:not(.campaign) {
+  &:not(.img-banner) {
     &:before {
       content: "";
       position: absolute;
@@ -31,8 +31,8 @@
     }
   }
 
-  &.campaign {
-    height: 300px;
+  &.img-banner {
+    height: auto;
   }
 
   .section-subtitle {
