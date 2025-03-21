@@ -6,25 +6,27 @@ $queryArr = array(
 );
 
 $currentCat = null;
-if (is_tax()) {
+if (is_tax() || is_category()) {
     $currentCat = get_queried_object();
+    $taxonomy = is_category() ? 'category' : $currentCat->taxonomy;
     $queryArr["tax_query"] = array(
         array(
-            "taxonomy" => $currentCat->taxonomy,
+            "taxonomy" => $taxonomy,
             "terms" => $currentCat->term_id
         )
     );
 }
 $filter_color = isset($_GET['filter_color']) ? $_GET['filter_color'] : null;
 $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
-$campana = get_field('etiqueta_de_tipo_campana', $currentCat);
+// $campana = get_field('etiqueta_de_tipo_campana', $currentCat);
 $featuredImage = get_field('imagen_destacada', $currentCat);
+
 ?>
 
 
-<section id="bannerCategory" class=" position-relative overflow-hidden p-0 <?= $campana ? 'img-fit campaign' : '' ?>">
+<section id="bannerCategory" class=" position-relative overflow-hidden p-0 <?= $featuredImage ? 'img-contain img-banner' : '' ?>">
 
-    <?php if (!$campana) { ?>
+    <?php if (!$featuredImage) { ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -42,9 +44,15 @@ $featuredImage = get_field('imagen_destacada', $currentCat);
             </div>
         </div>
     <?php } else { ?>
-        <img src="<?= $featuredImage['url'] ?>" alt="<?php woocommerce_page_title(); ?>">
+        <picture class="w-100" >
+              <source media="(min-width: 1200px)" srcset="<?= $featuredImage['url'] ?>" />
+              <source media="(min-width: 578px)" srcset="<?= $featuredImage['url'] ?>" />
+              <source media="(max-width: 578px)" srcset="<?= $featuredImage['url'] ?>" />
+              <img src="<?= $featuredImage['url'] ?>" alt="<?= $primera_coleccion["titulo"]; ?>" />
+            </picture>
     <?php } ?>
 </section>
+
 
 <section id="infoProducts" class="pt-4">
     <div class="container ">
