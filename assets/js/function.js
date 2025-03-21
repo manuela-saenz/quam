@@ -849,32 +849,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const productElements = document.querySelectorAll("li[data-variants]");
 
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      // Verifica si el atributo de la imagen cambió
-      if (mutation.type === "attributes" && mutation.attributeName === "src") {
-        const image = mutation.target;
-        let imageUrl = image.src;
 
-        // Si la URL contiene -300x300, quítalo
-        if (imageUrl.includes("-300x300")) {
-          imageUrl = imageUrl.replace("-300x300", "");
-          image.src = imageUrl; // Actualiza la URL de la imagen
-        }
-      }
-    });
-  });
-
-  // Seleccionar la imagen a observar (en este caso, todas las imágenes en la página)
-  const imagesAll = document.querySelectorAll("img");
-
-  // Configuración del observer
-  const config = { attributes: true };
-
-  // Observar cada imagen
-  imagesAll.forEach((image) => {
-    observer.observe(image, config);
-  });
 
   productElements.forEach((productElement) => {
     const colorButtons = productElement.querySelectorAll(".color-circle");
@@ -886,10 +861,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedSize = null;
 
     colorButtons.forEach((button) => {
-      setTimeout(() => {
-        buttonAddToCart.classList.remove("cfvsw_variation_found");
-      }, 1000);
-
+ 
       button.addEventListener("click", function () {
         // Remover la clase activa de otros botones
         colorButtons.forEach((btn) => btn.classList.remove("active-color"));
@@ -990,4 +962,36 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const productList = document.getElementById("product-list");
+  if (!productList) return;
+
+  const observer = new MutationObserver(() => {
+      reorderProducts();
+  });
+
+  observer.observe(productList, { childList: true, subtree: true });
+
+  function reorderProducts() {
+      const items = Array.from(productList.querySelectorAll("li[data-father]"));
+      if (items.length < 2) return;
+
+      let firstFather = items[0].getAttribute("data-father");
+      let lastFather = firstFather;
+      let toMove = [];
+
+      for (let i = 1; i < items.length; i++) {
+          let currentFather = items[i].getAttribute("data-father");
+          if (currentFather === lastFather) {
+              toMove.push(items[i]);
+          } else {
+              lastFather = currentFather;
+          }
+      }
+
+      toMove.forEach(item => productList.appendChild(item));
+  }
 });
