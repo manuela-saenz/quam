@@ -119,9 +119,6 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
         if (in_array($variant['color'], $shown_colors)) {
             continue; // Saltar si el color ya se ha mostrado
         }
-        echo '<pre class="d-none">';
-        print_r($variant);
-        echo '</pre>';
         $shown_colors[] = $variant['color']; // Agregar color a la lista de mostrados
     ?>
         <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?>

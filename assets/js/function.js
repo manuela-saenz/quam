@@ -966,6 +966,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.pathname === "/") return; // Evita que se ejecute en la ruta raíz
+
   const productList = document.getElementById("product-list");
   if (!productList) return;
 

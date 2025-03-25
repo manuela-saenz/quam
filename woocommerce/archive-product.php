@@ -44,12 +44,12 @@ $featuredImage = get_field('imagen_destacada', $currentCat);
             </div>
         </div>
     <?php } else { ?>
-        <picture class="w-100" >
-              <source media="(min-width: 1200px)" srcset="<?= $featuredImage['url'] ?>" />
-              <source media="(min-width: 578px)" srcset="<?= $featuredImage['url'] ?>" />
-              <source media="(max-width: 578px)" srcset="<?= $featuredImage['url'] ?>" />
-              <img src="<?= $featuredImage['url'] ?>" alt="<?= $primera_coleccion["titulo"]; ?>" />
-            </picture>
+        <picture class="w-100">
+            <source media="(min-width: 1200px)" srcset="<?= $featuredImage['url'] ?>" />
+            <source media="(min-width: 578px)" srcset="<?= $featuredImage['url'] ?>" />
+            <source media="(max-width: 578px)" srcset="<?= $featuredImage['url'] ?>" />
+            <img src="<?= $featuredImage['url'] ?>" alt="<?= $primera_coleccion["titulo"]; ?>" />
+        </picture>
     <?php } ?>
 </section>
 
@@ -315,14 +315,21 @@ $featuredImage = get_field('imagen_destacada', $currentCat);
                      */
                     do_action('woocommerce_shop_loop');
 
-                    wc_get_template_part('content', 'product'); ?>
+
+                    if (is_front_page()) {
+                        // Código para la página principal
+                        // wc_get_template_part('content', 'product-home'); 
+                    } else {
+                        // Código para otras páginas
+                        wc_get_template_part('content', 'product');
+                    }
+
+                    // wc_get_template_part('content', 'product'); ?>
                     <?php //wc_get_template_part('content', 'producto'); 
                     ?>
         <?php
                 }
             }
-
-        
         } else {
             /**
              * Hook: woocommerce_no_products_found.

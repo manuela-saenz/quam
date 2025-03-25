@@ -48,7 +48,7 @@ if ($related_products) :
 							setup_postdata($post); // Configurar el post actual
 					?>
 							<div class="swiper-slide">
-								<?php wc_get_template_part('content', 'product'); ?>
+								<?php wc_get_template_part('contentgen', 'product'); ?>
 							</div>
 					<?php
 
