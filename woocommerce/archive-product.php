@@ -20,6 +20,9 @@ $filter_color = isset($_GET['filter_color']) ? $_GET['filter_color'] : null;
 $filter_talla = isset($_GET['filter_talla']) ? $_GET['filter_talla'] : null;
 // $campana = get_field('etiqueta_de_tipo_campana', $currentCat);
 $featuredImage = get_field('imagen_destacada', $currentCat);
+$bannerImgTablet = get_field('imagen_tablet', $currentCat);
+$bannerImgMobile = get_field('imagen_movil', $currentCat);
+
 
 ?>
 
