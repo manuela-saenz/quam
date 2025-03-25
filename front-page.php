@@ -120,31 +120,37 @@ $banners  = (new WP_Query(array(
             if ($products->have_posts()) :
               while ($products->have_posts()) : $products->the_post(); ?>
                 <div class="swiper-slide">
-                  <?php wc_get_template_part('content', 'product'); ?>
+                  <?php
+                  if (is_front_page()) {
+                    // Código para la página principal
+                    wc_get_template_part('contentgen', 'product'); // Puedes cargar un template diferente si lo deseas
+                  }
+                  ?>
+              
                 </div>
             <?php endwhile;
               wp_reset_postdata();
             endif ?>
           </div>
           <div class="swiper-wrapper">
-					<?php if (!empty($related_products) && is_array($related_products)) :
-						global $post; // Definir la variable global para modificarla dentro del loop
+            <?php if (!empty($related_products) && is_array($related_products)) :
+              global $post; // Definir la variable global para modificarla dentro del loop
 
-						foreach ($related_products as $product) :
-							$post = get_post($product->get_id()); // Obtener el objeto WP_Post del producto
-							setup_postdata($post); // Configurar el post actual
-					?>
-							<div class="swiper-slide">
-								<?php wc_get_template_part('content', 'product'); ?>
-							</div>
-					<?php
+              foreach ($related_products as $product) :
+                $post = get_post($product->get_id()); // Obtener el objeto WP_Post del producto
+                setup_postdata($post); // Configurar el post actual
+            ?>
+                <div class="swiper-slide">
+                  <?php wc_get_template_part('content', 'product'); ?>
+                </div>
+            <?php
 
 
-						endforeach;
+              endforeach;
 
-						wp_reset_postdata(); // Restaurar el contexto global del post
-					endif; ?>
-				</div>
+              wp_reset_postdata(); // Restaurar el contexto global del post
+            endif; ?>
+          </div>
         </div>
       </div>
     </div>
@@ -166,7 +172,7 @@ $segundaImagenVariable = $segunda_coleccion['imagen_variable'];
       <div class="col-md-6 col-lg-6 col-xl-8 p-0 position-relative">
         <a href="<?= $primera_coleccion["link"]; ?>" class="position-relative d-flex">
           <div class="img-fit backgroundImg w-100">
-            <picture class="w-100" >
+            <picture class="w-100">
               <source media="(min-width: 1200px)" srcset="<?= $primeraImagenVariable['pc_image'] ?>" />
               <source media="(min-width: 578px)" srcset="<?= $primeraImagenVariable['imagen_tablet'] ?>" />
               <source media="(max-width: 578px)" srcset="<?= $primeraImagenVariable['imagen_movil'] ?>" />
