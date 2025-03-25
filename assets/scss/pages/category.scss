@@ -171,6 +171,8 @@
     }
   }
 
+
+
   @media (max-width: 991px) {
     padding-bottom: 0;
   }
@@ -202,10 +204,11 @@
   }
 
   .galleryP {
-    row-gap: 40px;
+    // row-gap: 40px;
 
     .product {
-
+      border: 1px solid #eee;
+      padding-bottom: 12px;
       // &:nth-child(10n - 1),
       // &:nth-child(10n) {
       //   width: 50%;

@@ -119,9 +119,6 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
         if (in_array($variant['color'], $shown_colors)) {
             continue; // Saltar si el color ya se ha mostrado
         }
-        echo '<pre class="d-none">';
-        print_r($variant);
-        echo '</pre>';
         $shown_colors[] = $variant['color']; // Agregar color a la lista de mostrados
     ?>
         <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?>
@@ -137,7 +134,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                 <?php endif; ?>
 
                 <div class="position-relative">
-                    <a href="<?= $variant['permalink'] ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-3 relative img-contain"
+                    <a href="<?= $variant['permalink'] ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-2 relative img-contain"
                         title="<?= $variant['name'] ?>">
                         <img src="<?= $variant['image_url'] ?>"
                             alt="<?= $variant['name'] ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail product-image" />
@@ -151,8 +148,16 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                     </button>
                 </div>
 
-                <div class="">
-                    <div class="color-selection d-flex justify-content-center mt-2">
+                <div class="mb-1 variants-selection d-flex flex-column justify-content-end">
+                    <div class="size-selection d-flex justify-content-center">
+                        <?php
+                        $unique_sizes = array_unique(array_column($all_variants, 'size'));
+                        foreach ($unique_sizes as $size) :
+                        ?>
+                            <button class="size-circle" title="<?= $size; ?>" data-size="<?= $size; ?>"><?= strtoupper($size); ?></button>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="color-selection d-flex justify-content-center mt-3">
                         <?php
                         $unique_colors = array_unique(array_column($all_variants, 'color'));
                         foreach ($unique_colors as $color) :
@@ -163,18 +168,11 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                             <button class="color-circle" style="background-color: <?= $color_hex; ?>;" title="<?= $color; ?>" data-color="<?= $color; ?>"></button>
                         <?php endforeach; ?>
                     </div>
-                    <div class="size-selection d-flex justify-content-center mt-2">
-                        <?php
-                        $unique_sizes = array_unique(array_column($all_variants, 'size'));
-                        foreach ($unique_sizes as $size) :
-                        ?>
-                            <button class="size-circle" title="<?= $size; ?>" data-size="<?= $size; ?>"><?= strtoupper($size); ?></button>
-                        <?php endforeach; ?>
-                    </div>
+
                 </div>
 
                 <div class="info-highlights position-relative">
-                    <div class="d-grid product-info justify-content-center justify-content-md-between w-100">
+                    <div class="product-info justify-content-center justify-content-md-between w-100">
                         <?php do_action('woocommerce_shop_loop_item_title'); ?>
                         <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
                     </div>

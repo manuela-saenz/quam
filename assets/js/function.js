@@ -274,6 +274,10 @@ function addProductToCartCustom(productId, quantity, buttons) {
 
         buttons.forEach(function (button) {
           button.classList.remove("loading", "cfvsw_variation_found");
+          // button.classList.add("added");
+          // setTimeout(()=>{
+          //   button.classList.remove("added");
+          // }, 1000)
         });
 
         $("#cartItem").text(res.quantity);
@@ -769,9 +773,9 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       // Agregar la clase d-none a los elementos con la clase cfvsw-shop-container
-      sizeOptions.forEach(function (sizeOption) {
-        sizeOption.classList.add("d-none");
-      });
+      // sizeOptions.forEach(function (sizeOption) {
+      //   sizeOption.classList.add("d-none");
+      // });
 
       swatchOptions.forEach(function (option) {
         var dataSlug = option.getAttribute("data-slug");
@@ -861,7 +865,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedSize = null;
 
     colorButtons.forEach((button) => {
- 
+
       button.addEventListener("click", function () {
         // Remover la clase activa de otros botones
         colorButtons.forEach((btn) => btn.classList.remove("active-color"));
@@ -900,6 +904,7 @@ document.addEventListener("DOMContentLoaded", function () {
           sizeButton.textContent = size; // Asegurar que se muestre en mayúsculas
 
           sizeButton.addEventListener("click", function () {
+            console.log('funciona')
             document
               .querySelectorAll(".size-circle")
               .forEach((btn) => btn.classList.remove("active-size"));
@@ -942,6 +947,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (selectedVariant) {
           console.log("Selected Variation ID:", selectedVariant.id);
+          console.log('talla seleccionada')
+         
 
           // Buscar el botón "Add to Cart" dentro de productElement
           const addToCartButton = productElement.querySelector(
@@ -949,6 +956,7 @@ document.addEventListener("DOMContentLoaded", function () {
           );
 
           if (addToCartButton) {
+            
             // Agregar la clase 'cfvsw_variation_found'
             addToCartButton.classList.add("cfvsw_variation_found");
 
@@ -957,6 +965,9 @@ document.addEventListener("DOMContentLoaded", function () {
               "data-variation_id",
               selectedVariant.id
             );
+            
+              addToCartButton.click()
+           
           }
         }
       }
@@ -970,28 +981,28 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!productList) return;
 
   const observer = new MutationObserver(() => {
-      reorderProducts();
+    reorderProducts();
   });
 
   observer.observe(productList, { childList: true, subtree: true });
 
   function reorderProducts() {
-      const items = Array.from(productList.querySelectorAll("li[data-father]"));
-      if (items.length < 2) return;
+    const items = Array.from(productList.querySelectorAll("li[data-father]"));
+    if (items.length < 2) return;
 
-      let firstFather = items[0].getAttribute("data-father");
-      let lastFather = firstFather;
-      let toMove = [];
+    let firstFather = items[0].getAttribute("data-father");
+    let lastFather = firstFather;
+    let toMove = [];
 
-      for (let i = 1; i < items.length; i++) {
-          let currentFather = items[i].getAttribute("data-father");
-          if (currentFather === lastFather) {
-              toMove.push(items[i]);
-          } else {
-              lastFather = currentFather;
-          }
+    for (let i = 1; i < items.length; i++) {
+      let currentFather = items[i].getAttribute("data-father");
+      if (currentFather === lastFather) {
+        toMove.push(items[i]);
+      } else {
+        lastFather = currentFather;
       }
+    }
 
-      toMove.forEach(item => productList.appendChild(item));
+    toMove.forEach(item => productList.appendChild(item));
   }
 });
