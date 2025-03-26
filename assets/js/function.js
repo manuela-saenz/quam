@@ -138,8 +138,21 @@ document.addEventListener("DOMContentLoaded", function () {
       var productId = button.getAttribute("data-product_id");
       button.classList.add("loading");
       var id = variationId ? variationId : productId;
+
+      // Encuentra el <li> que contiene el botón
+      var parentLi = button.closest("li");
+      var div = null;
+      if (parentLi) {
+        var cardProductsDiv = parentLi.querySelector("div.CardProducts");
+        if (cardProductsDiv) {
+          // Agrega la clase "added" al <div>
+          cardProductsDiv.classList.add("added");
+          div = cardProductsDiv;
+        }
+      }
+
       setTimeout(function () {
-        addProductToCartCustom(id, 1, buttons);
+        addProductToCartCustom(id, 1, buttons, div ? div : null);
       }, 1500);
     });
   });
@@ -242,7 +255,7 @@ function addProductToCart(productId, quantity) {
 
 let isAddingToCart = false; // Bandera para evitar múltiples ejecuciones
 
-function addProductToCartCustom(productId, quantity, buttons) {
+function addProductToCartCustom(productId, quantity, buttons, cardProductsDiv) {
   if (isAddingToCart) return; // Evita ejecutar si ya está en proceso
   isAddingToCart = true; // Activa la bandera
 
@@ -274,12 +287,14 @@ function addProductToCartCustom(productId, quantity, buttons) {
 
         buttons.forEach(function (button) {
           button.classList.remove("loading", "cfvsw_variation_found");
-          // button.classList.add("added");
-          // setTimeout(()=>{
-          //   button.classList.remove("added");
-          // }, 1000)
         });
-
+        if (cardProductsDiv) {
+          cardProductsDiv.classList.add("added");
+          setTimeout(() => {
+            cardProductsDiv.classList.remove("added");
+          }, 1000);
+          cardProductsDiv.classList.remove("loading");
+        }
         $("#cartItem").text(res.quantity);
         $("#subtotal").html("$" + subvalue);
         $("#total").html("$" + value);
@@ -683,7 +698,6 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       listImageCat.forEach(function (img) {
         var src = img.getAttribute("src");
-        // console.log("src", src);
         if (src) {
           img.setAttribute("src", urlToReplace);
         }
@@ -853,8 +867,6 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const productElements = document.querySelectorAll("li[data-variants]");
 
-
-
   productElements.forEach((productElement) => {
     const colorButtons = productElement.querySelectorAll(".color-circle");
     const sizeButtonsContainer =
@@ -864,36 +876,44 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedColor = null;
     let selectedSize = null;
 
-    colorButtons.forEach((button) => {
+    const initialColor = productElement.getAttribute("data-color-q");
+    if (initialColor) {
+      colorButtons.forEach((button) => {
+        if (button.getAttribute("data-color") === initialColor) {
+          button.classList.add("active-color");
+          selectedColor = initialColor;
 
+          updateSizeButtons(productElement);
+          updateProductImage(productElement);
+        }
+      });
+    }
+
+    colorButtons.forEach((button) => {
       button.addEventListener("click", function () {
-        // Remover la clase activa de otros botones
         colorButtons.forEach((btn) => btn.classList.remove("active-color"));
         this.classList.add("active-color");
         buttonAddToCart.classList.remove("cfvsw_variation_found");
         selectedColor = this.getAttribute("data-color");
-        selectedSize = null; // Resetear la talla seleccionada
+        selectedSize = null;
 
         updateSizeButtons(productElement);
-        updateProductImage(productElement); // Actualizar la imagen al seleccionar el color
+        updateProductImage(productElement);
       });
     });
 
     function updateSizeButtons(productElement) {
       const variants = JSON.parse(productElement.getAttribute("data-variants"));
 
-      // Filtrar variantes por color seleccionado y convertir tallas a mayúsculas
       let sizesForColor = variants
         .filter((variant) => variant.color === selectedColor)
         .map((variant) => variant.size.toUpperCase());
 
-      // Orden específico S, M, L, XL
       const sizeOrder = ["S", "M", "L", "XL"];
       const uniqueSizes = [...new Set(sizesForColor)].sort(
         (a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b)
       );
 
-      // Limpiar el contenedor de tallas
       sizeButtonsContainer.innerHTML = "";
 
       if (uniqueSizes.length > 0) {
@@ -901,10 +921,9 @@ document.addEventListener("DOMContentLoaded", function () {
           const sizeButton = document.createElement("button");
           sizeButton.classList.add("size-circle");
           sizeButton.setAttribute("data-size", size);
-          sizeButton.textContent = size; // Asegurar que se muestre en mayúsculas
+          sizeButton.textContent = size;
 
           sizeButton.addEventListener("click", function () {
-            console.log('funciona')
             document
               .querySelectorAll(".size-circle")
               .forEach((btn) => btn.classList.remove("active-size"));
@@ -946,35 +965,23 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
         if (selectedVariant) {
-          console.log("Selected Variation ID:", selectedVariant.id);
-          console.log('talla seleccionada')
-         
-
-          // Buscar el botón "Add to Cart" dentro de productElement
           const addToCartButton = productElement.querySelector(
             ".add_to_cart_button"
           );
 
           if (addToCartButton) {
-            
-            // Agregar la clase 'cfvsw_variation_found'
             addToCartButton.classList.add("cfvsw_variation_found");
-
-            // Actualizar el atributo data-variation_id con el ID de la variación seleccionada
             addToCartButton.setAttribute(
               "data-variation_id",
               selectedVariant.id
             );
-            
-              addToCartButton.click()
-           
+            addToCartButton.click();
           }
         }
       }
     }
   });
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname === "/") return; // Evita que se ejecute en la ruta raíz
@@ -1005,6 +1012,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    toMove.forEach(item => productList.appendChild(item));
+    toMove.forEach((item) => productList.appendChild(item));
   }
 });
