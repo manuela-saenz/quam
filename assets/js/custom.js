@@ -262,10 +262,15 @@ function initAddToFavoriteButton() {
   });
 }
 
-$('.add-to-cart-container .add-btn').on('click', function(){
-  $(this).parent().parent().parent().find('.size-selection').addClass('show-colors');
-  $(this).addClass('hide-btn')
-})
+$(".add-to-cart-container .add-btn").on("click", function () {
+  $(this)
+    .parent()
+    .parent()
+    .parent()
+    .find(".size-selection")
+    .addClass("show-colors");
+  $(this).addClass("hide-btn");
+});
 // $('.add_to_cart_button')
 
 // borrar texto tabla
@@ -274,9 +279,9 @@ function getCategoryFromURL() {
   const url = window.location.href; // Obtiene la URL actual
   const regex = /categoria-producto\/([^\/]+)/; // Expresión regular para capturar la categoría después de "categoria-producto/"
   const match = url.match(regex);
-  
+
   if (match && match[1]) {
-      return match[1]; // Devuelve la categoría encontrada
+    return match[1]; // Devuelve la categoría encontrada
   }
   return null; // Devuelve null si no encuentra la categoría
 }
@@ -286,13 +291,12 @@ function getCategoryFromURL() {
   const url = window.location.href; // Obtiene la URL actual
   const regex = /categoria-producto\/([^\/]+)/; // Expresión regular para capturar la categoría después de "categoria-producto/"
   const match = url.match(regex);
-  
+
   if (match && match[1]) {
-      return match[1]; // Devuelve la categoría encontrada
+    return match[1]; // Devuelve la categoría encontrada
   }
   return null; // Devuelve null si no encuentra la categoría
 }
-
 
 jQuery(function ($) {
   let paged = 2; // Comienza desde la segunda página
@@ -303,7 +307,6 @@ jQuery(function ($) {
     loading = true;
     const category = getCategoryFromURL();
 
-
     $.ajax({
       type: "POST",
       url: ajaxUrl,
@@ -313,9 +316,9 @@ jQuery(function ($) {
         slug: category,
       },
       beforeSend: function () {
-        let placeholders = '';
+        let placeholders = "";
         for (let i = 0; i < 8; i++) {
-            placeholders += `
+          placeholders += `
                 <div class="col-lg-3 col-sm-6 col-6 product type-product post-146 status-publish first outofstock has-post-thumbnail shipping-taxable purchasable product-type-variation loading" data-id="toastCardLoad">
                     <div class="CardProducts w-100 placeholder-glow">
                         <div class="img-contain placeholder w-100"></div>
@@ -328,8 +331,7 @@ jQuery(function ($) {
                     </div>
                 </div>`;
         }
-        $('#product-list').append(placeholders);
-       
+        $("#product-list").append(placeholders);
       },
       success: function (response) {
         $(".loading").remove();
@@ -348,9 +350,24 @@ jQuery(function ($) {
             const sizeButtonsContainer =
               productElement.querySelector(".size-selection");
             const productImage = productElement.querySelector(".product-image");
-            const buttonAddToCart = productElement.querySelector('.add_to_cart_button');
+            const buttonAddToCart = productElement.querySelector(
+              ".add_to_cart_button"
+            );
             let selectedColor = null;
             let selectedSize = null;
+
+            const initialColor = productElement.getAttribute("data-color-q");
+            if (initialColor) {
+              colorButtons.forEach((button) => {
+                if (button.getAttribute("data-color") === initialColor) {
+                  button.classList.add("active-color");
+                  selectedColor = initialColor;
+
+                  updateSizeButtons(productElement);
+                  updateProductImage(productElement);
+                }
+              });
+            }
 
             colorButtons.forEach((button) => {
               button.addEventListener("click", function () {
@@ -362,46 +379,52 @@ jQuery(function ($) {
 
                 selectedColor = this.getAttribute("data-color");
                 selectedSize = null; // Resetear la talla seleccionada
-                buttonAddToCart.classList.remove('cfvsw_variation_found');
+                buttonAddToCart.classList.remove("cfvsw_variation_found");
                 updateSizeButtons(productElement);
                 updateProductImage(productElement); // Actualizar la imagen al seleccionar el color
               });
             });
 
             function updateSizeButtons(productElement) {
-              const variants = JSON.parse(productElement.getAttribute('data-variants'));
-          
+              const variants = JSON.parse(
+                productElement.getAttribute("data-variants")
+              );
+
               // Filtrar variantes por color seleccionado y convertir tallas a mayúsculas
               let sizesForColor = variants
-                  .filter(variant => variant.color === selectedColor)
-                  .map(variant => variant.size.toUpperCase());
-          
+                .filter((variant) => variant.color === selectedColor)
+                .map((variant) => variant.size.toUpperCase());
+
               // Orden específico S, M, L, XL
               const sizeOrder = ["S", "M", "L", "XL"];
-              const uniqueSizes = [...new Set(sizesForColor)].sort((a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b));
-          
+              const uniqueSizes = [...new Set(sizesForColor)].sort(
+                (a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b)
+              );
+
               // Limpiar el contenedor de tallas
-              sizeButtonsContainer.innerHTML = '';
-          
+              sizeButtonsContainer.innerHTML = "";
+
               if (uniqueSizes.length > 0) {
-                  uniqueSizes.forEach(size => {
-                      const sizeButton = document.createElement('button');
-                      sizeButton.classList.add('size-circle');
-                      sizeButton.setAttribute('data-size', size);
-                      sizeButton.textContent = size; // Asegurar que se muestre en mayúsculas
-          
-                      sizeButton.addEventListener('click', function() {
-                          document.querySelectorAll('.size-circle').forEach(btn => btn.classList.remove('active-size'));
-                          this.classList.add('active-size');
-          
-                          selectedSize = this.getAttribute('data-size');
-                          updateSelectedVariation(productElement);
-                      });
-          
-                      sizeButtonsContainer.appendChild(sizeButton);
+                uniqueSizes.forEach((size) => {
+                  const sizeButton = document.createElement("button");
+                  sizeButton.classList.add("size-circle");
+                  sizeButton.setAttribute("data-size", size);
+                  sizeButton.textContent = size; // Asegurar que se muestre en mayúsculas
+
+                  sizeButton.addEventListener("click", function () {
+                    document
+                      .querySelectorAll(".size-circle")
+                      .forEach((btn) => btn.classList.remove("active-size"));
+                    this.classList.add("active-size");
+
+                    selectedSize = this.getAttribute("data-size");
+                    updateSelectedVariation(productElement);
                   });
+
+                  sizeButtonsContainer.appendChild(sizeButton);
+                });
               }
-          }
+            }
 
             function updateProductImage(productElement) {
               if (selectedColor) {
@@ -430,39 +453,59 @@ jQuery(function ($) {
                 );
 
                 if (selectedVariant) {
-                  console.log("Selected Variation ID:", selectedVariant.id);
-
-                  // Buscar el botón "Add to Cart" dentro de productElement
                   const addToCartButton = productElement.querySelector(
                     ".add_to_cart_button"
                   );
 
                   if (addToCartButton) {
-                    // Agregar la clase 'cfvsw_variation_found'
                     addToCartButton.classList.add("cfvsw_variation_found");
-
-                    // Actualizar el atributo data-variation_id con el ID de la variación seleccionada
                     addToCartButton.setAttribute(
                       "data-variation_id",
                       selectedVariant.id
                     );
+                    addToCartButton.click();
                   }
                 }
               }
             }
           });
-          
+
           initAddToFavoriteButton();
+          $(".add-to-cart-container .add-btn").on("click", function () {
+            $(this)
+              .parent()
+              .parent()
+              .parent()
+              .find(".size-selection")
+              .addClass("show-colors");
+            $(this).addClass("hide-btn");
+          });
           var buttons = document.querySelectorAll(".add_to_cart_button");
 
           buttons.forEach(function (button) {
             button.addEventListener("click", function (event) {
+              event.preventDefault();
               var variationId = button.getAttribute("data-variation_id");
               var productId = button.getAttribute("data-product_id");
               button.classList.add("loading");
               var id = variationId ? variationId : productId;
+        
+              // Encuentra el <li> que contiene el botón
+              var parentLi = button.closest("li");
+    
+              var div = null;
+              if (parentLi) {
+                // Selecciona el <div> con la clase "CardProducts" dentro del <li>
+                var cardProductsDiv = parentLi.querySelector("div.CardProducts");
+                if (cardProductsDiv) {
+                  // Agrega la clase "added" al <div>
+                  cardProductsDiv.classList.add("added");
+                  div = cardProductsDiv;
+                }
+              }
+        
               setTimeout(function () {
-                addProductToCartCustom(id, 1, buttons);
+                addProductToCartCustom(id, 1, buttons, div ? div : null);
               }, 1500);
             });
           });
@@ -473,11 +516,15 @@ jQuery(function ($) {
     });
   }
   $(window).on("scroll", function () {
-    if (window.location.search.indexOf('s=') === -1 && window.location.search.indexOf('post_type=product') === -1 && window.location.search.indexOf('filter_talla') === -1 && window.location.search.indexOf('filter_color') === -1) {
-        if ($(window).scrollTop() >= $(document).height() / 2.5) {
-            loadMoreProducts();
-        }
+    if (
+      window.location.search.indexOf("s=") === -1 &&
+      window.location.search.indexOf("post_type=product") === -1 &&
+      window.location.search.indexOf("filter_talla") === -1 &&
+      window.location.search.indexOf("filter_color") === -1
+    ) {
+      if ($(window).scrollTop() >= $(document).height() / 2.5) {
+        loadMoreProducts();
+      }
     }
-});
-
+  });
 });

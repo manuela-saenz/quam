@@ -124,6 +124,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
         <li <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?>
             data-id="<?= $variant['id']; ?>"
             data-father="<?= $variant['id_father']; ?>"
+            data-color-q="<?= $variant['color']; ?>"
             data-variants="<?= $all_variants_json; ?>">
 
             <div class="CardProducts w-100 position-relative <?= $variant['status'] ?>" data-stock="<?= $variant['status']; ?>">
