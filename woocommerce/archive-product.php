@@ -59,7 +59,7 @@ $bannerImgMobile = get_field('imagen_movil', $currentCat);
 if (!empty($description)) {
 ?>
     <div class="container mb-4">
-        <div class="cat-description col-6 mx-auto text-center">
+        <div class="cat-description col-md-6 mx-auto text-center">
             <?php echo category_description() ?>
         </div>
     </div>

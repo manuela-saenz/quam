@@ -136,17 +136,23 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       var variationId = button.getAttribute("data-variation_id");
       var productId = button.getAttribute("data-product_id");
-      button.classList.add("loading");
+      var grandparent = button.parentElement?.parentElement?.parentElement; 
+    if (grandparent) {
+      grandparent.classList.add("loading");
+    }
+      // console.log('should add loading')
       var id = variationId ? variationId : productId;
 
       // Encuentra el <li> que contiene el botón
       var parentLi = button.closest("li");
       var div = null;
+      
       if (parentLi) {
         var cardProductsDiv = parentLi.querySelector("div.CardProducts");
         if (cardProductsDiv) {
+          // console.log('should add added')
           // Agrega la clase "added" al <div>
-          cardProductsDiv.classList.add("added");
+          // cardProductsDiv.classList.add("added");
           div = cardProductsDiv;
         }
       }
@@ -289,11 +295,13 @@ function addProductToCartCustom(productId, quantity, buttons, cardProductsDiv) {
           button.classList.remove("loading", "cfvsw_variation_found");
         });
         if (cardProductsDiv) {
+          console.log('should add')
+          cardProductsDiv.classList.remove("loading");
           cardProductsDiv.classList.add("added");
           setTimeout(() => {
             cardProductsDiv.classList.remove("added");
+            console.log('should remove add')
           }, 1000);
-          cardProductsDiv.classList.remove("loading");
         }
         $("#cartItem").text(res.quantity);
         $("#subtotal").html("$" + subvalue);

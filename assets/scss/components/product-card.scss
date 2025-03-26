@@ -6,11 +6,10 @@
   &::before{
     content: "";
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #eee;
-    opacity: 0.8;
+    left: -12px;
+    width: calc(100% + 24px);
+    height: calc(100% + 12px);
+    background: #002d7296;
     z-index: 4;
   }
   &::after{
@@ -22,8 +21,9 @@
     animation: pulse infinite 1s;
     transform: translate(-50%, -50%);
     z-index: 5;
+    color: white;
   }
-  &:has(.loading){
+  &.loading{
     &:before, &::after{
       visibility: visible;
     }
@@ -42,7 +42,7 @@
       visibility: hidden;
     }
   }
-  &:has(.added){
+  &.added{
     &:before, &::after {
       animation: addedBg 1.2s forwards;
     }
@@ -83,9 +83,9 @@
       text-transform: capitalize;
       line-height: 1.6;
 
-      @media (max-width:991px) {
-        text-align: center;
-      }
+      // @media (max-width:991px) {
+      //   text-align: center;
+      // }
     }
 
     .price {
@@ -559,6 +559,9 @@
     }
     &.active-size{
       outline: 1px solid #fff;
+      outline-offset: 3px;
+    }
+    &.active-size, &.active-color{
       outline-offset: 3px;
     }
   }
