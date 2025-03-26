@@ -140,29 +140,30 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                     </svg>
                 </button>
             </div>
-            <div class="">
-                <div class="color-selection d-flex justify-content-center mt-2">
-                    <?php
-                    $unique_colors = array_unique(array_column($all_variants, 'color'));
-                    foreach ($unique_colors as $color) :
-                        $color_hex = array_column(array_filter($all_variants, function ($variant) use ($color) {
-                            return $variant['color'] === $color;
-                        }), 'color_hex')[0];
-                    ?>
-                        <button class="color-circle" style="background-color: <?= $color_hex; ?>;" title="<?= $color; ?>" data-color="<?= $color; ?>"></button>
-                    <?php endforeach; ?>
+            <div class="mb-1 variants-selection d-flex flex-column justify-content-end">
+                    <div class="size-selection d-flex justify-content-center">
+                        <?php
+                        $unique_sizes = array_unique(array_column($all_variants, 'size'));
+                        foreach ($unique_sizes as $size) :
+                        ?>
+                            <button class="size-circle" title="<?= $size; ?>" data-size="<?= $size; ?>"><?= strtoupper($size); ?></button>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="color-selection d-flex justify-content-center mt-3">
+                        <?php
+                        $unique_colors = array_unique(array_column($all_variants, 'color'));
+                        foreach ($unique_colors as $color) :
+                            $color_hex = array_column(array_filter($all_variants, function ($variant) use ($color) {
+                                return $variant['color'] === $color;
+                            }), 'color_hex')[0];
+                        ?>
+                            <button class="color-circle" style="background-color: <?= $color_hex; ?>;" title="<?= $color; ?>" data-color="<?= $color; ?>"></button>
+                        <?php endforeach; ?>
+                    </div>
+
                 </div>
-                <div class="size-selection d-flex justify-content-center mt-2">
-                    <?php
-                    $unique_sizes = array_unique(array_column($all_variants, 'size'));
-                    foreach ($unique_sizes as $size) :
-                    ?>
-                        <button class="size-circle" title="<?= $size; ?>" data-size="<?= $size; ?>"><?= strtoupper($size); ?></button>
-                    <?php endforeach; ?>
-                </div>
-            </div>
             <div class="info-highlights position-relative">
-                <div class="d-grid product-info justify-content-center justify-content-md-between w-100">
+                <div class=" product-info justify-content-center justify-content-md-between w-100">
 
                     <?php
 

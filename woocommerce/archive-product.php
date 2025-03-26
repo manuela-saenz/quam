@@ -38,9 +38,7 @@ $bannerImgMobile = get_field('imagen_movil', $currentCat);
                         <h1 class="woocommerce-products-header__title page-title <?= is_search() ? 'section-subtitle-2' : 'section-subtitle' ?>  mb-0">
                             <?php woocommerce_page_title(); ?>
                         </h1>
-                        <div>
-                            <?php category_description() ?>
-                        </div>
+
                     <?php endif; ?>
 
                 </div>
@@ -54,7 +52,19 @@ $bannerImgMobile = get_field('imagen_movil', $currentCat);
             <img src="<?= $featuredImage['url'] ?>" alt="<?= $primera_coleccion["titulo"]; ?>" />
         </picture>
     <?php } ?>
+
 </section>
+
+<?php $description = category_description();
+if (!empty($description)) {
+?>
+    <div class="container mb-4">
+        <div class="cat-description col-6 mx-auto text-center">
+            <?php echo category_description() ?>
+        </div>
+    </div>
+
+<?php } ?>
 
 
 <section id="infoProducts" class="pt-4">
@@ -327,7 +337,8 @@ $bannerImgMobile = get_field('imagen_movil', $currentCat);
                         wc_get_template_part('content', 'product');
                     }
 
-                    // wc_get_template_part('content', 'product'); ?>
+                    // wc_get_template_part('content', 'product'); 
+        ?>
                     <?php //wc_get_template_part('content', 'producto'); 
                     ?>
         <?php

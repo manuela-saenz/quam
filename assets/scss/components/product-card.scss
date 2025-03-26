@@ -1,5 +1,4 @@
 .CardProducts {
-  overflow: hidden;
   &:before, &::after{
     position: absolute;
     visibility: hidden;
@@ -173,14 +172,14 @@
       }
     }
 
-    .color-selection {
-      &:not(:has(.active-color)) {
-        button:first-child {
-          outline: 1px solid #000;
-          outline-offset: 2px;
-        }
-      }
-    }
+    // .color-selection {
+    //   &:not(:has(.active-color)) {
+    //     button:first-child {
+    //       outline: 1px solid #000;
+    //       outline-offset: 2px;
+    //     }
+    //   }
+    // }
   }
 
 
@@ -417,7 +416,7 @@
       opacity: 0.6;
       background: #ccc;
       width: 100%;
-      display: none;
+      display: none !important;
       justify-content: center;
       padding: 12px 14px;
       line-height: 1;
@@ -543,10 +542,9 @@
 
   .color-circle,
   .size-circle {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    border: 1px solid #ccc;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -566,7 +564,6 @@
   }
 
   .color-circle {
-    border: 2px solid #fff;
     /* Un borde blanco para mayor visibilidad */
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     /* Sombra ligera */

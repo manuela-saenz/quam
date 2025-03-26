@@ -39,6 +39,15 @@
     text-transform: uppercase;
   }
 }
+.cat-description{
+  font-size: 18px;
+  border-radius: 0 0 20px 20px;
+  padding:32px 0;
+  background:rgba(0, 46, 114, 0.2);
+  p{
+    margin-bottom: 0;
+  }
+}
 
 .select-box {
   position: relative;

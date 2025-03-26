@@ -16,6 +16,12 @@
   }
 }
 
+.ordenList {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+
 .no-favs-products {
   @include center-all;
 
