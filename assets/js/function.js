@@ -136,17 +136,17 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       var variationId = button.getAttribute("data-variation_id");
       var productId = button.getAttribute("data-product_id");
-      var grandparent = button.parentElement?.parentElement?.parentElement; 
-    if (grandparent) {
-      grandparent.classList.add("loading");
-    }
+      var grandparent = button.parentElement?.parentElement?.parentElement;
+      if (grandparent) {
+        grandparent.classList.add("loading");
+      }
       // console.log('should add loading')
       var id = variationId ? variationId : productId;
 
       // Encuentra el <li> que contiene el botón
       var parentLi = button.closest("li");
       var div = null;
-      
+
       if (parentLi) {
         var cardProductsDiv = parentLi.querySelector("div.CardProducts");
         if (cardProductsDiv) {
@@ -295,12 +295,12 @@ function addProductToCartCustom(productId, quantity, buttons, cardProductsDiv) {
           button.classList.remove("loading", "cfvsw_variation_found");
         });
         if (cardProductsDiv) {
-          console.log('should add')
+          console.log("should add");
           cardProductsDiv.classList.remove("loading");
           cardProductsDiv.classList.add("added");
           setTimeout(() => {
             cardProductsDiv.classList.remove("added");
-            console.log('should remove add')
+            console.log("should remove add");
           }, 1000);
         }
         $("#cartItem").text(res.quantity);
@@ -1022,4 +1022,79 @@ document.addEventListener("DOMContentLoaded", function () {
 
     toMove.forEach((item) => productList.appendChild(item));
   }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Selecciona el contenedor que deseas observar
+  const targetNode = document.querySelector(".offcanvas-body.ordenList.cart");
+
+  if (!targetNode) {
+    console.error("El contenedor no se encontró.");
+    return;
+  }
+  const productList = document.querySelector("#product-list");
+  const productItems = productList.querySelectorAll("li");
+
+  // Configuración del observer
+  const observer = new MutationObserver((mutationsList) => {
+    for (const mutation of mutationsList) {
+      if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+        // Busca el primer div con la clase "mini-cart-product-card"
+        const firstProductCard = targetNode.querySelector(
+          ".mini-cart-product-card"
+        );
+        if (firstProductCard) {
+          // Extrae el precio del elemento con ID "price"
+          const priceElement = firstProductCard.querySelector(
+            "#price ins .woocommerce-Price-amount"
+          );
+
+          const detectedPrice = priceElement
+            ? priceElement.textContent.trim()
+            : null;
+          console.log("Precio detectado:", detectedPrice);
+
+          productItems.forEach((productItem) => {
+            const cardProduct = productItem.querySelector(".CardProducts");
+            const infoHighlights =
+              cardProduct.querySelector(".info-highlights");
+            const priceSpan = infoHighlights.querySelector(
+              ".price .woocommerce-Price-amount"
+            );
+            const existingIns = priceSpan.parentNode.querySelector("ins");
+
+            if (detectedPrice) {
+              if (!existingIns) {
+                // Agrega el nuevo <ins> después del último <span>, simulando que está después del ::after
+                priceSpan.insertAdjacentHTML(
+                  "beforeend",
+                  `<ins class="offer-price" aria-hidden="true" style="display: inline-block; margin-left: 5px;">
+                      <span class="woocommerce-Price-amount amount">
+                        <bdi><span class="woocommerce-Price-currencySymbol"></span>${detectedPrice}</bdi>
+                      </span>
+                    </ins>`
+                );
+              } else {
+                // Si ya existe, actualiza el contenido del <ins>
+                existingIns.querySelector(
+                  ".woocommerce-Price-amount bdi"
+                ).innerHTML = `
+                    <span class="woocommerce-Price-currencySymbol"></span>&nbsp;${detectedPrice}
+                  `;
+              }
+            } else if (existingIns) {
+              // Si no se detecta ningún precio, elimina el <ins> existente
+              existingIns.remove();
+            }
+          });
+        }
+      }
+    }
+  });
+
+  // Opciones del observer
+  const config = { childList: true, subtree: true };
+
+  // Inicia el observer
+  observer.observe(targetNode, config);
 });

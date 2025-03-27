@@ -137,7 +137,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                 <div class="position-relative">
                     <a href="<?= $variant['permalink'] ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-2 relative img-contain"
                         title="<?= $variant['name'] ?>">
-                        <img src="<?= $variant['image_url'] ?>"
+                        <img loading="lazy" src="<?= $variant['image_url'] ?>"
                             alt="<?= $variant['name'] ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail product-image" />
                     </a>
                     <button class="button-heart d-flex add-fav position-absolute"
@@ -175,7 +175,10 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                 <div class="info-highlights position-relative">
                     <div class="product-info justify-content-center justify-content-md-between w-100">
                         <?php do_action('woocommerce_shop_loop_item_title'); ?>
-                        <?php do_action('woocommerce_after_shop_loop_item_title'); ?>
+                        <div class="price">
+                            <p class="mb-0 d-flex gap-2"><?= $variant['price']; ?></p>          
+                        </div>
+                             
                     </div>
                     <?php do_action('woocommerce_after_shop_loop_item'); ?>
                 </div>

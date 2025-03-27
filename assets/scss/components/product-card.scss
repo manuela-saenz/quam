@@ -112,6 +112,10 @@
         order: 3;
         color: $red;
         font-weight: 700;
+        display: none;
+        &.offer-price{
+          display: block;
+        }
       }
 
     }
