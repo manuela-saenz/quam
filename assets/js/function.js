@@ -1052,7 +1052,6 @@ document.addEventListener("DOMContentLoaded", function () {
           const detectedPrice = priceElement
             ? priceElement.textContent.trim()
             : null;
-          console.log("Precio detectado:", detectedPrice);
 
           productItems.forEach((productItem) => {
             const cardProduct = productItem.querySelector(".CardProducts");
