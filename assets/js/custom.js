@@ -346,10 +346,44 @@ function getCategoryFromURL() {
   return null; // Devuelve null si no encuentra la categoría
 }
 
+function setVariantAll(){
+  if (window.location.pathname === "/") return; // Evita que se ejecute en la ruta raíz
+
+  const productList = document.getElementById("product-list");
+  if (!productList) return;
+
+  function reorderProducts() {
+    const items = Array.from(productList.querySelectorAll("li[data-father]"));
+    if (items.length < 2) return;
+
+    let lastFather = null;
+    let toMove = [];
+
+    for (let i = 0; i < items.length; i++) {
+      const currentFather = items[i].getAttribute("data-father");
+      if (currentFather === lastFather) {
+        toMove.push(items[i]);
+      } else {
+        lastFather = currentFather;
+      }
+    }
+    toMove.forEach((item) => productList.appendChild(item));
+  }
+
+  const observer = new MutationObserver(() => {
+    reorderProducts(); 
+  });
+
+  const config = { childList: true, subtree: true };
+  observer.observe(productList, config);
+  reorderProducts();
+}
+
 jQuery(function ($) {
   let paged = 2; // Comienza desde la segunda página
   let loading = false;
 
+  
   function loadMoreProducts() {
     if (loading) return;
     loading = true;
@@ -382,6 +416,11 @@ jQuery(function ($) {
         $("#product-list").append(placeholders);
       },
       success: function (response) {
+        if ($.trim(response) === "no_more_products") {
+          console.log("No hay más productos para cargar.");
+          $(".loading").remove();
+          return;
+      }
         $(".loading").remove();
         if ($.trim(response) !== "") {
           $("#product-list").append(response);
@@ -636,10 +675,12 @@ jQuery(function ($) {
           const config = { childList: true, subtree: true };
 
           // Inicia el observer
+
           observer.observe(targetNode, config);
           setTimeout(() => {
             initLiPrice();
           }, 500);
+
         } else {
           $(window).off("scroll"); // Detiene la carga si ya no hay más productos
         }
@@ -653,7 +694,7 @@ jQuery(function ($) {
       window.location.search.indexOf("filter_talla") === -1 &&
       window.location.search.indexOf("filter_color") === -1
     ) {
-      if ($(window).scrollTop() >= $(document).height() / 2.5) {
+      if ($(window).scrollTop() >= $(document).height() / 4) {
         loadMoreProducts();
       }
     }

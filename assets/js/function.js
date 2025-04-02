@@ -991,38 +991,38 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  if (window.location.pathname === "/") return; // Evita que se ejecute en la ruta raíz
+// document.addEventListener("DOMContentLoaded", function () {
+//   if (window.location.pathname === "/") return; // Evita que se ejecute en la ruta raíz
 
-  const productList = document.getElementById("product-list");
-  if (!productList) return;
+//   const productList = document.getElementById("product-list");
+//   if (!productList) return;
 
-  const observer = new MutationObserver(() => {
-    reorderProducts();
-  });
+//   function reorderProducts() {
+//     const items = Array.from(productList.querySelectorAll("li[data-father]"));
+//     if (items.length < 2) return;
 
-  observer.observe(productList, { childList: true, subtree: true });
+//     let lastFather = null;
+//     let toMove = [];
 
-  function reorderProducts() {
-    const items = Array.from(productList.querySelectorAll("li[data-father]"));
-    if (items.length < 2) return;
+//     for (let i = 0; i < items.length; i++) {
+//       const currentFather = items[i].getAttribute("data-father");
+//       if (currentFather === lastFather) {
+//         toMove.push(items[i]);
+//       } else {
+//         lastFather = currentFather;
+//       }
+//     }
+//     toMove.forEach((item) => productList.appendChild(item));
+//   }
 
-    let firstFather = items[0].getAttribute("data-father");
-    let lastFather = firstFather;
-    let toMove = [];
+//   const observer = new MutationObserver(() => {
+//     reorderProducts(); 
+//   });
 
-    for (let i = 1; i < items.length; i++) {
-      let currentFather = items[i].getAttribute("data-father");
-      if (currentFather === lastFather) {
-        toMove.push(items[i]);
-      } else {
-        lastFather = currentFather;
-      }
-    }
-
-    toMove.forEach((item) => productList.appendChild(item));
-  }
-});
+//   const config = { childList: true, subtree: true };
+//   observer.observe(productList, config);
+//   reorderProducts();
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
   // Selecciona el contenedor que deseas observar

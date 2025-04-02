@@ -73,18 +73,20 @@ function variations_visibility_all_pages($requires_shop_settings)
 }
 add_filter('cfvsw_requires_shop_settings', 'variations_visibility_all_pages');
 
-add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
+add_filter('loop_shop_per_page', 'lw_loop_shop_per_page', 30);
 
-function lw_loop_shop_per_page( $products ) {
- $products = 12;
- return $products;
+function lw_loop_shop_per_page($products)
+{
+    $products = 12;
+    return $products;
 }
 
 add_action('wp_ajax_load_more_products', 'load_more_products');
 add_action('wp_ajax_nopriv_load_more_products', 'load_more_products');
 
 
-function load_more_products() {
+function load_more_products()
+{
     $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
     $slug = isset($_POST['slug']) ? sanitize_text_field($_POST['slug']) : '';
     $per_page = 12; // Número de productos a cargar por solicitud
@@ -104,14 +106,17 @@ function load_more_products() {
     );
 
     $query = new WP_Query($args);
-    
+
     if ($query->have_posts()) :
         while ($query->have_posts()) :
             $query->the_post();
             wc_get_template_part('content', 'product');
         endwhile;
+    else :
+        echo "no_more_products"; // Indicador de que no hay más productos
     endif;
-    // wp_reset_postdata();
+
+    wp_reset_postdata();
     die();
 }
 
@@ -548,17 +553,18 @@ function get_all_product_categories_attributes_and_prices()
     add_action('wp_ajax_nopriv_update_cart_count', 'update_cart_count');
     add_action('wp_ajax_my_custom_action', 'my_custom_function');
     add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_function');
-    
-    function my_custom_function() {
+
+    function my_custom_function()
+    {
         // Declara la instancia aquí
         $woocommerce = WC();
-    
+
         $cart_items = $woocommerce->cart->get_cart();
         echo json_encode($cart_items);
-    
+
         wp_die();
     }
-    
+
     function update_cart_count()
     {
         global $woocommerce;
@@ -615,3 +621,82 @@ function get_all_product_categories_attributes_and_prices()
         }
         wp_die();
     }
+
+
+    function remove_unwanted_styles() {
+        if (!is_user_logged_in()) {
+            // Elimina Dashicons
+            wp_dequeue_style('dashicons');
+            wp_deregister_style('dashicons');
+    
+            // Elimina los estilos de Gutenberg
+            wp_dequeue_style('wp-block-library');
+            wp_deregister_style('wp-block-library');
+    
+            wp_dequeue_style('wp-block-library-theme');
+            wp_deregister_style('wp-block-library-theme');
+    
+            // Elimina los estilos de AdDi (cambia el handle si es diferente)
+            wp_dequeue_style('buy-now-pay-later-addi');
+            wp_deregister_style('buy-now-pay-later-addi');
+    
+            // Elimina otros estilos de plugins como WooCommerce
+            wp_dequeue_style('woocommerce-layout');
+            wp_deregister_style('woocommerce-layout');
+    
+            wp_dequeue_style('woocommerce-smallscreen');
+            wp_deregister_style('woocommerce-smallscreen');
+        }
+    }
+    add_action('wp_enqueue_scripts', 'remove_unwanted_styles', 100);
+
+    function clear_mobile_product_cache($post_id)
+    {
+        // Verificamos si el post es un producto de WooCommerce
+        if (get_post_type($post_id) === 'product') {
+            delete_transient('mobile_product_cache');
+        }
+    }
+
+    // Hooks para eventos de productos en WooCommerce
+    add_action('save_post_product', 'clear_mobile_product_cache');
+    add_action('woocommerce_new_product', 'clear_mobile_product_cache');
+    add_action('woocommerce_update_product', 'clear_mobile_product_cache');
+    add_action('woocommerce_delete_product', 'clear_mobile_product_cache');
+
+    // Hook para detectar cambios en el orden de productos
+    add_action('save_post', 'clear_mobile_product_cache', 10, 1);
+
+
+    function enqueue_scripts_with_product_count() {
+        wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/custom-script.js', array('jquery'), null, true);
+    
+        // Obtén el slug de la categoría desde la URL
+        $category_slug = get_query_var('product_cat'); // 'product_cat' es la taxonomía de categorías de productos en WooCommerce
+    
+        // Configuración de la consulta
+        $args = array(
+            'post_type'      => 'product', // Tipo de post: productos
+            'posts_per_page' => -1,        // Sin límite de productos
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'product_cat', // Taxonomía de categorías de productos
+                    'field'    => 'slug',       // Buscar por slug
+                    'terms'    => $category_slug, // Slug de la categoría desde la URL
+                ),
+            ),
+        );
+    
+        // Realiza la consulta
+        $query = new WP_Query($args);
+        $product_count = $query->found_posts; // Cantidad de productos encontrados
+    
+        // Limpia la consulta
+        wp_reset_postdata();
+    
+        // Pasar la cantidad de productos al script
+        wp_localize_script('custom-script', 'productData', array(
+            'productCount' => $product_count,
+        ));
+    }
+    add_action('wp_enqueue_scripts', 'enqueue_scripts_with_product_count');

@@ -27,11 +27,13 @@
     }
     ?>
   </title>
-  <link rel="icon" href="favicon/favicon-1.ico" />
+  <!-- <link rel="icon" href="favicon/favicon-1.ico" /> -->
   <?php if (is_page(78)) { ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
   <?php } ?>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <?php if (!is_archive()) { ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <?php } ?>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -55,7 +57,10 @@
   </script>
   <?php
   wp_meta();
-  wp_head(); ?>
+  wp_head();
+
+  ?>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/order-products.js"></script>
 </head>
 <?php wp_body_open() ?>
 

@@ -109,7 +109,9 @@
     </div>
   </div>
 </footer>
+<?php if (!is_archive()) { ?>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<?php } ?>
 <?php wp_footer(); ?>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 <script>
@@ -128,7 +130,9 @@
 <?php if (is_product()) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/product.js"> </script>
 <?php } ?>
+<?php if (!is_archive()) { ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js"> </script>
+<?php } ?>
 <?php if (is_page(1694)) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/form.js"> </script>
 <?php } ?>

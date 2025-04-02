@@ -181,6 +181,18 @@
     }
   }
 
+  #product-list {
+    img{
+      opacity: 0;
+      transition: all .3s;
+    }
+    &.ready{
+      img{
+        opacity: 1;
+      }
+    }
+  }
+
 
 
   @media (max-width: 991px) {

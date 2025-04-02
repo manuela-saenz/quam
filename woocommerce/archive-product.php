@@ -320,28 +320,45 @@ if (!empty($description)) {
             woocommerce_product_loop_start();
 
             if (wc_get_loop_prop('total')) {
-                while (have_posts()) {
-                    the_post();
+                $cache_key = 'mobile_product_cache';
+                $cache_expiration = HOUR_IN_SECONDS; // Tiempo de expiración (1 hora)
 
-                    /**
-                     * Hook: woocommerce_shop_loop.
-                     */
-                    do_action('woocommerce_shop_loop');
+                if (wp_is_mobile()) {
+                    // Intentar obtener caché
+                    $cached_output = get_transient($cache_key);
 
+                    if ($cached_output === false) {
+                        ob_start(); // Iniciar almacenamiento en buffer
 
-                    if (is_front_page()) {
-                        // Código para la página principal
-                        // wc_get_template_part('content', 'product-home'); 
-                    } else {
-                        // Código para otras páginas
-                        wc_get_template_part('content', 'product');
+                        while (have_posts()) {
+                            the_post();
+                            do_action('woocommerce_shop_loop');
+
+                            if (is_front_page()) {
+                                // Código para la página principal
+                                // wc_get_template_part('content', 'product-home');
+                            } else {
+                                wc_get_template_part('content', 'product');
+                            }
+                        }
+
+                        $cached_output = ob_get_clean(); // Obtener el contenido del buffer
+                        set_transient($cache_key, $cached_output, $cache_expiration); // Guardar en caché
                     }
 
-                    // wc_get_template_part('content', 'product'); 
-        ?>
-                    <?php //wc_get_template_part('content', 'producto'); 
-                    ?>
-        <?php
+                    echo $cached_output; // Imprimir caché
+                } else {
+                    while (have_posts()) {
+                        the_post();
+                        do_action('woocommerce_shop_loop');
+
+                        if (is_front_page()) {
+                            // Código para la página principal
+                            // wc_get_template_part('content', 'product-home');
+                        } else {
+                            wc_get_template_part('content', 'product');
+                        }
+                    }
                 }
             }
         } else {
