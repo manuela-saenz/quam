@@ -626,8 +626,8 @@ function get_all_product_categories_attributes_and_prices()
     function remove_unwanted_styles() {
         if (!is_user_logged_in()) {
             // Elimina Dashicons
-            wp_dequeue_style('dashicons');
-            wp_deregister_style('dashicons');
+            // wp_dequeue_style('dashicons');
+            // wp_deregister_style('dashicons');
     
             // Elimina los estilos de Gutenberg
             wp_dequeue_style('wp-block-library');
@@ -646,6 +646,7 @@ function get_all_product_categories_attributes_and_prices()
     
             wp_dequeue_style('woocommerce-smallscreen');
             wp_deregister_style('woocommerce-smallscreen');
+
         }
     }
     add_action('wp_enqueue_scripts', 'remove_unwanted_styles', 100);
@@ -670,7 +671,6 @@ function get_all_product_categories_attributes_and_prices()
 
     function enqueue_scripts_with_product_count() {
         wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/custom-script.js', array('jquery'), null, true);
-    
         // Obtén el slug de la categoría desde la URL
         $category_slug = get_query_var('product_cat'); // 'product_cat' es la taxonomía de categorías de productos en WooCommerce
     

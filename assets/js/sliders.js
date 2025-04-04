@@ -95,6 +95,7 @@ var homeSwiper = new Swiper(".generationSwiper", {
 var swiper = new Swiper(".related-swiper", {
   centeredSlides: true,
   loop: true,
+  allowTouchMove: false,
   navigation: {
     nextEl: ".generation-arrows.next",
     prevEl: ".generation-arrows.prev",

@@ -36,7 +36,7 @@ if (isset($_SESSION["prodsfavs"]) && count($_SESSION["prodsfavs"]) > 0) : ?>
     ?>
       <div class="mini-cart-product-card d-flex align-items-start bg-white fav">
         <a href="<?= get_permalink($prod->ID) ?>" class="img-contain">
-          <img src="<?php echo get_the_post_thumbnail_url($prod->ID) ?>" alt="">
+          <img src="<?php echo get_the_post_thumbnail_url($prod->ID) ?>" loading="lazy" alt="<?php echo ($product_name); ?>">
         </a>
         <div class=" w-100">
           <h5> <a href="<?= get_permalink($prod->ID) ?>"><?php echo ($product_name); ?> </a></h5>
