@@ -128,42 +128,37 @@ function discountValue(res) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  var buttons = document.querySelectorAll(".add_to_cart_button");
+function addButtonCustomCartCategory(button) {
+   // Validar elementos necesarios
+   const parentLi = button.closest("li");
+   if (!parentLi) {
+     console.error("No se encontró el elemento li padre");
+     return;
+   }
 
-  buttons.forEach(function (button) {
-    button.addEventListener("click", function (event) {
-      event.preventDefault();
-      var variationId = button.getAttribute("data-variation_id");
-      var productId = button.getAttribute("data-product_id");
-      var grandparent = button.parentElement?.parentElement?.parentElement;
-      if (grandparent) {
-        grandparent.classList.add("loading");
-      }
-      // console.log('should add loading')
-      var id = variationId ? variationId : productId;
+   const cardProductsDiv = parentLi.querySelector("div.CardProducts");
 
-      // Encuentra el <li> que contiene el botón
-      var parentLi = button.closest("li");
-      var div = null;
+   if (!cardProductsDiv) {
+     console.error("No se encontró el div.CardProducts");
+     return;
+   }
 
-      if (parentLi) {
-        var cardProductsDiv = parentLi.querySelector("div.CardProducts");
-        if (cardProductsDiv) {
-          // console.log('should add added')
-          // Agrega la clase "added" al <div>
-          // cardProductsDiv.classList.add("added");
-          div = cardProductsDiv;
-        }
-      }
+   // Obtener IDs actualizados
+   const variationId = button.getAttribute("data-variation_id");
+   const productId = button.getAttribute("data-product_id");
+   const id = variationId || productId;
 
-      setTimeout(function () {
-        addProductToCartCustom(id, 1, buttons, div ? div : null);
-      }, 1500);
-    });
-  });
-});
+   // Añadir clase loading al contenedor
+   const grandparent = button.parentElement?.parentElement?.parentElement;
+   if (grandparent) {
+     grandparent.classList.add("loading");
+   }
 
+   // Ejecutar la función con los elementos validados
+   setTimeout(function () {
+     addProductToCartCustom(id, 1, button, cardProductsDiv, parentLi);
+   }, 1500);
+}
 // <!-- Lógica de añadir articulo al carrito   -->
 var botonCart = document.getElementById("bottonCart");
 
@@ -261,9 +256,21 @@ function addProductToCart(productId, quantity) {
 
 let isAddingToCart = false; // Bandera para evitar múltiples ejecuciones
 
-function addProductToCartCustom(productId, quantity, buttons, cardProductsDiv) {
+function addProductToCartCustom(
+  productId,
+  quantity,
+  button,
+  cardProductsDiv,
+  liElement
+) {
   if (isAddingToCart) return; // Evita ejecutar si ya está en proceso
   isAddingToCart = true; // Activa la bandera
+
+  // Guardar referencia al contenedor info-highlights si existe
+  let infoHighlights = null;
+  if (liElement && liElement.querySelector(".info-highlights")) {
+    infoHighlights = liElement.querySelector(".info-highlights");
+  }
 
   var data = {
     action: "woocommerce_ajax_add_to_cart_category",
@@ -290,19 +297,27 @@ function addProductToCartCustom(productId, quantity, buttons, cardProductsDiv) {
         var value = getTotalValue(totalString);
 
         discountValue(res);
-
-        buttons.forEach(function (button) {
-          button.classList.remove("loading", "cfvsw_variation_found");
-        });
-        if (cardProductsDiv) {
-          console.log("should add");
-          cardProductsDiv.classList.remove("loading");
-          cardProductsDiv.classList.add("added");
-          setTimeout(() => {
-            cardProductsDiv.classList.remove("added");
-            console.log("should remove add");
-          }, 1000);
+        button.classList.remove("loading", "cfvsw_variation_found");
+        if (liElement.children.length !== 1) {
+          console.log("El <li> está vacío o no tiene un <div> como hijo");
+          liElement.appendChild(cardProductsDiv);
+          $(".add-to-cart-container .add-btn").on("click", function () {
+            $(this)
+              .parent()
+              .parent()
+              .parent()
+              .find(".size-selection")
+              .addClass("show-colors");
+            $(this).addClass("hide-btn");
+          });
         }
+
+        cardProductsDiv.classList.remove("loading");
+        cardProductsDiv.classList.add("added");
+        setTimeout(() => {
+          cardProductsDiv.classList.remove("added");
+        }, 1000);
+
         $("#cartItem").text(res.quantity);
         $("#subtotal").html("$" + subvalue);
         $("#total").html("$" + value);
@@ -973,18 +988,9 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
         if (selectedVariant) {
-          const addToCartButton = productElement.querySelector(
-            ".add_to_cart_button"
-          );
-
-          if (addToCartButton) {
-            addToCartButton.classList.add("cfvsw_variation_found");
-            addToCartButton.setAttribute(
-              "data-variation_id",
-              selectedVariant.id
-            );
-            addToCartButton.click();
-          }
+          const button = productElement.querySelector(".add_to_cart_button");
+          button.setAttribute("data-variation_id", selectedVariant.id);
+          addButtonCustomCartCategory(button);
         }
       }
     }
@@ -1016,12 +1022,86 @@ document.addEventListener("DOMContentLoaded", function () {
 //   }
 
 //   const observer = new MutationObserver(() => {
-//     reorderProducts(); 
+//     reorderProducts();
 //   });
 
 //   const config = { childList: true, subtree: true };
 //   observer.observe(productList, config);
 //   reorderProducts();
+// });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Selecciona el contenedor que deseas observar
+//   const targetNode = document.querySelector(".offcanvas-body.ordenList.cart");
+
+//   if (!targetNode) {
+//     console.error("El contenedor no se encontró.");
+//     return;
+//   }
+//   const productList = document.querySelector("#product-list");
+//   const productItems = productList.querySelectorAll("li");
+
+//   // Configuración del observer
+//   const observer = new MutationObserver((mutationsList) => {
+//     for (const mutation of mutationsList) {
+//       if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+//         // Busca el primer div con la clase "mini-cart-product-card"
+//         const firstProductCard = targetNode.querySelector(
+//           ".mini-cart-product-card"
+//         );
+//         if (firstProductCard) {
+//           // Extrae el precio del elemento con ID "price"
+//           const priceElement = firstProductCard.querySelector(
+//             "#price ins .woocommerce-Price-amount"
+//           );
+
+//           const detectedPrice = priceElement
+//             ? priceElement.textContent.trim()
+//             : null;
+
+//           productItems.forEach((productItem) => {
+//             const cardProduct = productItem.querySelector(".CardProducts");
+//             const infoHighlights =
+//               cardProduct.querySelector("#info-highlights");
+//             const priceSpan = infoHighlights.querySelector(
+//               ".price .woocommerce-Price-amount"
+//             );
+//             const existingIns = priceSpan.parentNode.querySelector("ins");
+
+//             if (detectedPrice) {
+//               if (!existingIns) {
+//                 // Agrega el nuevo <ins> después del último <span>, simulando que está después del ::after
+//                 priceSpan.insertAdjacentHTML(
+//                   "beforeend",
+//                   `<ins class="offer-price" aria-hidden="true" style="display: inline-block; margin-left: 5px;">
+//                       <span class="woocommerce-Price-amount amount">
+//                         <bdi><span class="woocommerce-Price-currencySymbol"></span>${detectedPrice}</bdi>
+//                       </span>
+//                     </ins>`
+//                 );
+//               } else {
+//                 // Si ya existe, actualiza el contenido del <ins>
+//                 existingIns.querySelector(
+//                   ".woocommerce-Price-amount bdi"
+//                 ).innerHTML = `
+//                     <span class="woocommerce-Price-currencySymbol"></span>&nbsp;${detectedPrice}
+//                   `;
+//               }
+//             } else if (existingIns) {
+//               // Si no se detecta ningún precio, elimina el <ins> existente
+//               existingIns.remove();
+//             }
+//           });
+//         }
+//       }
+//     }
+//   });
+
+//   // Opciones del observer
+//   const config = { childList: true, subtree: true };
+
+//   // Inicia el observer
+//   observer.observe(targetNode, config);
 // });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1032,8 +1112,14 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("El contenedor no se encontró.");
     return;
   }
-  const productList = document.querySelector("#product-list");
-  const productItems = productList.querySelectorAll("li");
+
+  // Obtener todos los li, tanto directos como dentro de swiper-slide
+  const getAllProductItems = () => {
+    const productList = document.querySelector("#product-list");
+    const directItems = productList ? Array.from(productList.querySelectorAll("li")) : [];
+    const swiperItems = document.querySelectorAll("#related-swiper .swiper-wrapper .swiper-slide li");
+    return [...directItems, ...swiperItems];
+  };
 
   // Configuración del observer
   const observer = new MutationObserver((mutationsList) => {
@@ -1053,18 +1139,26 @@ document.addEventListener("DOMContentLoaded", function () {
             ? priceElement.textContent.trim()
             : null;
 
-          productItems.forEach((productItem) => {
+          // Obtener todos los items de producto actualizados
+          const allProductItems = getAllProductItems();
+
+          allProductItems.forEach((productItem) => {
             const cardProduct = productItem.querySelector(".CardProducts");
-            const infoHighlights =
-              cardProduct.querySelector(".info-highlights");
+            if (!cardProduct) return; // Skip si no tiene CardProducts
+
+            const infoHighlights = cardProduct.querySelector("#info-highlights");
+            if (!infoHighlights) return; // Skip si no tiene info-highlights
+
             const priceSpan = infoHighlights.querySelector(
               ".price .woocommerce-Price-amount"
             );
+            if (!priceSpan) return; // Skip si no tiene el elemento de precio
+
             const existingIns = priceSpan.parentNode.querySelector("ins");
 
             if (detectedPrice) {
               if (!existingIns) {
-                // Agrega el nuevo <ins> después del último <span>, simulando que está después del ::after
+                // Agrega el nuevo <ins> después del último <span>
                 priceSpan.insertAdjacentHTML(
                   "beforeend",
                   `<ins class="offer-price" aria-hidden="true" style="display: inline-block; margin-left: 5px;">

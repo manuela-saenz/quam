@@ -60,8 +60,15 @@
 
     gtag('config', 'G-14Y5R2N56V');
   </script>
-  
-  <script src="<?php bloginfo('template_url') ?>/assets/js/order-products.js"></script>
+  <?php
+  wp_meta();
+  wp_head();
+
+  ?>
+   <?php if (is_archive()) { ?>
+    <script src="<?php bloginfo('template_url') ?>/assets/js/order-products.js"></script>
+  <?php } ?>
+ 
 </head>
 <?php wp_body_open() ?>
 
