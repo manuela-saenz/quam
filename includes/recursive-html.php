@@ -21,7 +21,8 @@ function ItemsCart()
     ?>
         <div class="mini-cart-product-card align-items-start d-flex bg-white">
             <a href="<?= get_permalink($_product->get_id()) ?>" class="img-contain overflow-hidden rounded-1">
-                <?= $_product->get_image('medium', 'alt=' . $title)   ?>
+            <?= str_replace('<img', '<img loading="lazy"', $_product->get_image('medium', 'alt=' . $title)) ?>
+
             </a>
             <div class="w-100">
                 <h5 class="mb-1"><a href="<?= get_permalink($_product->get_id()) ?>"><?= $title ?></a></h5>

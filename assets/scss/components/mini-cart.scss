@@ -18,8 +18,15 @@
 
 .ordenList {
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
+  flex-direction: column; 
+  $total: 20; 
+  .mini-cart-product-card{
+    @for $i from 1 through $total {
+      &:nth-child(#{$i}) {
+        order: $total - $i + 1;
+      }
+    }
+  }
 }
 
 .no-favs-products {

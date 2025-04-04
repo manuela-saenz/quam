@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
   <?php } ?>
   <?php if (!is_archive()) { ?>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /> -->
   <?php } ?>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,6 +44,11 @@
     var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
   </script>
   <!-- Google tag (gtag.js) -->
+  <?php
+  wp_meta();
+  wp_head();
+
+  ?>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-14Y5R2N56V"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -133,7 +138,7 @@
                   <span id="favoritesCounter" class="d-none cart-section-quantity rounded-pill position-absolute center-all text-white">0</span>
                 </button>
 
-                <button id="bottonCart" class=" position-relative btn center-all p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
+                <button id="bottonCart" class=" position-relative btn center-all p-0 <?=  is_cart() || is_checkout() ? 'd-none' : '' ?>" type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
                   <i class="icon-shopping-bag"></i>
                   <span id="cartItem" class="d-none cart-section-quantity rounded-pill position-absolute center-all text-white">0</span>
                 </button>

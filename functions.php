@@ -685,7 +685,6 @@ function get_all_product_categories_attributes_and_prices()
     function enqueue_scripts_with_product_count()
     {
         wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/custom-script.js', array('jquery'), null, true);
-
         // Obtén el slug de la categoría desde la URL
         $category_slug = get_query_var('product_cat'); // 'product_cat' es la taxonomía de categorías de productos en WooCommerce
 
