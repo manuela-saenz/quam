@@ -1,121 +1,121 @@
-function initSelectProductDefect() {
-  const productElements = document.querySelectorAll("li[data-variants]");
+// function initSelectProductDefect() {
+//   const productElements = document.querySelectorAll("li[data-variants]");
 
-  productElements.forEach((productElement) => {
-    const colorButtons = productElement.querySelectorAll(".color-circle");
-    const sizeButtonsContainer =
-      productElement.querySelector(".size-selection");
-    const productImage = productElement.querySelector(".product-image");
-    const buttonAddToCart = productElement.querySelector(".add_to_cart_button");
-    let selectedColor = null;
-    let selectedSize = null;
+//   productElements.forEach((productElement) => {
+//     const colorButtons = productElement.querySelectorAll(".color-circle");
+//     const sizeButtonsContainer =
+//       productElement.querySelector(".size-selection");
+//     const productImage = productElement.querySelector(".product-image");
+//     const buttonAddToCart = productElement.querySelector(".add_to_cart_button");
+//     let selectedColor = null;
+//     let selectedSize = null;
 
-    const initialColor = productElement.getAttribute("data-color-q");
-    if (initialColor) {
-      colorButtons.forEach((button) => {
-        if (button.getAttribute("data-color") === initialColor) {
-          button.classList.add("active-color");
-          selectedColor = initialColor;
+//     const initialColor = productElement.getAttribute("data-color-q");
+//     if (initialColor) {
+//       colorButtons.forEach((button) => {
+//         if (button.getAttribute("data-color") === initialColor) {
+//           button.classList.add("active-color");
+//           selectedColor = initialColor;
 
-          updateSizeButtons(productElement);
-          updateProductImage(productElement);
-        }
-      });
-    }
+//           updateSizeButtons(productElement);
+//           updateProductImage(productElement);
+//         }
+//       });
+//     }
 
-    colorButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        colorButtons.forEach((btn) => btn.classList.remove("active-color"));
-        this.classList.add("active-color");
-        buttonAddToCart.classList.remove("cfvsw_variation_found");
-        selectedColor = this.getAttribute("data-color");
-        selectedSize = null;
+//     colorButtons.forEach((button) => {
+//       button.addEventListener("click", function () {
+//         colorButtons.forEach((btn) => btn.classList.remove("active-color"));
+//         this.classList.add("active-color");
+//         buttonAddToCart.classList.remove("cfvsw_variation_found");
+//         selectedColor = this.getAttribute("data-color");
+//         selectedSize = null;
 
-        updateSizeButtons(productElement);
-        updateProductImage(productElement);
-      });
-    });
+//         updateSizeButtons(productElement);
+//         updateProductImage(productElement);
+//       });
+//     });
 
-    function updateSizeButtons(productElement) {
-      const variants = JSON.parse(productElement.getAttribute("data-variants"));
+//     function updateSizeButtons(productElement) {
+//       const variants = JSON.parse(productElement.getAttribute("data-variants"));
 
-      let sizesForColor = variants
-        .filter((variant) => variant.color === selectedColor)
-        .map((variant) => variant.size.toUpperCase());
+//       let sizesForColor = variants
+//         .filter((variant) => variant.color === selectedColor)
+//         .map((variant) => variant.size.toUpperCase());
 
-      const sizeOrder = ["S", "M", "L", "XL"];
-      const uniqueSizes = [...new Set(sizesForColor)].sort(
-        (a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b)
-      );
+//       const sizeOrder = ["S", "M", "L", "XL"];
+//       const uniqueSizes = [...new Set(sizesForColor)].sort(
+//         (a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b)
+//       );
 
-      sizeButtonsContainer.innerHTML = "";
+//       sizeButtonsContainer.innerHTML = "";
 
-      if (uniqueSizes.length > 0) {
-        uniqueSizes.forEach((size) => {
-          const sizeButton = document.createElement("button");
-          sizeButton.classList.add("size-circle");
-          sizeButton.setAttribute("data-size", size);
-          sizeButton.textContent = size;
+//       if (uniqueSizes.length > 0) {
+//         uniqueSizes.forEach((size) => {
+//           const sizeButton = document.createElement("button");
+//           sizeButton.classList.add("size-circle");
+//           sizeButton.setAttribute("data-size", size);
+//           sizeButton.textContent = size;
 
-          sizeButton.addEventListener("click", function () {
-            document
-              .querySelectorAll(".size-circle")
-              .forEach((btn) => btn.classList.remove("active-size"));
-            this.classList.add("active-size");
+//           sizeButton.addEventListener("click", function () {
+//             document
+//               .querySelectorAll(".size-circle")
+//               .forEach((btn) => btn.classList.remove("active-size"));
+//             this.classList.add("active-size");
 
-            selectedSize = this.getAttribute("data-size");
-            updateSelectedVariation(productElement);
-          });
+//             selectedSize = this.getAttribute("data-size");
+//             updateSelectedVariation(productElement);
+//           });
 
-          sizeButtonsContainer.appendChild(sizeButton);
-        });
-      }
-    }
+//           sizeButtonsContainer.appendChild(sizeButton);
+//         });
+//       }
+//     }
 
-    function updateProductImage(productElement) {
-      if (selectedColor) {
-        const variants = JSON.parse(
-          productElement.getAttribute("data-variants")
-        );
-        const selectedVariant = variants.find(
-          (variant) => variant.color === selectedColor
-        );
+//     function updateProductImage(productElement) {
+//       if (selectedColor) {
+//         const variants = JSON.parse(
+//           productElement.getAttribute("data-variants")
+//         );
+//         const selectedVariant = variants.find(
+//           (variant) => variant.color === selectedColor
+//         );
 
-        if (selectedVariant) {
-          productImage.src = selectedVariant.image_url;
-        }
-      }
-    }
+//         if (selectedVariant) {
+//           productImage.src = selectedVariant.image_url;
+//         }
+//       }
+//     }
 
-    function updateSelectedVariation(productElement) {
-      if (selectedColor && selectedSize) {
-        const variants = JSON.parse(
-          productElement.getAttribute("data-variants")
-        );
-        const selectedVariant = variants.find(
-          (variant) =>
-            variant.color === selectedColor &&
-            variant.size === selectedSize.toLowerCase()
-        );
+//     function updateSelectedVariation(productElement) {
+//       if (selectedColor && selectedSize) {
+//         const variants = JSON.parse(
+//           productElement.getAttribute("data-variants")
+//         );
+//         const selectedVariant = variants.find(
+//           (variant) =>
+//             variant.color === selectedColor &&
+//             variant.size === selectedSize.toLowerCase()
+//         );
 
-        if (selectedVariant) {
-          const addToCartButton = productElement.querySelector(
-            ".add_to_cart_button"
-          );
+//         if (selectedVariant) {
+//           const addToCartButton = productElement.querySelector(
+//             ".add_to_cart_button"
+//           );
 
-          if (addToCartButton) {
-            addToCartButton.classList.add("cfvsw_variation_found");
-            addToCartButton.setAttribute(
-              "data-variation_id",
-              selectedVariant.id
-            );
-            addToCartButton.click();
-          }
-        }
-      }
-    }
-  });
-}
+//           if (addToCartButton) {
+//             addToCartButton.classList.add("cfvsw_variation_found");
+//             addToCartButton.setAttribute(
+//               "data-variation_id",
+//               selectedVariant.id
+//             );
+//             addToCartButton.click();
+//           }
+//         }
+//       }
+//     }
+//   });
+// }
 
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname === "/") return; // Evita que se ejecute en la ruta raíz
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
           productList.appendChild(duplicate);
         });
 
-        initSelectProductDefect(); // Inicializa la función después de mover los elementos
+        // Inicializa la función después de mover los elementos
         observer.disconnect();
       }
     } else {
@@ -177,7 +177,6 @@ document.addEventListener("DOMContentLoaded", function () {
           productList.appendChild(duplicate);
         });
 
-        initSelectProductDefect(); // Inicializa la función después de mover los elementos
         observer.disconnect();
       }
     }
@@ -253,4 +252,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Llama a la función inicialmente para filtrar los productos al cargar la página
   filterUniqueProducts();
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.pathname === "/") return;
+
+  const productList = document.getElementById("product-list");
+  if (!productList) return;
+
+  // Detecta parámetros de búsqueda o filtros en la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const hasSearch = urlParams.has('s');
+  const hasFilter = Array.from(urlParams.keys()).some(key => key.startsWith('filter_'));
+
+  // Si hay búsqueda o filtros, agrega la clase ready
+  if (hasSearch || hasFilter) {
+    productList.classList.add("ready");
+    return; // Detiene la ejecución del resto del código
+  }
 });

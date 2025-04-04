@@ -60,7 +60,10 @@
   wp_head();
 
   ?>
-  <script src="<?php bloginfo('template_url') ?>/assets/js/order-products.js"></script>
+   <?php if (is_archive()) { ?>
+    <script src="<?php bloginfo('template_url') ?>/assets/js/order-products.js"></script>
+  <?php } ?>
+ 
 </head>
 <?php wp_body_open() ?>
 

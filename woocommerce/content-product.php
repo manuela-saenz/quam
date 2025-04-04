@@ -172,7 +172,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
 
                 </div>
 
-                <div class="info-highlights position-relative">
+                <div id="info-highlights" class="info-highlights position-relative">
                     <div class="product-info justify-content-center justify-content-md-between w-100">
                         <?php do_action('woocommerce_shop_loop_item_title'); ?>
                         <div class="price">
