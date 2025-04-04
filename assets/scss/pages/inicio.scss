@@ -321,6 +321,7 @@
     transform: translateX(-50%);
     max-width: 280px;
     width: 100%;
+    text-align: center;
 
     h5 {
         color: $white;
@@ -344,6 +345,9 @@
 
     a {
         color: $red;
+    }
+    &.cookie-on{
+        display: none;
     }
 }
 

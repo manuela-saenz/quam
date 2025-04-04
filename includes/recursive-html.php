@@ -3,7 +3,6 @@ function ItemsCart()
 {
     $items = WC()->cart->get_cart();
     $item_counter = 0;
-
     foreach ($items as $item => $values) {
         $item_counter++;
         $product_id = $values['product_id'];
@@ -17,11 +16,11 @@ function ItemsCart()
         if ($_product->is_type('variation')) {
             $variation_id = $values['variation_id'];
         }
-        
-    ?>
+
+?>
         <div class="mini-cart-product-card align-items-start d-flex bg-white">
             <a href="<?= get_permalink($_product->get_id()) ?>" class="img-contain overflow-hidden rounded-1">
-            <?= str_replace('<img', '<img loading="lazy"', $_product->get_image('medium', 'alt=' . $title)) ?>
+                <?= str_replace('<img', '<img loading="lazy"', $_product->get_image('medium', 'alt=' . $title)) ?>
 
             </a>
             <div class="w-100">
@@ -38,7 +37,12 @@ function ItemsCart()
 
                 <div class="d-flex align-items-center price mb-3">
                     <p id="price"><?= $_product->get_price_html() ?> COP</p>
-                    <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
+                    <pre class="d-none">
+                    <?php
+                    print_r($_product)
+                    ?>
+                        </pre>
+                    <p id="priceUnit" data-price="<?php echo ($price); ?>" hidden> </p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="quantity">
