@@ -129,35 +129,35 @@ function discountValue(res) {
 }
 
 function addButtonCustomCartCategory(button) {
-   // Validar elementos necesarios
-   const parentLi = button.closest("li");
-   if (!parentLi) {
-     console.error("No se encontró el elemento li padre");
-     return;
-   }
+  // Validar elementos necesarios
+  const parentLi = button.closest("li");
+  if (!parentLi) {
+    console.error("No se encontró el elemento li padre");
+    return;
+  }
 
-   const cardProductsDiv = parentLi.querySelector("div.CardProducts");
+  const cardProductsDiv = parentLi.querySelector("div.CardProducts");
 
-   if (!cardProductsDiv) {
-     console.error("No se encontró el div.CardProducts");
-     return;
-   }
+  if (!cardProductsDiv) {
+    console.error("No se encontró el div.CardProducts");
+    return;
+  }
 
-   // Obtener IDs actualizados
-   const variationId = button.getAttribute("data-variation_id");
-   const productId = button.getAttribute("data-product_id");
-   const id = variationId || productId;
+  // Obtener IDs actualizados
+  const variationId = button.getAttribute("data-variation_id");
+  const productId = button.getAttribute("data-product_id");
+  const id = variationId || productId;
 
-   // Añadir clase loading al contenedor
-   const grandparent = button.parentElement?.parentElement?.parentElement;
-   if (grandparent) {
-     grandparent.classList.add("loading");
-   }
+  // Añadir clase loading al contenedor
+  const grandparent = button.parentElement?.parentElement?.parentElement;
+  if (grandparent) {
+    grandparent.classList.add("loading");
+  }
 
-   // Ejecutar la función con los elementos validados
-   setTimeout(function () {
-     addProductToCartCustom(id, 1, button, cardProductsDiv, parentLi);
-   }, 1500);
+  // Ejecutar la función con los elementos validados
+  setTimeout(function () {
+    addProductToCartCustom(id, 1, button, cardProductsDiv, parentLi);
+  }, 1500);
 }
 // <!-- Lógica de añadir articulo al carrito   -->
 var botonCart = document.getElementById("bottonCart");
@@ -277,6 +277,23 @@ function addProductToCartCustom(
     product_id: productId,
     quantity: quantity,
   };
+
+  placeholders = `
+  <div class="col-lg-3 col-sm-6 col-6 product type-product post-146 status-publish first outofstock has-post-thumbnail shipping-taxable purchasable product-type-variation loading" data-id="toastCardLoad">
+      <div class="CardProducts w-100 placeholder-glow">
+          <div class="img-contain placeholder w-100"></div>
+          <div class="info-highlights opacity-25">
+              <h5 class="col-12 placeholder md-2"></h5>
+              <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
+                  <p class="mb-0 d-flex gap-2 placeholder col-6"></p>
+              </div>
+          </div>
+      </div>
+  </div>`;
+
+  if (liElement.children.length !== 1) {
+    liElement.appendChild(cardProductsDiv);
+  }
 
   $.ajax({
     type: "POST",
@@ -475,7 +492,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
       maximumFractionDigits: 3,
     });
 
-    $("#subtotal").html("$" + totalWithThousandSeparator);
+    // $("#subtotal").html("$" + totalWithThousandSeparator);
   }
 
   var clickedElement = $(this);
@@ -529,10 +546,14 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
       success: function (response) {
         var res = JSON.parse(response);
         if (res.status === "success") {
+          console.log('hola aqui probando');
           var totalString = res.total;
+          const htmlCart = res.html;
           var value = getTotalValue(totalString);
+          $(".offcanvas-body.ordenList.cart").html(htmlCart);
           discountValue(res);
           $("#total").html("$" + value);
+          $("#subtotal").html("$" + value);
         } else {
           alert("Hubo un problema al actualizar la cantidad del producto.");
         }
@@ -1116,8 +1137,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Obtener todos los li, tanto directos como dentro de swiper-slide
   const getAllProductItems = () => {
     const productList = document.querySelector("#product-list");
-    const directItems = productList ? Array.from(productList.querySelectorAll("li")) : [];
-    const swiperItems = document.querySelectorAll("#related-swiper .swiper-wrapper .swiper-slide li");
+    const directItems = productList
+      ? Array.from(productList.querySelectorAll("li"))
+      : [];
+    const swiperItems = document.querySelectorAll(
+      "#related-swiper .swiper-wrapper .swiper-slide li"
+    );
     return [...directItems, ...swiperItems];
   };
 
@@ -1129,10 +1154,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const firstProductCard = targetNode.querySelector(
           ".mini-cart-product-card"
         );
+        console.log(firstProductCard);
         if (firstProductCard) {
           // Extrae el precio del elemento con ID "price"
           const priceElement = firstProductCard.querySelector(
-            "#price ins .woocommerce-Price-amount"
+            "#price"
           );
 
           const detectedPrice = priceElement
@@ -1146,8 +1172,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const cardProduct = productItem.querySelector(".CardProducts");
             if (!cardProduct) return; // Skip si no tiene CardProducts
 
-            const infoHighlights = cardProduct.querySelector("#info-highlights");
-            if (!infoHighlights) return; // Skip si no tiene info-highlights
+            const infoHighlights =
+              cardProduct.querySelector("#info-highlights");
+            if (!infoHighlights) return; 
 
             const priceSpan = infoHighlights.querySelector(
               ".price .woocommerce-Price-amount"

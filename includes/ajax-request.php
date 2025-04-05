@@ -201,6 +201,7 @@ class SyEAjaxRequest
 
         $totalItemsProduct = $woocommerce->cart->get_cart_item($cartItemKey)["quantity"];
         $PrecioProducto = $woocommerce->cart->get_cart_item($cartItemKey)["data"]->get_price();
+        $PrecioUnitario =  $PrecioProducto;
         $TotalProduct = $totalItemsProduct * $PrecioProducto;
 
         $formatoColombiano = "$ " . number_format($TotalProduct, 0, ',', '.');
@@ -242,7 +243,8 @@ class SyEAjaxRequest
                 "total" => $ValorTotal,
                 "shipping_total" => $shipping_total,
                 "quantity" => count($woocommerce->cart->get_cart()),
-                "totalProducto" => $formatoColombiano
+                "totalProducto" => $formatoColombiano,
+                "precioUnitario" => $PrecioUnitario
             )
         );
         die();
@@ -383,6 +385,7 @@ class SyEAjaxRequest
             array(
                 "status" => "success",
                 "html" => $buffer,
+                "itemCart" => $itemsCart,
                 // "ordenList" => $buffer,
                 "coupon_details" => $coupon_details,
                 "total" => $ValorTotal,

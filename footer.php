@@ -121,20 +121,26 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
 </script>
 
-<?php if (is_page(78)) { ?>
+<?php 
+$random = rand(1000, 9999); // Genera un número aleatorio
+
+if (is_page(78)) { ?>
   <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
   <script src="<?php bloginfo('template_url') ?>/assets/js/stepper.js"> </script>
 <?php } ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/function.js"> </script>
-<script src="<?php bloginfo('template_url') ?>/assets/js/custom.js"> </script>
+<?php if (is_archive()) { ?>
+<script src="<?php bloginfo('template_url') ?>/assets/js/.js?v=<?php echo $random; ?>"> </script>
+<?php } ?>
+<script src="<?php bloginfo('template_url') ?>/assets/js/function-general.js?v=<?php echo $random; ?>"> </script>
+<script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?v=<?php echo $random; ?>"> </script>
 <?php if (is_product()) { ?>
-  <script src="<?php bloginfo('template_url') ?>/assets/js/product.js"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/product.js?v=<?php echo $random; ?>"> </script>
 <?php } ?>
 <?php if (!is_archive()) { ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js"> </script>
 <?php } ?>
 <?php if (is_page(1694)) { ?>
-  <script src="<?php bloginfo('template_url') ?>/assets/js/form.js"> </script>
+<script src="<?php bloginfo('template_url') ?>/assets/js/form.js?v=<?php echo $random; ?>"> </script>
 <?php } ?>
 <script>
   document.addEventListener('DOMContentLoaded', function() {

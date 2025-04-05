@@ -106,7 +106,7 @@ function desplegableProductos($titulo, $tipoDeLista)
     </div>
 
     <?php if ($tipoDeLista == 'mini-carrito') { ?>
-      <div class="offcanvas-body ordenList cart">
+      <div id="cartSub" class="offcanvas-body ordenList cart">
         <?php get_template_part("templates/components/mini", "cart") ?>
       </div>
       <div class="offcanvas-footer">

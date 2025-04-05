@@ -1,12 +1,19 @@
 <?php
 function ItemsCart()
 {
+    global $woocommerce;
     $items = WC()->cart->get_cart();
     $item_counter = 0;
+    // Calcular el total de items sumando las cantidades
+    $total_items = 0;
+    foreach ($items as $item) {
+        $total_items += $item['quantity'];
+    }
 
     foreach ($items as $item => $values) {
         $item_counter++;
         $product_id = $values['product_id'];
+        $PrecioProducto = $woocommerce->cart->get_cart_item($item)["data"]->get_price();
         $_product = wc_get_product($values['data']->get_id());
         $price = $_product->get_price();
         $quantity = $values['quantity'];
@@ -17,7 +24,6 @@ function ItemsCart()
         if ($_product->is_type('variation')) {
             $variation_id = $values['variation_id'];
         }
-        
     ?>
         <div class="mini-cart-product-card align-items-start d-flex bg-white">
             <a href="<?= get_permalink($_product->get_id()) ?>" class="img-contain overflow-hidden rounded-1">
@@ -37,7 +43,14 @@ function ItemsCart()
                 </div>
 
                 <div class="d-flex align-items-center price mb-3">
-                    <p id="price"><?= $_product->get_price_html() ?> COP</p>
+                    <p ><?= $_product->get_price_html() ?> COP</p>
+                    <?php if ($total_items >= 3) : ?>
+                    <ins id="price" class="offer-price" aria-hidden="true" style="display: inline-block; margin-left: 5px;">
+                      <span class="woocommerce-Price-amount amount">
+                        <bdi style="color: #002d72;font-weight: bold;"><span class="woocommerce-Price-currencySymbol">$</span><?= number_format($PrecioProducto, 0, ',', '.') ?></bdi>
+                      </span>
+                    </ins>
+                    <?php endif; ?>
                     <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -67,6 +80,7 @@ function ItemsCheckout()
 {
     $items = WC()->cart->get_cart();
     $item_counter = 0;
+    $total_items = count($items);
 
     foreach ($items as $item => $values) {
         $item_counter++;

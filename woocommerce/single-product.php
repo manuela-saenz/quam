@@ -106,4 +106,13 @@ if ($attachment_ids) {
     });
   });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const scripts = document.querySelectorAll('script[src*="custom-script.js"]');
+    scripts.forEach(script => {
+        script.remove();
+        console.log("custom-script.js fue bloqueado");
+    });
+});
+</script>
 <?php get_footer() ?>
