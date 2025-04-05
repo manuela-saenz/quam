@@ -915,6 +915,17 @@
 
 .sm-floating-box {
   @media (max-width:991px) {
+    &::before{
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 5px;
+      width: 55px;
+      background: #ccc;
+      border-radius: 10px;
+    }
     &.swipe-animation {
       animation: swipe 0.8s ease infinite;
 
