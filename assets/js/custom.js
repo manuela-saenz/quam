@@ -635,6 +635,7 @@ jQuery(function ($) {
           setTimeout(() => {
             initLiPrice();
             selectButtonCustom();
+            initProductDiscount();
           }, 500);
         } else {
           $(window).off("scroll"); // Detiene la carga si ya no hay más productos

@@ -65,9 +65,6 @@
   wp_head();
 
   ?>
-   <?php if (is_archive()) { ?>
-    <script src="<?php bloginfo('template_url') ?>/assets/js/order-products-test.js"></script>
-  <?php } ?>
  
 </head>
 <?php wp_body_open() ?>

@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname === "/") return; // Evita que se ejecute en la ruta raíz
-  console.log("ejecutando script de productos v11");
   const productList = document.getElementById("product-list");
   if (!productList) return;
 

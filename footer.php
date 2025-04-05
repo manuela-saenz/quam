@@ -129,7 +129,7 @@ if (is_page(78)) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/stepper.js"> </script>
 <?php } ?>
 <?php if (is_archive()) { ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/.js?v=<?php echo $random; ?>"> </script>
+<script src="<?php bloginfo('template_url') ?>/assets/js/order-products.js?v=<?php echo $random; ?>"></script>
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/function-general.js?v=<?php echo $random; ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?v=<?php echo $random; ?>"> </script>

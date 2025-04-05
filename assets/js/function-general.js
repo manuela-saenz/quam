@@ -71,6 +71,73 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCartCount();
 });
 
+function initProductDiscount(){
+ const targetNode = document.querySelector(".offcanvas-body.ordenList.cart");
+
+  // Obtener todos los li, tanto directos como dentro de swiper-slide
+  const getAllProductItems = () => {
+    const productList = document.querySelector("#product-list");
+    const directItems = productList
+      ? Array.from(productList.querySelectorAll("li"))
+      : [];
+    const swiperItems = document.querySelectorAll(".swiper-slide li");
+    return [...directItems, ...swiperItems];
+  };
+
+  // Busca el primer div con la clase "mini-cart-product-card"
+  const firstProductCard = targetNode.querySelector(".mini-cart-product-card");
+
+  if (firstProductCard) {
+    // Extrae el precio del elemento con ID "price"
+    const priceElement = firstProductCard.querySelector("#price");
+
+    const detectedPrice = priceElement ? priceElement.textContent.trim() : null;
+
+    // Obtener todos los items de producto actualizados
+    const allProductItems = getAllProductItems();
+
+    allProductItems.forEach((productItem) => {
+      const cardProduct = productItem.querySelector(".CardProducts");
+
+
+      let infoHighlights = cardProduct.querySelector("#info-highlights");
+      if (!infoHighlights) {
+        infoHighlights = cardProduct.querySelector(".info-highlights");
+      }
+
+      const priceSpan = infoHighlights.querySelector(
+        ".price .woocommerce-Price-amount"
+      );
+
+      const existingIns = priceSpan.parentNode.querySelector("ins");
+
+      if (detectedPrice) {
+        if (!existingIns) {
+          // Agrega el nuevo <ins> después del último <span>
+          priceSpan.insertAdjacentHTML(
+            "beforeend",
+            `<ins class="offer-price" aria-hidden="true" style="display: inline-block; margin-left: 5px;">
+                <span class="woocommerce-Price-amount amount">
+                  <bdi><span class="woocommerce-Price-currencySymbol"></span>${detectedPrice}</bdi>
+                </span>
+              </ins>`
+          );
+        } else {
+          // Si ya existe, actualiza el contenido del <ins>
+          existingIns.querySelector(
+            ".woocommerce-Price-amount bdi"
+          ).innerHTML = `
+              <span class="woocommerce-Price-currencySymbol"></span>&nbsp;${detectedPrice}
+            `;
+        }
+      } else if (existingIns) {
+        // Si no se detecta ningún precio, elimina el <ins> existente
+        existingIns.remove();
+      }
+    });
+  }
+}
+
 function getTotalValue(totalString) {
   var match = totalString.match(
     /<span class="woocommerce-Price-currencySymbol">[^<]*<\/span>&nbsp;((\d{1,3}(\.\d{3})*(\,\d+)?)|(\d+))/
@@ -333,6 +400,7 @@ function addProductToCartCustom(
         cardProductsDiv.classList.add("added");
         setTimeout(() => {
           cardProductsDiv.classList.remove("added");
+          initProductDiscount();
         }, 1000);
 
         $("#cartItem").text(res.quantity);
@@ -391,6 +459,7 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
 
       if (res.status === "success") {
         updateCartContents(res);
+        initProductDiscount();
         if (tbodyElementCheckout.length) {
           tbodyElementCheckout.remove();
         }
@@ -410,6 +479,8 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
             opacity: "1",
           });
         }
+      
+
       } else {
         alert("Hubo un problema al eliminar el producto del carrito.");
       }
@@ -554,6 +625,7 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
           discountValue(res);
           $("#total").html("$" + value);
           $("#subtotal").html("$" + value);
+          initProductDiscount();
         } else {
           alert("Hubo un problema al actualizar la cantidad del producto.");
         }
@@ -927,8 +999,10 @@ document.addEventListener("DOMContentLoaded", function () {
           button.classList.add("active-color");
           selectedColor = initialColor;
 
-          updateSizeButtons(productElement);
+          setTimeout(() => {
+            updateSizeButtons(productElement);
           updateProductImage(productElement);
+          }, 1500);
         }
       });
     }
@@ -1018,112 +1092,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   if (window.location.pathname === "/") return; // Evita que se ejecute en la ruta raíz
-
-//   const productList = document.getElementById("product-list");
-//   if (!productList) return;
-
-//   function reorderProducts() {
-//     const items = Array.from(productList.querySelectorAll("li[data-father]"));
-//     if (items.length < 2) return;
-
-//     let lastFather = null;
-//     let toMove = [];
-
-//     for (let i = 0; i < items.length; i++) {
-//       const currentFather = items[i].getAttribute("data-father");
-//       if (currentFather === lastFather) {
-//         toMove.push(items[i]);
-//       } else {
-//         lastFather = currentFather;
-//       }
-//     }
-//     toMove.forEach((item) => productList.appendChild(item));
-//   }
-
-//   const observer = new MutationObserver(() => {
-//     reorderProducts();
-//   });
-
-//   const config = { childList: true, subtree: true };
-//   observer.observe(productList, config);
-//   reorderProducts();
-// });
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Selecciona el contenedor que deseas observar
-//   const targetNode = document.querySelector(".offcanvas-body.ordenList.cart");
-
-//   if (!targetNode) {
-//     console.error("El contenedor no se encontró.");
-//     return;
-//   }
-//   const productList = document.querySelector("#product-list");
-//   const productItems = productList.querySelectorAll("li");
-
-//   // Configuración del observer
-//   const observer = new MutationObserver((mutationsList) => {
-//     for (const mutation of mutationsList) {
-//       if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-//         // Busca el primer div con la clase "mini-cart-product-card"
-//         const firstProductCard = targetNode.querySelector(
-//           ".mini-cart-product-card"
-//         );
-//         if (firstProductCard) {
-//           // Extrae el precio del elemento con ID "price"
-//           const priceElement = firstProductCard.querySelector(
-//             "#price ins .woocommerce-Price-amount"
-//           );
-
-//           const detectedPrice = priceElement
-//             ? priceElement.textContent.trim()
-//             : null;
-
-//           productItems.forEach((productItem) => {
-//             const cardProduct = productItem.querySelector(".CardProducts");
-//             const infoHighlights =
-//               cardProduct.querySelector("#info-highlights");
-//             const priceSpan = infoHighlights.querySelector(
-//               ".price .woocommerce-Price-amount"
-//             );
-//             const existingIns = priceSpan.parentNode.querySelector("ins");
-
-//             if (detectedPrice) {
-//               if (!existingIns) {
-//                 // Agrega el nuevo <ins> después del último <span>, simulando que está después del ::after
-//                 priceSpan.insertAdjacentHTML(
-//                   "beforeend",
-//                   `<ins class="offer-price" aria-hidden="true" style="display: inline-block; margin-left: 5px;">
-//                       <span class="woocommerce-Price-amount amount">
-//                         <bdi><span class="woocommerce-Price-currencySymbol"></span>${detectedPrice}</bdi>
-//                       </span>
-//                     </ins>`
-//                 );
-//               } else {
-//                 // Si ya existe, actualiza el contenido del <ins>
-//                 existingIns.querySelector(
-//                   ".woocommerce-Price-amount bdi"
-//                 ).innerHTML = `
-//                     <span class="woocommerce-Price-currencySymbol"></span>&nbsp;${detectedPrice}
-//                   `;
-//               }
-//             } else if (existingIns) {
-//               // Si no se detecta ningún precio, elimina el <ins> existente
-//               existingIns.remove();
-//             }
-//           });
-//         }
-//       }
-//     }
-//   });
-
-//   // Opciones del observer
-//   const config = { childList: true, subtree: true };
-
-//   // Inicia el observer
-//   observer.observe(targetNode, config);
-// });
 
 document.addEventListener("DOMContentLoaded", function () {
   // Selecciona el contenedor que deseas observar
@@ -1141,7 +1109,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ? Array.from(productList.querySelectorAll("li"))
       : [];
     const swiperItems = document.querySelectorAll(
-      "#related-swiper .swiper-wrapper .swiper-slide li"
+      ".swiper-slide li"
     );
     return [...directItems, ...swiperItems];
   };
@@ -1154,7 +1122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const firstProductCard = targetNode.querySelector(
           ".mini-cart-product-card"
         );
-        console.log(firstProductCard);
+
         if (firstProductCard) {
           // Extrae el precio del elemento con ID "price"
           const priceElement = firstProductCard.querySelector(
@@ -1172,9 +1140,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const cardProduct = productItem.querySelector(".CardProducts");
             if (!cardProduct) return; // Skip si no tiene CardProducts
 
-            const infoHighlights =
-              cardProduct.querySelector("#info-highlights");
-            if (!infoHighlights) return; 
+            let infoHighlights = cardProduct.querySelector("#info-highlights");
+            if (!infoHighlights) {
+              infoHighlights = cardProduct.querySelector(".info-highlights");
+            }
+            if (!infoHighlights) return;
 
             const priceSpan = infoHighlights.querySelector(
               ".price .woocommerce-Price-amount"
