@@ -131,8 +131,6 @@ function initProductDiscount() {
       );
 
       const existingIns = priceSpan.parentNode.querySelector("ins");
-      console.log(priceSpan );
-      console.log(existingIns );
       if (detectedPrice) {
         if (!existingIns) {
           // Agrega el nuevo <ins> después del último <span>
@@ -405,7 +403,6 @@ function addProductToCartCustom(
         discountValue(res);
         button.classList.remove("loading", "cfvsw_variation_found");
         if (liElement.children.length !== 1) {
-          console.log("El <li> está vacío o no tiene un <div> como hijo");
           liElement.appendChild(cardProductsDiv);
           $(".add-to-cart-container .add-btn").on("click", function () {
             $(this)
@@ -637,7 +634,6 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
       success: function (response) {
         var res = JSON.parse(response);
         if (res.status === "success") {
-          console.log("hola aqui probando");
           var totalString = res.total;
           const htmlCart = res.html;
           var value = getTotalValue(totalString);
