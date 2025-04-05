@@ -24,7 +24,7 @@ function ItemsCart()
         if ($_product->is_type('variation')) {
             $variation_id = $values['variation_id'];
         }
-    ?>
+?>
         <div class="mini-cart-product-card align-items-start d-flex bg-white">
             <a href="<?= get_permalink($_product->get_id()) ?>" class="img-contain overflow-hidden rounded-1">
                 <?= str_replace('<img', '<img loading="lazy"', $_product->get_image('medium', 'alt=' . $title)) ?>
@@ -43,13 +43,17 @@ function ItemsCart()
                 </div>
 
                 <div class="d-flex align-items-center price mb-3">
-                    <p ><?= $_product->get_price_html() ?> COP</p>
-                    <?php if ($total_items >= 3) : ?>
-                    <ins id="price" class="offer-price" aria-hidden="true" style="display: inline-block; margin-left: 5px;">
-                      <span class="woocommerce-Price-amount amount">
-                        <bdi style="color: #002d72;font-weight: bold;"><span class="woocommerce-Price-currencySymbol">$</span><?= number_format($PrecioProducto, 0, ',', '.') ?></bdi>
-                      </span>
-                    </ins>
+                    <p><?= $_product->get_price_html() ?> COP</p>
+                    <?php
+                    $product_categories = wp_get_post_terms($product_id, 'product_cat', array('fields' => 'slugs'));
+                    if ($total_items >= 3 && in_array('polos-hombre', $product_categories)) : ?>
+                        <ins id="price" data-category="polos-hombre" class="offer-price" aria-hidden="true" style="display: inline-block; margin-left: 5px;">
+                            <span class="woocommerce-Price-amount amount">
+                                <bdi style="color: #002d72;font-weight: bold;">
+                                    <span class="woocommerce-Price-currencySymbol">$</span><?= number_format($PrecioProducto, 0, ',', '.') ?>
+                                </bdi>
+                            </span>
+                        </ins>
                     <?php endif; ?>
                     <p id="priceUnit" data-price="<?php echo esc_attr($price); ?>" hidden> </p>
                 </div>

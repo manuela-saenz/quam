@@ -72,7 +72,19 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
     $product_id = $product->get_id();
     $all_variants = array();
 
+    $product_categories = get_the_terms($product->get_id(), 'product_cat');
 
+    // Verificar si el producto pertenece a la categoría "polos-hombre"
+    $is_polos_hombre = false;
+
+    if ($product_categories && !is_wp_error($product_categories)) {
+        foreach ($product_categories as $category) {
+            if ($category->slug === 'polos-hombre') {
+                $is_polos_hombre = true;
+                break; // Salir del bucle si se encuentra la categoría
+            }
+        }
+    }
     foreach ($available_variations as $variation) {
         $variation_obj = wc_get_product($variation['variation_id']);
         $product_id = $variation_obj->get_parent_id();
@@ -107,8 +119,8 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
         // Obtener el valor hexadecimal del color desde el término del atributo
         $color_term = get_term_by('slug', $color, 'pa_color');
         $meta_value = get_term_meta($color_term->term_id, 'cfvsw_color', true);
+        $category = $is_polos_hombre ? 'polos-hombre' : 'niño';
 
-        // Crear el objeto de variantes
         $variant_data = array(
             'id' => $variation_id,
             'color' => $color,
@@ -162,7 +174,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                     </div>
 
                 </div>
-            <div class="info-highlights position-relative">
+            <div class="info-highlights position-relative" data-category="<?= $category ?>">
                 <div class=" product-info justify-content-center justify-content-md-between w-100">
 
                     <?php

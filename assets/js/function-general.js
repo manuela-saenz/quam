@@ -71,8 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCartCount();
 });
 
-function initProductDiscount(){
- const targetNode = document.querySelector(".offcanvas-body.ordenList.cart");
+function initProductDiscount() {
+  const targetNode = document.querySelector(".offcanvas-body.ordenList.cart");
 
   // Obtener todos los li, tanto directos como dentro de swiper-slide
   const getAllProductItems = () => {
@@ -85,21 +85,42 @@ function initProductDiscount(){
   };
 
   // Busca el primer div con la clase "mini-cart-product-card"
-  const firstProductCard = targetNode.querySelector(".mini-cart-product-card");
+  // Seleccionar todos los elementos con la clase "mini-cart-product-card"
+  const allProductCards = targetNode.querySelectorAll(
+    ".mini-cart-product-card"
+  );
 
-  if (firstProductCard) {
+  // Buscar el último que contenga un <ins> con data-category="polos-hombre"
+  let lastMatchingCard = null;
+
+  allProductCards.forEach((card) => {
+    const insElement = card.querySelector('ins[data-category="polos-hombre"]');
+    if (insElement) {
+      lastMatchingCard = card; // Actualizar con el último que coincida
+    }
+  });
+
+  if (!lastMatchingCard) {
+    allProductCards.forEach((card) => {
+      const insElement = card.querySelector('ins[data-category="polos-hombre"]');
+      if (!insElement) {
+        lastMatchingCard = card; // Seleccionar el primero que no tenga el <ins>
+        return; // Salir del bucle
+      }
+    });
+  }
+
+  if (lastMatchingCard) {
     // Extrae el precio del elemento con ID "price"
-    const priceElement = firstProductCard.querySelector("#price");
-
+    const priceElement = lastMatchingCard.querySelector("#price");
     const detectedPrice = priceElement ? priceElement.textContent.trim() : null;
-
     // Obtener todos los items de producto actualizados
     const allProductItems = getAllProductItems();
-
+    const pathname = window.location.pathname;
+    const isProductPage = pathname.includes("/polos-hombre/");
+    if(!isProductPage) return;
     allProductItems.forEach((productItem) => {
       const cardProduct = productItem.querySelector(".CardProducts");
-
-
       let infoHighlights = cardProduct.querySelector("#info-highlights");
       if (!infoHighlights) {
         infoHighlights = cardProduct.querySelector(".info-highlights");
@@ -110,7 +131,8 @@ function initProductDiscount(){
       );
 
       const existingIns = priceSpan.parentNode.querySelector("ins");
-
+      console.log(priceSpan );
+      console.log(existingIns );
       if (detectedPrice) {
         if (!existingIns) {
           // Agrega el nuevo <ins> después del último <span>
@@ -479,8 +501,6 @@ function trashItem(id, idVariant, tbodyElementCheckout) {
             opacity: "1",
           });
         }
-      
-
       } else {
         alert("Hubo un problema al eliminar el producto del carrito.");
       }
@@ -617,14 +637,15 @@ $(document).on("click", ".qtyminus , .qtyplus", function (e) {
       success: function (response) {
         var res = JSON.parse(response);
         if (res.status === "success") {
-          console.log('hola aqui probando');
+          console.log("hola aqui probando");
           var totalString = res.total;
           const htmlCart = res.html;
           var value = getTotalValue(totalString);
+          var subtotatString = getTotalValue(res.subtotal);
           $(".offcanvas-body.ordenList.cart").html(htmlCart);
           discountValue(res);
           $("#total").html("$" + value);
-          $("#subtotal").html("$" + value);
+          $("#subtotal").html("$" + subtotatString);
           initProductDiscount();
         } else {
           alert("Hubo un problema al actualizar la cantidad del producto.");
@@ -1001,7 +1022,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           setTimeout(() => {
             updateSizeButtons(productElement);
-          updateProductImage(productElement);
+            updateProductImage(productElement);
           }, 1500);
         }
       });
@@ -1092,7 +1113,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
   // Selecciona el contenedor que deseas observar
   const targetNode = document.querySelector(".offcanvas-body.ordenList.cart");
@@ -1108,9 +1128,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const directItems = productList
       ? Array.from(productList.querySelectorAll("li"))
       : [];
-    const swiperItems = document.querySelectorAll(
-      ".swiper-slide li"
-    );
+    const swiperItems = document.querySelectorAll(".swiper-slide li");
     return [...directItems, ...swiperItems];
   };
 
@@ -1119,15 +1137,33 @@ document.addEventListener("DOMContentLoaded", function () {
     for (const mutation of mutationsList) {
       if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
         // Busca el primer div con la clase "mini-cart-product-card"
-        const firstProductCard = targetNode.querySelector(
+        const allProductCards = targetNode.querySelectorAll(
           ".mini-cart-product-card"
         );
+      
+        // Buscar el último que contenga un <ins> con data-category="polos-hombre"
+        let lastMatchingCard = null;
+      
+        allProductCards.forEach((card) => {
+          const insElement = card.querySelector('ins[data-category="polos-hombre"]');
+          if (insElement) {
+            lastMatchingCard = card; // Actualizar con el último que coincida
+          }
+        });
 
-        if (firstProductCard) {
+        if (!lastMatchingCard) {
+          allProductCards.forEach((card) => {
+            const insElement = card.querySelector('ins[data-category="polos-hombre"]');
+            if (!insElement) {
+              lastMatchingCard = card; // Seleccionar el primero que no tenga el <ins>
+              return; // Salir del bucle
+            }
+          });
+        }
+
+        if (lastMatchingCard) {
           // Extrae el precio del elemento con ID "price"
-          const priceElement = firstProductCard.querySelector(
-            "#price"
-          );
+          const priceElement = lastMatchingCard.querySelector("#price");
 
           const detectedPrice = priceElement
             ? priceElement.textContent.trim()
@@ -1135,14 +1171,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // Obtener todos los items de producto actualizados
           const allProductItems = getAllProductItems();
-
+          // const pathname = window.location.pathname;
+          // const isProductPage = pathname.includes("/polos-hombre/");
+          // if(!isProductPage) return;
+          
           allProductItems.forEach((productItem) => {
             const cardProduct = productItem.querySelector(".CardProducts");
             if (!cardProduct) return; // Skip si no tiene CardProducts
 
-            let infoHighlights = cardProduct.querySelector("#info-highlights");
+            let infoHighlights = cardProduct.querySelector('#info-highlights[data-category="polos-hombre"]');
             if (!infoHighlights) {
-              infoHighlights = cardProduct.querySelector(".info-highlights");
+              infoHighlights = cardProduct.querySelector('.info-highlights[data-category="polos-hombre"]');
             }
             if (!infoHighlights) return;
 

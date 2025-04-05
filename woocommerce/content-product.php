@@ -70,11 +70,27 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
     $available_variations = $product->get_available_variations();
     $all_variants = [];
 
+    $product_categories = get_the_terms($product->get_id(), 'product_cat');
+
+    // Verificar si el producto pertenece a la categoría "polos-hombre"
+    $is_polos_hombre = false;
+
+    if ($product_categories && !is_wp_error($product_categories)) {
+        foreach ($product_categories as $category) {
+            if ($category->slug === 'polos-hombre') {
+                $is_polos_hombre = true;
+                break; // Salir del bucle si se encuentra la categoría
+            }
+        }
+    }
+
     foreach ($available_variations as $variation) {
         $variation_obj = wc_get_product($variation['variation_id']);
         $color = $variation['attributes']['attribute_pa_color'] ?? '';
         $size = $variation['attributes']['attribute_pa_talla'] ?? '';
         $variation_id = $variation_obj->get_id();
+        $categoySlug = $product->get_category_ids()[0] ?? 0;
+        $categoySlug = get_term($categoySlug)->slug ?? 0;
         $optimized_image_url = wp_get_attachment_image_src(get_post_thumbnail_id($variation_id), 'full')[0] ?? '';
         $variation_title = removerTalla($variation_obj->get_name());
         $variation_permalink = get_permalink($variation_id);
@@ -106,6 +122,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
             'regular_price' => $regular_price,
             'sale_price' => $sale_price,
             'size' => $size,
+            'category' => $is_polos_hombre ? 'polos-hombre' : $categoySlug,
             'image_url' => $optimized_image_url,
         ];
     }
@@ -172,13 +189,13 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
 
                 </div>
 
-                <div id="info-highlights" class="info-highlights position-relative">
+                <div id="info-highlights" data-category="<?= $variant['category']; ?>" class="info-highlights position-relative">
                     <div class="product-info justify-content-center justify-content-md-between w-100">
                         <?php do_action('woocommerce_shop_loop_item_title'); ?>
                         <div class="price">
-                            <p class="mb-0 d-flex gap-2"><?= $variant['price']; ?></p>          
+                            <p class="mb-0 d-flex gap-2"><?= $variant['price']; ?></p>
                         </div>
-                             
+
                     </div>
                     <?php do_action('woocommerce_after_shop_loop_item'); ?>
                 </div>
