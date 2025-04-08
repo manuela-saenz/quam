@@ -653,7 +653,7 @@ jQuery(function ($) {
       const path = window.location.pathname;
       if (path.includes("categoria-producto")) {
         $(window).on("scroll", function () {
-          if ($(window).scrollTop() >= $(document).height() / 4) {
+          if ($(window).scrollTop() >= $(document).height() / 8) {
             loadMoreProducts();
           }
         });
