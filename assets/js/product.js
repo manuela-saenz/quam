@@ -1,19 +1,19 @@
 // observer del slider de productos relacionados para carga de imagenes
 
-const relatedSlider = document.querySelector("#related-swiper");
-const sliderObserve = new IntersectionObserver((entries) => {
-  const entry = entries[0];
-  if (entry.isIntersecting) {
-    if (entry.target.id === 'related-swiper') {
-      let slides = $('#related-swiper .swiper-slide');
-        slides.each(function() {
-          let slide = $(this);
-          slide.find('img').attr('src', $(this).find('img').attr('data-slide-src'));
-        })
-    }
-  }
-});
-sliderObserve.observe(relatedSlider);
+// const relatedSlider = document.querySelector("#related-swiper");
+// const sliderObserve = new IntersectionObserver((entries) => {
+//   const entry = entries[0];
+//   if (entry.isIntersecting) {
+//     if (entry.target.id === 'related-swiper') {
+//       let slides = $('#related-swiper .swiper-slide');
+//         slides.each(function() {
+//           let slide = $(this);
+//           slide.find('img').attr('src', $(this).find('img').attr('data-slide-src'));
+//         })
+//     }
+//   }
+// });
+// sliderObserve.observe(relatedSlider);
 
 $(document).ready(function () {
   // Obtener el elemento del pie de página
