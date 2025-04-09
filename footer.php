@@ -138,7 +138,7 @@ if (is_page(78)) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/product.js"> </script>
 <?php } ?>
 <?php if (!is_archive()) { ?>
-  <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?v=<?php echo $random; ?>"> </script>
 <?php } ?>
 <?php if (is_page(1694)) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/form.js?v=<?php echo $random; ?>"> </script>

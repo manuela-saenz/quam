@@ -12,18 +12,37 @@ document.addEventListener("DOMContentLoaded", function () {
     success: function (response) {
       response = JSON.parse(response);
       if (response.html) {
-        // Actualizar el contenido del carrito de favoritos
         $(".offcanvas-body.ordenListFav.fav").html(response.html);
       }
       if (response.count !== undefined) {
-        // Actualizar el conteo de favoritos
         $("#favoritesCounter").text(response.count).removeClass("d-none");
       }
 
-      for (var i = 0; i < favorites.length; i++) {
-        $(".add-fav[data-product-id='" + favorites[i] + "']").addClass(
-          "active-fav"
+      let relatedSwiper = document.getElementById("related-swiper");
+      if (relatedSwiper === null) {
+        relatedSwiper = document.querySelector(
+          ".swiper.generationSwiper.swiper-creative.swiper-3d.swiper-initialized.swiper-horizontal.swiper-watch-progress"
         );
+      }
+
+      if (relatedSwiper) {
+        const slides = relatedSwiper.querySelectorAll(".swiper-slide");
+        slides.forEach((slide) => {
+          const buttons = slide.querySelectorAll(".add-fav");
+          buttons.forEach((button) => {
+            const productId = button.getAttribute("data-product-id-slide");
+            if (productId && favorites.includes(Number(productId))) {
+              button.classList.add("active-fav"); // Añadir la clase active-fav
+            }
+          });
+        });
+      } else {
+        console.log("aqui no es");
+        for (var i = 0; i < favorites.length; i++) {
+          $(".add-fav[data-product-id='" + favorites[i] + "']").addClass(
+            "active-fav"
+          );
+        }
       }
     },
     error: function (error) {
@@ -102,7 +121,9 @@ function initProductDiscount() {
 
   if (!lastMatchingCard) {
     allProductCards.forEach((card) => {
-      const insElement = card.querySelector('ins[data-category="polos-hombre"]');
+      const insElement = card.querySelector(
+        'ins[data-category="polos-hombre"]'
+      );
       if (!insElement) {
         lastMatchingCard = card; // Seleccionar el primero que no tenga el <ins>
         return; // Salir del bucle
@@ -661,7 +682,9 @@ function initAddToFavoriteButton() {
   $(".add-fav").on("click", function (e) {
     e.preventDefault();
 
-    $(this).addClass("adding");
+    const swiperContainer = document.querySelector(
+      ".swiper.generationSwiper.swiper-creative.swiper-3d.swiper-initialized.swiper-horizontal.swiper-watch-progress"
+    );
 
     var productId = $(".variation_id").val();
     productId =
@@ -673,6 +696,11 @@ function initAddToFavoriteButton() {
 
     if (productId == undefined || productId == 0) {
       productId = $(this).data("product-id");
+    }
+
+    if (swiperContainer) {
+      const productIdButtonSlide = $(this).data("product-id-slide");
+      productId = productIdButtonSlide;
     }
 
     var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
@@ -701,15 +729,32 @@ function initAddToFavoriteButton() {
           return;
         }
 
-        // Verifica si existe el elemento con el data-product-id especificado
-        if ($(".add-fav[data-product-id='" + productId + "']").length > 0) {
-          // Si existe, agrega la clase al elemento específico
-          $(".add-fav[data-product-id='" + productId + "']").addClass(
-            "active-fav"
-          );
+        if (swiperContainer) {
+          const slides = swiperContainer.querySelectorAll(".swiper-slide");
+          slides.forEach((slide) => {
+            // Buscar todos los botones dentro de cada slide
+            const buttons = slide.querySelectorAll(".add-fav");
+            buttons.forEach((button) => {
+              const productIdBotton = button.getAttribute(
+                "data-product-id-slide"
+              );
+              console.log(productId);
+              if (productIdBotton == productId) {
+                button.classList.add("active-fav"); // Añadir la clase active-fav solo al botón que coincida
+              }
+            });
+          });
         } else {
-          // Si no existe, agrega la clase a todos los elementos con la clase add-fav
-          $(".add-fav").addClass("active-fav");
+          // Verifica si existe el elemento con el data-product-id especificado
+          if ($(".add-fav[data-product-id='" + productId + "']").length > 0) {
+            // Si existe, agrega la clase al elemento específico
+            $(".add-fav[data-product-id='" + productId + "']").addClass(
+              "active-fav"
+            );
+          } else {
+            // Si no existe, agrega la clase a todos los elementos con la clase add-fav
+            $(".add-fav").addClass("active-fav");
+          }
         }
 
         var spanElement = document.getElementById("favoritesCounter");
@@ -723,7 +768,7 @@ function initAddToFavoriteButton() {
           botonFav.appendChild(spanElement);
         }
 
-        $("#favoritesCounter").text(res.counter).removeClass("d-none");
+        $("#favoritesCounter").text(sessionFav.length).removeClass("d-none");
         $(".offcanvas-body.ordenListFav.fav").html(res.html);
         var alertElement = $("#showAlertAddFav");
         alertElement.removeClass("d-none").show();
@@ -745,6 +790,15 @@ function deleteFavorite(prodid) {
   var alertElement = $("#showAlertDeleteFavT");
   alertElement.removeClass("d-none").show();
 
+  const swiperContainer = document.querySelector(
+    ".swiper.generationSwiper.swiper-creative.swiper-3d.swiper-initialized.swiper-horizontal.swiper-watch-progress"
+  );
+  // let productEliminatedBySlide = null; 
+  // if (swiperContainer) {
+  //   const productIdButtonSlide = $(this).data("product-id-slide");
+  //   productEliminatedBySlide = productIdButtonSlide;
+  // }
+  console.log(prodid)
   $.ajax({
     url: ajaxUrl,
     method: "POST",
@@ -771,11 +825,30 @@ function deleteFavorite(prodid) {
         }
       }
 
-      if ($(".add-fav[data-product-id='" + prodid + "']").length > 0) {
-        // Si existe, agrega la clase al elemento específico
-        $(".add-fav[data-product-id='" + prodid + "']").removeClass(
-          "active-fav"
-        );
+      if (swiperContainer) {
+        const slides = swiperContainer.querySelectorAll(".swiper-slide");
+        slides.forEach((slide) => {
+          const buttons = slide.querySelectorAll(".add-fav");
+          buttons.forEach((button) => {
+            const productIdButtonSlide = button.getAttribute(
+              "data-product-id-slide"
+            );
+            console.log(prodid);
+            if (prodid === productIdButtonSlide) {
+              console.log(prodid);
+              console.log(productIdButtonSlide)
+              console.log(button);
+              button.classList.remove("active-fav");
+            }
+          });
+        });
+      } else {
+        if ($(".add-fav[data-product-id='" + prodid + "']").length > 0) {
+          // Si existe, agrega la clase al elemento específico
+          $(".add-fav[data-product-id='" + prodid + "']").removeClass(
+            "active-fav"
+          );
+        }
       }
 
       alertElement.hide().addClass("d-none");
@@ -793,11 +866,40 @@ function initFavoritesPanelDelete() {
 }
 
 function deleteFavoriteSameContext(prodid) {
-  if ($(".add-fav[data-product-id='" + prodid + "']").length > 0) {
-    // Si existe, agrega la clase al elemento específico
-    $(".add-fav[data-product-id='" + prodid + "']").removeClass("active-fav");
+  let relatedSwiper = document.getElementById("related-swiper");
+
+  if (relatedSwiper === null) {
+    relatedSwiper = document.querySelector(
+      ".swiper.generationSwiper.swiper-creative.swiper-3d.swiper-initialized.swiper-horizontal.swiper-watch-progress"
+    );
+  }
+  console.log(relatedSwiper)
+  console.log('elimando en el sameContext')
+  if (relatedSwiper) {
+    const slides = relatedSwiper.querySelectorAll(".swiper-slide");
+    slides.forEach((slide) => {
+      const buttons = slide.querySelectorAll(".add-fav");
+      buttons.forEach((button) => {
+        const productIdButtonSlide = button.getAttribute(
+          "data-product-id-slide"
+        );
+        console.log(prodid == productIdButtonSlide);
+        if (prodid === productIdButtonSlide) {
+          button.classList.remove("active-fav");
+        }
+        if(prodid == productIdButtonSlide){
+          console.log('dentro de same')
+          button.classList.remove("active-fav");
+        }
+      });
+    });
   } else {
-    $(".add-fav").removeClass("active-fav");
+    if ($(".add-fav[data-product-id='" + prodid + "']").length > 0) {
+      // Si existe, agrega la clase al elemento específico
+      $(".add-fav[data-product-id='" + prodid + "']").removeClass("active-fav");
+    } else {
+      $(".add-fav").removeClass("active-fav");
+    }
   }
   deleteFavorite(prodid);
 }
@@ -1117,14 +1219,11 @@ function productColorVariants() {
       .addClass("show-colors");
     $(this).addClass("hide-btn");
   });
-  
-  console.log('funciona')
 }
 
 $(document).ready(() => {
   productColorVariants();
-})
-
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   // Selecciona el contenedor que deseas observar
@@ -1158,7 +1257,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let lastMatchingCard = null;
 
         allProductCards.forEach((card) => {
-          const insElement = card.querySelector('ins[data-category="polos-hombre"]');
+          const insElement = card.querySelector(
+            'ins[data-category="polos-hombre"]'
+          );
           if (insElement) {
             lastMatchingCard = card; // Actualizar con el último que coincida
           }
@@ -1166,7 +1267,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!lastMatchingCard) {
           allProductCards.forEach((card) => {
-            const insElement = card.querySelector('ins[data-category="polos-hombre"]');
+            const insElement = card.querySelector(
+              'ins[data-category="polos-hombre"]'
+            );
             if (!insElement) {
               lastMatchingCard = card; // Seleccionar el primero que no tenga el <ins>
               return; // Salir del bucle
@@ -1192,9 +1295,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const cardProduct = productItem.querySelector(".CardProducts");
             if (!cardProduct) return; // Skip si no tiene CardProducts
 
-            let infoHighlights = cardProduct.querySelector('#info-highlights[data-category="polos-hombre"]');
+            let infoHighlights = cardProduct.querySelector(
+              '#info-highlights[data-category="polos-hombre"]'
+            );
             if (!infoHighlights) {
-              infoHighlights = cardProduct.querySelector('.info-highlights[data-category="polos-hombre"]');
+              infoHighlights = cardProduct.querySelector(
+                '.info-highlights[data-category="polos-hombre"]'
+              );
             }
             if (!infoHighlights) return;
 

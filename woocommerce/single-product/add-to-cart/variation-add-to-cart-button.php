@@ -47,23 +47,35 @@ $sessionFav = $_SESSION["prodsfavs"]
                 var sessionFavLocal = JSON.parse(localStorage.getItem('sessionFav')) || [];
                 var productId = targetNode.getAttribute('data-product-id');
                 var outOfStock = document.querySelector('.stock.out-of-stock');
+
+                // Habilitar el botón de agregar al carrito si no está fuera de stock
                 if (!outOfStock) {
                     var submitButton = document.querySelector('button[type="submit"]');
                     if (submitButton) {
                         submitButton.disabled = false;
                     }
                 }
+                const relatedSwiper = document.getElementById("related-swiper");
+                // Verificar si el producto está en favoritos
                 if (sessionFavLocal.includes(Number(productId))) {
-                    $(".add-fav").addClass("active-fav");
+                    // Añadir la clase active-fav solo al botón con el data-product-id correspondiente
+                    const button = document.querySelector(`.add-fav[data-product-id="${productId}"]`);
+                    if (button) {
+                        button.classList.add('active-fav');
+                    }
                 } else {
-                    $(".add-fav").removeClass("active-fav");
+                    //Remover la clase active-fav del botón si no está en favoritos
+                    const button = document.querySelector(`.add-fav[data-product-id="${productId}"]`);
+                    if (button) {
+                        button.classList.remove('active-fav');
+                    }
                 }
             }
         }
     });
 
     var config = {
-        attributes: true
+        attributes: true,
     };
     observer.observe(targetNode, config);
 
@@ -76,7 +88,7 @@ $sessionFav = $_SESSION["prodsfavs"]
                     submitButton.disabled = true;
                 }
             }
-        }, 1000)
+        }, 1000);
     });
 </script>
 

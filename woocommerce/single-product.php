@@ -120,42 +120,124 @@ if ($attachment_ids) {
     });
   });
 </script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const scripts = document.querySelectorAll('script[src*="custom-script.js"]');
-    scripts.forEach(script => {
-      script.remove();
-      console.log("custom-script.js fue bloqueado");
-    });
-  });
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const productId = <?= $product->get_id(); ?>; // ID del producto actual
 
-    // Realizar la solicitud AJAX para cargar productos relacionados
-    fetch("<?= admin_url('admin-ajax.php'); ?>", {
+<script>
+ function initAddToFavoriteButtonSlider() {
+    $(".add-fav").on("click", function(e) {
+      e.preventDefault();
+
+      $(this).addClass("adding");
+      const getAtributeData = null
+      let productId = null;
+
+      const relatedSwiper = document.getElementById("related-swiper");
+      if (relatedSwiper) {
+        const slides = relatedSwiper.querySelectorAll(".swiper-slide");
+        const myButton = this;
+        const getAtributeData = myButton.getAttribute("data-product-id-slide");
+        myButton.classList.add("active-fav");
+        productId = getAtributeData;
+      } 
+      console.log(productId )
+      var sessionFav = JSON.parse(localStorage.getItem("sessionFav")) || [];
+
+      $.ajax({
+        url: ajaxUrl,
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+        data: {
+          action: "add_product_to_favorites",
+          prodid: productId,
         },
-        body: new URLSearchParams({
-          action: "load_related_products",
-          product_id: productId,
-        }),
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          document.getElementById('related-products-container').empty
-          document.getElementById('related-products-container').innerHTML = data.data;
-          relatedSliderswiper.init();
-          productColorVariants();
-        } else {
-          console.error(data.data);
-        }
-      })
-      .catch(error => console.error('Error al cargar productos relacionados:', error));
+        success: function(res) {
+          $(".add-fav").removeClass("adding");
+
+          if (!sessionFav.includes(Number(productId))) {
+            sessionFav.push(Number(productId));
+            localStorage.setItem("sessionFav", JSON.stringify(sessionFav));
+          } else {
+            deleteFavoriteSameContext(productId);
+            var alertElement = $("#showAlertDeleteFav");
+            alertElement.removeClass("d-none").show();
+
+            setTimeout(function() {
+              alertElement.hide().addClass("d-none");
+            }, 2200);
+            return;
+          }
+
+          var spanElement = document.getElementById("favoritesCounter");
+
+          if (!spanElement) {
+            spanElement = document.createElement("span");
+            spanElement.id = "favoritesCounter";
+            spanElement.className =
+              "cart-section-quantity rounded-pill position-absolute center-all text-white";
+            spanElement.textContent = "";
+            botonFav.appendChild(spanElement);
+          }
+
+          $("#favoritesCounter").text(res.counter).removeClass("d-none");
+          $(".offcanvas-body.ordenListFav.fav").html(res.html);
+          var alertElement = $("#showAlertAddFav");
+          alertElement.removeClass("d-none").show();
+
+          setTimeout(function() {
+            alertElement.hide().addClass("d-none");
+          }, 2200);
+        },
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const productId = <?= $product->get_id(); ?>;
+    const cacheKey = `related_products`;
+    const cacheExpiryKey = `related_products_expiry`;
+    const now = new Date().getTime();
+
+    // Verificar si los datos están en localStorage y no han expirado
+    const cachedData = localStorage.getItem(cacheKey);
+    const cacheExpiry = localStorage.getItem(cacheExpiryKey);
+
+    if (cachedData && cacheExpiry && now < parseInt(cacheExpiry)) {
+      // Si los datos están en caché y no han expirado, cargarlos directamente
+      document.getElementById('related-products-container').innerHTML = cachedData;
+      console.log("Cargando productos relacionados desde caché v2");
+      setTimeout(() => {
+        relatedSliderswiper.init();
+        initAddToFavoriteButtonSlider();
+      }, 200);
+      productColorVariants();
+    } else {
+      // Si no hay datos en caché o han expirado, realizar la solicitud AJAX
+      fetch("<?= admin_url('admin-ajax.php'); ?>", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            action: "load_related_products",
+            product_id: productId,
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Guardar la respuesta en localStorage
+            localStorage.setItem(cacheKey, data.data);
+            localStorage.setItem(cacheExpiryKey, now + 2 * 60 * 60 * 1000); // 2 horas en milisegundos
+
+            // Cargar los productos relacionados en el contenedor
+            document.getElementById('related-products-container').innerHTML = data.data;
+            relatedSliderswiper.init();
+            initAddToFavoriteButtonSlider();
+            productColorVariants();
+          } else {
+            console.error(data.data);
+          }
+        })
+        .catch(error => console.error('Error al cargar productos relacionados:', error));
+    }
   });
 </script>
 <?php get_footer() ?>

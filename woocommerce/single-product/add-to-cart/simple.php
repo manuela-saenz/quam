@@ -64,7 +64,6 @@ if ($product->is_in_stock()) : ?>
 	setTimeout(() => {
 		var targetNode = document.getElementById('add-sprod-favs');
 		var productId = targetNode.getAttribute('data-product-id');
-		console.log(productId)
 		var sessionFav = <?php echo json_encode($sessionFav); ?>;
 		if (!productId === 0) {
 			if (sessionFav.includes(productId)) {

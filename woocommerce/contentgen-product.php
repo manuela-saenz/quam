@@ -91,8 +91,8 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
         $color = $variation['attributes']['attribute_pa_color'];
         $size = $variation['attributes']['attribute_pa_talla']; // Asumiendo que 'attribute_pa_size' es el nombre del atributo de talla
         $variation_id = $variation_obj->get_id();
-        // $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_id), 'full'); // Tamaño optimizado
-        $image_array = wp_get_attachment_image_src(get_post_thumbnail_id($variation_id), 'medium_large');
+        $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_id), 'full'); // Tamaño optimizado
+        $image_array = wp_get_attachment_image_src(get_post_thumbnail_id($variation_id), 'full');
         $optimized_image_url = $image_array[0];
         $variation_title = removerTalla($variation_obj->get_name());
         $variation_permalink = get_permalink($variation_id);
@@ -134,7 +134,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
     $all_variants_json = htmlspecialchars(json_encode($all_variants), ENT_QUOTES, 'UTF-8');
 ?>
 
-    <li data-id="<?= $product_id; ?>" data-variants="<?= $all_variants_json; ?>" data-color-q="<?= $variant_data['color']; ?>">
+    <li <?php wc_product_class('', $product); ?> data-id="<?= $product_id; ?>" data-variants="<?= $all_variants_json; ?>" data-color-q="<?= $variant_data['color']; ?>">
         <div class="CardProducts w-100 position-relative <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
             <?php if ($discount > 0): ?>
                 <div class="discount position-absolute px-2 py-1 rounded-3 text-white lh-1">
@@ -145,7 +145,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
                 <a href="<?= $variation_permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex rounded-[10px] overflow-hidden mb-3 relative img-contain" title="<?= $variation_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                     <img src="<?= $optimized_image_url ?>" loading="lazy" data-href="<?= $variation_permalink ?>" data-src="<?= $optimized_image_url ?> " alt="<?= $variation_title ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail product-image" />
                 </a>
-                <button class="button-heart  d-flex add-fav position-absolute" id="add-sprod-favs" data-product-id="<?= $variation_id; ?>" type="button">
+                <button class="button-heart  d-flex add-fav position-absolute" id="add-sprod-favs" data-product-id-slide="<?= $variation_id; ?>" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
