@@ -62,19 +62,7 @@ if ($attachment_ids) {
           </button>
         </div>
         <button id="btn-single-mobile" class="quam-btn red d-lg-none open-selector w-100 sm-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Agregar al carrito</button>
-        <!-- <div class=" center-vertical justify-content-center mt-2 opacity-50 fw-medium gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-up">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M7 11l5 -5l5 5" />
-            <path d="M7 17l5 -5l5 5" />
-          </svg>
-          Más información
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevrons-up">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M7 11l5 -5l5 5" />
-            <path d="M7 17l5 -5l5 5" />
-          </svg>
-        </div> -->
+
       </div>
       <div class="d-md-none container">
         <p> <?= $product->get_short_description() ?></p>
@@ -84,7 +72,33 @@ if ($attachment_ids) {
           <?php woocommerce_output_product_data_tabs() ?>
         </div>
       </section>
-      <?php woocommerce_output_related_products() ?>
+      <?php //woocommerce_output_related_products() 
+      ?>
+      <section id="related-products-section" class="overflow-hidden">
+        <div class="container">
+          <h2>Productos relacionados</h2>
+          <div id="related-products-container">
+            <!-- Los productos relacionados se cargarán aquí -->
+            <div class="preview row">
+              <?php for ($i = 0; $i < 4; $i++): ?>
+                <div class="col-lg-3 col-sm-6 col-6 product type-product post-146 status-publish first outofstock has-post-thumbnail shipping-taxable purchasable product-type-variation loading" data-id="toastCardLoad">
+                  <div class="CardProducts w-100 placeholder-glow">
+                    <div class="img-contain placeholder w-100"></div>
+                    <div class="info-highlights opacity-25">
+                      <h5 class="col-12 placeholder md-2"></h5>
+                      <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
+                        <p class="mb-0 d-flex gap-2 placeholder col-6"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <?php endfor ?>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
       <section class=" d-md-none">
         <?php itemsFooter() ?>
       </section>
@@ -107,12 +121,41 @@ if ($attachment_ids) {
   });
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function() {
     const scripts = document.querySelectorAll('script[src*="custom-script.js"]');
     scripts.forEach(script => {
-        script.remove();
-        console.log("custom-script.js fue bloqueado");
+      script.remove();
+      console.log("custom-script.js fue bloqueado");
     });
-});
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const productId = <?= $product->get_id(); ?>; // ID del producto actual
+
+    // Realizar la solicitud AJAX para cargar productos relacionados
+    fetch("<?= admin_url('admin-ajax.php'); ?>", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          action: "load_related_products",
+          product_id: productId,
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('related-products-container').empty
+          document.getElementById('related-products-container').innerHTML = data.data;
+          relatedSliderswiper.init();
+          productColorVariants();
+        } else {
+          console.error(data.data);
+        }
+      })
+      .catch(error => console.error('Error al cargar productos relacionados:', error));
+  });
 </script>
 <?php get_footer() ?>

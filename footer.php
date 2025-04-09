@@ -32,6 +32,7 @@
 
 <!-- </section> -->
 
+
 </main>
 <section class="<?= is_single() ? ' d-none d-md-block' : '' ?>">
   <?php itemsFooter() ?>
@@ -110,7 +111,7 @@
   </div>
 </footer>
 <?php if (!is_archive()) { ?>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <?php } ?>
 <?php wp_footer(); ?>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
@@ -121,7 +122,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
 </script>
 
-<?php 
+<?php
 $random = rand(1000, 9999); // Genera un número aleatorio
 
 if (is_page(78)) { ?>
@@ -129,18 +130,18 @@ if (is_page(78)) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/stepper.js"> </script>
 <?php } ?>
 <?php if (is_archive()) { ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/order-products.js?v=<?php echo $random; ?>"></script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/order-products.js?v=<?php echo $random; ?>"></script>
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/function-general.js?v=<?php echo $random; ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?v=<?php echo $random; ?>"> </script>
 <?php if (is_product()) { ?>
-  <script src="<?php bloginfo('template_url') ?>/assets/js/product.js?v=<?php echo $random; ?>"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/product.js"> </script>
 <?php } ?>
 <?php if (!is_archive()) { ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js"> </script>
 <?php } ?>
 <?php if (is_page(1694)) { ?>
-<script src="<?php bloginfo('template_url') ?>/assets/js/form.js?v=<?php echo $random; ?>"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/form.js?v=<?php echo $random; ?>"> </script>
 <?php } ?>
 <script>
   document.addEventListener('DOMContentLoaded', function() {

@@ -39,7 +39,7 @@ if ($related_products) :
 			<?php endif; ?>
 
 			<div id="related-swiper" class="related-swiper swiper overflow-visible">
-			<div class="swiper-wrapper">
+				<div class="swiper-wrapper">
 					<?php if (!empty($related_products) && is_array($related_products)) :
 						global $post; // Definir la variable global para modificarla dentro del loop
 
@@ -51,10 +51,7 @@ if ($related_products) :
 								<?php wc_get_template_part('contentgen', 'product'); ?>
 							</div>
 					<?php
-
-
 						endforeach;
-
 						wp_reset_postdata(); // Restaurar el contexto global del post
 					endif; ?>
 				</div>

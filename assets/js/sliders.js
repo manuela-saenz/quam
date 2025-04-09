@@ -92,9 +92,9 @@ var homeSwiper = new Swiper(".generationSwiper", {
 });
 
 
-var swiper = new Swiper(".related-swiper", {
-  centeredSlides: true,
-  loop: true,
+var relatedSliderswiper = new Swiper(".related-swiper", {
+  centeredSlides: false,
+  loop: false,
   allowTouchMove: false,
   navigation: {
     nextEl: ".generation-arrows.next",
@@ -112,7 +112,6 @@ var swiper = new Swiper(".related-swiper", {
 
     200: {
       spaceBetween: 20,
-      loop: true,
       slidesPerView: 1.3,
     },
   },

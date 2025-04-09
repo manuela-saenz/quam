@@ -297,390 +297,464 @@ function get_all_product_categories_attributes_and_prices()
         $attributes = array();
         $prices = array(); ?>
 
-        
 
-            <?php // Iterar sobre cada producto
-            foreach ($products as $product_post) {
-                $product = wc_get_product($product_post->ID);
 
-                // Almacenar el precio del producto
-                $prices[] = $product->get_price();
+        <?php // Iterar sobre cada producto
+        foreach ($products as $product_post) {
+            $product = wc_get_product($product_post->ID);
 
-                // Obtener los atributos del producto
-                $product_attributes = $product->get_attributes();
+            // Almacenar el precio del producto
+            $prices[] = $product->get_price();
 
-                // Iterar sobre cada atributo y almacenarlo en el array de atributos si es usado para variaciones
-                foreach ($product_attributes as $attribute) {
-                    if ($attribute->get_variation()) { // Verifica si el atributo se usa para variaciones
-                        if ($attribute->is_taxonomy()) {
-                            $taxonomy = $attribute->get_taxonomy_object();
-                            $terms = wp_get_post_terms($product_post->ID, $attribute->get_name());
-                            foreach ($terms as $term) {
-                                $attributes[$taxonomy->attribute_label][$term->slug] = $term->name;
-                            }
-                        } else {
-                            $attribute_name = $attribute->get_name();
-                            $options = $attribute->get_options();
-                            foreach ($options as $option) {
-                                $attributes[$attribute_name][] = $option;
-                            }
+            // Obtener los atributos del producto
+            $product_attributes = $product->get_attributes();
+
+            // Iterar sobre cada atributo y almacenarlo en el array de atributos si es usado para variaciones
+            foreach ($product_attributes as $attribute) {
+                if ($attribute->get_variation()) { // Verifica si el atributo se usa para variaciones
+                    if ($attribute->is_taxonomy()) {
+                        $taxonomy = $attribute->get_taxonomy_object();
+                        $terms = wp_get_post_terms($product_post->ID, $attribute->get_name());
+                        foreach ($terms as $term) {
+                            $attributes[$taxonomy->attribute_label][$term->slug] = $term->name;
+                        }
+                    } else {
+                        $attribute_name = $attribute->get_name();
+                        $options = $attribute->get_options();
+                        foreach ($options as $option) {
+                            $attributes[$attribute_name][] = $option;
                         }
                     }
                 }
             }
+        }
 
-            // Eliminar duplicados en el array de atributos
-            foreach ($attributes as $key => $values) {
-                $attributes[$key] = array_unique($values);
-            }
+        // Eliminar duplicados en el array de atributos
+        foreach ($attributes as $key => $values) {
+            $attributes[$key] = array_unique($values);
+        }
 
-            // Calcular el precio mínimo y máximo de la categoría
-            $min_price = !empty($prices) ? min($prices) : 0;
-            $max_price = !empty($prices) ? max($prices) : 0;
+        // Calcular el precio mínimo y máximo de la categoría
+        $min_price = !empty($prices) ? min($prices) : 0;
+        $max_price = !empty($prices) ? max($prices) : 0;
 
-            // Añadir la categoría, sus atributos y precios al array final
-            $categories_data[$category->slug] = array(
-                'attributes' => $attributes,
-                'min_price' => $min_price,
-                'max_price' => $max_price,
+        // Añadir la categoría, sus atributos y precios al array final
+        $categories_data[$category->slug] = array(
+            'attributes' => $attributes,
+            'min_price' => $min_price,
+            'max_price' => $max_price,
+        );
+    }
+
+    return [$categories_data, $product_categories];
+}
+
+add_action('wp_ajax_load_products', 'load_products');
+add_action('wp_ajax_nopriv_load_products', 'load_products');
+function load_products()
+{
+    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+    $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+
+    $args = array(
+        'post_type' => array('product', 'product_variation'),
+        'paged' => $paged,
+        'product_cat' => $category,
+        'posts_per_page' => 5,
+    );
+
+    $query = new WP_Query($args);
+
+    $products = array(); // Array para almacenar los productos
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+
+            // Obtener datos del producto
+            $product = wc_get_product(get_the_ID());
+
+            $products[] = array(
+                'id' => $product->get_id(),
+                'name' => $product->get_name(),
+                'price' => $product->get_price(),
+                'image' => wp_get_attachment_image_src(get_post_thumbnail_id($product->get_id()), 'full')[0],
+                'permalink' => get_permalink($product->get_id()),
             );
         }
-
-        return [$categories_data, $product_categories];
     }
 
-    add_action('wp_ajax_load_products', 'load_products');
-    add_action('wp_ajax_nopriv_load_products', 'load_products');
-    function load_products()
-    {
-        $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
-        $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+    wp_reset_postdata();
 
-        $args = array(
-            'post_type' => array('product', 'product_variation'),
-            'paged' => $paged,
-            'product_cat' => $category,
-            'posts_per_page' => 5,
-        );
+    // Enviar respuesta en JSON
+    wp_send_json($products);
 
-        $query = new WP_Query($args);
-
-        $products = array(); // Array para almacenar los productos
-
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-
-                // Obtener datos del producto
-                $product = wc_get_product(get_the_ID());
-
-                $products[] = array(
-                    'id' => $product->get_id(),
-                    'name' => $product->get_name(),
-                    'price' => $product->get_price(),
-                    'image' => wp_get_attachment_image_src(get_post_thumbnail_id($product->get_id()), 'full')[0],
-                    'permalink' => get_permalink($product->get_id()),
-                );
-            }
-        }
-
-        wp_reset_postdata();
-
-        // Enviar respuesta en JSON
-        wp_send_json($products);
-
-        die();
-    }
+    die();
+}
 
 
-    add_action('template_redirect', 'apply_custom_coupon_code');
+add_action('template_redirect', 'apply_custom_coupon_code');
 
-    function apply_custom_coupon_code()
-    {
-        if (isset($_POST['codigo_descuento']) && !empty($_POST['codigo_descuento'])) {
-            $coupon_code = sanitize_text_field($_POST['codigo_descuento']);
-            $applied = WC()->cart->apply_coupon($coupon_code);
+function apply_custom_coupon_code()
+{
+    if (isset($_POST['codigo_descuento']) && !empty($_POST['codigo_descuento'])) {
+        $coupon_code = sanitize_text_field($_POST['codigo_descuento']);
+        $applied = WC()->cart->apply_coupon($coupon_code);
 
-            if ($applied) {
-                wc_print_notices();
-            } else {
-                wc_add_notice(__('El cupón no es válido.', 'woocommerce'), 'error');
-            }
-        }
-    }
-
-    add_filter('cron_schedules', 'custom_cron_interval');
-
-    function custom_cron_interval($schedules)
-    {
-        $schedules['every_five_minutes'] = array(
-            'interval' => 3, // 300 segundos = 5 minutos
-            'display'  => __('Cada 3 Minutos')
-        );
-        return $schedules;
-    }
-
-
-    add_action('wp', 'schedule_my_custom_cron_job');
-
-    function schedule_my_custom_cron_job()
-    {
-        if (!wp_next_scheduled('my_custom_cron_job')) {
-            wp_schedule_event(time(), 'every_five_minutes', 'my_custom_cron_job');
-        }
-    }
-
-    add_action('my_custom_cron_job', 'execute_my_function');
-
-    function execute_my_function()
-    {
-        // Cargar las clases necesarias de WooCommerce
-        if (!class_exists('WooCommerce')) {
-            error_log('WooCommerce no está instalado o activado.');
-            return;
-        }
-
-        // Obtener los pedidos pendientes de WooCommerce
-        $args = array(
-            'status' => 'pending', // Estado pendiente
-            'payment_method' => 'payulatam', // ID del método de pago PayU (debes confirmar el ID correcto)
-            'limit' => -1 // Sin límite para obtener todos los pedidos
-        );
-
-        $orders = wc_get_orders($args);
-
-        if (empty($orders)) {
-            error_log('No se encontraron pedidos pendientes con PayU.');
-            return;
-        }
-
-        foreach ($orders as $order) {
-            $order_id = $order->get_id();
-
-            // Preparar la solicitud a la API de PayU
-            $url = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
-            $body = array(
-                'test' => false,
-                'language' => 'en',
-                'command' => 'ORDER_DETAIL_BY_REFERENCE_CODE',
-                'merchant' => array(
-                    'apiLogin' => 'gbUeoK36Z6a55H8', // Reemplaza con tu API Login
-                    'apiKey' => '3Fe1XI463W6gVi6Wdo93zBi1Px' // Tu API Key
-                ),
-                'details' => array(
-                    'referenceCode' => strval($order_id) // Usar el ID del pedido como referencia
-                )
-            );
-
-            $args = array(
-                'body' => json_encode($body),
-                'headers' => array(
-                    'Content-Type' => 'application/json',
-                    'Accept' => 'application/json'
-                ),
-                'method' => 'POST'
-            );
-
-            // Hacer la solicitud
-            $response = wp_remote_post($url, $args);
-
-            if (is_wp_error($response)) {
-                error_log('Error en la solicitud a PayU: ' . $response->get_error_message());
-                continue;
-            }
-
-            $response_body = wp_remote_retrieve_body($response);
-            $data = json_decode($response_body, true);
-
-            if ($data) {
-                error_log('Respuesta de PayU para el pedido ' . $order_id . ': ' . print_r($data, true));
-            } else {
-                error_log('Error al procesar la respuesta de PayU para el pedido ' . $order_id);
-            }
-
-            if (isset($data['result']['payload'][0]['transactions'][0]['transactionResponse']['state'])) {
-                $transaction_state = $data['result']['payload'][0]['transactions'][0]['transactionResponse']['state'];
-
-                if ($transaction_state === 'APPROVED') {
-                    // Cambia el estado del pedido a 'processing'
-                    $order->update_status('processing', __('Payment approved by PayU.', 'your-text-domain'));
-                    error_log('El estado del pedido ' . $order_id . ' ha sido cambiado a procesando.');
-                }
-            }
-        }
-    }
-
-    add_action('wp_ajax_get_product_image', 'get_product_image');
-    add_action('wp_ajax_nopriv_get_product_image', 'get_product_image');
-
-    function get_product_image()
-    {
-        // Verificar los parámetros recibidos
-        if (isset($_POST['product_id']) && isset($_POST['data_slug'])) {
-            $product_id = intval($_POST['product_id']);
-            $data_slug = sanitize_text_field($_POST['data_slug']);
-
-            // Obtener el producto
-            $product = wc_get_product($product_id);
-
-            if ($product && $product->is_type('variable')) {
-                // Obtener las variaciones del producto
-                $variations = $product->get_available_variations();
-
-                foreach ($variations as $variation) {
-                    $variation_id = $variation['variation_id'];
-                    $attributes = $variation['attributes'];
-
-                    // Verificar si el atributo coincide con el data_slug
-                    if (isset($attributes['attribute_pa_color']) && $attributes['attribute_pa_color'] === $data_slug) {
-                        // Obtener la URL de la imagen de la variación
-                        $image_id = get_post_thumbnail_id($variation_id);
-                        $image_url = wp_get_attachment_url($image_id);
-
-                        // Devolver la URL de la imagen en formato JSON
-                        wp_send_json_success(array('image_url' => $image_url));
-                    }
-                }
-            }
-        }
-
-        // Si no se encuentra la imagen, devolver un error
-        wp_send_json_error(array('message' => 'Imagen no encontrada'));
-    }
-
-
-    add_action('wp_ajax_update_cart_count', 'update_cart_count');
-    add_action('wp_ajax_nopriv_update_cart_count', 'update_cart_count');
-    add_action('wp_ajax_my_custom_action', 'my_custom_function');
-    add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_function');
-
-    function my_custom_function()
-    {
-        // Declara la instancia aquí
-        $woocommerce = WC();
-
-        $cart_items = $woocommerce->cart->get_cart();
-        echo json_encode($cart_items);
-
-        wp_die();
-    }
-
-    function update_cart_count()
-    {
-        global $woocommerce;
-
-        if (WC()->cart) {
-            $count = WC()->cart->get_cart_contents_count();
-            ob_start();
-            ItemsCart();
-            $itemsCart = ob_get_clean();
-            $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $itemsCart);
-            $itemsCount = $woocommerce->cart->get_cart_contents_count();
-            $total_discount = 0;
-            $applied_coupons = $woocommerce->cart->get_applied_coupons();
-            // $coupon_details = $this->verifyCoupon($applied_coupons);
-
-            // Ahora, $coupon_details es un array que contiene los detalles de todos los cupones aplicados
-            $ValorTotalSinDescuento = $woocommerce->cart->get_cart_subtotal();
-            $ValorTotal = $woocommerce->cart->get_cart_total();
-            $DescuentoTotal = $woocommerce->cart->get_total_discount();
-
-            wp_send_json_success(array(
-                'count' => $count,
-                'itemsCart' => $buffer,
-                "discount" => $DescuentoTotal,
-                "quantity" => $itemsCount,
-                "subtotal" => $ValorTotalSinDescuento,
-                "discount_amount" => $total_discount,
-                "total" => $ValorTotal,
-            ));
+        if ($applied) {
+            wc_print_notices();
         } else {
-            wp_send_json_error(array('message' => 'Carrito no disponible'));
+            wc_add_notice(__('El cupón no es válido.', 'woocommerce'), 'error');
+        }
+    }
+}
+
+add_filter('cron_schedules', 'custom_cron_interval');
+
+function custom_cron_interval($schedules)
+{
+    $schedules['every_five_minutes'] = array(
+        'interval' => 3, // 300 segundos = 5 minutos
+        'display'  => __('Cada 3 Minutos')
+    );
+    return $schedules;
+}
+
+
+add_action('wp', 'schedule_my_custom_cron_job');
+
+function schedule_my_custom_cron_job()
+{
+    if (!wp_next_scheduled('my_custom_cron_job')) {
+        wp_schedule_event(time(), 'every_five_minutes', 'my_custom_cron_job');
+    }
+}
+
+add_action('my_custom_cron_job', 'execute_my_function');
+
+function execute_my_function()
+{
+    // Cargar las clases necesarias de WooCommerce
+    if (!class_exists('WooCommerce')) {
+        error_log('WooCommerce no está instalado o activado.');
+        return;
+    }
+
+    // Obtener los pedidos pendientes de WooCommerce
+    $args = array(
+        'status' => 'pending', // Estado pendiente
+        'payment_method' => 'payulatam', // ID del método de pago PayU (debes confirmar el ID correcto)
+        'limit' => -1 // Sin límite para obtener todos los pedidos
+    );
+
+    $orders = wc_get_orders($args);
+
+    if (empty($orders)) {
+        error_log('No se encontraron pedidos pendientes con PayU.');
+        return;
+    }
+
+    foreach ($orders as $order) {
+        $order_id = $order->get_id();
+
+        // Preparar la solicitud a la API de PayU
+        $url = 'https://api.payulatam.com/reports-api/4.0/service.cgi';
+        $body = array(
+            'test' => false,
+            'language' => 'en',
+            'command' => 'ORDER_DETAIL_BY_REFERENCE_CODE',
+            'merchant' => array(
+                'apiLogin' => 'gbUeoK36Z6a55H8', // Reemplaza con tu API Login
+                'apiKey' => '3Fe1XI463W6gVi6Wdo93zBi1Px' // Tu API Key
+            ),
+            'details' => array(
+                'referenceCode' => strval($order_id) // Usar el ID del pedido como referencia
+            )
+        );
+
+        $args = array(
+            'body' => json_encode($body),
+            'headers' => array(
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ),
+            'method' => 'POST'
+        );
+
+        // Hacer la solicitud
+        $response = wp_remote_post($url, $args);
+
+        if (is_wp_error($response)) {
+            error_log('Error en la solicitud a PayU: ' . $response->get_error_message());
+            continue;
+        }
+
+        $response_body = wp_remote_retrieve_body($response);
+        $data = json_decode($response_body, true);
+
+        if ($data) {
+            error_log('Respuesta de PayU para el pedido ' . $order_id . ': ' . print_r($data, true));
+        } else {
+            error_log('Error al procesar la respuesta de PayU para el pedido ' . $order_id);
+        }
+
+        if (isset($data['result']['payload'][0]['transactions'][0]['transactionResponse']['state'])) {
+            $transaction_state = $data['result']['payload'][0]['transactions'][0]['transactionResponse']['state'];
+
+            if ($transaction_state === 'APPROVED') {
+                // Cambia el estado del pedido a 'processing'
+                $order->update_status('processing', __('Payment approved by PayU.', 'your-text-domain'));
+                error_log('El estado del pedido ' . $order_id . ' ha sido cambiado a procesando.');
+            }
+        }
+    }
+}
+
+add_action('wp_ajax_get_product_image', 'get_product_image');
+add_action('wp_ajax_nopriv_get_product_image', 'get_product_image');
+
+function get_product_image()
+{
+    // Verificar los parámetros recibidos
+    if (isset($_POST['product_id']) && isset($_POST['data_slug'])) {
+        $product_id = intval($_POST['product_id']);
+        $data_slug = sanitize_text_field($_POST['data_slug']);
+
+        // Obtener el producto
+        $product = wc_get_product($product_id);
+
+        if ($product && $product->is_type('variable')) {
+            // Obtener las variaciones del producto
+            $variations = $product->get_available_variations();
+
+            foreach ($variations as $variation) {
+                $variation_id = $variation['variation_id'];
+                $attributes = $variation['attributes'];
+
+                // Verificar si el atributo coincide con el data_slug
+                if (isset($attributes['attribute_pa_color']) && $attributes['attribute_pa_color'] === $data_slug) {
+                    // Obtener la URL de la imagen de la variación
+                    $image_id = get_post_thumbnail_id($variation_id);
+                    $image_url = wp_get_attachment_url($image_id);
+
+                    // Devolver la URL de la imagen en formato JSON
+                    wp_send_json_success(array('image_url' => $image_url));
+                }
+            }
         }
     }
 
-    add_action('wp_ajax_update_favs', 'update_favs');
-    add_action('wp_ajax_nopriv_update_favs', 'update_favs');
+    // Si no se encuentra la imagen, devolver un error
+    wp_send_json_error(array('message' => 'Imagen no encontrada'));
+}
 
-    function update_favs()
-    {
-        if (isset($_POST['favs'])) {
-            $favs = json_decode(stripslashes($_POST['favs']));
-            $_SESSION["prodsfavs"] = $favs;
-            $count_favs = count($favs);
 
-            ob_start();
-            get_template_part("templates/components/mini", "favs");
-            $html = ob_get_clean();
-            echo json_encode(
-                array(
-                    "html" => $html,
-                    "count" => $count_favs,
-                )
-            );
-        }
+add_action('wp_ajax_update_cart_count', 'update_cart_count');
+add_action('wp_ajax_nopriv_update_cart_count', 'update_cart_count');
+add_action('wp_ajax_my_custom_action', 'my_custom_function');
+add_action('wp_ajax_nopriv_my_custom_action', 'my_custom_function');
+
+function my_custom_function()
+{
+    // Declara la instancia aquí
+    $woocommerce = WC();
+
+    $cart_items = $woocommerce->cart->get_cart();
+    echo json_encode($cart_items);
+
+    wp_die();
+}
+
+function update_cart_count()
+{
+    global $woocommerce;
+
+    if (WC()->cart) {
+        $count = WC()->cart->get_cart_contents_count();
+        ob_start();
+        ItemsCart();
+        $itemsCart = ob_get_clean();
+        $buffer = preg_replace('/<!--(.|\s)*?-->/', '', $itemsCart);
+        $itemsCount = $woocommerce->cart->get_cart_contents_count();
+        $total_discount = 0;
+        $applied_coupons = $woocommerce->cart->get_applied_coupons();
+        // $coupon_details = $this->verifyCoupon($applied_coupons);
+
+        // Ahora, $coupon_details es un array que contiene los detalles de todos los cupones aplicados
+        $ValorTotalSinDescuento = $woocommerce->cart->get_cart_subtotal();
+        $ValorTotal = $woocommerce->cart->get_cart_total();
+        $DescuentoTotal = $woocommerce->cart->get_total_discount();
+
+        wp_send_json_success(array(
+            'count' => $count,
+            'itemsCart' => $buffer,
+            "discount" => $DescuentoTotal,
+            "quantity" => $itemsCount,
+            "subtotal" => $ValorTotalSinDescuento,
+            "discount_amount" => $total_discount,
+            "total" => $ValorTotal,
+        ));
+    } else {
+        wp_send_json_error(array('message' => 'Carrito no disponible'));
+    }
+}
+
+add_action('wp_ajax_update_favs', 'update_favs');
+add_action('wp_ajax_nopriv_update_favs', 'update_favs');
+
+function update_favs()
+{
+    if (isset($_POST['favs'])) {
+        $favs = json_decode(stripslashes($_POST['favs']));
+        $_SESSION["prodsfavs"] = $favs;
+        $count_favs = count($favs);
+
+        ob_start();
+        get_template_part("templates/components/mini", "favs");
+        $html = ob_get_clean();
+        echo json_encode(
+            array(
+                "html" => $html,
+                "count" => $count_favs,
+            )
+        );
+    }
+    wp_die();
+}
+
+
+// function remove_unwanted_styles() {
+//     if (!is_user_logged_in()) {
+//         // Elimina Dashicons
+//         wp_dequeue_style('dashicons');
+//         wp_deregister_style('dashicons');
+
+//         // Elimina los estilos de Gutenberg
+//         wp_dequeue_style('wp-block-library');
+//         wp_deregister_style('wp-block-library');
+
+//         wp_dequeue_style('wp-block-library-theme');
+//         wp_deregister_style('wp-block-library-theme');
+
+//         // Elimina los estilos de AdDi (cambia el handle si es diferente)
+//         wp_dequeue_style('buy-now-pay-later-addi');
+//         wp_deregister_style('buy-now-pay-later-addi');
+
+//         // Elimina otros estilos de plugins como WooCommerce
+//         wp_dequeue_style('woocommerce-layout');
+//         wp_deregister_style('woocommerce-layout');
+
+//         wp_dequeue_style('woocommerce-smallscreen');
+//         wp_deregister_style('woocommerce-smallscreen');
+//     }
+// }
+// add_action('wp_enqueue_scripts', 'remove_unwanted_styles', 100);
+
+// Limpiar el caché cuando se modifica un producto
+function clear_product_cache($post_id)
+{
+    if (get_post_type($post_id) !== 'product') {
+        return;
+    }
+
+    $device_type = wp_is_mobile() ? 'mobile' : 'desktop';
+    $category_ids = wp_get_post_terms($post_id, 'product_cat', array('fields' => 'ids'));
+
+    foreach ($category_ids as $cat_id) {
+        delete_transient($device_type . '_product_cache_' . $cat_id);
+    }
+
+    // Limpiar caché de la tienda principal
+    delete_transient($device_type . '_product_cache_' . get_option('woocommerce_shop_page_id'));
+}
+
+// Hooks para eventos de productos
+add_action('woocommerce_update_product', 'clear_product_cache');
+add_action('woocommerce_delete_product', 'clear_product_cache');
+add_action('save_post_product', 'clear_product_cache');
+add_action('woocommerce_new_product', 'clear_product_cache');
+add_action('save_post_product', 'clear_product_cache', 10, 1);
+
+// Hook para cambios en categorías de productos
+add_action('edited_product_cat', function ($term_id) {
+    delete_transient('mobile_product_cache_' . $term_id);
+    delete_transient('desktop_product_cache_' . $term_id);
+});
+
+
+// Registrar el action para cargar productos relacionados
+add_action('wp_ajax_load_related_products', 'load_related_products');
+add_action('wp_ajax_nopriv_load_related_products', 'load_related_products');
+
+function load_related_products()
+{
+    // Verificar que la solicitud sea válida
+    if (!isset($_POST['product_id']) || !is_numeric($_POST['product_id'])) {
+        wp_send_json_error('ID de producto no válido.');
         wp_die();
     }
 
+    $product_id = intval($_POST['product_id']);
 
-    // function remove_unwanted_styles() {
-    //     if (!is_user_logged_in()) {
-    //         // Elimina Dashicons
-    //         wp_dequeue_style('dashicons');
-    //         wp_deregister_style('dashicons');
+    // Obtener las categorías del producto actual
+    $product_categories = wp_get_post_terms($product_id, 'product_cat', array('fields' => 'ids'));
 
-    //         // Elimina los estilos de Gutenberg
-    //         wp_dequeue_style('wp-block-library');
-    //         wp_deregister_style('wp-block-library');
+    // Configurar la consulta personalizada para productos relacionados
+    $args = array(
+        'post_type'      => 'product',
+        'posts_per_page' => 12, // Número de productos relacionados a mostrar
+        'post__not_in'   => array($product_id), // Excluir el producto actual
+        'tax_query'      => array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field'    => 'term_id',
+                'terms'    => $product_categories, // Mostrar productos de las mismas categorías
+            ),
+        ),
+    );
 
-    //         wp_dequeue_style('wp-block-library-theme');
-    //         wp_deregister_style('wp-block-library-theme');
+    $related_products_query = new WP_Query($args);
 
-    //         // Elimina los estilos de AdDi (cambia el handle si es diferente)
-    //         wp_dequeue_style('buy-now-pay-later-addi');
-    //         wp_deregister_style('buy-now-pay-later-addi');
+    if ($related_products_query->have_posts()) {
+        ob_start(); // Iniciar el buffer de salida 
+        ?>
+        <div id="related-swiper" class="related-swiper swiper overflow-visible">
+            <div class="swiper-wrapper">
+                <?php
+                while ($related_products_query->have_posts()) {
+                    $related_products_query->the_post();
+                ?>
+                    <div class="swiper-slide">
+                        <?php wc_get_template_part('contentgen', 'product'); // Usar la plantilla de WooCommerce 
+                        ?>
+                    </div>
+                <?php
+                }; ?>
+            </div>
+            <div class="arrow-prev-container d-none d-md-flex">
+                <button class="generation-arrows prev">
+                    <i class="icon-arrowline-left"> </i>
+                </button>
+            </div>
+            <div class="arrow-next-container d-none d-md-flex">
+                <button class="generation-arrows next">
+                    <i class="icon-arrowline-right"> </i>
+                </button>
+            </div>
+        </div>
 
-    //         // Elimina otros estilos de plugins como WooCommerce
-    //         wp_dequeue_style('woocommerce-layout');
-    //         wp_deregister_style('woocommerce-layout');
+<?php
 
-    //         wp_dequeue_style('woocommerce-smallscreen');
-    //         wp_deregister_style('woocommerce-smallscreen');
-    //     }
-    // }
-    // add_action('wp_enqueue_scripts', 'remove_unwanted_styles', 100);
+        wp_reset_postdata(); // Restaurar el contexto global del post
 
-    // Limpiar el caché cuando se modifica un producto
-    function clear_product_cache($post_id)
-    {
-        if (get_post_type($post_id) !== 'product') {
-            return;
-        }
-
-        $device_type = wp_is_mobile() ? 'mobile' : 'desktop';
-        $category_ids = wp_get_post_terms($post_id, 'product_cat', array('fields' => 'ids'));
-
-        foreach ($category_ids as $cat_id) {
-            delete_transient($device_type . '_product_cache_' . $cat_id);
-        }
-
-        // Limpiar caché de la tienda principal
-        delete_transient($device_type . '_product_cache_' . get_option('woocommerce_shop_page_id'));
+        $html = ob_get_clean(); // Obtener el contenido generado
+        wp_send_json_success($html); // Enviar el HTML como respuesta
+    } else {
+        wp_send_json_error('No se encontraron productos relacionados.');
     }
 
-    // Hooks para eventos de productos
-    add_action('woocommerce_update_product', 'clear_product_cache');
-    add_action('woocommerce_delete_product', 'clear_product_cache');
-    add_action('save_post_product', 'clear_product_cache');
-    add_action('woocommerce_new_product', 'clear_product_cache');
-    add_action('save_post_product', 'clear_product_cache', 10, 1);
-
-    // Hook para cambios en categorías de productos
-    add_action('edited_product_cat', function ($term_id) {
-        delete_transient('mobile_product_cache_' . $term_id);
-        delete_transient('desktop_product_cache_' . $term_id);
-    });
-
+    wp_die(); // Finalizar la ejecución
+}
 
     // function enqueue_scripts_with_product_count()
     // {

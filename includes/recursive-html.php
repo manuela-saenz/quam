@@ -41,15 +41,17 @@ function ItemsCart()
                         <p><b>Color:</b> <?= $color ?></p>
                     <?php } ?>
                 </div>
-
-                <div class="d-flex align-items-center price mb-3">
+                <?php
+                $product_categories = wp_get_post_terms($product_id, 'product_cat', array('fields' => 'slugs'));
+                ?>
+                <div class="d-flex align-items-center price mb-3 <?= $total_items >= 3 && in_array('polos-hombre', $product_categories) ? 'offer' : '' ?>">
                     <p><?= $_product->get_price_html() ?> COP</p>
                     <?php
-                    $product_categories = wp_get_post_terms($product_id, 'product_cat', array('fields' => 'slugs'));
+
                     if ($total_items >= 3 && in_array('polos-hombre', $product_categories)) : ?>
                         <ins id="price" data-category="polos-hombre" class="offer-price" aria-hidden="true" style="display: inline-block; margin-left: 5px;">
                             <span class="woocommerce-Price-amount amount">
-                                <bdi style="color: #002d72;font-weight: bold;">
+                                <bdi>
                                     <span class="woocommerce-Price-currencySymbol">$</span><?= number_format($PrecioProducto, 0, ',', '.') ?>
                                 </bdi>
                             </span>

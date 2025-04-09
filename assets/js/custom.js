@@ -312,15 +312,7 @@ function initAddToFavoriteButton() {
   });
 }
 
-$(".add-to-cart-container .add-btn").on("click", function () {
-  $(this)
-    .parent()
-    .parent()
-    .parent()
-    .find(".size-selection")
-    .addClass("show-colors");
-  $(this).addClass("hide-btn");
-});
+
 // $('.add_to_cart_button')
 
 function selectButtonCustom(){

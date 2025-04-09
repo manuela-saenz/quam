@@ -91,8 +91,8 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
         $color = $variation['attributes']['attribute_pa_color'];
         $size = $variation['attributes']['attribute_pa_talla']; // Asumiendo que 'attribute_pa_size' es el nombre del atributo de talla
         $variation_id = $variation_obj->get_id();
-        $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_id), 'full'); // Tamaño optimizado
-        $image_array = wp_get_attachment_image_src(get_post_thumbnail_id($variation_id), 'full');
+        // $variation_image = wp_get_attachment_image(get_post_thumbnail_id($variation_id), 'full'); // Tamaño optimizado
+        $image_array = wp_get_attachment_image_src(get_post_thumbnail_id($variation_id), 'medium_large');
         $optimized_image_url = $image_array[0];
         $variation_title = removerTalla($variation_obj->get_name());
         $variation_permalink = get_permalink($variation_id);
@@ -134,7 +134,7 @@ if ($product->is_type('variable') && $filter_color === null && $filter_talla ===
     $all_variants_json = htmlspecialchars(json_encode($all_variants), ENT_QUOTES, 'UTF-8');
 ?>
 
-    <li <?php wc_product_class('', $product); ?> data-id="<?= $product_id; ?>" data-variants="<?= $all_variants_json; ?>" data-color-q="<?= $variant_data['color']; ?>">
+    <li data-id="<?= $product_id; ?>" data-variants="<?= $all_variants_json; ?>" data-color-q="<?= $variant_data['color']; ?>">
         <div class="CardProducts w-100 position-relative <?= $variation_status ?>" data-stock="<?= $variation_status; ?>">
             <?php if ($discount > 0): ?>
                 <div class="discount position-absolute px-2 py-1 rounded-3 text-white lh-1">

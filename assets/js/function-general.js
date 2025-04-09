@@ -118,7 +118,7 @@ function initProductDiscount() {
     const allProductItems = getAllProductItems();
     const pathname = window.location.pathname;
     const isProductPage = pathname.includes("/polos-hombre/");
-    if(!isProductPage) return;
+    if (!isProductPage) return;
     allProductItems.forEach((productItem) => {
       const cardProduct = productItem.querySelector(".CardProducts");
       let infoHighlights = cardProduct.querySelector("#info-highlights");
@@ -997,7 +997,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+function productColorVariants() {
   const productElements = document.querySelectorAll("li[data-variants]");
 
   productElements.forEach((productElement) => {
@@ -1107,7 +1107,24 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
-});
+
+  $(".add-to-cart-container .add-btn").on("click", function () {
+    $(this)
+      .parent()
+      .parent()
+      .parent()
+      .find(".size-selection")
+      .addClass("show-colors");
+    $(this).addClass("hide-btn");
+  });
+  
+  console.log('funciona')
+}
+
+$(document).ready(() => {
+  productColorVariants();
+})
+
 
 document.addEventListener("DOMContentLoaded", function () {
   // Selecciona el contenedor que deseas observar
@@ -1136,10 +1153,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const allProductCards = targetNode.querySelectorAll(
           ".mini-cart-product-card"
         );
-      
+
         // Buscar el último que contenga un <ins> con data-category="polos-hombre"
         let lastMatchingCard = null;
-      
+
         allProductCards.forEach((card) => {
           const insElement = card.querySelector('ins[data-category="polos-hombre"]');
           if (insElement) {
@@ -1170,7 +1187,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // const pathname = window.location.pathname;
           // const isProductPage = pathname.includes("/polos-hombre/");
           // if(!isProductPage) return;
-          
+
           allProductItems.forEach((productItem) => {
             const cardProduct = productItem.querySelector(".CardProducts");
             if (!cardProduct) return; // Skip si no tiene CardProducts

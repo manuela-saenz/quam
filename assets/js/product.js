@@ -260,7 +260,7 @@ document.getElementById('shareBtnWhatsapp').addEventListener('click', function (
       elementoDos.append('<div class="swiper-scrollbar"></div>');
       elementoDos.addClass('SingProducts2 swiper');
       gallerySliders();
-    }, 2000)
+    }, 300)
     var elementoDataValue = elemento.attr('data-options');
     if (elementoDataValue) {
       elementoDataValue = JSON.parse(elementoDataValue);

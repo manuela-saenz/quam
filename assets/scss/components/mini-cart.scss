@@ -42,6 +42,8 @@
   }
 }
 
+
+
 .mini-cart-product-card {
   margin-bottom: 20px;
 
@@ -65,6 +67,16 @@
 
   h5 {
     font-size: 16px;
+  }
+  .offer{
+    p{
+      text-decoration: line-through;
+      font-weight: 500 !important;
+      opacity: 0.8;
+    }
+    ins{
+      font-weight: 700 ;
+    }
   }
 
   .quantity {
