@@ -1347,3 +1347,17 @@ document.addEventListener("DOMContentLoaded", function () {
   // Inicia el observer
   observer.observe(targetNode, config);
 });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Verificar si la URL contiene el parámetro "s"
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get("s");
+
+  if (searchQuery) {
+      const productList = document.getElementById("product-list");
+      if (productList) {
+          productList.classList.add("ready");
+      } 
+  }
+});
