@@ -43,28 +43,42 @@ class SyEAjaxRequest
 
     function send_mail_contact()
     {
-        $txtName = $_POST['name'];
-        $txtPhone = $_POST['phone'];
-        $txtEmail = $_POST['email'];
-        $txtMessage = $_POST['message'];
-        $txtConsult = $_POST['consult'];
-
+        // Sanitizar los datos recibidos
+        $txtName = sanitize_text_field($_POST['name']);
+        $txtPhone = sanitize_text_field($_POST['phone']);
+        $txtEmail = sanitize_email($_POST['email']);
+        $txtMessage = sanitize_textarea_field($_POST['message']);
+        $txtConsult = sanitize_text_field($_POST['consult']);
+    
+        // Validar el correo electrónico
+        if (!is_email($txtEmail)) {
+            http_response_code(400);
+            echo json_encode(array(
+                'status' => '400',
+                'message' => 'Correo electrónico no válido.'
+            ));
+            exit;
+        }
+    
         $headers[] = 'Content-Type: text/html; charset=UTF-8';
         $headers[] = 'From: Quam contacto';
-
+    
+        // Generar el cuerpo del correo para el cliente
         ob_start();
         include get_template_directory() . '/includes/bodyMails/contact-form-client.php';
         $body = ob_get_clean();
-
+    
         $mail1 = wp_mail($txtEmail, "Lo que nos cuentas es importante para nosotros", $body, $headers);
-
+    
+        // Generar el cuerpo del correo para el administrador
         $receptorEmail = 'legiestsas@gmail.com';
         ob_start();
         include get_template_directory() . '/includes/bodyMails/admin-mail-restor.php';
         $bodyReceptor = ob_get_clean();
-
+    
         $mail2 = wp_mail($receptorEmail, "Alguien quiere contactarse con Quam", $bodyReceptor, $headers);
-
+    
+        // Responder según el resultado del envío
         if ($mail1 && $mail2) {
             http_response_code(200);
             echo json_encode(array(
