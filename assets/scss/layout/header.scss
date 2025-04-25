@@ -33,13 +33,11 @@ header {
         }
       }
 
-     
-
       i {
         margin-right: 7px;
         font-size: 17px;
       }
-      @media (max-width: 768px){
+      @media (max-width: 768px) {
         width: 100%;
         justify-content: space-between;
       }
@@ -67,7 +65,6 @@ header {
       .nav_links {
         display: flex;
         width: 100%;
-
 
         @media (max-width: 768px) {
           display: flex;
@@ -167,10 +164,10 @@ header {
 
             a {
               font-size: 18px;
-      
+
               &:nth-child(1) {
                 border-top: 1px solid #ccc;
-      
+
                 @media (max-width: 1200px) {
                   border: none;
                 }
@@ -295,12 +292,12 @@ header {
               transform: translateY(-50%);
               color: black;
             }
-            @media (max-width:1200px) {
+            @media (max-width: 1200px) {
               input {
                 background: rgba(236, 236, 236, 0.2);
                 color: #fff;
                 width: 100%;
-                &::placeholder{
+                &::placeholder {
                   color: #ddd;
                 }
               }
@@ -312,7 +309,7 @@ header {
                 background: rgba(236, 236, 236, 0.2);
                 color: #fff;
                 width: 100%;
-                &::placeholder{
+                &::placeholder {
                   color: #ddd;
                 }
               }
@@ -332,14 +329,16 @@ header {
 
         h1 {
           @include center-all;
-          height: 100%;
-          margin-right: 20px;
-          width: 130px;
-          max-height: 9px;
         }
 
         .logo {
           display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          margin-right: 20px;
+          width: 130px;
+          max-height: 9px;
 
           @media (max-width: 991px) {
             transform: translate(0);
@@ -476,8 +475,6 @@ header {
         top: 71px;
         height: calc(100vh - 71px);
       }
-
-      
     }
   }
 
@@ -489,10 +486,10 @@ header {
       position: relative;
     }
     // @media (min-width: 991px) {
-      .header-contact,
-      .info-contact {
-        top: -50px;
-      }
+    .header-contact,
+    .info-contact {
+      top: -50px;
+    }
     // }
 
     .info-contact {
@@ -502,9 +499,8 @@ header {
       }
     }
     @media (max-width: 768px) {
-      
-     .mobile-menu {
-          padding-top: 80px !important;
+      .mobile-menu {
+        padding-top: 80px !important;
       }
     }
   }
@@ -544,7 +540,6 @@ header {
     font-weight: 700;
     font-size: 26px;
   }
- 
 
   .price {
     font-size: 17px;
@@ -586,7 +581,7 @@ header {
   }
 }
 // btn whatsapp
-.btn-whatsapp{
+.btn-whatsapp {
   width: 54px;
   height: 54px;
   right: 20px;
@@ -595,16 +590,16 @@ header {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 50%;
   cursor: pointer;
-  background:  #25D366;
+  background: #25d366;
   padding: 8px;
-  @media (max-width:990px) {
+  @media (max-width: 990px) {
     width: 45px;
     height: 45px;
     padding: 5px;
   }
 }
-.small{
-  transition: .2s;
+.small {
+  transition: 0.2s;
   bottom: 190px;
 }
 .btn-whatsapp:hover {
@@ -613,11 +608,11 @@ header {
 }
 
 // cont-header
-.rastreo-button{
+.rastreo-button {
   cursor: pointer;
   display: flex;
 }
-#track-package-form{
+#track-package-form {
   display: flex;
   align-items: center;
   position: relative;
