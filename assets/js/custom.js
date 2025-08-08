@@ -312,10 +312,9 @@ function initAddToFavoriteButton() {
   });
 }
 
-
 // $('.add_to_cart_button')
 
-function selectButtonCustom(){
+function selectButtonCustom() {
   const productElements = document.querySelectorAll("li[data-variants]");
 
   productElements.forEach((productElement) => {
@@ -416,7 +415,7 @@ function selectButtonCustom(){
         );
 
         if (selectedVariant) {
-          console.log('seleccionando desde lazy')
+          console.log("seleccionando desde lazy");
           const button = productElement.querySelector(".add_to_cart_button");
           button.setAttribute("data-variation_id", selectedVariant.id);
           addButtonCustomCartCategory(button);
@@ -447,6 +446,61 @@ function getCategoryFromURL() {
     return match[1]; // Devuelve la categoría encontrada
   }
   return null; // Devuelve null si no encuentra la categoría
+}
+
+function reorderProductsWithMinGap() {
+  const productList = document.getElementById("product-list");
+  if (!productList) return;
+
+  const allItems = Array.from(productList.querySelectorAll("li[data-father]"));
+  if (allItems.length <= 10) return;
+
+  const fixedItems = allItems.slice(0, 10); // Primeros 10 intactos
+  let itemsToReorder = allItems.slice(10); // Resto para procesar
+
+  const result = [...fixedItems]; // Lista final que armaremos
+
+  // Mapa para contar cuántos elementos desde el último insert por padre
+  const lastInsertedIndex = {};
+
+  // Recorremos todos los items que faltan
+  for (let i = 0; i < itemsToReorder.length; i++) {
+    const current = itemsToReorder[i];
+    const currentFather = current.getAttribute("data-father");
+
+    // Buscar una posición válida en "result" donde se respeten 4 de separación
+    let inserted = false;
+    for (let j = fixedItems.length; j <= result.length; j++) {
+      const before = result[j - 1];
+      const after = result[j];
+
+      const beforeFather = before?.getAttribute("data-father");
+      const afterFather = after?.getAttribute("data-father");
+
+      let tooClose = false;
+      for (let k = Math.max(0, j - 4); k < j + 4 && k < result.length; k++) {
+        if (result[k]?.getAttribute("data-father") === currentFather) {
+          tooClose = true;
+          break;
+        }
+      }
+
+      if (!tooClose) {
+        result.splice(j, 0, current);
+        inserted = true;
+        break;
+      }
+    }
+
+    // Si no se pudo insertar con espacio, lo ponemos al final
+    if (!inserted) {
+      result.push(current);
+    }
+  }
+
+  // Limpiamos y renderizamos el resultado final
+  productList.innerHTML = "";
+  result.forEach((item) => productList.appendChild(item));
 }
 
 function setVariantAll() {
@@ -530,11 +584,9 @@ jQuery(function ($) {
           $(document.body).trigger("wc_fragments_refreshed");
           $(document.body).trigger("wc_variation_form");
           loading = false;
-          
-        
 
           initAddToFavoriteButton();
-
+          reorderProductsWithMinGap();
           $(".add-to-cart-container .add-btn").on("click", function () {
             $(this)
               .parent()
