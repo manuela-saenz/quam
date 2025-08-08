@@ -1067,11 +1067,16 @@
   cursor: pointer;
 }
 
+.bulk_table{
+  margin-bottom: 35px; 
+}
+
 // configuraciones de la tabla
 .info-product .wdp_bulk_table_content {
   .wdp_pricing_table_caption {
     font-weight: 800;
     color: #000 !important;
+    display: none;
   }
 
   .wdp_pricing_table {
