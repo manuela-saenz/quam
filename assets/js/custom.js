@@ -455,8 +455,8 @@ function reorderProductsWithMinGap() {
   const allItems = Array.from(productList.querySelectorAll("li[data-father]"));
   if (allItems.length <= 10) return;
 
-  const fixedItems = allItems.slice(0, 10); // Primeros 10 intactos
-  let itemsToReorder = allItems.slice(10); // Resto para procesar
+  const fixedItems = allItems.slice(0, 20); // Primeros 10 intactos
+  let itemsToReorder = allItems.slice(20); // Resto para procesar
 
   const result = [...fixedItems]; // Lista final que armaremos
 

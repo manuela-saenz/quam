@@ -753,7 +753,7 @@ function load_related_products()
         wp_send_json_error('No se encontraron productos relacionados.');
     }
 
-    wp_die(); // Finalizar la ejecución
+    wp_die(); 
 }
 
     // function enqueue_scripts_with_product_count()
