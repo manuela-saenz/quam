@@ -62,6 +62,15 @@ function arphabet_widgets_init()
 }
 add_action('widgets_init', 'arphabet_widgets_init');
 
+function allow_webp_avif_svg_uploads($mime_types)
+{
+    $mime_types['webp'] = 'image/webp';
+	$mime_types['svg'] = 'image/svg+xml';
+    $mime_types['avif'] = 'image/avif';
+    return $mime_types;
+}
+add_filter('upload_mimes', 'allow_webp_avif_svg_uploads');
+
 
 function variations_visibility_all_pages($requires_shop_settings)
 {
@@ -756,36 +765,53 @@ function load_related_products()
     wp_die(); 
 }
 
-    // function enqueue_scripts_with_product_count()
-    // {
-        
-    //     wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/custom-script.js', array('jquery'), null, true);
-    //     // Obtén el slug de la categoría desde la URL
-    //     $category_slug = get_query_var('product_cat'); // 'product_cat' es la taxonomía de categorías de productos en WooCommerce
+// function enqueue_scripts_with_product_count()
+// {
 
-    //     // Configuración de la consulta
-    //     $args = array(
-    //         'post_type'      => 'product', // Tipo de post: productos
-    //         'posts_per_page' => -1,        // Sin límite de productos
-    //         'tax_query'      => array(
-    //             array(
-    //                 'taxonomy' => 'product_cat', // Taxonomía de categorías de productos
-    //                 'field'    => 'slug',       // Buscar por slug
-    //                 'terms'    => $category_slug, // Slug de la categoría desde la URL
-    //             ),
-    //         ),
-    //     );
+//     wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/custom-script.js', array('jquery'), null, true);
+//     // Obtén el slug de la categoría desde la URL
+//     $category_slug = get_query_var('product_cat'); // 'product_cat' es la taxonomía de categorías de productos en WooCommerce
 
-    //     // Realiza la consulta
-    //     $query = new WP_Query($args);
-    //     $product_count = $query->found_posts; // Cantidad de productos encontrados
+//     // Configuración de la consulta
+//     $args = array(
+//         'post_type'      => 'product', // Tipo de post: productos
+//         'posts_per_page' => -1,        // Sin límite de productos
+//         'tax_query'      => array(
+//             array(
+//                 'taxonomy' => 'product_cat', // Taxonomía de categorías de productos
+//                 'field'    => 'slug',       // Buscar por slug
+//                 'terms'    => $category_slug, // Slug de la categoría desde la URL
+//             ),
+//         ),
+//     );
 
-    //     // Limpia la consulta
-    //     wp_reset_postdata();
+//     // Realiza la consulta
+//     $query = new WP_Query($args);
+//     $product_count = $query->found_posts; // Cantidad de productos encontrados
 
-    //     // Pasar la cantidad de productos al script
-    //     wp_localize_script('order-products', 'productData', array(
-    //         'productCount' => $product_count,
-    //     ));
-    // }
-    // add_action('wp_enqueue_scripts', 'enqueue_scripts_with_product_count');
+//     // Limpia la consulta
+//     wp_reset_postdata();
+
+//     // Pasar la cantidad de productos al script
+//     wp_localize_script('order-products', 'productData', array(
+//         'productCount' => $product_count,
+//     ));
+// }
+// add_action('wp_enqueue_scripts', 'enqueue_scripts_with_product_count');
+
+function ajustar_tamano_medium_sin_crop()
+{
+    update_option('medium_crop', 0); // Desactiva el recorte para tamaño medium
+    update_option('medium_size_w', 300);
+    update_option('medium_size_h', 300);
+}
+add_action('after_setup_theme', 'ajustar_tamano_medium_sin_crop');
+
+
+add_filter('woocommerce_get_image_size_thumbnail', function ($size) {
+    return array(
+        'width'  => 300,
+        'height' => 300,
+        'crop'   => 0, 
+    );
+});
