@@ -48,21 +48,23 @@ if ($color) {
     $product_permalink = get_permalink($product_id);
     $product_price_html = $product->get_price_html() . " COP";
     $product_status = $product->get_stock_status();
+    // Category product solo uno
+    $product_categories = get_the_terms($product_id, 'product_cat');
+    // print_r($product_categories[0]->slug);
 ?>
-    <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>">
-        <a href="<?= $product_permalink ?>" class="CardProducts w-100" data-stock="<?= $product_status; ?>">
-            <div class="img-contain bb" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
+    <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>" data-category="polos-hombre">
+        <a href="<?= $product_permalink ?>" class="CardProducts w-100 <?= $product_status ?>" data-stock="<?= $product_status; ?>">
+            <div class="img-contain bb center-all" title="<?= $product_title ?>" data-src="<?= get_the_post_thumbnail_url() ?>">
                 <?= $image ?>
             </div>
-            <div class="info-highlights">
+            <div id="info-highlights" class="info-highlights" data-category="polos-hombre">
                 <h5 title="<?= $product_title ?>"><?= $product_title ?></h5>
-                <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row">
+                <div class="d-flex align-items-lg-center align-items-start flex-column flex-sm-row price">
                     <p class="mb-0 d-flex gap-2"><?= $product_price_html ?></p>
                 </div>
             </div>
         </a>
     </div>
-
 <?php endif; ?>
 
 <?php

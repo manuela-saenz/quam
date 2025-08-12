@@ -316,40 +316,33 @@ if (!empty($description)) {
 
         <?php
         if (woocommerce_product_loop()) {
+
             woocommerce_product_loop_start();
 
             if (wc_get_loop_prop('total')) {
-                // Configuración del caché según el dispositivo
-                $device_type = wp_is_mobile() ? 'mobile' : 'desktop';
-                $cache_key = $device_type . '_product_cache_' . get_queried_object_id(); // Añade el ID de la página actual
-                $cache_expiration = HOUR_IN_SECONDS; // 1 hora de caché
+                while (have_posts()) {
+                    the_post();
 
-                // Intenta obtener el caché existente
-                $cached_output = get_transient($cache_key);
+                    /**
+                     * Hook: woocommerce_shop_loop.
+                     */
+                    do_action('woocommerce_shop_loop');
 
-                if ($cached_output === false) {
-                    ob_start(); // Inicia el buffer
-
-                    while (have_posts()) {
-                        the_post();
-                        do_action('woocommerce_shop_loop');
-
-                        if (is_front_page()) {
-                            // Código para la página principal
-                            // wc_get_template_part('content', 'product-home');
-                        } else {
-                            wc_get_template_part('content', 'product');
-                        }
-                    }
-
-                    $cached_output = ob_get_clean(); // Obtiene el contenido del buffer
-                    set_transient($cache_key, $cached_output, $cache_expiration); // Guarda en caché
+                    wc_get_template_part('content', 'product'); ?>
+                    <?php //wc_get_template_part('content', 'producto'); 
+                    ?>
+        <?php
                 }
-
-                echo $cached_output; // Imprime el contenido (sea desde caché o recién generado)
             }
 
             woocommerce_product_loop_end();
+
+            /**
+             * Hook: woocommerce_after_shop_loop.
+             *
+             * @hooked woocommerce_pagination - 10
+             */
+            do_action('woocommerce_after_shop_loop');
         } else {
             /**
              * Hook: woocommerce_no_products_found.
@@ -359,6 +352,7 @@ if (!empty($description)) {
             do_action('woocommerce_no_products_found');
         }
         ?>
+
 
         <!-- <nav aria-label="Page navigation example d-none" >
             <ul class="pagination">

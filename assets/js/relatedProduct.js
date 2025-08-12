@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("paso aqui");
   const cacheKey = `related_products`;
   const cacheExpiryKey = `related_products_expiry`;
   const now = new Date().getTime();
