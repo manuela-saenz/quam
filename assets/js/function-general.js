@@ -1276,7 +1276,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           });
         }
-        console.log("hola aqui");
         if (lastMatchingCard) {
       
           // Extrae el precio del elemento con ID "price"
@@ -1293,7 +1292,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
           allProductItems.forEach((productItem) => {
             const cardProduct = productItem.querySelector(".CardProducts");
-            console.log(cardProduct);
             if (!cardProduct) return; // Skip si no tiene CardProducts
 
             let infoHighlights = cardProduct.querySelector(

@@ -51,6 +51,15 @@ if ($color) {
     // Category product solo uno
     $product_categories = get_the_terms($product_id, 'product_cat');
     // print_r($product_categories[0]->slug);
+    $thumbnail_url = get_the_post_thumbnail_url($product_id, 'full');
+    //Condiciona que no aparezca productos que esten agotados
+    if (
+        $product_status === 'outofstock' ||
+        strpos($image, 'woocommerce-placeholder') !== false
+    ) {
+        return;
+    }
+
 ?>
     <div <?php wc_product_class('col-lg-3 col-sm-6 col-6', $product); ?> data-id="<?= $product_id; ?>" data-category="polos-hombre">
         <a href="<?= $product_permalink ?>" class="CardProducts w-100 <?= $product_status ?>" data-stock="<?= $product_status; ?>">
