@@ -42,7 +42,9 @@
 
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
+    
   </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/relatedProduct.js?v=<?php echo $random; ?>"> </script>
   <!-- Google tag (gtag.js) -->
   <?php
   wp_meta();

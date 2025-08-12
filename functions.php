@@ -695,29 +695,33 @@ add_action('edited_product_cat', function ($term_id) {
 add_action('wp_ajax_load_related_products', 'load_related_products');
 add_action('wp_ajax_nopriv_load_related_products', 'load_related_products');
 
-function load_related_products()
-{
-    // Verificar que la solicitud sea válida
+function load_related_products() {
     if (!isset($_POST['product_id']) || !is_numeric($_POST['product_id'])) {
         wp_send_json_error('ID de producto no válido.');
         wp_die();
     }
 
     $product_id = intval($_POST['product_id']);
+    $cache_key  = 'related_products_html_' . $product_id;
 
-    // Obtener las categorías del producto actual
+    // Intentar obtener de la caché
+    $html = get_transient($cache_key);
+    if ($html) {
+        wp_send_json_success($html);
+        wp_die();
+    }
+
     $product_categories = wp_get_post_terms($product_id, 'product_cat', array('fields' => 'ids'));
 
-    // Configurar la consulta personalizada para productos relacionados
     $args = array(
         'post_type'      => 'product',
-        'posts_per_page' => 12, // Número de productos relacionados a mostrar
-        'post__not_in'   => array($product_id), // Excluir el producto actual
+        'posts_per_page' => 12,
+        'post__not_in'   => array($product_id),
         'tax_query'      => array(
             array(
                 'taxonomy' => 'product_cat',
                 'field'    => 'term_id',
-                'terms'    => $product_categories, // Mostrar productos de las mismas categorías
+                'terms'    => $product_categories,
             ),
         ),
     );
@@ -725,45 +729,43 @@ function load_related_products()
     $related_products_query = new WP_Query($args);
 
     if ($related_products_query->have_posts()) {
-        ob_start(); // Iniciar el buffer de salida 
+        ob_start();
         ?>
         <div id="related-swiper" class="related-swiper swiper overflow-visible">
             <div class="swiper-wrapper">
-                <?php
-                while ($related_products_query->have_posts()) {
-                    $related_products_query->the_post();
-                ?>
+                <?php while ($related_products_query->have_posts()) : $related_products_query->the_post(); ?>
                     <div class="swiper-slide">
-                        <?php wc_get_template_part('contentgen', 'product'); // Usar la plantilla de WooCommerce 
-                        ?>
+                        <?php wc_get_template_part('contentgen', 'product'); ?>
                     </div>
-                <?php
-                }; ?>
+                <?php endwhile; ?>
             </div>
             <div class="arrow-prev-container d-none d-md-flex">
                 <button class="generation-arrows prev">
-                    <i class="icon-arrowline-left"> </i>
+                    <i class="icon-arrowline-left"></i>
                 </button>
             </div>
             <div class="arrow-next-container d-none d-md-flex">
                 <button class="generation-arrows next">
-                    <i class="icon-arrowline-right"> </i>
+                    <i class="icon-arrowline-right"></i>
                 </button>
             </div>
         </div>
+        <?php
+        wp_reset_postdata();
 
-<?php
+        $html = ob_get_clean();
 
-        wp_reset_postdata(); // Restaurar el contexto global del post
+        // Guardar en caché por 12 horas
+        set_transient($cache_key, $html, 12 * HOUR_IN_SECONDS);
 
-        $html = ob_get_clean(); // Obtener el contenido generado
-        wp_send_json_success($html); // Enviar el HTML como respuesta
+        wp_send_json_success($html);
     } else {
         wp_send_json_error('No se encontraron productos relacionados.');
     }
 
-    wp_die(); 
+    wp_die();
 }
+
 
 // function enqueue_scripts_with_product_count()
 // {
