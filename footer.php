@@ -134,6 +134,7 @@ if (is_page(78)) { ?>
 <?php } ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/function-general.js?v=<?php echo $random; ?>"> </script>
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?v=<?php echo $random; ?>"> </script>
+<script src="<?php bloginfo('template_url') ?>/assets/js/relatedProduct.js?v=<?php echo $random; ?>"> </script>
 <?php if (is_product()) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/product.js"> </script>
 <?php } ?>
