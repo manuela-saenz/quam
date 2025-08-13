@@ -9,12 +9,13 @@
 @import "envio-transporte";
 @import 'metodos-pago';
 
-.section-title-common-content, .section-subtitle-common-content{
+.section-title-common-content,
+.section-subtitle-common-content {
     font-weight: bold;
     color: $dark_blue;
 }
 
-.section-title-common-content{
+.section-title-common-content {
     font-size: 20px;
     border-bottom: 2px solid $red;
     text-transform: uppercase;
@@ -22,9 +23,10 @@
     align-items: center;
     line-height: 1;
     font-weight: 800;
-    span{
+
+    span {
         background: $red;
-        padding:8px 5px;
+        padding: 8px 5px;
         border-radius: 5px 5px 0 0;
         display: block;
         margin-right: 10px;
@@ -32,17 +34,18 @@
     }
 }
 
-.section-subtitle-common-content{
+.section-subtitle-common-content {
     font-size: 18px;
 }
 
 
 
 
-.terms-box{
+.terms-box {
     position: relative;
     padding: 45px 30px;
-    &::after{
+
+    &::after {
         content: "";
         position: absolute;
         right: 0;
@@ -52,10 +55,25 @@
         background: $dark_blue;
         z-index: -1;
     }
-    h5{
+
+    h5 {
         font-size: 25px;
     }
-    p{
+
+    p {
         font-size: 18px;
     }
+}
+
+
+.swiper-slide {
+    .CardProducts {
+        .img-contain,
+        .img-fit {
+            @media (max-width: 768px) {
+                height: auto;
+            }
+        }
+    }
+
 }

@@ -62,6 +62,15 @@ function arphabet_widgets_init()
 }
 add_action('widgets_init', 'arphabet_widgets_init');
 
+function allow_webp_avif_svg_uploads($mime_types)
+{
+    $mime_types['webp'] = 'image/webp';
+    $mime_types['svg'] = 'image/svg+xml';
+    $mime_types['avif'] = 'image/avif';
+    return $mime_types;
+}
+add_filter('upload_mimes', 'allow_webp_avif_svg_uploads');
+
 
 function variations_visibility_all_pages($requires_shop_settings)
 {
@@ -246,17 +255,17 @@ function get_products_by_category_name($category_name)
     }
 }
 
-// function randomCode()
-// {
-//     $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-//     $codigo = '';
+function randomCode()
+{
+    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $codigo = '';
 
-//     for ($i = 0; $i < 6; $i++) {
-//         $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
-//     }
+    for ($i = 0; $i < 6; $i++) {
+        $codigo .= $caracteres[rand(0, strlen($caracteres) - 1)];
+    }
 
-//     return $codigo;
-// }
+    return $codigo;
+}
 
 
 function custom_woocommerce_products_per_page($products_per_page)
@@ -623,32 +632,32 @@ function update_favs()
 }
 
 
-// function remove_unwanted_styles() {
-//     if (!is_user_logged_in()) {
-//         // Elimina Dashicons
-//         wp_dequeue_style('dashicons');
-//         wp_deregister_style('dashicons');
+function remove_unwanted_sources()
+{
+    if (!is_user_logged_in()) {
 
-//         // Elimina los estilos de Gutenberg
-//         wp_dequeue_style('wp-block-library');
-//         wp_deregister_style('wp-block-library');
+        // WooCommerce Blocks (Gutenberg
+        wp_dequeue_style('wc-blocks-style');
+        wp_deregister_style('wc-blocks-style');
 
-//         wp_dequeue_style('wp-block-library-theme');
-//         wp_deregister_style('wp-block-library-theme');
+        // WooCommerce Single Product scripts
+        wp_dequeue_script('wc-single-product');
+        wp_dequeue_script('zoom');
 
-//         // Elimina los estilos de AdDi (cambia el handle si es diferente)
-//         wp_dequeue_style('buy-now-pay-later-addi');
-//         wp_deregister_style('buy-now-pay-later-addi');
+        // WooCommerce Photoswipe
+        wp_dequeue_style('photoswipe');
+        wp_dequeue_style('photoswipe-default-skin');
+        wp_dequeue_script('photoswipe-ui-default');
 
-//         // Elimina otros estilos de plugins como WooCommerce
-//         wp_dequeue_style('woocommerce-layout');
-//         wp_deregister_style('woocommerce-layout');
+        // Estilos de Woo Product Variation Gallery
+        wp_dequeue_style('swiper');
 
-//         wp_dequeue_style('woocommerce-smallscreen');
-//         wp_deregister_style('woocommerce-smallscreen');
-//     }
-// }
-// add_action('wp_enqueue_scripts', 'remove_unwanted_styles', 100);
+        // WooCommerce Brands (si existe este handle)
+        wp_dequeue_style('woocommerce-blockstyle');
+        wp_deregister_style('woocommerce-blockstyle');
+    }
+}
+add_action('wp_enqueue_scripts', 'remove_unwanted_sources', 100);
 
 // Limpiar el caché cuando se modifica un producto
 function clear_product_cache($post_id)
@@ -688,27 +697,32 @@ add_action('wp_ajax_nopriv_load_related_products', 'load_related_products');
 
 function load_related_products()
 {
-    // Verificar que la solicitud sea válida
     if (!isset($_POST['product_id']) || !is_numeric($_POST['product_id'])) {
         wp_send_json_error('ID de producto no válido.');
         wp_die();
     }
 
     $product_id = intval($_POST['product_id']);
+    $cache_key  = 'related_products_html_' . $product_id;
 
-    // Obtener las categorías del producto actual
+    // Intentar obtener de la caché
+    $html = get_transient($cache_key);
+    if ($html) {
+        wp_send_json_success($html);
+        wp_die();
+    }
+
     $product_categories = wp_get_post_terms($product_id, 'product_cat', array('fields' => 'ids'));
 
-    // Configurar la consulta personalizada para productos relacionados
     $args = array(
         'post_type'      => 'product',
-        'posts_per_page' => 12, // Número de productos relacionados a mostrar
-        'post__not_in'   => array($product_id), // Excluir el producto actual
+        'posts_per_page' => 12,
+        'post__not_in'   => array($product_id),
         'tax_query'      => array(
             array(
                 'taxonomy' => 'product_cat',
                 'field'    => 'term_id',
-                'terms'    => $product_categories, // Mostrar productos de las mismas categorías
+                'terms'    => $product_categories,
             ),
         ),
     );
@@ -716,76 +730,105 @@ function load_related_products()
     $related_products_query = new WP_Query($args);
 
     if ($related_products_query->have_posts()) {
-        ob_start(); // Iniciar el buffer de salida 
+        ob_start();
         ?>
         <div id="related-swiper" class="related-swiper swiper overflow-visible">
             <div class="swiper-wrapper">
-                <?php
-                while ($related_products_query->have_posts()) {
-                    $related_products_query->the_post();
-                ?>
+                <?php while ($related_products_query->have_posts()) : $related_products_query->the_post(); ?>
                     <div class="swiper-slide">
-                        <?php wc_get_template_part('contentgen', 'product'); // Usar la plantilla de WooCommerce 
-                        ?>
+                        <?php wc_get_template_part('contentgen', 'product'); ?>
                     </div>
-                <?php
-                }; ?>
+                <?php endwhile; ?>
             </div>
             <div class="arrow-prev-container d-none d-md-flex">
                 <button class="generation-arrows prev">
-                    <i class="icon-arrowline-left"> </i>
+                    <i class="icon-arrowline-left"></i>
                 </button>
             </div>
             <div class="arrow-next-container d-none d-md-flex">
                 <button class="generation-arrows next">
-                    <i class="icon-arrowline-right"> </i>
+                    <i class="icon-arrowline-right"></i>
                 </button>
             </div>
         </div>
-
 <?php
+        wp_reset_postdata();
 
-        wp_reset_postdata(); // Restaurar el contexto global del post
+        $html = ob_get_clean();
 
-        $html = ob_get_clean(); // Obtener el contenido generado
-        wp_send_json_success($html); // Enviar el HTML como respuesta
+        // Guardar en caché por 12 horas
+        set_transient($cache_key, $html, 12 * HOUR_IN_SECONDS);
+
+        wp_send_json_success($html);
     } else {
         wp_send_json_error('No se encontraron productos relacionados.');
     }
 
-    wp_die(); // Finalizar la ejecución
+    wp_die();
 }
 
-    // function enqueue_scripts_with_product_count()
-    // {
-        
-    //     wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/custom-script.js', array('jquery'), null, true);
-    //     // Obtén el slug de la categoría desde la URL
-    //     $category_slug = get_query_var('product_cat'); // 'product_cat' es la taxonomía de categorías de productos en WooCommerce
 
-    //     // Configuración de la consulta
-    //     $args = array(
-    //         'post_type'      => 'product', // Tipo de post: productos
-    //         'posts_per_page' => -1,        // Sin límite de productos
-    //         'tax_query'      => array(
-    //             array(
-    //                 'taxonomy' => 'product_cat', // Taxonomía de categorías de productos
-    //                 'field'    => 'slug',       // Buscar por slug
-    //                 'terms'    => $category_slug, // Slug de la categoría desde la URL
-    //             ),
-    //         ),
-    //     );
+// function enqueue_scripts_with_product_count()
+// {
 
-    //     // Realiza la consulta
-    //     $query = new WP_Query($args);
-    //     $product_count = $query->found_posts; // Cantidad de productos encontrados
+//     wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/custom-script.js', array('jquery'), null, true);
+//     // Obtén el slug de la categoría desde la URL
+//     $category_slug = get_query_var('product_cat'); // 'product_cat' es la taxonomía de categorías de productos en WooCommerce
 
-    //     // Limpia la consulta
-    //     wp_reset_postdata();
+//     // Configuración de la consulta
+//     $args = array(
+//         'post_type'      => 'product', // Tipo de post: productos
+//         'posts_per_page' => -1,        // Sin límite de productos
+//         'tax_query'      => array(
+//             array(
+//                 'taxonomy' => 'product_cat', // Taxonomía de categorías de productos
+//                 'field'    => 'slug',       // Buscar por slug
+//                 'terms'    => $category_slug, // Slug de la categoría desde la URL
+//             ),
+//         ),
+//     );
 
-    //     // Pasar la cantidad de productos al script
-    //     wp_localize_script('order-products', 'productData', array(
-    //         'productCount' => $product_count,
-    //     ));
-    // }
-    // add_action('wp_enqueue_scripts', 'enqueue_scripts_with_product_count');
+//     // Realiza la consulta
+//     $query = new WP_Query($args);
+//     $product_count = $query->found_posts; // Cantidad de productos encontrados
+
+//     // Limpia la consulta
+//     wp_reset_postdata();
+
+//     // Pasar la cantidad de productos al script
+//     wp_localize_script('order-products', 'productData', array(
+//         'productCount' => $product_count,
+//     ));
+// }
+// add_action('wp_enqueue_scripts', 'enqueue_scripts_with_product_count');
+
+function ajustar_tamano_medium_sin_crop()
+{
+    update_option('medium_crop', 0); // Desactiva el recorte para tamaño medium
+    update_option('medium_size_w', 300);
+    update_option('medium_size_h', 300);
+}
+add_action('after_setup_theme', 'ajustar_tamano_medium_sin_crop');
+
+
+add_filter('woocommerce_get_image_size_thumbnail', function ($size) {
+    return array(
+        'width'  => 300,
+        'height' => 300,
+        'crop'   => 0,
+    );
+});
+
+
+
+add_filter( 'woocommerce_available_variation', function( $variation_data, $product, $variation ) {
+    
+    // Si no hay imagen asignada
+    if ( empty( $variation_data['image']['src'] ) ) {
+        $variation_data['image']['src'] = get_template_directory_uri() . '/media/images/quam-placeholder.jpg';
+        $variation_data['image']['srcset'] = '';
+        $variation_data['image']['sizes'] = '';
+    }
+
+    return $variation_data;
+}, 10, 3 );

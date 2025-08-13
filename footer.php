@@ -136,11 +136,8 @@ if (is_page(78)) { ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?v=<?php echo $random; ?>"> </script>
 <?php if (is_product()) { ?>
 
-  <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
   <script src="<?php bloginfo('template_url') ?>/assets/js/product.js"> </script>
-  <script>
-    const lightbox = GLightbox();
-  </script>
+
 <?php } ?>
 <?php if (!is_archive()) { ?>
   <script src="<?php bloginfo('template_url') ?>/assets/js/sliders.js?v=<?php echo $random; ?>"> </script>

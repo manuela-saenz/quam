@@ -27,6 +27,7 @@
     }
     ?>
   </title>
+  <?php wp_meta();  ?>
   <!-- <link rel="icon" href="favicon/favicon-1.ico" /> -->
   <?php if (is_page(78)) { ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
@@ -34,21 +35,20 @@
   <?php if (!is_archive()) { ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <?php } ?>
-  <?php if(is_product()){ ?>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-  <?php } ?>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link rel="icon" href="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css?=3" />
+  <!-- <link rel="icon" href="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" type="image/svg+xml"> -->
+  <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css?=<?php echo randomCode() ?>" />
 
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
+    
   </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/relatedProduct.js?v=<?php echo $random; ?>"> </script>
   <!-- Google tag (gtag.js) -->
   <?php
-  wp_meta();
+  
   wp_head();
 
   ?>

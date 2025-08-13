@@ -793,12 +793,12 @@ function deleteFavorite(prodid) {
   const swiperContainer = document.querySelector(
     ".swiper.generationSwiper.swiper-creative.swiper-3d.swiper-initialized.swiper-horizontal.swiper-watch-progress"
   );
-  // let productEliminatedBySlide = null; 
+  // let productEliminatedBySlide = null;
   // if (swiperContainer) {
   //   const productIdButtonSlide = $(this).data("product-id-slide");
   //   productEliminatedBySlide = productIdButtonSlide;
   // }
-  console.log(prodid)
+  console.log(prodid);
   $.ajax({
     url: ajaxUrl,
     method: "POST",
@@ -836,7 +836,7 @@ function deleteFavorite(prodid) {
             console.log(prodid);
             if (prodid === productIdButtonSlide) {
               console.log(prodid);
-              console.log(productIdButtonSlide)
+              console.log(productIdButtonSlide);
               console.log(button);
               button.classList.remove("active-fav");
             }
@@ -873,8 +873,8 @@ function deleteFavoriteSameContext(prodid) {
       ".swiper.generationSwiper.swiper-creative.swiper-3d.swiper-initialized.swiper-horizontal.swiper-watch-progress"
     );
   }
-  console.log(relatedSwiper)
-  console.log('elimando en el sameContext')
+  console.log(relatedSwiper);
+  console.log("elimando en el sameContext");
   if (relatedSwiper) {
     const slides = relatedSwiper.querySelectorAll(".swiper-slide");
     slides.forEach((slide) => {
@@ -887,8 +887,8 @@ function deleteFavoriteSameContext(prodid) {
         if (prodid === productIdButtonSlide) {
           button.classList.remove("active-fav");
         }
-        if(prodid == productIdButtonSlide){
-          console.log('dentro de same')
+        if (prodid == productIdButtonSlide) {
+          console.log("dentro de same");
           button.classList.remove("active-fav");
         }
       });
@@ -1238,7 +1238,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const getAllProductItems = () => {
     const productList = document.querySelector("#product-list");
     const directItems = productList
-      ? Array.from(productList.querySelectorAll("li"))
+      ? Array.from(productList.querySelectorAll("li, div"))
       : [];
     const swiperItems = document.querySelectorAll(".swiper-slide li");
     return [...directItems, ...swiperItems];
@@ -1276,11 +1276,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           });
         }
-
         if (lastMatchingCard) {
+      
           // Extrae el precio del elemento con ID "price"
           const priceElement = lastMatchingCard.querySelector("#price");
-
           const detectedPrice = priceElement
             ? priceElement.textContent.trim()
             : null;
@@ -1298,13 +1297,15 @@ document.addEventListener("DOMContentLoaded", function () {
             let infoHighlights = cardProduct.querySelector(
               '#info-highlights[data-category="polos-hombre"]'
             );
+
             if (!infoHighlights) {
               infoHighlights = cardProduct.querySelector(
                 '.info-highlights[data-category="polos-hombre"]'
               );
             }
-            if (!infoHighlights) return;
 
+            if (!infoHighlights) return;
+            console.log('llegue hasta aqui')
             const priceSpan = infoHighlights.querySelector(
               ".price .woocommerce-Price-amount"
             );
@@ -1348,16 +1349,15 @@ document.addEventListener("DOMContentLoaded", function () {
   observer.observe(targetNode, config);
 });
 
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Verificar si la URL contiene el parámetro "s"
   const urlParams = new URLSearchParams(window.location.search);
   const searchQuery = urlParams.get("s");
 
   if (searchQuery) {
-      const productList = document.getElementById("product-list");
-      if (productList) {
-          productList.classList.add("ready");
-      } 
+    const productList = document.getElementById("product-list");
+    if (productList) {
+      productList.classList.add("ready");
+    }
   }
 });
