@@ -136,7 +136,7 @@ if (is_page(78)) { ?>
 <script src="<?php bloginfo('template_url') ?>/assets/js/custom.js?v=<?php echo $random; ?>"> </script>
 <?php if (is_product()) { ?>
 
-  <script src="<?php bloginfo('template_url') ?>/assets/js/product.js"> </script>
+  <script src="<?php bloginfo('template_url') ?>/assets/js/product.js?v=<?php // echo randomCode() ?>"> </script>
 
 <?php } ?>
 <?php if (!is_archive()) { ?>

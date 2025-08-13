@@ -157,6 +157,9 @@ document.getElementById('shareBtnWhatsapp').addEventListener('click', function (
       var currentOptions = JSON.parse($('.rtwpvg-slider').attr('data-options'));
       currentOptions.enabled = false;
       $('.rtwpvg-slider').attr('data-options', JSON.stringify(currentOptions));
+      const footerClone = $('footer').clone();
+      $('.mobile-container').append(footerClone);
+      console.log(footerClone)
 
 
       return;
@@ -164,6 +167,8 @@ document.getElementById('shareBtnWhatsapp').addEventListener('click', function (
 
       // else if a small viewport and single column layout needed
     } else if (breakpoint.matches === true) {
+      $('.mobile-container footer').remove()
+      console.log('remueve')
 
       // fire small viewport version of swiper
       return enableSwiper();
@@ -293,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (element0) {
     setTimeout(function () {
       element0.classList.remove("swipe-animation");
-    }, 500); 
+    }, 500);
   }
 
   setInterval(function () {
@@ -304,5 +309,5 @@ document.addEventListener("DOMContentLoaded", function () {
         element.classList.remove("swipe-animation");
       }, 1500);
     }
-  }, 15000); 
+  }, 15000);
 });
