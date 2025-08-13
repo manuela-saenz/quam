@@ -28,7 +28,10 @@
     ?>
   </title>
   <?php wp_meta();  ?>
-  <!-- <link rel="icon" href="favicon/favicon-1.ico" /> -->
+  <link rel="icon" href="https://www.quam.com.co/wp-content/uploads/2025/08/cropped-quam-32x32.png" sizes="32x32" />
+  <link rel="icon" href="https://www.quam.com.co/wp-content/uploads/2025/08/cropped-quam-192x192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="https://www.quam.com.co/wp-content/uploads/2025/08/cropped-quam-180x180.png" />
+  <meta name="msapplication-TileImage" content="https://www.quam.com.co/wp-content/uploads/2025/08/cropped-quam-270x270.png" />
   <?php if (is_page(78)) { ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
   <?php } ?>
@@ -38,17 +41,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <!-- <link rel="icon" href="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" type="image/svg+xml"> -->
-  <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css?=<?php // echo randomCode() ?>" />
+  <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css?=<?php // echo randomCode() 
+                                                                                    ?>" />
 
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
-    
   </script>
   <script src="<?php bloginfo('template_url') ?>/assets/js/relatedProduct.js?v=<?php echo $random; ?>"> </script>
   <!-- Google tag (gtag.js) -->
   <?php
-  
+
   wp_head();
 
   ?>
@@ -68,7 +70,7 @@
   wp_head();
 
   ?>
- 
+
 </head>
 <?php wp_body_open() ?>
 
@@ -138,7 +140,7 @@
                   <span id="favoritesCounter" class="d-none cart-section-quantity rounded-pill position-absolute center-all text-white">0</span>
                 </button>
 
-                <button id="bottonCart" class=" position-relative btn center-all p-0 <?=  is_cart() || is_checkout() ? 'd-none' : '' ?>" type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
+                <button id="bottonCart" class=" position-relative btn center-all p-0 <?= is_cart() || is_checkout() ? 'd-none' : '' ?>" type="button" data-bs-toggle="offcanvas" data-bs-target="#mini-carrito" aria-controls="mini-carrito">
                   <i class="icon-shopping-bag"></i>
                   <span id="cartItem" class="d-none cart-section-quantity rounded-pill position-absolute center-all text-white">0</span>
                 </button>
