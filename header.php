@@ -34,11 +34,14 @@
   <?php if (!is_archive()) { ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <?php } ?>
+  <?php if(is_product()){ ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+  <?php } ?>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="icon" href="<?php bloginfo('template_url') ?>/media/images/Logo-quam.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css?=2" />
+  <link rel="stylesheet" href="<?php bloginfo('template_url') ?>/custom.prefix.css?=3" />
 
   <script>
     var ajaxUrl = "<?= admin_url("admin-ajax.php") ?>";
